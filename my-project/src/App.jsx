@@ -1,32 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Heroes from './Heroes'
-import Footer from './Footer'
-import Card from './Card'
-import Profil from './Profil'
-import Static from './Static'
-import Contact  from './Contact'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Detail from './Detail'
-import './App.css'
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Formpengajuan from "./Pages/Formpengajuan";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <Heroes />
-      <Card />
-      <Profil />
-      <Static />
-      <Contact  />
-      <Footer />
-     
-      {/* <Detail /> */}
-    
-    </>
-  )
+    <Router>
+      <>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/Formpengajuan" element={<Formpengajuan />} />
+        </Routes>
+      </>
+    </Router>
+  );
 }
 
-export default App
+export default App;
