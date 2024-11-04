@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const posts = [
     {
       id: 1,
@@ -33,7 +34,7 @@ const posts = [
           </div>
           
           {/* Grid untuk menampilkan card secara sejajar */}
-          <div className="mt-16 grid grid-cols-1 gap-y-16 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-y-16 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <article key={post.id} className="flex flex-col items-start justify-between">
                 <div className="relative w-full">
@@ -57,7 +58,7 @@ const posts = [
                     </a>
                   </div>
                   <div className="group relative">
-                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                    <h3 className="mt-3 text-lg font-semibold leading-6 text-indigo-900 group-hover:text-gray-600">
                       <a href={post.href}>
                         <span className="absolute inset-0" />
                         Rusun Kaliurang
@@ -68,10 +69,11 @@ const posts = [
   
                   <div className="mt-10 flex items-center gap-x-6">
                     <a
-                      href="#"
+                    
                       className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Cek Rusun
+                      <Link to="/ProfilRusun">Cek Rusun</Link>
+                      
                     </a>
                   </div>
                 </div>
