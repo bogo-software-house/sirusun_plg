@@ -67,7 +67,7 @@ const product = {
 const products = [
   {
     id: 1,
-    name: 'Blok A Lantai 1',
+    name: 'Lantai 1',
     href: '#',
     imageSrc: 'https://i.pinimg.com/736x/9f/3a/99/9f3a99394ce0e63cc7b9c949c6767fb9.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
@@ -76,7 +76,7 @@ const products = [
   },
   {
     id: 2,
-    name: 'Blok A Lantai 1',
+    name: 'Lantai 2',
     href: '#',
     imageSrc: 'https://i.pinimg.com/736x/9f/3a/99/9f3a99394ce0e63cc7b9c949c6767fb9.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
@@ -85,22 +85,14 @@ const products = [
   },
   {
     id: 3,
-    name: 'Blok A Lantai 1',
+    name: ' Lantai 2',
     href: '#',
     imageSrc: 'https://i.pinimg.com/736x/9f/3a/99/9f3a99394ce0e63cc7b9c949c6767fb9.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
     price: 'Rp 300.000,00',
     tersedia: '5 kamar lagi nih'
   },
-  {
-    id: 4,
-    name: 'Blok A Lantai 1',
-    href: '#',
-    imageSrc: 'https://i.pinimg.com/736x/9f/3a/99/9f3a99394ce0e63cc7b9c949c6767fb9.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: 'Rp 300.000,00',
-    tersedia: '5 kamar lagi nih'
-  }
+  
   // More products...
 ]
 
