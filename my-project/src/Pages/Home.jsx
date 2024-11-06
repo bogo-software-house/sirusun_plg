@@ -1,13 +1,11 @@
 import { useState } from "react";
-
-import Navbar from "../Navbar";
-import Heroes from "../Heroes";
-import Footer from "../Footer";
-import Card from "../Card";
-import Profil from "../Profil";
-import Static from "../Static";
-import Contact from "../Contact";
-import Download from "../Download";
+import Heroes from "../Components/Heroes";
+import Footer from "../Components/Footer";
+import Card from "../Components/Card";
+import Profil from "../Components/Profil";
+import Static from "../Components/Static";
+import Contact from "../Components/Contact";
+import Download from "../Components/Download";
 
 import "../App.css";
 
@@ -16,7 +14,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <Heroes />
       <Card />
       <Profil />
