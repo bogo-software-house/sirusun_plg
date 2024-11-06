@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('floors', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_id')->unique();
+            $table->integer('Floor');
             $table->timestamps();
         });
     }

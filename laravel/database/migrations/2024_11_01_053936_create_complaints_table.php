@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_id')->unique();
+            $table->string('Complaint');
             $table->timestamps();
         });
     }

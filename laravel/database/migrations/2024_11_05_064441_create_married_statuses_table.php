@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unit_numbers', function (Blueprint $table) {
+        Schema::create('married_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('No_Unit');
+            $table->string('Married_Status');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('unit_numbers');
+        Schema::dropIfExists('married_statuses');
     }
 };
