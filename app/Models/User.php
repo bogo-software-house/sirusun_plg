@@ -6,9 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
+
+
    protected $table = 'users'; // Nama tabel jika berbeda
     protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
     public $incrementing = false; // Jika nik bukan auto-incrementing
@@ -25,25 +30,33 @@ class User extends Authenticatable
     protected $fillable = [
         'nik',
         'username',
+        'tempat_lahir',
+        'roles_custom_id',
         'email',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Mendapatkan relasi role untuk pengguna.
      *
-     * @var array<int, string>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    protected $hidden = [
-        'password', // Jika Anda menggunakan password
-        'remember_token',
-    ];
+  protected static function boot()
+    {
+        parent::boot();
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+        static::creating(function ($model) {
+            if (strlen($model->nik) !== 16) {
+                throw ValidationException::withMessages([
+                    'nik' => 'Nik harus terdiri dari 16 karakter.',
+                ]);
+            }
+        });
+
+    
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->BelongsTo(Role::class, 'roles_custom_id', 'custom_id');
+    }
 }

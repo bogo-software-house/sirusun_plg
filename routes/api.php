@@ -13,3 +13,7 @@ Route::apiResource('/users', App\Http\Controllers\Api\UserController::class);
 Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
 //rusun
 Route::apiResource('/rusuns', App\Http\Controllers\Api\RusunController::class);
+//resident
+Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
+//resident/document
+Route::apiResource('/residents/{id}/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);

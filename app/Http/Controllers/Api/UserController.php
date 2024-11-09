@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,38 +16,37 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::Latest()->paginate(5);
-        return new UserResource(true, 'List Data Posts', $users);
+        $users = User::Latest()->with('role')->select('nik','username','tempat_lahir','email')->get();
+        return new UserResource(true, 'List Data Users', $users);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-           //define validation rules
-        $validator = Validator::make($request->all(), [
-            'nik'     => 'required',
-            'username'   => 'required',
-            'email'   => 'required',
-        ]);
+  public function store(Request $request)
+{
+    // Define validation rules
+    $validator = Validator::make($request->all(), [
+        'nik'             => 'required|size:16|unique:users,nik', // Pastikan NIK unik
+        'username'        => 'required',
+        'tempat_lahir'    => 'required',
+        'email'           => 'required|email|unique:users,email', // Pastikan email unik
+    ]);
 
-        //check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-
-        //create User
-        $Users = User::create([
-            'nik'       =>  $request->nik,
-            'username'  =>  $request->username,
-            'email'     =>  $request->email,
-        ]);
-
-        //return response
-        return new UserResource(true, 'Data user Berhasil Ditambahkan!', $Users);
+    // Check if validation fails
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
     }
+
+    // Mengambil semua data dari request kecuali 'roles_custom_id'
+    $userData = $request->except(['roles_custom_id']); // Ini benar, panggil except() pada $request
+
+    // Create User dengan menggabungkan data user dan roles_custom_id
+    $user = User::create(array_merge($userData, ['roles_custom_id' => 'IRL002']));
+
+    // Return response
+    return new UserResource(true, 'Data user Berhasil Ditambahkan!', $user);
+}
 
     /**
      * Display the specified resource.
@@ -73,6 +73,7 @@ class UserController extends Controller
         //define validation rules
         $validator = Validator::make($request->all(), [
             'username'     => 'required',
+            'tempat_lahir'     => 'required',
             'email'   => 'required',
         ]);
 
