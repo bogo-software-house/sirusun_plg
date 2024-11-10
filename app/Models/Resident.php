@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\hasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\models\Religion;
 use App\models\Education;
 use App\models\StatusNikah;
 use App\models\Gender;
+use App\models\ResidentPdf;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
 class Resident extends Model
@@ -91,10 +92,15 @@ class Resident extends Model
      */
     public function BerkasKk(): HasOne
     {
-        return $this->hasOne(Resident::class,'nik','nik');
+        return $this->hasOne(Resident::class, 'nik', 'nik');
     }
     public function BerkasKtp(): HasOne
     {
-        return $this->hasOne(Resident::class,'nik','nik');
+        return $this->hasOne(Resident::class, 'nik', 'nik');
+    }
+      // Tambahkan relasi dengan ResidentPdf
+    public function residentPdf(): HasOne
+    {
+        return $this->hasOne(ResidentPdf::class, 'nik', 'nik');
     }
 }

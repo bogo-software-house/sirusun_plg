@@ -2,52 +2,43 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\BerkaskkResource;
 use App\Http\Resources\BerkasktpResource;
+use App\Http\Resources\ResidentPdfResource;
 
 class ResidentResource extends JsonResource
 {
-    //define properti
-    public $status;
-    public $message;
-    public $resource;
+    // Tambahkan properti untuk status dan pesan
+    protected $status = true;
+    protected $message = 'Data berhasil diambil';
 
-    /**
-     * __construct
-     *
-     * @param  mixed $status
-     * @param  mixed $message
-     * @param  mixed $resource
-     * @return void
-     */
-    public function __construct($status, $message, $resource)
+    // Constructor untuk mengatur status dan pesan kustom
+    public function __construct($resource, $status = true, $message = 'Data berhasil diambil')
     {
         parent::__construct($resource);
-        $this->status  = $status;
+        $this->status = $status;
         $this->message = $message;
     }
 
-   /**
-     * toArray
+    /**
+     * Transform the resource into an array.
      *
-     * @param  mixed $request
-     * @return array
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
-        // Periksa apakah resource adalah model atau collection
-        if ($this->resource instanceof \Illuminate\Database\Eloquent\Model) {
-            return $this->processModel();
-        }
-
-        // Jika collection, proses setiap item
+      // Periksa apakah resource adalah model atau collection
+    if ($this->resource instanceof \Illuminate\Database\Eloquent\Model) {
+        return $this->processModel();
+    } elseif (is_iterable($this->resource)) { // Memastikan resource adalah iterable
         return [
             'success'   => $this->status,
             'message'   => $this->message,
             'data'      => $this->resource->map(function ($item) {
                 return [
+                    'id' => $item->id ?? null,
                     'nik' => $item->nik ?? null,
                     'username' => $item->username ?? null,
                     'tempat_lahir' => $item->tempat_lahir ?? null,
@@ -62,15 +53,28 @@ class ResidentResource extends JsonResource
                     'warga_negara' => $item->warga_negara ?? null,
                     'pekerjaan' => $item->pekerjaan ?? null,
                     'alamat_tempat_kerja' => $item->alamat_tempat_kerja ?? null,
-                    'berkas_kk' => $item->relationLoaded('BerkasKk', function () use ($item) {
-                        return $item->berkasKk ? new BerkaskkResource($item->berkasKk) : null;
+                    
+                    // Gunakan metode baru untuk mengecek relasi
+                    'berkas_kk' => $this->whenLoaded('BerkasKk', function () use ($item) {
+                        return $item->BerkasKk ? new BerkaskkResource($item->BerkasKk) : null;
                     }),
-                    'berkas_ktp' => $item->relationLoaded('BerkasKtp', function () use ($item) {
-                        return $item->berkasKtp ? new BerkasktpResource($item->berkasKtp) : null;
+                    'berkas_ktp' => $this->whenLoaded('BerkasKtp', function () use ($item) {
+                        return $item->BerkasKtp ? new BerkasktpResource($item->BerkasKtp) : null;
+                    }),
+                    'resident_pdf' => $this->whenLoaded('residentPdf', function () use ($item) {
+                        return $item->residentPdf ? new ResidentPdfResource($item->residentPdf) : null;
                     }),
                 ];
             })
         ];
+    }
+
+    // Jika resource tidak valid
+    return [
+        'success' => false,
+        'message' => 'Data tidak ditemukan',
+        'data' => ['resource tidak valid']
+    ];
     }
 
     /**
@@ -82,6 +86,7 @@ class ResidentResource extends JsonResource
             'success'   => $this->status,
             'message'   => $this->message,
             'data'      => [
+                'id' => $this->id ?? null,
                 'nik' => $this->nik ?? null,
                 'username' => $this->username ?? null,
                 'tempat_lahir' => $this->tempat_lahir ?? null,
@@ -96,13 +101,36 @@ class ResidentResource extends JsonResource
                 'warga_negara' => $this->warga_negara ?? null,
                 'pekerjaan' => $this->pekerjaan ?? null,
                 'alamat_tempat_kerja' => $this->alamat_tempat_kerja ?? null,
-                'berkas_kk' => $this->relationLoaded('BerkasKk', function () {
-                    return $this->berkasKk ? new BerkaskkResource($this->berkasKk) : null;
+                
+                // Gunakan whenLoaded untuk relasi
+                'berkas_kk' => $this->whenLoaded('BerkasKk', function () {
+                    return $this->BerkasKk ? new BerkaskkResource($this->BerkasKk) : null;
                 }),
-                'berkas_ktp' => $this->relationLoaded('BerkasKtp', function () {
-                    return $this->berkasKtp ? new BerkasktpResource($this->berkasKtp) : null;
+                'berkas_ktp' => $this->whenLoaded('BerkasKtp', function () {
+                    return $this->BerkasKtp ? new BerkasktpResource($this->BerkasKtp) : null;
+                }),
+                'resident_pdf' => $this->whenLoaded('residentPdf', function () {
+                    return $this->residentPdf ? new ResidentPdfResource($this->residentPdf) : null;
                 }),
             ]
         ];
+    }
+
+    /**
+     * Metode untuk mengatur status kustom
+     */
+    public function withStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * Metode untuk mengatur pesan kustom
+     */
+    public function withMessage($message)
+    {
+        $this->message = $message;
+        return $this;
     }
 }

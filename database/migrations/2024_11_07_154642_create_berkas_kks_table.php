@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('berkas_kks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('nik')->default(16)->unique();
-            $table->string('file_path'); // Menyimpan path berkas kk
+            $table->string('file_name');
+            $table->string('file_path');
+            $table->string('file_url'); // Menyimpan path berkas kk
             $table->timestamps();
 
                $table->foreign('nik')->references('nik')->on('residents')->onDelete('cascade');
