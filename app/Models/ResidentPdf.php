@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Resident;
+use App\Models\TransactionStatusForm;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ResidentPdf extends Model
 {
@@ -17,6 +18,11 @@ class ResidentPdf extends Model
     public function resident(): BelongsTo
     {
         return $this->belongsTo(Resident::class, 'nik', 'nik');
+    }
+
+  public function transactionStatusForm(): HasOne
+    {
+        return $this->hasOne(TransactionStatusForm::class, 'form_custom_id', 'custom_id');
     }
 
      // Metode untuk menghasilkan ID kustom
@@ -48,4 +54,5 @@ class ResidentPdf extends Model
     return $newCustomId; // Kembalikan ID baru yang unik
     }
 
+  
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\BerkaskkResource;
 use App\Http\Resources\BerkasktpResource;
 use App\Http\Resources\ResidentPdfResource;
+use App\Http\Resources\TransactionStatusFormResource;
 
 class ResidentResource extends JsonResource
 {
@@ -62,12 +63,17 @@ class ResidentResource extends JsonResource
                         return $item->berkasKtp ? new BerkasktpResource($item->berkasKtp) : null;
                     }),
                     'resident_pdf' => $this->whenLoaded('residentPdf', function () use ($item) {
-                        return $item->residentPdf ? new ResidentPdfResource($item->residentPdf) : null;
+                        return $item->residentPdf ? new ResidentPdfResource($item->residentPdf) : null; 
                     }),
-                ];
+                     'transactionStatusForm' => $this->whenLoaded('transactionStatusForm', function () {
+                        return $this->transactionStatusForm ? new TransactionStatusFormResource($this->transactionStatusForm) : null;
+                    }),
+                    ];
             })
         ];
     }
+
+    
 
     // Jika resource tidak valid
     return [
@@ -75,7 +81,7 @@ class ResidentResource extends JsonResource
         'message' => 'Data tidak ditemukan',
         'data' => ['resource tidak valid']
     ];
-    }
+}
 
     /**
      * Proses untuk model individual
@@ -111,6 +117,9 @@ class ResidentResource extends JsonResource
                 'resident_pdf' => $this->whenLoaded('residentPdf', function () {
                     return $this->residentPdf ? new ResidentPdfResource($this->residentPdf) : null;
                 }),
+                   'transactionStatusForm' => $this->whenLoaded('transactionStatusForm', function () {
+                        return $this->transactionStatusForm ? new TransactionStatusFormResource($this->transactionStatusForm) : null;
+                    }),
             ]
         ];
     }

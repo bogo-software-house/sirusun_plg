@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     \App\Models\Education::factory()->create();
     \App\Models\Gender::factory()->create();
     \App\Models\StatusNikah::factory()->create();
+    \App\Models\StatusForm::factory()->create();
 }
 }

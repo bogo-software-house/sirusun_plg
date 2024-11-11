@@ -9,6 +9,8 @@ use App\Models\Resident;
 use App\Models\BerkasKk;
 use App\Models\BerkasKtp;
 use App\Models\ResidentPdf;
+use App\Models\StatusForm;
+use App\Models\TransactionStatusForm;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use App\Http\Resources\ResidentResource;
@@ -148,12 +150,37 @@ class ResidentController extends Controller
                 'file_url' => $pdfUrl
             ]);
 
-            // Load relasi
-            $resident->load('berkasKk', 'berkasKtp', 'residentPdf');
+          // Cek keberadaan status form
+        $statusForm = StatusForm::where('custom_id', 'ISF001')->first();
 
-            // Return response dengan ResidentResource
-            return new ResidentResource($resident);
-        });
+        // Jika status form tidak ditemukan, lempar exception
+        if (!$statusForm) {
+            throw new \Exception('Status form tidak ditemukan');
+        }
+
+        // Buat entri di TransactionStatusForm
+        $transactionStatus = TransactionStatusForm::create([
+            'form_custom_id' => $residentPdf->custom_id, // Gunakan custom_id dari ResidentPdf
+            'statusForm_custom_id' => $statusForm->custom_id, // Gunakan custom_id dari StatusForm
+        ]);
+
+        // Logging untuk memastikan data tersimpan dengan benar
+        \Log::info('Transaction Status Created', [
+            'resident_nik' => $resident->nik,
+            'form_custom_id' => $transactionStatus->form_custom_id,
+            'status_form_custom_id' => $transactionStatus->statusForm_custom_id
+        ]);
+
+        // Load relasi yang diperlukan
+        $resident->load(
+            'berkasKk', 
+            'berkasKtp', 
+            'residentPdf', 
+            'transactionStatusForm.statusForm'
+        );
+
+        return new ResidentResource($resident);
+         });
         } catch (\Exception $e) {
             // Tangani error yang mungkin terjadi
             return response()->json([
