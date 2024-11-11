@@ -36,6 +36,9 @@
             <strong>NIK:</strong> {{ $resident->nik }}
         </div>
         <div class="detail">
+            <strong>ID FORMULIR:</strong> {{ $customId ?? 'Tidak ada ID' }}
+        </div>
+        <div class="detail">
             <strong>Nama:</strong> {{ $resident->username }}
         </div>
         <div class="detail">

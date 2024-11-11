@@ -27,7 +27,7 @@ class ResidentController extends Controller
            try {
             // Eager loading
              $Residents = Resident::Latest()->with(['religions','genders','StatusNikah','education','BerkasKk','BerkasKtp'])->get();
-             return new ResidentResource(true, 'List Data residents', $Residents);
+             return new ResidentResource($Residents);
             
         } catch (\Exception $e) {
             Log::error('Error fetching residents: ' . $e->getMessage());
@@ -98,7 +98,7 @@ class ResidentController extends Controller
                 $kkFile = $request->file('berkas_kk');
                 $kkPath = $kkFile->store('berkas_kk', 'public');
 
-                BerkasKk::create([
+             $berkasKk = BerkasKk::create([
                     'nik' => $resident->nik,
                     'file_name' => $kkFile->getClientOriginalName(),
                     'file_path' => $kkPath,
@@ -112,11 +112,8 @@ class ResidentController extends Controller
                 $ktpPath = $ktpFile->store('berkas_ktp', 'public');
                         // Dapatkan URL publik file
                 $fileUrl = Storage::url($ktpPath);
-                // Log untuk memastikan file URL terbentuk
-                Log::info('File URL Berkas KTP:', ['file_url' => $fileUrl]);
-
-
-                BerkasKtp::create([
+              
+               $berkasKtp = BerkasKtp::create([
                     'nik' => $resident->nik,
                     'file_name' => $ktpFile->getClientOriginalName(),
                     'file_path' => $ktpPath,
@@ -124,10 +121,13 @@ class ResidentController extends Controller
                 ]);
             }
             // Load relasi untuk response
-            $resident->load('BerkasKk', 'BerkasKtp');
+            $resident->load('berkasKk', 'berkasKtp');
+
+               // Generate custom ID
+             $customId = ResidentPdf::generateCustomId();
 
              // Generate PDF
-            $pdf = Pdf::loadView('pdf.resident', ['resident' => $resident]);
+            $pdf = Pdf::loadView('pdf.resident', ['resident' => $resident, 'customId' => $customId]);
 
             // Buat nama file unik
             $uniqueFileName = 'resident_' . $resident->nik . '_' . Str::random(10) . '.pdf';
@@ -138,17 +138,18 @@ class ResidentController extends Controller
 
             // Dapatkan URL lengkap
             $pdfUrl = url('storage/' . $path);
-
+    
             // Simpan informasi PDF ke database
             $residentPdf = ResidentPdf::create([
                 'nik' => $resident->nik,
+                'custom_id' => $customId,
                 'file_name' => $uniqueFileName,
                 'file_path' => $path,
                 'file_url' => $pdfUrl
             ]);
 
             // Load relasi
-            $resident->load('BerkasKk', 'BerkasKtp', 'residentPdf');
+            $resident->load('berkasKk', 'berkasKtp', 'residentPdf');
 
             // Return response dengan ResidentResource
             return new ResidentResource($resident);
@@ -170,7 +171,7 @@ class ResidentController extends Controller
     public function show(string $nik)
     {
          // Temukan pengguna berdasarkan NIK
-        $Resident = Resident::with(['BerkasKk','BerkasKtp'])->where('nik',$nik)->first();
+        $Resident = Resident::with(['BerkasKk','BerkasKtp','residentPdf'])->where('nik',$nik)->first();
 
         // Periksa apakah pengguna ditemukan
         if (!$Resident) {
@@ -178,7 +179,7 @@ class ResidentController extends Controller
         }
 
         // Kembalikan pengguna sebagai resource
-        return new ResidentResource(true, 'Detail Data Resident!', $Resident);
+        return new ResidentResource($Resident);
     }
 
     /**

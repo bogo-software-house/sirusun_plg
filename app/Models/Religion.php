@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 use App\Models\resident;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Religion extends Model
 {
+use HasFactory;
+
     protected $fillable = [
     'custom_id',
     'religions',

@@ -55,11 +55,11 @@ class ResidentResource extends JsonResource
                     'alamat_tempat_kerja' => $item->alamat_tempat_kerja ?? null,
                     
                     // Gunakan metode baru untuk mengecek relasi
-                    'berkas_kk' => $this->whenLoaded('BerkasKk', function () use ($item) {
-                        return $item->BerkasKk ? new BerkaskkResource($item->BerkasKk) : null;
+                    'berkas_kk' => $this->whenLoaded('berkasKk', function () use ($item) {
+                        return $item->berkasKk ? new BerkaskkResource($item->berkasKk) : null;
                     }),
-                    'berkas_ktp' => $this->whenLoaded('BerkasKtp', function () use ($item) {
-                        return $item->BerkasKtp ? new BerkasktpResource($item->BerkasKtp) : null;
+                    'berkas_ktp' => $this->whenLoaded('berkasKtp', function () use ($item) {
+                        return $item->berkasKtp ? new BerkasktpResource($item->berkasKtp) : null;
                     }),
                     'resident_pdf' => $this->whenLoaded('residentPdf', function () use ($item) {
                         return $item->residentPdf ? new ResidentPdfResource($item->residentPdf) : null;
@@ -86,7 +86,6 @@ class ResidentResource extends JsonResource
             'success'   => $this->status,
             'message'   => $this->message,
             'data'      => [
-                'id' => $this->id ?? null,
                 'nik' => $this->nik ?? null,
                 'username' => $this->username ?? null,
                 'tempat_lahir' => $this->tempat_lahir ?? null,
@@ -103,11 +102,11 @@ class ResidentResource extends JsonResource
                 'alamat_tempat_kerja' => $this->alamat_tempat_kerja ?? null,
                 
                 // Gunakan whenLoaded untuk relasi
-                'berkas_kk' => $this->whenLoaded('BerkasKk', function () {
-                    return $this->BerkasKk ? new BerkaskkResource($this->BerkasKk) : null;
+                'berkas_kk' => $this->whenLoaded('berkasKk', function () {
+                    return $this->berkasKk ? new BerkaskkResource($this->berkasKk) : null;
                 }),
-                'berkas_ktp' => $this->whenLoaded('BerkasKtp', function () {
-                    return $this->BerkasKtp ? new BerkasktpResource($this->BerkasKtp) : null;
+                'berkas_ktp' => $this->whenLoaded('berkasKtp', function () {
+                    return $this->berkasKtp ? new BerkasktpResource($this->berkasKtp) : null;
                 }),
                 'resident_pdf' => $this->whenLoaded('residentPdf', function () {
                     return $this->residentPdf ? new ResidentPdfResource($this->residentPdf) : null;

@@ -10,10 +10,7 @@ class ResidentPdfResource extends JsonResource
   public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'nik' => $this->nik,
-            'file_name' => $this->file_name,
-            'file_path' => $this->file_path,
+            'custom_id' => $this->custom_id,
             'file_url' => $this->file_url,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

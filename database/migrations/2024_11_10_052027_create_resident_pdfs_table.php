@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('resident_pdfs', function (Blueprint $table) {
             $table->id();
              $table->bigInteger('nik')->default(16)->unique(); // NIK sebagai foreign key
+              $table->string('custom_id')->unique(); // Kolom untuk menyimpan ID kustom
             $table->string('file_name');
             $table->string('file_path');
             $table->string('file_url');
