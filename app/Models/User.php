@@ -28,35 +28,47 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nik',
+        'custom_id',
         'username',
-        'tempat_lahir',
+        'password',
+        'transaksi_custom_id',
         'roles_custom_id',
-        'email',
     ];
 
-    /**
-     * Mendapatkan relasi role untuk pengguna.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-  protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (strlen($model->nik) !== 16) {
-                throw ValidationException::withMessages([
-                    'nik' => 'Nik harus terdiri dari 16 karakter.',
-                ]);
-            }
-        });
-
-    
-    }
+  
 
     public function role(): BelongsTo
     {
         return $this->BelongsTo(Role::class, 'roles_custom_id', 'custom_id');
     }
+
+       // Metode untuk menghasilkan ID kustom
+    public static function generateCustomId()
+    {
+        $prefix = 'IUS'; // Ganti dengan prefiks yang Anda inginkan
+    $lastItem = self::orderBy('custom_id', 'desc')->first();
+
+    // Jika tidak ada item, mulai dari ISPER0001
+    if (!$lastItem) {
+        return $prefix . '0001';
+    }
+
+    // Ambil ID kustom terakhir
+    $lastCustomId = $lastItem->custom_id;
+
+    // Pisahkan huruf dan angka
+    $number = (int) substr($lastCustomId, strlen($prefix)); // Mengambil bagian angka
+    $newNumber = str_pad($number + 1, 4, '0', STR_PAD_LEFT); // Increment dan padding dengan 0
+    $newCustomId = $prefix . $newNumber; // Gabungkan kembali menjadi ID baru
+
+    // Cek apakah custom_id sudah ada
+    while (self::where('custom_id', $newCustomId)->exists()) {
+        $number++;
+        $newNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
+        $newCustomId = $prefix . $newNumber;
+    }
+
+    return $newCustomId; // Kembalikan ID baru yang unik
+    }
+
 }

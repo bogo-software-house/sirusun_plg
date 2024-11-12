@@ -17,3 +17,5 @@ Route::apiResource('/rusuns', App\Http\Controllers\Api\RusunController::class);
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document
 Route::apiResource('/residents/{id}/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);
+//update status transaction
+Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);

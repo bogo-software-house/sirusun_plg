@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigInteger('nik')->default(16)->unique()->primary(); // Menambahkan kolom nik yang unik
+            $table->id(); // Menambahkan kolom nik yang unik
+            $table->string('custom_id')->unique(); // custom user
             $table->string('username');
-            $table->string('tempat_lahir');
+            $table->string('password');
+            $table->string('transaksi_custom_id'); // Menambahkan kolom nik yang unik
             $table->string('roles_custom_id');
-            $table->string('email')->unique();
             $table->timestamps();
 
             // Menambahkan foreign key
             $table->foreign('roles_custom_id')->references('custom_id')->on('roles')->onDelete('cascade');
+            $table->foreign('transaksi_custom_id')->references('custom_id')->on('transaction_status_forms')->onDelete('cascade');
             
         });
     }

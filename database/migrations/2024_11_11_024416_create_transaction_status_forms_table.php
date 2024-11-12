@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transaction_status_forms', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_id')->unique();
             $table->string('form_custom_id');
             $table->string('statusForm_custom_id');
             $table->timestamps();

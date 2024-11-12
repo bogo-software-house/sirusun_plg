@@ -11,11 +11,11 @@ use App\Models\BerkasKtp;
 use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\TransactionStatusForm;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf; // Pastikan Anda sudah mengimpor library PDF yang digunakan
 use Illuminate\Support\Str;
 use App\Http\Resources\ResidentResource;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage; // Pastikan Anda sudah mengimpor library PDF yang digunakan
+use Illuminate\Support\Facades\Storage; 
 use Illuminate\Support\Facades\Log; 
 
 class ResidentController extends Controller
@@ -51,7 +51,7 @@ class ResidentController extends Controller
     {
        // Define validation rules
         $validator = Validator::make($request->all(), [
-        'nik'                       => 'required|size:16|unique:users,nik',
+        'nik'                       => 'required|size:16',
         'username'                  => 'required',
         'tempat_lahir'              => 'required',
         'tanggal_lahir'             => 'required|date',
@@ -157,9 +157,12 @@ class ResidentController extends Controller
         if (!$statusForm) {
             throw new \Exception('Status form tidak ditemukan');
         }
+        
+            $transactioncustomid = TransactionStatusForm::generateCustomId();
 
         // Buat entri di TransactionStatusForm
         $transactionStatus = TransactionStatusForm::create([
+            'custom_id' => $transactioncustomid, // Gunakan custom_id dari generate
             'form_custom_id' => $residentPdf->custom_id, // Gunakan custom_id dari ResidentPdf
             'statusForm_custom_id' => $statusForm->custom_id, // Gunakan custom_id dari StatusForm
         ]);
