@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Education;
-
+use App\Http\Resources\EducationResource;
 class EducationController extends Controller
 {
     /**
@@ -13,8 +13,8 @@ class EducationController extends Controller
      */
     public function index()
     {
-                 $Education = Education::Latest()->paginate(2);
-       return new ResidentResource(true, 'List Data agama',$Education);
+                 $Education = Education::Latest()->get();
+       return new EducationResource(true, 'List Data agama',$Education);
     
     }
 

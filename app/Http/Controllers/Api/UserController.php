@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::Latest()->with('role')->select('nik','username','tempat_lahir','email')->get();
+        $users = User::Latest()->with('role')->get();
         return new UserResource(true, 'List Data Users', $users);
     }
 
@@ -51,10 +51,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $nik)
+    public function show(string $customId)
     {
          // Temukan pengguna berdasarkan NIK
-        $user = User::where('nik',$nik)->first();
+        $user = User::where('custom_id',$customId)->first();
 
         // Periksa apakah pengguna ditemukan
         if (!$user) {
@@ -68,13 +68,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $nik)
+    public function update(Request $request, $customId)
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'username'     => 'required',
-            'tempat_lahir'     => 'required',
-            'email'   => 'required',
+            'password'     => 'required',
         ]);
 
         //check if validation fails
@@ -84,10 +82,12 @@ class UserController extends Controller
 
         
         // Temukan pengguna berdasarkan NIK
-        $user = User::where('nik',$nik)->first();
+        $user = User::where('custom_id',$customId)->first();
 
-           // Jika user tidak ditemukan, ini akan menjadi null
-    $user->update($request->all()); // Ini akan menyebabkan kesalahan jika $user adalah null
+            // Jika user tidak ditemukan, ini akan menjadi null
+        $user->update([
+            'password' => bcrypt($request->password),
+        ]); // Ini akan menyebabkan kesalahan jika $user adalah null
         
 
         //return response
@@ -96,12 +96,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $nik)
+    public function destroy(string $customId)
     {
-           // Temukan pengguna berdasarkan NIK
-        $user = User::where('nik',$nik)->first();
+           // Temukan pengguna berdasarkan customId
+        $user = User::where('custom_id',$customId)->first();
 
-        //delete post
+        //delete user
         $user->delete();
 
         //return response
