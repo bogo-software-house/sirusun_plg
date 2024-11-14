@@ -1,11 +1,13 @@
 import { useState } from "react";
-import Heroes from "../Components/Heroes";
-import Footer from "../Components/Footer";
-import Card from "../Components/Card";
-import Profil from "../Components/Profil";
-import Static from "../Components/Static";
-import Contact from "../Components/Contact";
-import Download from "../Components/Download";
+import Heroes from "../components/Heroes";
+import Footer from "../components/Footer";
+import Card from "../components/Card";
+import Profil from "../components/Profil";
+import Static from "../components/Static";
+import Contact from "../components/Contact";
+import Download from "../components/Download";
+
+
 
 import "../App.css";
 
@@ -18,6 +20,7 @@ function Home() {
       <Card />
       <Profil />
       <Download />
+   
       <Static />
       <Contact />
       <Footer />
