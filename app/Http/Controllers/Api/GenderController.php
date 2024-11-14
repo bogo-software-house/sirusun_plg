@@ -1,15 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Gender;
 
-class controller
+class GenderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
+    {
+               $Gender = Gender::Latest()->paginate(2);
+       return new ResidentResource(true, 'List Data agama',$Gender);
+    
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
         //
     }
@@ -31,6 +43,14 @@ class controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -45,5 +65,4 @@ class controller
     {
         //
     }
-
 }

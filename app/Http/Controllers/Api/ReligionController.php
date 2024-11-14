@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Religion;
+
 use App\Http\Resources\ReligionResource;
 use Illuminate\Support\Facades\Validator;
+
 
 class ReligionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     //buat fungsi index
     public function index()
     {
@@ -38,12 +41,13 @@ class ReligionController extends Controller
             'custom_id' => $customId,
             'Religion' => $request->Religion,
         ]);
-        return new ReligionResource(true, 'Data Religion Berhasil Ditambahkan!',$religions);
+        return new ReligionResource(true, 'Data Religion Berhasil Ditambahkan!',$religions);                            
     }
 
     /**
      * Display the specified resource.
      */
+
     public function show(string $custom_id)
     {
         // Temukan pengguna berdasarkan ID Religion
@@ -54,6 +58,7 @@ class ReligionController extends Controller
             return response()->json(['message' => 'Religion not found'], 404);
         }
         return new ReligionResource(true, 'Detail data religion!', $religions);
+
     }
 
     /**
@@ -82,11 +87,13 @@ class ReligionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
     //buat fungsi destroy
     public function destroy(string $custom_id)
     {
         $religions = Religion::where('custom_id', $custom_id)->first();
         $religions->delete();
         return new ReligionResource(true, 'Data Religion berhasil dihapus!', null);
+
     }
 }

@@ -46,4 +46,11 @@ Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::
 //berkas_scan_ktp
 // Route::apiResource('/berkas_scan_ktps', App\Http\Controllers\Api\Berkas_scan_ktpController::class);
 //resident/penghuni
-// Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
+
+//resident
+Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
+//resident/document
+Route::apiResource('/residents/{id}/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);
+//update status transaction
+Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
+

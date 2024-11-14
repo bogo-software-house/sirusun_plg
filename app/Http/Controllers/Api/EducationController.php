@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Education;
+
 use App\Http\Resources\EducationResource;
 use Illuminate\Support\Facades\Validator;
+
 
 class EducationController extends Controller
 {
@@ -15,15 +17,18 @@ class EducationController extends Controller
      */
     public function index()
     {
+
         $educations = Education::latest()->paginate(5);
         return new EducationResource(true, 'List Data Educations', $educations);
     } 
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'Education' => 'required',
         ]);
@@ -39,9 +44,11 @@ class EducationController extends Controller
         return new EducationResource(true, 'Data Education Berhasil Ditambahkan!',$educations);
     } 
 
+
     /**
      * Display the specified resource.
      */
+
     public function show(string $custom_id)
     {
         // Temukan pengguna berdasarkan ID Education
@@ -52,11 +59,13 @@ class EducationController extends Controller
             return response()->json(['message' => 'Education not found'], 404);
         }
         return new EducationResource(true, 'Detail data education!', $educations);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $custom_id)
     {
         //define validation rules
@@ -85,5 +94,6 @@ class EducationController extends Controller
         $educations = Education::where('custom_id', $custom_id)->first();
         $educations->delete();
         return new EducationResource(true, 'Data Education berhasil dihapus!', null);
+
     }
 }
