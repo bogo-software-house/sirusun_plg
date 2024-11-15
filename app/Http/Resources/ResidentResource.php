@@ -23,6 +23,7 @@ class ResidentResource extends JsonResource
     }
 
     /**
+
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -87,6 +88,7 @@ class ResidentResource extends JsonResource
      * Proses untuk model individual
      */
     protected function processModel()
+
     {
         return [
             'success'   => $this->status,

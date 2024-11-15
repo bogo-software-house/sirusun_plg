@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; 
 use Illuminate\Support\Facades\Log; 
 
+
 class ResidentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
 
@@ -218,19 +220,24 @@ class ResidentController extends Controller
     public function edit(string $id)
     {
         //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
         //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
+
+
     public function destroy(string $nik)
     {
            // Temukan pengguna berdasarkan NIK
@@ -290,4 +297,5 @@ protected function cleanupUploadedFiles($resident)
     $resident->delete();
 }
 }
+
 

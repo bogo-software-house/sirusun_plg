@@ -12,13 +12,10 @@ use App\Models\Role;
 
 class User extends Authenticatable
 {
-
-
    protected $table = 'users'; // Nama tabel jika berbeda
     protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
     public $incrementing = false; // Jika nik bukan auto-incrementing
     protected $keyType = 'biginteger'; // Tipe kunci jika nik adalah string
-
 
     use HasFactory, Notifiable;
 
@@ -34,8 +31,6 @@ class User extends Authenticatable
         'transaksi_custom_id',
         'roles_custom_id',
     ];
-
-  
 
     public function role(): BelongsTo
     {
@@ -70,5 +65,4 @@ class User extends Authenticatable
 
     return $newCustomId; // Kembalikan ID baru yang unik
     }
-
 }

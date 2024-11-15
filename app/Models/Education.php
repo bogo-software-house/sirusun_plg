@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 use App\Models\resident;
 use Illuminate\Database\Eloquent\Relations\hasMany;

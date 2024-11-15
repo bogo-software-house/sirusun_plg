@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+
 use App\Models\Role;
+
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
-
 class UserController extends Controller
 {
     /**
@@ -18,11 +19,13 @@ class UserController extends Controller
     {
         $users = User::Latest()->with('role')->get();
         return new UserResource(true, 'List Data Users', $users);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
   public function store(Request $request)
 {
     // Define validation rules
@@ -72,7 +75,13 @@ class UserController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
+<<<<<<< HEAD
             'password'     => 'required',
+=======
+            'username'     => 'required',
+            'tempat_lahir' => 'required',
+            'email'   => 'required',
+>>>>>>> master
         ]);
 
         //check if validation fails

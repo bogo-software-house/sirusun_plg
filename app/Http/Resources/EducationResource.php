@@ -7,7 +7,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class EducationResource extends JsonResource
 {
+<<<<<<< HEAD
    //define properti
+=======
+    //define properti
+>>>>>>> master
     public $status;
     public $message;
     public $resource;
