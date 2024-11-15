@@ -54,11 +54,10 @@ Route::apiResource('/residents/{id}/berkaskk', App\Http\Controllers\Api\Berkaskk
 //update status transaction
 Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
 
-<<<<<<< HEAD
+
 //penampilan nilai databases saja
 Route::apiResource('/religions', App\Http\Controllers\Api\ReligionController::class);
 Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class);
 Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
-=======
->>>>>>> master
+

@@ -75,13 +75,7 @@ class UserController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-<<<<<<< HEAD
             'password'     => 'required',
-=======
-            'username'     => 'required',
-            'tempat_lahir' => 'required',
-            'email'   => 'required',
->>>>>>> master
         ]);
 
         //check if validation fails
