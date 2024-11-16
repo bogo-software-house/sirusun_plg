@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 
 Route::get('/user', function (Request $request) {
@@ -31,28 +32,11 @@ Route::apiResource('/informations', App\Http\Controllers\Api\InformationControll
 Route::apiResource('/unit_numbers', App\Http\Controllers\Api\UnitnumberController::class);
 //rooms
 Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
-//jenis_kelamin
-Route::apiResource('/genders', App\Http\Controllers\Api\GendersController::class);
-//married_statuses
-Route::apiResource('/married_statuses', App\Http\Controllers\Api\MarriedstatusesController::class);
-//religion
-Route::apiResource('/religions', App\Http\Controllers\Api\ReligionController::class);
-//education
-Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
-//form
-// Route::apiResource('/forms', App\Http\Controllers\Api\FormController::class);
-//berkas_scan_kk
-// Route::apiResource('/berkas_scan_kks', App\Http\Controllers\Api\Berkas_scan_kkController::class);
-//berkas_scan_ktp
-// Route::apiResource('/berkas_scan_ktps', App\Http\Controllers\Api\Berkas_scan_ktpController::class);
-//resident/penghuni
 
 //resident
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document
-Route::apiResource('/residents/{id}/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);
-//update status transaction
-Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
+Route::apiResource('/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);
 
 
 //penampilan nilai databases saja
@@ -61,3 +45,36 @@ Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class)
 Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
 
+
+
+    //minddleware login
+    Route::prefix('auth')->group(function () {
+        // Login
+        Route::post('/login', [AuthController::class, 'login']);
+        
+        // Route yang membutuhkan autentikasi
+        Route::middleware('auth:sanctum')->group(function () {
+            // Logout
+            Route::post('/logout', [AuthController::class, 'logout']);
+            
+            // Cek user
+            Route::get('/me', [AuthController::class, 'me']);
+
+            // Route khusus admin
+            Route::middleware('role:admin')->group(function () {
+                Route::get('/admin/dashboard', function () {
+                    return response()->json(['message' => 'Selamat datang di dashboard admin']);
+                });
+            });
+
+            // Route khusus user
+            Route::middleware('role:user')->group(function () {
+                Route::get('/user/dashboard', function () {
+                    return response()->json(['message' => 'Selamat datang di dashboard user']);
+                });
+            });
+        });
+        
+    });
+    //update status transaction
+        Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);

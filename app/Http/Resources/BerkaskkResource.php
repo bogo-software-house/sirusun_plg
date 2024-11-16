@@ -10,13 +10,21 @@ use Illuminate\Support\Facades\Log;
 
 class BerkaskkResource extends JsonResource
 {
-  public function toArray($request)
+   public function toArray($request)
     {
+        // Konversi data apapun ke format yang konsisten
+        $data = is_array($this->resource) 
+            ? $this->resource 
+            : (array) $this->resource;
+
         return [
-            'nik' => $this->nik,
-            'file_name' => $this->file_name,
-            'file_path' => $this->file_path,
-            'file_url' => $this->file_url,
+            'success' => true,
+            'message' => 'Detail Data',
+            'data' => [
+                'nik' => $data['nik'] ?? null,
+                'file_name' => $data['file_name'] ?? null,
+                'file_path' => $data['file_path'] ?? null,
+            ]
         ];
     }
 }

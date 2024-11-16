@@ -54,7 +54,7 @@ class ResidentController extends Controller
        // Define validation rules
         $validator = Validator::make($request->all(), [
         'nik'                       => 'required|size:16',
-        'username'                  => 'required',
+        'username'                  => 'required|unique:users,username',
         'tempat_lahir'              => 'required',
         'tanggal_lahir'             => 'required|date',
         'genders_custom_id'         => 'required|exists:genders,custom_id',

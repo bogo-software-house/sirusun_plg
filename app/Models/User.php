@@ -9,15 +9,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
+use Laravel\Sanctum\HasApiTokens; // Tambahkan ini
+
 
 class User extends Authenticatable
 {
    protected $table = 'users'; // Nama tabel jika berbeda
-    protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
-    public $incrementing = false; // Jika nik bukan auto-incrementing
-    protected $keyType = 'biginteger'; // Tipe kunci jika nik adalah string
+   
 
-    use HasFactory, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +31,11 @@ class User extends Authenticatable
         'transaksi_custom_id',
         'roles_custom_id',
     ];
+
+    protected $hidden = [
+    'password',
+    'remember_token',
+];
 
     public function role(): BelongsTo
     {

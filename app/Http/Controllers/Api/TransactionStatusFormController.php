@@ -75,6 +75,7 @@ class TransactionStatusFormController extends Controller
 
             // Cek apakah status form adalah ISF002
             if ($request->input('statusForm_custom_id') === 'ISF002') {
+
                 // Cek apakah user sudah ada
                 $existingUser = User::where('username', $resident->username)->first();
                 
@@ -85,6 +86,7 @@ class TransactionStatusFormController extends Controller
                     // Generate custom ID untuk user
                     $usercustomId = User::generateCustomId();
 
+                    $token = null;
                     // Buat user baru
                     $user = User::create([
                         'custom_id' => $usercustomId,
@@ -93,6 +95,13 @@ class TransactionStatusFormController extends Controller
                         'transaksi_custom_id' => $transaction->custom_id,
                         'roles_custom_id' => $role->custom_id,
                     ]); 
+                    
+               // Buat token untuk user
+                $token = $user->createToken('auth_token')->plainTextToken;
+
+                }else {
+                    // Jika user sudah ada, buat token baru
+                    $token = $existingUser->createToken('auth_token')->plainTextToken;
                 }
             }
 
@@ -102,8 +111,11 @@ class TransactionStatusFormController extends Controller
             // Reload transaksi untuk memastikan data terbaru
             $transaction->refresh();
 
-            // Kembalikan pengguna sebagai resource
-            return new TransactionStatusFormResource($transaction);
+            // Jika ingin mengembalikan token
+        return response()->json([
+            'transaction' => new TransactionStatusFormResource($transaction),
+            'token' => $token ?? null
+        ]);
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json([
