@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Kernel;
 
 
 Route::get('/user', function (Request $request) {
@@ -61,18 +62,18 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
             Route::get('/me', [AuthController::class, 'me']);
 
             // Route khusus admin
-            Route::middleware('role:admin')->group(function () {
+            Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                 Route::get('/admin/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard admin']);
                 });
             });
 
             // Route khusus user
-            Route::middleware('role:user')->group(function () {
-                Route::get('/user/dashboard', function () {
+            //Route::middleware("role.check:user")->group(function () {
+             Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
-                });
-            });
+                })->middleware(App\Http\Middleware\CheckRole::class.':user');
+            //});
         });
         
     });

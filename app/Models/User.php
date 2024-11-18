@@ -42,6 +42,16 @@ class User extends Authenticatable
         return $this->BelongsTo(Role::class, 'roles_custom_id', 'custom_id');
     }
 
+   // Method untuk memeriksa role
+    public function hasRole($roles)
+    {
+        // Pastikan $roles adalah array
+        $roles = is_array($roles) ? $roles : func_get_args();
+
+        // Periksa apakah role pengguna ada dan cocok dengan role yang diizinkan
+        return $this->role && in_array($this->role->leveluser, $roles);
+    }
+
        // Metode untuk menghasilkan ID kustom
     public static function generateCustomId()
     {

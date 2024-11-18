@@ -26,7 +26,7 @@ class AuthController extends Controller
         // Periksa kredensial
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'Kredensial tidak valid'
+                'message' => 'password tidak valid'
             ], 401);
         }
 
@@ -36,7 +36,6 @@ class AuthController extends Controller
         // Buat token baru
         $token = $user->createToken('auth_token')->plainTextToken;
 
-       
 
         return response()->json([
             'user' => $user,
@@ -44,7 +43,8 @@ class AuthController extends Controller
             'role' => $user->role->leveluser
         ]);
 
-        dd($user);
+        
+     
     }
 
     // Logout User
