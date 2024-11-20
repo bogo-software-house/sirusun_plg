@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('Property');
+            $table->string('property'); 
+            //isi property ada lantai, kusen, pintu, jendela, finishing platform, finishing dinding, instalasi listrik, instalasi air
             $table->timestamps();
         });
     }

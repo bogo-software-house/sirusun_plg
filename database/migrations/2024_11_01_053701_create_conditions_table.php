@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('conditions', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('Condition');
+            $table->string('condition'); // baik, rusak ringan, rusak sedang,rusak berat
             $table->timestamps();
         });
     }

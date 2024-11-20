@@ -14,8 +14,15 @@ return new class extends Migration
         Schema::create('damage_rooms', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('Noted');
+            $table->string('properties_custom_id');
+            $table->string('conditions_custom_id');
+            $table->string('information_custom_id');
             $table->timestamps();
+
+            //membuat relasi
+            $table->foreign('properties_custom_id')->references('custom_id')->on('properties')->onDelete('cascade');
+            $table->foreign('conditions_custom_id')->references('custom_id')->on('conditions')->onDelete('cascade');
+            $table->foreign('information_custom_id')->references('custom_id')->on('information_damages')->onDelete('cascade');
         });
     }
 

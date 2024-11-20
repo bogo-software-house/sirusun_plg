@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('unit_numbers', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('No_Unit');
+            $table->string('no_unit'); //max 30 unit
+            $table->string('bloks_custom_id');
+            $table->string('floors_custom_id');
             $table->timestamps();
+
+            // Foreign Key Constraints
+            $table->foreign('bloks_custom_id')->references('custom_id')->on('bloks')->onDelete('cascade');
+            $table->foreign('floors_custom_id')->references('custom_id')->on('floors')->onDelete('cascade');
         });
     }
 

@@ -15,8 +15,9 @@ use Illuminate\Validation\ValidationException;
 
 class Resident extends Model
 {
+    use HasFactory;
 
- protected $table = 'Residents'; // Nama tabel jika berbeda
+    protected $table = 'Residents'; // Nama tabel jika berbeda
     protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
     public $incrementing = false; // Jika nik bukan auto-incrementing
     protected $keyType = 'biginteger'; // Tipe kunci jika nik adalah string
@@ -115,6 +116,6 @@ class Resident extends Model
             'nik',                         // Primary key pada model asal (Resident)
             'custom_id'                    // Primary key pada model perantara (ResidentPdf)
         );
-
+        
     }
 }

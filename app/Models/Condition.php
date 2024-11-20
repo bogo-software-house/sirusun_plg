@@ -1,35 +1,23 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DamageRoom;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Condition extends Model
 {
-      use HasFactory;
+    use HasFactory;
       
-    protected $fillable = ['id', 'custom_id', 'Condition'];
+    protected $fillable = [
+        'custom_id', 
+        'condition',
+    ];
 
-    // Metode untuk menghasilkan ID kustom
-    public static function generateCustomId()
+    public function damageRoom(): BelongsTo
     {
-        // Ambil ID terakhir dari tabel
-        $lastItem = self::orderBy('custom_id', 'desc')->first();
-
-        // Jika tidak ada item, mulai dari IC0001
-        if (!$lastItem) {
-            return 'IB0001';
-        }
-
-        // Ambil ID kustom terakhir
-        $lastCustomId = $lastItem->custom_id;
-
-        // Pisahkan huruf dan angka
-        $number = (int) substr($lastCustomId, 2); // Mengambil bagian angka
-        $newNumber = str_pad($number + 1, 4, '0', STR_PAD_LEFT); // Increment dan padding dengan 0
-
-        return 'IB' . $newNumber; // Gabungkan kembali menjadi ID baru
+        return $this->belongsTo(DamageRoom::class, 'condition_custom_id', 'custom_id');
     }
 
 }

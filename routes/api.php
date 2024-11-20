@@ -32,7 +32,7 @@ Route::apiResource('/unit_numbers', App\Http\Controllers\Api\UnitnumberControlle
 //rooms
 Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
 //jenis_kelamin
-Route::apiResource('/genders', App\Http\Controllers\Api\GendersController::class);
+Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class);
 //married_statuses
 Route::apiResource('/married_statuses', App\Http\Controllers\Api\MarriedstatusesController::class);
 //religion

@@ -13,9 +13,17 @@ return new class extends Migration
     {
         Schema::create('rusuns', function (Blueprint $table) {
            $table->id();
-            $table->string('custom_id')->unique(); // Kolom untuk menyimpan ID kustom
-           $table->string('Name_Rusun'); // Kolom untuk menyimpan ID kustom
-            $table->timestamps();
+           $table->string('custom_id')->unique(); // Kolom untuk menyimpan ID kustom
+           $table->string('nama_rusun'); 
+           $table->string('alamat');
+           $table->string('luas');
+           $table->string('jmlh_blok');
+           $table->string('jmlh_lantai');
+           $table->string('tahun_pembangunan');
+           $table->string('fasilitas');
+           //gambar
+           $table->timestamps();
+
         });
     }
 

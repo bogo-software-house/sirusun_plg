@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('residents', function (Blueprint $table) {
-             $table->bigInteger('nik')->default(16)->unique()->primary(); // Menambahkan kolom nik yang unik
+            $table->bigInteger('nik')->default(16)->unique()->primary(); // Menambahkan kolom nik yang unik
             $table->string('username');
             $table->string('tempat_lahir');
             $table->string('tanggal_lahir');
