@@ -22,7 +22,7 @@ return new class extends Migration
             //membuat relasi
             $table->foreign('properties_custom_id')->references('custom_id')->on('properties')->onDelete('cascade');
             $table->foreign('conditions_custom_id')->references('custom_id')->on('conditions')->onDelete('cascade');
-            $table->foreign('information_custom_id')->references('custom_id')->on('information_damages')->onDelete('cascade');
+            $table->foreign('information_custom_id')->references('custom_id')->on('information')->onDelete('cascade');
         });
     }
 
