@@ -71,7 +71,7 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
             //Route::middleware("role.check:user")->group(function () {
              Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
-                })->middleware(App\Http\Middleware\CheckRole::class.':user');
+                })->middleware(App\Http\Middleware\CheckRole::class.':USER');
             //});
         });
         
