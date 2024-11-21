@@ -13,7 +13,7 @@ class Status extends Model
       
     protected $fillable = [
         'custom_id', 
-        'status'
+        'status',
     ];
 
     public function room(): BelongsTo
