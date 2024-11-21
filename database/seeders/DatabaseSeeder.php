@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
    public function run()
 
     {
-        \App\Models\Religion::factory()->create();
+        \App\Models\Religion::factory()->count(5)->create();
         \App\Models\Education::factory()->create();
         \App\Models\Gender::factory()->create();
         \App\Models\StatusNikah::factory()->create();
