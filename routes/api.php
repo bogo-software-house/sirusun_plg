@@ -33,7 +33,6 @@ Route::apiResource('/informations', App\Http\Controllers\Api\InformationControll
 Route::apiResource('/unit_numbers', App\Http\Controllers\Api\UnitnumberController::class);
 //rooms
 Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
-
 //resident
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document

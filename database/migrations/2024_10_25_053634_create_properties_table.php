@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unit_numbers', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('No_Unit');
+            $table->string('property'); 
+            //isi property ada lantai, kusen, pintu, jendela, finishing platform, finishing dinding, instalasi listrik, instalasi air
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('unit_numbers');
+        Schema::dropIfExists('properties');
     }
 };

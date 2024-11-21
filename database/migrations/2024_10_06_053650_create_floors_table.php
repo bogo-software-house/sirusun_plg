@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('married_statuses', function (Blueprint $table) {
+        Schema::create('floors', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('Married_Status');
+            $table->integer('floor');
+            $table->string('prices_custom_id');
             $table->timestamps();
+
+            // Membuat relasi one-to-many antara floors dan prices
+            $table->foreign('prices_custom_id')->references('custom_id')->on('prices')->onDelete('cascade');
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('married_statuses');
+        Schema::dropIfExists('floors');
     }
 };
