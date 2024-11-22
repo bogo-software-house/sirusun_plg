@@ -124,7 +124,7 @@ class ResidentController extends Controller
                     'file_url' => $fileUrl, // Menggunakan Storage::url untuk mendapatkan URL yang benar
                 ]);
             }
-
+            
                // Generate custom ID
              $customId = ResidentPdf::generateCustomId();
 

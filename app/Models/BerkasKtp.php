@@ -16,6 +16,6 @@ class BerkasKtp extends Model
 
     public function resident(): BelongsTo
     {
-        return $this->BelongsTo(Resident::class,'nik','nik');
+        return $this->BelongsTo(BerkasKtp::class,'nik','nik');
     }
 }

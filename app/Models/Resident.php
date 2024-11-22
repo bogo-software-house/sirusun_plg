@@ -10,6 +10,8 @@ use App\models\Education;
 use App\models\StatusNikah;
 use App\models\Gender;
 use App\models\ResidentPdf;
+use App\models\BerkasKtp;
+use App\models\BerkasKk;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
@@ -93,11 +95,11 @@ class Resident extends Model
      */
     public function BerkasKk(): HasOne
     {
-        return $this->hasOne(Resident::class, 'nik', 'nik');
+        return $this->hasOne(BerkasKk::class, 'nik', 'nik');
     }
     public function BerkasKtp(): HasOne
     {
-        return $this->hasOne(Resident::class, 'nik', 'nik');
+        return $this->hasOne(BerkasKtp::class, 'nik', 'nik');
     }
       // Tambahkan relasi dengan ResidentPdf
     public function residentPdf(): HasOne
