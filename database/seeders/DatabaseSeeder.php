@@ -44,17 +44,16 @@ class DatabaseSeeder extends Seeder
     \App\Models\StatusForm::factory()->count(3)->sequence(
         ['custom_id' => 'ISF001','status' => 'DI PROSES'],
         ['custom_id' => 'ISF002','status' => 'DITERIMA'],
-        ['custom_id' => 'ISF003','status' => 'DITOLAK'],    )
-    ->create();
+        ['custom_id' => 'ISF003','status' => 'DITOLAK'],    
+    )->create();
 
-    \App\Models\Role::factory()->count(2)
-    ->sequence(
+    \App\Models\Role::factory()->count(2)->sequence(
         ['custom_id' =>'IRO001','leveluser' => 'admin'],
         ['custom_id' =>'IRO002','leveluser' => 'user'], 
     )
     ->create();
 
-    //Blok::factory()->count(4)->create();
+    // \App\Models\Blok::factory()->count(4)->create();
     // \App\Models\Condition::factory()->create();
     // \App\Models\Price::factory()->create();
     // \App\Models\Status::factory()->create();

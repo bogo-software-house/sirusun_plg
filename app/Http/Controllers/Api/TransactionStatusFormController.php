@@ -100,6 +100,14 @@ class TransactionStatusFormController extends Controller
                // Buat token untuk user
                 $token = $user->createToken('auth_token')->plainTextToken;
 
+                }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+                    // Jadwalkan job untuk menghapus data setelah 3 jam
+                    DeleteTransactionStatusFormData::dispatch($formcustomId)->delay(now()->addHours(1));
+
+                    // Kembalikan respons
+                    return response()->json([
+                        'message' => 'Transaction status updated to ISF003. Data will be deleted in 1 hours.'
+               ]);
                 }else {
                     // Jika user sudah ada, buat token baru
                     $token = $existingUser->createToken('auth_token')->plainTextToken;
