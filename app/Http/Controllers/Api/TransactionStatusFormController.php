@@ -77,7 +77,7 @@ class TransactionStatusFormController extends Controller
             if ($request->input('statusForm_custom_id') === 'ISF002') {
 
                 // Cek apakah user sudah ada
-                $existingUser = User::where('username', $resident->username)->first();
+                $existingUser = User::where('nik', $resident->nik)->first();
                 
                 if (!$existingUser) {
                    //mencari di table role
@@ -90,8 +90,9 @@ class TransactionStatusFormController extends Controller
                     // Buat user baru
                     $user = User::create([
                         'custom_id' => $usercustomId,
-                        'username' => $resident->username,
-                        'password' => Hash::make('user123'), // Gunakan Hash untuk password
+                        'nik'       => $resident->nik,
+                        'username'  => $resident->username,
+                        'password'  => Hash::make('user123'), // Gunakan Hash untuk password
                         'transaksi_custom_id' => $transaction->custom_id,
                         'roles_custom_id' => $role->custom_id,
                     ]); 

@@ -18,12 +18,7 @@ class DatabaseSeeder extends Seeder
     \App\Models\StatusNikah::factory()->create();
     \App\Models\StatusForm::factory()->create();
 
-      // \App\Models\Religion::factory()->create();
-    // \App\Models\Education::factory()->create();
-    // \App\Models\Gender::factory()->create();
-    // \App\Models\StatusNikah::factory()->create();
-    // \App\Models\StatusForm::factory()->create();
-    Blok::factory()->count(4)->create();
+    //Blok::factory()->count(4)->create();
     // \App\Models\Condition::factory()->create();
     // \App\Models\Price::factory()->create();
     // \App\Models\Status::factory()->create();

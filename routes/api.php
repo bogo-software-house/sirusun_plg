@@ -37,6 +37,7 @@ Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document
 Route::apiResource('/berkaskk', App\Http\Controllers\Api\BerkaskkController::class);
+Route::apiResource('/berkasktp', App\Http\Controllers\Api\BerkasktpController::class);
 
 
 //penampilan nilai databases saja
@@ -68,11 +69,12 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
             });
 
             // Route khusus user
-            //Route::middleware("role.check:user")->group(function () {
+            Route::middleware(App\Http\Middleware\CheckRole::class.':user')->group(function () {
              Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
-                })->middleware(App\Http\Middleware\CheckRole::class.':USER');
-            //});
+                });
+                //->middleware(App\Http\Middleware\CheckRole::class.':user');
+            });
         });
         
     });

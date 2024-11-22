@@ -10,20 +10,52 @@ use Illuminate\Support\Facades\Log;
 
 class BerkaskkResource extends JsonResource
 {
-   public function toArray($request)
-    {
-        // Konversi data apapun ke format yang konsisten
-        $data = is_array($this->resource) 
-            ? $this->resource 
-            : (array) $this->resource;
+  
+    
+        protected $success;
+    protected $message;
 
+    public function __construct($success = true, $message = '', $resource = null)
+    {
+        $this->success = $success;
+        $this->message = $message;
+        parent::__construct($resource);
+    }
+
+    public function toArray($request)
+    {
+       // Jika resource null, kembalikan respons default
+        if ($this->resource === null) {
+            return [
+                'success' => false,
+                'message' => 'No data found',
+                'data' => null
+            ];
+        }
+
+        // Jika resource adalah collection
+        if ($this->resource instanceof \Illuminate\Support\Collection) {
+            return [
+                'success' => $this->success,
+                'message' => $this->message,
+                'data' => $this->resource->map(function($item) {
+                    return [
+                        'nik' => $item->nik ?? null,
+                        'file_name' => $item->file_name ?? null,
+                        'file_path' => $item->file_path ? Storage::url($item->file_path) : null,
+                    ];
+                })
+            ];
+        }
+
+        // Jika resource adalah single item atau model
         return [
-            'success' => true,
-            'message' => 'Detail Data',
+            'success' => $this->success,
+            'message' => $this->message,
             'data' => [
-                'nik' => $data['nik'] ?? null,
-                'file_name' => $data['file_name'] ?? null,
-                'file_path' => $data['file_path'] ?? null,
+                'nik' => $this->nik ?? null,
+                'file_name' => $this->file_name ?? null,
+                'file_path' => $this->file_path ? Storage::url($this->file_path) : null,
             ]
         ];
     }

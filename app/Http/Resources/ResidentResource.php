@@ -111,7 +111,7 @@ class ResidentResource extends JsonResource
                 
                 // Gunakan whenLoaded untuk relasi
                 'berkas_kk' => $this->whenLoaded('berkasKk', function () {
-                    return $this->berkasKk ? new BerkaskkResource($this->berkasKk) : null;
+                    return $this->berkasKk ? new BerkaskkResource(true,'dapat',$this->berkasKk) : null;
                 }),
                 'berkas_ktp' => $this->whenLoaded('berkasKtp', function () {
                     return $this->berkasKtp ? new BerkasktpResource($this->berkasKtp) : null;

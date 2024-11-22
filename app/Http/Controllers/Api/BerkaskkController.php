@@ -54,38 +54,26 @@ class BerkaskkController extends Controller
      */
    public function show($nik)
 {
-    try {
+  try {
         $berkaskk = BerkasKk::where('nik', $nik)
             ->select(['nik', 'file_name', 'file_path'])
             ->first();
 
         if (!$berkaskk) {
             return response()->json([
+                'success' => false,
                 'message' => 'Data tidak ditemukan',
-                'nik' => $nik
+                'data' => null
             ], 404);
         }
 
-        // Pastikan mendapatkan objek, bukan array
-        $berkaskk = $berkaskk instanceof Model ? $berkaskk : (object) $berkaskk;
-
-        $fileUrl = $berkaskk->file_path && Storage::exists($berkaskk->file_path)
-            ? Storage::url($berkaskk->file_path)
-            : null;
-
-        $data = [
-            'nik' => $berkaskk->nik,
-            'file_name' => $berkaskk->file_name,
-            'file_path' => $fileUrl,
-        ];
-
-        return new BerkaskkResource($data);
+        return new BerkaskkResource(true, 'Data ditemukan', $berkaskk);
 
     } catch (\Exception $e) {
-        // Tangani error dengan logging
         Log::error('Error in show method: ' . $e->getMessage());
         
         return response()->json([
+            'success' => false,
             'message' => 'Terjadi kesalahan',
             'error' => $e->getMessage()
         ], 500);

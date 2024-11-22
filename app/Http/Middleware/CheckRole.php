@@ -11,6 +11,8 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, ...$roles)
     {
+
+      
         Log::debug('Middleware Called', [
                 'roles' => $roles,
                 'authenticated' => Auth::check()

@@ -26,6 +26,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'custom_id',
+        'nik',
         'username',
         'password',
         'transaksi_custom_id',

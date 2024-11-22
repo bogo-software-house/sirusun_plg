@@ -16,12 +16,12 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
+            'username' => 'required',
             'password' => 'required|string',
         ]);
 
         // Cari user berdasarkan username
-        $user = User::with('role')->where('username', $request->username)->first();
+        $user = User::with('role')->where('username', $request->username)->orWhere('nik', $request->username)->first();
 
         // Periksa kredensial
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -32,16 +32,31 @@ class AuthController extends Controller
 
         // Hapus token lama
         $user->tokens()->delete();
-
         // Buat token baru
         $token = $user->createToken('auth_token')->plainTextToken;
+         // Cek peran pengguna
 
+            if ($user->role->leveluser === 'admin') {
+                return response()->json([
+                    'message' => 'Login berhasil',
+                    'token' => $token,
+                    'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
+                ]);
+            } elseif ($user->role->leveluser === 'user') {
+                return response()->json([
+                    'message' => 'Login berhasil',
+                    'token' => $token,
+                    'redirect' => '/api/auth/user/dashboard' // URL untuk user
+                ]);
+            }
 
-        return response()->json([
-            'user' => $user,
-            'token' => $token,
-            'role' => $user->role->leveluser
-        ]);
+             return response()->json(['message' => 'Login gagal'], 401);
+
+        // return response()->json([
+        //     'user' => $user,
+        //     'token' => $token,
+        //     'role' => $user->role->leveluser
+        // ]);
 
         
      
