@@ -63,9 +63,19 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
 
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
-                Route::get('/admin/dashboard', function () {
-                    return response()->json(['message' => 'Selamat datang di dashboard admin']);
-                });
+
+              //  Route::middleware(App\Http\Middleware\CheckRusun::class.':standar')->group(function () {
+                    Route::get('/admin/dashboard', function () {
+                        return response()->json(['message' => 'Selamat datang di dashboard admin']);
+                    });
+              //  });
+
+              //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
+                    Route::get('/admin-kertapati/dashboard', function () {
+                        return response()->json(['message' => 'Selamat datang di dashboard admin kertapati']);
+                    
+                    });
+              //  });
             });
 
             // Route khusus user

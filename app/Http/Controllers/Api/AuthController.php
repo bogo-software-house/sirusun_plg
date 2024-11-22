@@ -37,11 +37,22 @@ class AuthController extends Controller
          // Cek peran pengguna
 
             if ($user->role->leveluser === 'admin') {
-                return response()->json([
-                    'message' => 'Login berhasil',
-                    'token' => $token,
-                    'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
-                ]);
+
+                if($request->input('username') === 'admin-kertapati'){
+
+                    return response()->json([
+                        'message' => 'Login admin kertapati berhasil',
+                        'token' => $token,
+                        'redirect' => '/api/auth/admin-kertapati/dashboard' // URL untuk admin
+                    ]);
+                }else{
+                      return response()->json([
+                        'message' => 'Login admin kertapati berhasil',
+                        'token' => $token,
+                        'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
+                    ]);
+                }
+
             } elseif ($user->role->leveluser === 'user') {
                 return response()->json([
                     'message' => 'Login berhasil',

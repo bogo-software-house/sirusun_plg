@@ -124,8 +124,6 @@ class ResidentController extends Controller
                     'file_url' => $fileUrl, // Menggunakan Storage::url untuk mendapatkan URL yang benar
                 ]);
             }
-            // Load relasi untuk response
-            $resident->load('berkasKk', 'berkasKtp');
 
                // Generate custom ID
              $customId = ResidentPdf::generateCustomId();
