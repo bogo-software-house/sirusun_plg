@@ -13,11 +13,9 @@ class EducationFactory extends Factory
 
     public function definition()
     {
-        $count = Education::count() + 1;
-        $customId = sprintf("IED%03d", $count); // Format ID, misalnya "IED001"
 
         return [
-            'custom_id' => $customId,
+            'custom_id' => $this->faker->unique()->word,
             'education' => $this->faker->word, // Nama pendidikan
         ];
     }

@@ -9,8 +9,7 @@ use App\Http\Kernel;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-//users
-Route::apiResource('/users', App\Http\Controllers\Api\UserController::class);
+
 //posts
 Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
 //rusun
@@ -63,8 +62,9 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
 
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
-
-              //  Route::middleware(App\Http\Middleware\CheckRusun::class.':standar')->group(function () {
+                    //users
+                    Route::apiResource('/users-data', App\Http\Controllers\Api\UserController::class);   
+                    //Route::middleware(App\Http\Middleware\CheckRusun::class.':standar')->group(function () {
                     Route::get('/admin/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin']);
                     });
@@ -83,7 +83,6 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
              Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
                 });
-                //->middleware(App\Http\Middleware\CheckRole::class.':user');
             });
         });
         

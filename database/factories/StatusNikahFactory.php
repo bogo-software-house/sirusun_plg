@@ -13,11 +13,8 @@ class StatusNikahFactory extends Factory
 
     public function definition()
     {
-        $count = StatusNikah::count() + 1;
-        $customId = sprintf("ISN%03d", $count); // Format ID, misalnya "ISN001"
-
         return [
-            'custom_id' => $customId,
+            'custom_id' => $this->faker->unique()->word,
             'status_nikah' => $this->faker->word, // Status pernikahan
         ];
     }

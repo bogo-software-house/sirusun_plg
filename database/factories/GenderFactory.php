@@ -13,11 +13,8 @@ class GenderFactory extends Factory
 
     public function definition()
     {
-        $count = Gender::count() + 1;
-        $customId = sprintf("IGD%03d", $count); // Format ID, misalnya "IGD001"
-
         return [
-            'custom_id' => $customId,
+            'custom_id' => $this->faker->unique()->word,
             'gender' => $this->faker->word, // Jenis kelamin
         ];
     }
