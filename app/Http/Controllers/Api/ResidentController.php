@@ -30,8 +30,9 @@ class ResidentController extends Controller
 
            try {
             // Eager loading
-             $Residents = Resident::Latest()->with(['religions','genders','StatusNikah','education','BerkasKk','BerkasKtp'])->get();
-             return new ResidentResource($Residents);
+             $Residents = Resident::Latest()->with(['religions','genders','StatusNikah','education','berkasKk','berkasKtp','residentPdf','transactionStatusForm.statusForm'])->get();
+             
+             return  ResidentResource::collection($Residents);
             
         } catch (\Exception $e) {
             Log::error('Error fetching residents: ' . $e->getMessage());
@@ -201,7 +202,7 @@ class ResidentController extends Controller
     public function show(string $nik)
     {
          // Temukan pengguna berdasarkan NIK
-        $Resident = Resident::with(['BerkasKk','BerkasKtp','residentPdf'])->where('nik',$nik)->first();
+        $Resident = Resident::with(['BerkasKk','BerkasKtp','residentPdf','transactionStatusForm.statusForm'])->where('nik',$nik)->first();
 
         // Periksa apakah pengguna ditemukan
         if (!$Resident) {

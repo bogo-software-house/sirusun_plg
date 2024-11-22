@@ -12,7 +12,7 @@ class ResidentResource extends JsonResource
 {
     // Tambahkan properti untuk status dan pesan
     protected $status = true;
-    protected $message = 'Data berhasil diambil';
+    protected $message = 'berhasil ';
 
     // Constructor untuk mengatur status dan pesan kustom
     public function __construct($resource, $status = true, $message = 'Data berhasil diambil')
@@ -114,7 +114,7 @@ class ResidentResource extends JsonResource
                     return $this->berkasKk ? new BerkaskkResource(true,'dapat',$this->berkasKk) : null;
                 }),
                 'berkas_ktp' => $this->whenLoaded('berkasKtp', function () {
-                    return $this->berkasKtp ? new BerkasktpResource($this->berkasKtp) : null;
+                    return $this->berkasKtp ? new BerkasktpResource(true,'dapat',$this->berkasKtp) : null;
                 }),
                 'resident_pdf' => $this->whenLoaded('residentPdf', function () {
                     return $this->residentPdf ? new ResidentPdfResource($this->residentPdf) : null;
