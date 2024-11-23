@@ -71,8 +71,6 @@ class AuthController extends Controller
         //     'role' => $user->role->leveluser
         // ]);
 
-        
-     
     }
 
     // Logout User
