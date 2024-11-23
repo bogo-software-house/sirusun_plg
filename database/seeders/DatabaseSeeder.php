@@ -61,10 +61,16 @@ class DatabaseSeeder extends Seeder
     \App\Models\Information::factory()->create();
 
 
-    \App\Models\User::factory()->sequence(
+    \App\Models\User::factory()->count(2)->sequence(
     [
         'custom_id' => 'IUS001',
         'username' => 'admin', 
+        'password' => bcrypt('admin123'), 
+        'roles_custom_id' => 'IRO001'  // Menggunakan role admin yang sudah ada
+    ],
+    [
+        'custom_id' => 'IUS002',
+        'username' => 'admin-kertapati', 
         'password' => bcrypt('admin123'), 
         'roles_custom_id' => 'IRO001'  // Menggunakan role admin yang sudah ada
     ],

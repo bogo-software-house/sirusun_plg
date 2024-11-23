@@ -43,6 +43,7 @@ class AuthController extends Controller
                     return response()->json([
                         'message' => 'Login admin kertapati berhasil',
                         'token' => $token,
+                        'role' => $user->role->leveluser,
                         'redirect' => '/api/auth/admin-kertapati/dashboard' // URL untuk admin
                     ]);
                 // }else{
@@ -57,6 +58,7 @@ class AuthController extends Controller
                 return response()->json([
                     'message' => 'Login berhasil',
                     'token' => $token,
+                    'role' => $user->role->leveluser,
                     'redirect' => '/api/auth/user/dashboard' // URL untuk user
                 ]);
             }
