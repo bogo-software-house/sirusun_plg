@@ -14,6 +14,7 @@ use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
+use App\Jobs\DeleteTransactiomStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
 
 
@@ -101,8 +102,9 @@ class TransactionStatusFormController extends Controller
                 $token = $user->createToken('auth_token')->plainTextToken;
 
                 }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+                   
                     // Jadwalkan job untuk menghapus data setelah 3 jam
-                    DeleteTransactionStatusFormData::dispatch($formcustomId)->delay(now()->addHours(1));
+                   DeleteTransactionStatusFormData::dispatch($formcustomId)->delay(now()->addHours(1));
 
                     // Kembalikan respons
                     return response()->json([

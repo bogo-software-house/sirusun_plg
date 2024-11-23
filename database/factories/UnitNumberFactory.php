@@ -18,7 +18,7 @@ class UnitNumberFactory extends Factory
         $customId = sprintf("UN%03d", $count); // Format ID, misalnya "UN001"
         return [
             'custom_id' => $customId,
-            'no_unit' => $this->faker->numberBetween(1, 1000), // Nomor unit
+            'no_unit' => $this->faker->numberBetween(1, 50), // Nomor unit
         //     'bloks_custom_id',
         // 'floors_custom_id',
         ];

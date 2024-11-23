@@ -20,7 +20,7 @@ class FloorFactory extends Factory
         
         return [
             'custom_id' => $customId,
-            'floor' => $this->faker->numberBetween(1, 100), // Nomor lantai
+            'floor' => $this->faker->numberBetween(1, 10), // Nomor lantai
             'prices_custom_id' => Price::factory()->create()->custom_id,
         ];
     }
