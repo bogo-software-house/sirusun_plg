@@ -106,16 +106,18 @@ const ResidentForm = () => {
     <div>
       {/* Banner */}
       {showBanner && (
-        <div style={{
-          backgroundColor: "#4caf50",
-          color: "white",
-          padding: "10px",
-          textAlign: "center",
-          position: "fixed",
-          top: "0",
-          width: "100%",
-          zIndex: "1000"
-        }}>
+        <div
+          style={{
+            backgroundColor: "#4caf50",
+            color: "white",
+            padding: "10px",
+            textAlign: "center",
+            position: "fixed",
+            top: "0",
+            width: "100%",
+            zIndex: "1000",
+          }}
+        >
           Data anda sedang di prosses...
         </div>
       )}

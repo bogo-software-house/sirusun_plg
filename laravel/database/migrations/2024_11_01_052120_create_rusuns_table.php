@@ -17,8 +17,8 @@ return new class extends Migration
            $table->string('nama_rusun'); 
            $table->string('alamat');
            $table->string('luas');
-           $table->string('jmlh_blok');
-           $table->string('jmlh_lantai');
+           $table->string('blok');
+           $table->string('lantai');
            $table->string('tahun_pembangunan');
            $table->string('fasilitas');
            //gambar
