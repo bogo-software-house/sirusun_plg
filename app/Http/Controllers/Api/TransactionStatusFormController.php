@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Jobs\DeleteTransactiomStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
+use App\Http\Resources\TransactionStatusFormShowResource;
 
 
 class TransactionStatusFormController extends Controller
@@ -30,9 +31,10 @@ class TransactionStatusFormController extends Controller
     }
 
  
-    public function show(string $id)
+    public function show(string $formcustomId)
     {
-        //
+        $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->where('form_custom_id',$formcustomId)->Latest()->get();
+        return   TransactionStatusFormResource::collection($TransactionStatusForm);
     }
 
    
