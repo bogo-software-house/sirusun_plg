@@ -14,11 +14,10 @@ class ConditionFactory extends Factory
   
     public function definition()
     {
-        $count = Condition::count() + 1;
-        $customId = sprintf("IC%03d", $count); // Format ID, misalnya "IC001"
+
 
         return [
-            'custom_id' => $customId,
+            'custom_id' => $this->faker->unique()->word,
             'condition' => $this->faker->word, // Kondisi yang dapat ditemukan
         ];
     }

@@ -14,11 +14,11 @@ class StatusFactory extends Factory
 
     public function definition()
     {
-        $count = Status::count() + 1;
-        $customId = sprintf("IS%03d", $count); // Format ID, misalnya "IS001"
+
+
         return [
-            'custom_id' => $customId,
-            'status' => $this->faker->word, // Nama status
+            'custom_id' => $this->faker->unique()->word,
+            'status' => $this->faker->word, // status kamar
         ];
     }
 }

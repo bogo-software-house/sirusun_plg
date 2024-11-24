@@ -14,12 +14,11 @@ class PropertyFactory extends Factory
 
     public function definition()
     {
-        $count = Property::count() + 1;
-        $customId = sprintf("IPR%03d", $count); // Format ID, misalnya "IPR001"
-        
+
+
         return [
-            'custom_id' => $customId,
-            'property' => $this->faker->word, // Nama properti
+            'custom_id' => $this->faker->unique()->word,
+            'property' => $this->faker->word, // property
         ];
     }
 }

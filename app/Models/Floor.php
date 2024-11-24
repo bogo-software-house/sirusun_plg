@@ -4,23 +4,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\UnitNumber;
+use App\Models\PriceTag;
 
 
 class Floor extends Model
 {
-      use HasFactory;
+    use HasFactory;
       
     protected $fillable = [
         'custom_id', 
         'floor',
-        'prices_custom_id',
+
     ];
 
-    // Relasi One-to-Many dengan Model UnitNumber
-    public function unitNumbers(): HasMany
+    //relasi
+     /**
+     * Get all of the resident for the Gender
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */   
+    public function priceTags(): HasMany
     {
-        return $this->hasMany(UnitNumber::class, 'floors_custom_id', 'custom_id');
+        return $this->hasMany(PriceTag::class, 'floors_custom_id', 'custom_id');
     }
     
 }

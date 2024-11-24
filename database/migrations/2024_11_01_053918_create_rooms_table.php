@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('rusuns_custom_id');
+            $table->string('price_tags_custom_id');
             $table->string('unit_numbers_custom_id');
             $table->string('statuses_custom_id');
             $table->string('damage_rooms_custom_id');
             $table->timestamps();
 
             //membuat relasi 
-            $table->foreign('rusuns_custom_id')->references('custom_id')->on('rusuns')->onDelete('cascade');
+            $table->foreign('price_tags_custom_id')->references('custom_id')->on('price_tags')->onDelete('cascade');
             $table->foreign('unit_numbers_custom_id')->references('custom_id')->on('unit_numbers')->onDelete('cascade');
             $table->foreign('statuses_custom_id')->references('custom_id')->on('statuses')->onDelete('cascade');
             $table->foreign('damage_rooms_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
