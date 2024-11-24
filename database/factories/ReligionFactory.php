@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ReligionFactory extends Factory
 {
-     protected $model = Religion::class;
+    protected $model = Religion::class;
 
     public function definition()
     {
 
 
-
+        
     return [
         'custom_id' =>  $this->faker->unique()->word,
         'religions' =>  $this->faker->word

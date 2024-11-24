@@ -22,5 +22,11 @@ class Floor extends Model
     {
         return $this->hasMany(UnitNumber::class, 'floors_custom_id', 'custom_id');
     }
+
+    // Relasi ke Price
+    public function price()
+    {
+        return $this->belongsTo(Price::class, 'prices_custom_id', 'custom_id');
+    }
     
 }

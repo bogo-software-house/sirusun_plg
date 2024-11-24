@@ -17,6 +17,6 @@ class Price extends Model
 
     public function floor(): BelongsTo
     {
-        return $this->belongsTo(Floor::class, 'floors_custom_id', 'custom_id');
+        return $this->belongsTo(Floor::class, 'prices_custom_id', 'custom_id');
     }
 }

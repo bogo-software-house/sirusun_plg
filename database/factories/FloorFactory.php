@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Floor;
+use App\Models\Price;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Floor>
@@ -15,13 +16,12 @@ class FloorFactory extends Factory
     public function definition()
     {
 
-        $count = Floor::count() + 1;
-        $customId = sprintf("IF%03d", $count); // Format ID, misalnya "IF001"
         
+
         return [
-            'custom_id' => $customId,
-            'floor' => $this->faker->numberBetween(1, 100), // Nomor lantai
-            'prices_custom_id' => Price::factory()->create()->custom_id,
+            'custom_id' => $this->faker->unique()->bothify('IFL###'),  // ID unik untuk floor
+            'floor' => $this->faker->numberBetween(0, 4),  // Nomor lantai (0, 1, 2, 3, 4)
+            'prices_custom_id' => Price::factory(),  // Relasi dengan Price melalui prices_custom_id
         ];
     }
 }

@@ -14,12 +14,11 @@ class InformationFactory extends Factory
 
     public function definition()
     {
-        $count = Information::count() + 1;
-        $customId = sprintf("IFD%03d", $count); // Format ID, misalnya "IFD001"
+
         
         return [
-            'custom_id' => $customId,
-            'information' => $this->faker->name, // Nama
+            'custom_id' => $this->faker->unique()->word,
+            'information' => $this->faker->word, // Keterangan Kondisi Kerusakan
         ];
     }
 }

@@ -9,7 +9,7 @@ use App\Models\Gender;
  */
 class GenderFactory extends Factory
 {
-      protected $model = Gender::class;
+    protected $model = Gender::class;
 
     public function definition()
     {
