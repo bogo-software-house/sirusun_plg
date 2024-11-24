@@ -6,6 +6,7 @@ import Profil from "../components/Profil";
 import Static from "../components/Static";
 import Contact from "../components/Contact";
 import Download from "../components/Download";
+import AlurPendaftaran from "../components/AlurPendaftaran";
 
 
 
@@ -20,7 +21,7 @@ function Home() {
       <Card />
       <Profil />
       <Download />
-   
+      <AlurPendaftaran />
       <Static />
       <Contact />
       <Footer />

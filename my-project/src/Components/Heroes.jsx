@@ -2,6 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import Navbar from "../SmallComponents/Navbar";
 import { useState, useEffect } from "react";
+import logo from "../assets/images/logowithtext.png";
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,7 +41,7 @@ const Carousel = ({ images }) => {
         </svg>
         <div className="mt-10 mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-38">
           <div className=" mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-10">
-            <img alt="Your Company" src="https://mpp.palembang.go.id/static/logo/1661780620.png" className="h-11" />
+            <img alt="logo" src={logo} className="h-20" />
             <div className="mt-10 sm:mt-10 lg:mt-5">
               <a href="#" className="inline-flex space-x-6">
                 <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">What's new</span>

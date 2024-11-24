@@ -1,321 +1,160 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const TransactionTable = () => {
+  const [transactionData, setTransactionData] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]); // Untuk menyimpan status dari backend
+  const [selectedStatuses, setSelectedStatuses] = useState({}); // Menyimpan status per transaksi
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [updating, setUpdating] = useState(false);
+  const [notification, setNotification] = useState(null); // Menambahkan state untuk pemberitahuan
+
+  // Fetch transaksi dan status form
+  useEffect(() => {
+    fetchTransactionData(); // Ambil data transaksi
+    fetchStatusOptions(); // Ambil status options dari API
+  }, []);
+
+  const fetchTransactionData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/transactions");
+      setTransactionData(response.data.data); // Menyimpan data transaksi ke state
+      setLoading(false);
+    } catch (err) {
+      setError("Error fetching transaction data");
+      setLoading(false);
+    }
+  };
+
+  const fetchStatusOptions = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/status-form");
+      setStatusOptions(response.data.data); // Menyimpan data status form ke state
+    } catch (err) {
+      setError("Error fetching status options");
+    }
+  };
+
+  const updateStatus = async (transactionId) => {
+    // Pastikan status dipilih untuk transaksi ini
+    const statusFormCustomId = selectedStatuses[transactionId];
+
+    if (!statusFormCustomId) {
+      setError("Please select a status for this transaction.");
+      return;
+    }
+
+    setUpdating(true);
+    try {
+      // Ambil form_custom_id dari transaksi untuk dikirimkan dalam URL
+      const formcustomId = transactionData.find((transaction) => transaction.id === transactionId)?.form_custom_id;
+
+      if (!formcustomId) {
+        setError("Form Custom ID not found for this transaction.");
+        return;
+      }
+
+      // Kirimkan status yang dipilih untuk transaksi ini dengan formcustomId
+      const response = await axios.patch(`http://127.0.0.1:8000/api/transactions/${formcustomId}`, {
+        statusForm_custom_id: statusFormCustomId,
+      });
+
+      // Memuat ulang data transaksi setelah status diperbarui
+      fetchTransactionData();
+
+      // Tampilkan pesan sukses
+      setNotification({ type: "success", message: "Status berhasil diperbarui!" });
+
+      // Menghapus notifikasi setelah 3 detik
+      setTimeout(() => setNotification(null), 3000);
+    } catch (err) {
+      // Tampilkan pesan error
+      setNotification({ type: "error", message: "Error updating status. Please try again later." });
+
+      // Menghapus notifikasi setelah 3 detik
+      setTimeout(() => setNotification(null), 3000);
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleStatusChange = (transactionId, statusId) => {
+    setSelectedStatuses((prevSelectedStatuses) => ({
+      ...prevSelectedStatuses,
+      [transactionId]: statusId, // Update status untuk transaksi tertentu
+    }));
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
-  ```
-*/
-'use client'
-// import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-} from '@headlessui/react'
-import {
-  Bars3Icon,
-  BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { Link } from 'react-router-dom'
 
-const navigation = [
-  { name: 'Kamar', href: '#', icon: HomeIcon, current: true },
-  { name: 'Penghuni', href: '#', icon: UsersIcon, current: false },
-  { name: 'Anjay', href: '#', icon: FolderIcon, current: false },
-  { name: 'Mabar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Slebew', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-
-const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <>
-      {/*
-        This example requires updating your template:
+    <div className="transaction-table">
+      <h2>Transaction Status Table</h2>
 
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
-      <div>
-        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
-          <DialogBackdrop
-            transition
-            className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
-          />
-
-          <div className="fixed inset-0 flex">
-            <DialogPanel
-              transition
-              className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full"
-            >
-              <TransitionChild>
-                <div className="absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0">
-                  <button type="button" onClick={() => setSidebarOpen(false)} className="-m-2.5 p-2.5">
-                    <span className="sr-only">Close sidebar</span>
-                    <XMarkIcon aria-hidden="true" className="h-6 w-6 text-white" />
-                  </button>
-                </div>
-              </TransitionChild>
-              {/* Sidebar component, swap this element with another sidebar if you like */}
-              <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
-                <div className="flex h-16 shrink-0 items-center">
-                  <img
-                    alt="Your Company"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                    className="h-8 w-auto"
-                  />
-                </div>
-                <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                    <li>
-                      <ul role="list" className="-mx-2 space-y-1">
-                        {navigation.map((item) => (
-                          <li key={item.name}>
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                item.current
-                                  ? 'bg-indigo-700 text-white'
-                                  : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                                'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                              )}
-                            >
-                              <item.icon
-                                aria-hidden="true"
-                                className={classNames(
-                                  item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white',
-                                  'h-6 w-6 shrink-0',
-                                )}
-                              />
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                    <li className="mt-auto">
-                      <a
-                        href="#"
-                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                      >
-                        <Cog6ToothIcon
-                          aria-hidden="true"
-                          className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
-                        />
-                        Settings
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </DialogPanel>
-          </div>
-        </Dialog>
-
-        {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
-            <div className="flex h-16 shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                className="h-8 w-auto"
-              />
-            </div>
-            <nav className="flex flex-1 flex-col">
-              <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                <li>
-                  <ul role="list" className="-mx-2 space-y-1">
-                    {navigation.map((item) => (
-                      <li key={item.name}>
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? 'bg-indigo-700 text-white'
-                              : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                            'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                          )}
-                        >
-                          <item.icon
-                            aria-hidden="true"
-                            className={classNames(
-                              item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white',
-                              'h-6 w-6 shrink-0',
-                            )}
-                          />
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                  >
-                    <Cog6ToothIcon
-                      aria-hidden="true"
-                      className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
-                    />
-                    Settings
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+      {/* Tampilkan notifikasi jika ada */}
+      {notification && (
+        <div className={`notification ${notification.type}`} style={{ padding: "10px", marginBottom: "15px", backgroundColor: notification.type === "success" ? "green" : "red", color: "white" }}>
+          {notification.message}
         </div>
+      )}
 
-        <div className="lg:pl-72">
-          <div className="sticky top-0 z-40 flex h-16   shrink-0 items-center gap-x-4  px-4  sm:gap-x-6 sm:px-6 lg:px-8">
-            <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
-              <span className="sr-only">Open sidebar</span>
-              <Bars3Icon aria-hidden="true" className="h-6 w-6" />
-            </button>
-
-            {/* Separator */}
-            <div aria-hidden="true" className="h-6 w-px  lg:hidden" />
-
-            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 mt-4 ">
-              <form action="#" method="GET" className="relative flex flex-1   ">
-                <label htmlFor="search-field" className="sr-only ">
-                  Search
-                </label>
-                <MagnifyingGlassIcon
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-y-0 right-2 top-2 h-full w-5 text-gray-400  "
-                />
-                <input
-                  id="search-field"
-                  name="search"
-                  type="search"
-                  placeholder="Search..."
-                  className="block h-12 mt-2 bg-gray-100  w-full rounded-lg border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-                />
-              </form>
-              <div className="flex items-center gap-x-4 lg:gap-x-6 mt-4">
-                <button type="button" className="-m-2.5 p-2.5 text-white bg-indigo-500 hover:text-gray-500">
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-
-                {/* Separator */}
-                <div aria-hidden="true" className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" />
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative">
-                  <MenuButton className="-m-1.5 flex items-center p-1.5 ">
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      className="h-8 w-8 rounded-full bg-gray-50"
-                    />
-                    <span className="hidden lg:flex lg:items-center">
-                      <ChevronDownIcon aria-hidden="true" className="ml-2 h-5 w-5 text-gray-400" />
-                    </span>
-                  </MenuButton>
-                  <MenuItems
-                    transition
-                    className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                  >
-                    {userNavigation.map((item) => (
-                      <MenuItem key={item.name}>
-                        <a
-                          href={item.href}
-                          className="block px-3 py-1 text-sm leading-6 text-gray-900 data-[focus]:bg-gray-50"
-                        >
-                          {item.name}
-                        </a>
-                      </MenuItem>
-                    ))}
-                  </MenuItems>
-                </Menu>
-              </div>
-              </div>
-          </div>
-
-          <main className="py-10">
-  <div className="px-4 sm:px-6 lg:px-8">
-    {/* Content untuk cek kamar "Cek Kamar" */}
-    <h1 className="text-xl font-semibold text-gray-900">Daftar Kamar</h1>
-    <div className="mt-4 overflow-x-auto">
-      <table className="min-w-full border divide-y divide-gray-200 ">
-        <thead className="bg-gray-50">
+      <table border="1" cellPadding="10" className="text-black">
+        <thead>
           <tr>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Nama Penghuni
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Nomor Kamar
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Cihuahua
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Ehm
-            </th>
+            <th>NIK</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Custom ID</th> {/* Kolom baru untuk Custom ID */}
+            <th>PDF Resident</th>
+            <th>Update Status</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          <tr>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">101</td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Studio</td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tersedia</td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp 2,000,000</td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <button className="bg-red-600 text-white m-2">delete</button>
-              <button className="bg-indigo-600 text-white m-0">cek profil</button>
-            </td>
-          </tr>
+        <tbody>
+          {transactionData.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.resident_pdf?.resident?.nik || "N/A"}</td>
+              <td>{transaction.resident_pdf?.resident?.username || "N/A"}</td>
+              <td>{transaction.status_form?.status || "N/A"}</td>
+              <td>{transaction.custom_id || "N/A"}</td> {/* Menampilkan Custom ID */}
+              <td>
+                {transaction.resident_pdf?.file_url ? (
+                  <a href={transaction.resident_pdf.file_url} target="_blank" rel="noopener noreferrer" className="text-black">
+                    View PDF
+                  </a>
+                ) : (
+                  "No PDF"
+                )}
+              </td>
+              <td>
+                {/* Status selector */}
+                <div>
+                  <select onChange={(e) => handleStatusChange(transaction.id, e.target.value)} value={selectedStatuses[transaction.id] || ""} disabled={updating}>
+                    <option value="">Select Status</option>
+                    {statusOptions.map((status) => (
+                      <option key={status.custom_id} value={status.custom_id}>
+                        {status.status}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {/* Button to update status */}
+                <button onClick={() => updateStatus(transaction.id)} disabled={updating || !selectedStatuses[transaction.id]} style={{ marginLeft: "10px" }}>
+                  {updating ? "Updating..." : "Update Status"}
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
-  </div>
-</main>
+  );
+};
 
-        </div>
-      </div>
-    </>
-  )
-}
+export default TransactionTable;

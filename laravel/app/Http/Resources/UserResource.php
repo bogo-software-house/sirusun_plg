@@ -38,7 +38,7 @@ class UserResource extends JsonResource
         return [
             'success'   => $this->status,
             'message'   => $this->message,
-            'data'      => $this->resource->except(['nik','username'])
+            'data'      => $this->resource
         ];
     }
 }

@@ -1,247 +1,201 @@
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-export default function Example() {
+import React, { useState } from "react";
+import axios from "axios";
+import { useFetchOptions } from "../../src/api/FetchOption"; // Import the custom hook
+import GenderSelect from "../components/input/genders";
+import StatusNikahSelect from "../components/input/statusnikah";
+import ReligionSelect from "../components/input/religions";
+import EducationSelect from "../components/input/educations";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+
+const ResidentForm = () => {
+  const [formData, setFormData] = useState({
+    nik: "",
+    username: "",
+    tempat_lahir: "",
+    tanggal_lahir: "",
+    genders_custom_id: "",
+    status_nikah_custom_id: "",
+    religions_custom_id: "",
+    education_custom_id: "",
+    alamat_rumah: "",
+    no_telp: "",
+    penghasilan: "",
+    warga_negara: "",
+    pekerjaan: "",
+    alamat_tempat_kerja: "",
+    berkas_kk: null,
+    berkas_ktp: null,
+  });
+
+  const [showBanner, setShowBanner] = useState(false); // State to manage banner visibility
+  const navigate = useNavigate(); // Initialize useNavigate for redirection
+
+  const { genders, statusNikah, religions, educations } = useFetchOptions(); // Use the custom hook
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files[0],
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach((key) => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/residents", // Replace with your Laravel API URL
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Reset the form after submission
+      setFormData({
+        nik: "",
+        username: "",
+        tempat_lahir: "",
+        tanggal_lahir: "",
+        genders_custom_id: "",
+        status_nikah_custom_id: "",
+        religions_custom_id: "",
+        education_custom_id: "",
+        alamat_rumah: "",
+        no_telp: "",
+        penghasilan: "",
+        warga_negara: "",
+        pekerjaan: "",
+        alamat_tempat_kerja: "",
+        berkas_kk: null,
+        berkas_ktp: null,
+      });
+
+      // Show the "Mohon tunggu" banner
+      setShowBanner(true);
+
+      // Redirect to home after 3 seconds
+      setTimeout(() => {
+        navigate("/"); // Redirect to home page
+      }, 3000);
+
+      console.log(response.data);
+    } catch (error) {
+      alert("Terjadi kesalahan: " + error.message);
+      console.error("Error:", error);
+    }
+  };
+
   return (
-    <div className="relative isolate bg-white h-screen ">
-      <h1 className="text-black lg:text-2xl font-semibold lg:ml-40 mt-10 sm:ml-8 mt-10 sm:text-xl sm:text-center ">Pengajuan Penyewaan</h1>
-      <p className="text-gray-500 pb-10 text-sm  lg:ml-40  sm:ml-20 pb-4 text-center">Isi data dengan sebaik-baiknya</p>
-      <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2 pb-10 ">
-        <form action="#" method="POST" className="px-3 pt-5 pb-24 sm:pb-24 m-10 lg:px-8 lg:py-6">
-          <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div className="sm:col-span-2">
-                <label htmlFor="nama" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Nama
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="nama"
-                    name="nama"
-                    type="text"
-                    autoComplete="nama"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Tempat Lahir
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="lahir"
-                    name="lahir"
-                    type="text"
-                    autoComplete="lahir"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-3">
-              <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
-                Jenis Kelamin
-              </label>
-              <div className="mt-2">
-                <select
-                  id="jeniskelamin"
-                  name="jeniskelaminn"
-                  autoComplete="jeniskelamin"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6"
-                >
-                  <option>Laki-Laki</option>
-                  <option>perempuan</option>
-                  <option>Private</option>
-                </select>
-              </div>
-            </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Nomor Telepon
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="notel"
-                    name="notel"
-                    type="tel"
-                    autoComplete="tel"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Warga Negara
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="wnegara"
-                    name="wnegara"
-                    type="text"
-                    autoComplete="wnegara"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Pekerjaan
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="Pekerjaan"
-                    name="Pekerjaan"
-                    type="text"
-                    autoComplete="pekerjaan"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
-                Scan Kartu Keluarga
-              </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon aria-hidden="true" className="mx-auto h-12 w-12 text-gray-300" />
-                  <div className="mt-4 flex text-sm/6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs/5 text-gray-600">PNG, JPG max 5MB</p>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
-        </form>
-        <form action="#" method="POST" className="px-3 pt-10 pb-24 sm:pb-10 m-10 lg:px-8 lg:py-6">
-          <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div className="sm:col-span-2">
-                <label htmlFor="nama" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Nama
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="nama"
-                    name="nama"
-                    type="text"
-                    autoComplete="nama"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Tempat Lahir
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="lahir"
-                    name="lahir"
-                    type="text"
-                    autoComplete="lahir"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-3">
-              <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
-                Jenis Kelamin
-              </label>
-              <div className="mt-2">
-                <select
-                  id="jeniskelamin"
-                  name="jeniskelaminn"
-                  autoComplete="jeniskelamin"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6"
-                >
-                  <option>Laki-Laki</option>
-                  <option>perempuan</option>
-                  <option>Private</option>
-                </select>
-              </div>
-            </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Nomor Telepon
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="notel"
-                    name="notel"
-                    type="tel"
-                    autoComplete="tel"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Warga Negara
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="wnegara"
-                    name="wnegara"
-                    type="text"
-                    autoComplete="wnegara"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-                  Pekerjaan
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="Pekerjaan"
-                    name="Pekerjaan"
-                    type="text"
-                    autoComplete="pekerjaan"
-                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="col-span-full">
-              <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
-                Scan Kartu Keluarga
-              </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                <div className="text-center">
-                  <PhotoIcon aria-hidden="true" className="mx-auto h-12 w-12 text-gray-300" />
-                  <div className="mt-4 flex text-sm/6 text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                    >
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs/5 text-gray-600">PNG, JPG max 5MB</p>
-                </div>
-              </div>
-              <div className="mt-8 flex justify-end">
-              <button
-                type="submit"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Ajukan
-              </button>
-            </div>
-            </div>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div>
+      {/* Banner */}
+      {showBanner && (
+        <div style={{
+          backgroundColor: "#4caf50",
+          color: "white",
+          padding: "10px",
+          textAlign: "center",
+          position: "fixed",
+          top: "0",
+          width: "100%",
+          zIndex: "1000"
+        }}>
+          Data anda sedang di prosses...
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="text-black">
+        <label>
+          NIK:
+          <input type="text" name="nik" value={formData.nik} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Username:
+          <input type="text" name="username" value={formData.username} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Tempat Lahir:
+          <input type="text" name="tempat_lahir" value={formData.tempat_lahir} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Tanggal Lahir:
+          <input type="text" name="tanggal_lahir" value={formData.tanggal_lahir} onChange={handleInputChange} required />
+        </label>
+        <br />
+
+        {/* Use Select Components */}
+        <GenderSelect genders={genders} value={formData.genders_custom_id} onChange={handleInputChange} />
+        <br />
+        <StatusNikahSelect statusNikah={statusNikah} value={formData.status_nikah_custom_id} onChange={handleInputChange} />
+        <br />
+        <ReligionSelect religions={religions} value={formData.religions_custom_id} onChange={handleInputChange} />
+        <br />
+        <EducationSelect educations={educations} value={formData.education_custom_id} onChange={handleInputChange} />
+        <br />
+
+        <label>
+          Alamat Rumah:
+          <input type="text" name="alamat_rumah" value={formData.alamat_rumah} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          No Telp:
+          <input type="text" name="no_telp" value={formData.no_telp} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Penghasilan:
+          <input type="number" name="penghasilan" value={formData.penghasilan} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Warga Negara:
+          <input type="text" name="warga_negara" value={formData.warga_negara} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Pekerjaan:
+          <input type="text" name="pekerjaan" value={formData.pekerjaan} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Alamat Tempat Kerja:
+          <input type="text" name="alamat_tempat_kerja" value={formData.alamat_tempat_kerja} onChange={handleInputChange} required />
+        </label>
+        <br />
+        <label>
+          Berkas KK:
+          <input type="file" name="berkas_kk" onChange={handleFileChange} required />
+        </label>
+        <br />
+        <label>
+          Berkas KTP:
+          <input type="file" name="berkas_ktp" onChange={handleFileChange} required />
+        </label>
+        <br />
+        <button type="submit">Ajukan</button>
+      </form>
     </div>
   );
-}
+};
+
+export default ResidentForm;

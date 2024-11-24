@@ -8,7 +8,7 @@ const navigation = [
   { name: "Login", href: "/login" },
   { name: "Features", href: "" },
   { name: "Marketplace", href: "" },
-  { name: "Company", href: "" },
+  { name: "Cari", href: "" },
 ];
 
 export default function Navbar() {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class controller
+class Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,4 +45,5 @@ class controller
     {
         //
     }
+
 }

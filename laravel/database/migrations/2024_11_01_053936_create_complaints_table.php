@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_id')->unique();
+            $table->string('Complaint');
+            $table->string('rooms_custom_id');
+            $table->string('date');
             $table->timestamps();
+
+            //relasi
+            $table->foreign('rooms_custom_id')->references('custom_id')->on('rooms')->onDelete('cascade');
         });
     }
 
