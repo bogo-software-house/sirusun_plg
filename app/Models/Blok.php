@@ -3,7 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\hasMany;
-use App\Models\UnitNumber;
+use App\Models\PriceTag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
@@ -23,8 +23,8 @@ class Blok extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function unitNumbers(): HasMany
+    public function priceTags(): HasMany
     {
-        return $this->hasMany(UnitNumber::class, 'bloks_custom_id', 'custom_id');
+        return $this->hasMany(PriceTag::class, 'bloks_custom_id', 'custom_id');
     }
 }

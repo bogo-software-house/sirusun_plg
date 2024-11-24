@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use App\Models\Room;
+use App\Models\PriceTag;
 use App\Models\Property;
 
 class Rusun extends Model
@@ -63,11 +63,10 @@ class Rusun extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function rooms(): HasMany
+    public function priceTags(): HasMany
     {
-        return $this->hasMany(Room::class, 'rusun_custom_id', 'custom_id');
+        return $this->hasMany(PriceTag::class, 'rusuns_custom_id', 'custom_id');
     }
-
     //Relasi untuk mendapatkan Property melalui Room dan Damage_room.
     public function property(): HasManyThrough
     {

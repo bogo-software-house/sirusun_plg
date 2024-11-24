@@ -5,8 +5,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PriceTag;
 use App\Models\Rusun;
 use App\Models\DamageRoom;
+use App\Models\UnitNumber;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
@@ -50,10 +52,11 @@ class Room extends Model
 
     protected $fillable = [
         'custom_id',
-        'rusuns_custom_id',
+
         'unit_numbers_custom_id',
         'statuses_custom_id',
         'damage_rooms_custom_id',
+        'price_tags_custom_id',
     ];
 
     protected static function boot()
@@ -68,13 +71,14 @@ class Room extends Model
     }
 
     // Relasi One-to-Many
-    public function rusuns(): BelongsTo
-    {
-        return $this->belongsTo(Rusun::class, 'rusuns_custom_id', 'custom_id');
-    }
+
     public function DamageRoom(): BelongsTo
     {
         return $this->belongsTo(DamageRoom::class, 'damage_rooms_custom_id', 'custom_id');
+    }
+    public function UnitNumber(): BelongsTo
+    {
+        return $this->belongsTo(UnitNumber::class, 'unit_numbers_custom_id', 'custom_id');
     }
 
     /**
@@ -86,10 +90,11 @@ class Room extends Model
     {
         return $this->hasOne(Room::class, 'custom_id', 'statuses_custom_id');
     }
-    public function UnitNumber():HasOne
+    public function PriceTag(): BelongsTo
     {
-        return $this->hasOne(Room::class, 'custom_id', 'unit_numbers_custom_id');
+        return $this->belongsTo(PriceTag::class, 'price_tags_custom_id', 'custom_id');
     }
+
 
     // Relasi untuk mendapatkan Properti melalui DamageRoom
     public function property(): HasManyThrough

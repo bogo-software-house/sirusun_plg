@@ -112,11 +112,11 @@ class DatabaseSeeder extends Seeder
 
     \App\Models\Floor::factory()->count(5)
     ->sequence(
-        ['custom_id' => 'IFL001', 'floor' => 0, 'prices_custom_id' => 'IPR001'],
-        ['custom_id' => 'IFL002', 'floor' => 1, 'prices_custom_id' => 'IPR002'],
-        ['custom_id' => 'IFL003', 'floor' => 2, 'prices_custom_id' => 'IPR003'],
-        ['custom_id' => 'IFL004', 'floor' => 3, 'prices_custom_id' => 'IPR004'],
-        ['custom_id' => 'IFL005', 'floor' => 4, 'prices_custom_id' => 'IPR005']
+        ['custom_id' => 'IFL001', 'floor' => 0],
+        ['custom_id' => 'IFL002', 'floor' => 1],
+        ['custom_id' => 'IFL003', 'floor' => 2],
+        ['custom_id' => 'IFL004', 'floor' => 3],
+        ['custom_id' => 'IFL005', 'floor' => 4]
     )
     ->create();
 
@@ -156,6 +156,42 @@ class DatabaseSeeder extends Seeder
         ['custom_id' =>'IIF032','information' => 'Sebagian besar pompa, sebagian besar motor terbakar, pipa utama bocor namun di tempat terbuka, beberapa kran tidak berfungsi sehingga biaya perbaikan antara 50%-65% dari biaya instalasi baru']
     )
     ->create();
+
+    \App\Models\UnitNumber::factory()->count(30)
+    ->sequence(
+        ['custom_id' => 'IUN001', 'floor' => 'No.01'],
+        ['custom_id' => 'IUN002', 'floor' => 'No.02'],
+        ['custom_id' => 'IUN003', 'floor' => 'No.03'],
+        ['custom_id' => 'IUN004', 'floor' => 'No.04'],
+        ['custom_id' => 'IUN005', 'floor' => 'No.05'],
+        ['custom_id' => 'IUN006', 'floor' => 'No.06'],
+        ['custom_id' => 'IUN007', 'floor' => 'No.07'],
+        ['custom_id' => 'IUN008', 'floor' => 'No.08'],
+        ['custom_id' => 'IUN009', 'floor' => 'No.09'],
+        ['custom_id' => 'IUN010', 'floor' => 'No.10'],
+        ['custom_id' => 'IUN011', 'floor' => 'No.11'],
+        ['custom_id' => 'IUN012', 'floor' => 'No.12'],
+        ['custom_id' => 'IUN013', 'floor' => 'No.13'],
+        ['custom_id' => 'IUN014', 'floor' => 'No.14'],
+        ['custom_id' => 'IUN015', 'floor' => 'No.15'],
+        ['custom_id' => 'IUN016', 'floor' => 'No.16'],
+        ['custom_id' => 'IUN017', 'floor' => 'No.17'],
+        ['custom_id' => 'IUN018', 'floor' => 'No.18'],
+        ['custom_id' => 'IUN019', 'floor' => 'No.19'],
+        ['custom_id' => 'IUN020', 'floor' => 'No.20'],
+        ['custom_id' => 'IUN021', 'floor' => 'No.21'],
+        ['custom_id' => 'IUN022', 'floor' => 'No.22'],
+        ['custom_id' => 'IUN023', 'floor' => 'No.23'],
+        ['custom_id' => 'IUN024', 'floor' => 'No.24'],
+        ['custom_id' => 'IUN025', 'floor' => 'No.25'],
+        ['custom_id' => 'IUN026', 'floor' => 'No.26'],
+        ['custom_id' => 'IUN027', 'floor' => 'No.27'],
+        ['custom_id' => 'IUN028', 'floor' => 'No.28'],
+        ['custom_id' => 'IUN029', 'floor' => 'No.29'],
+        ['custom_id' => 'IUN030', 'floor' => 'No.30']
+    )
+    ->create();
+
 }
 
 }

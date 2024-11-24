@@ -3,7 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Floor;
+use App\Models\PriceTag;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Price extends Model
@@ -15,8 +15,8 @@ class Price extends Model
         'price',
     ];
 
-    public function floor(): BelongsTo
+    public function priceTags(): BelongsTo
     {
-        return $this->belongsTo(Floor::class, 'prices_custom_id', 'custom_id');
+        return $this->belongsTo(PriceTag::class, 'prices_custom_id', 'custom_id');
     }
 }

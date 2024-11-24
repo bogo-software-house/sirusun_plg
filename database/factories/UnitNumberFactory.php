@@ -14,13 +14,11 @@ class UnitNumberFactory extends Factory
 
     public function definition()
     {
-        $count = UnitNumber::count() + 1;
-        $customId = sprintf("UN%03d", $count); // Format ID, misalnya "UN001"
+
         return [
-            'custom_id' => $customId,
-            'no_unit' => $this->faker->numberBetween(1, 1000), // Nomor unit
-        //     'bloks_custom_id',
-        // 'floors_custom_id',
+            'custom_id' => $this->faker->unique()->word,
+            'no_unit' => $this->faker->word // Nomor Unit
+
         ];
     }
 }
