@@ -53,15 +53,6 @@ class DatabaseSeeder extends Seeder
     )
     ->create();
 
-
-    \App\Models\Blok::factory()->create();
-    \App\Models\Condition::factory()->create();
-    \App\Models\Price::factory()->create();
-    \App\Models\Status::factory()->create();
-    \App\Models\Property::factory()->create();
-    \App\Models\Information::factory()->create();
-
-
     \App\Models\User::factory()->count(2)->sequence(
     [
         'custom_id' => 'IUS001',
@@ -181,39 +172,38 @@ class DatabaseSeeder extends Seeder
     ->create();
 
    \App\Models\UnitNumber::factory()->count(30)
-    ->sequence(
-        ['custom_id' => 'IUN001', 'unit_number' => 'No.01'],
-        ['custom_id' => 'IUN002', 'unit_number' => 'No.02'],
-        ['custom_id' => 'IUN003', 'unit_number' => 'No.03'],
-        ['custom_id' => 'IUN004', 'unit_number' => 'No.04'],
-        ['custom_id' => 'IUN005', 'unit_number' => 'No.05'],
-        ['custom_id' => 'IUN006', 'unit_number' => 'No.06'],
-        ['custom_id' => 'IUN007', 'unit_number' => 'No.07'],
-        ['custom_id' => 'IUN008', 'unit_number' => 'No.08'],
-        ['custom_id' => 'IUN009', 'unit_number' => 'No.09'],
-        ['custom_id' => 'IUN010', 'unit_number' => 'No.10'],
-        ['custom_id' => 'IUN011', 'unit_number' => 'No.11'],
-        ['custom_id' => 'IUN012', 'unit_number' => 'No.12'],
-        ['custom_id' => 'IUN013', 'unit_number' => 'No.13'],
-        ['custom_id' => 'IUN014', 'unit_number' => 'No.14'],
-        ['custom_id' => 'IUN015', 'unit_number' => 'No.15'],
-        ['custom_id' => 'IUN016', 'unit_number' => 'No.16'],
-        ['custom_id' => 'IUN017', 'unit_number' => 'No.17'],
-        ['custom_id' => 'IUN018', 'unit_number' => 'No.18'],
-        ['custom_id' => 'IUN019', 'unit_number' => 'No.19'],
-        ['custom_id' => 'IUN020', 'unit_number' => 'No.20'],
-        ['custom_id' => 'IUN021', 'unit_number' => 'No.21'],
-        ['custom_id' => 'IUN022', 'unit_number' => 'No.22'],
-        ['custom_id' => 'IUN023', 'unit_number' => 'No.23'],
-        ['custom_id' => 'IUN024', 'unit_number' => 'No.24'],
-        ['custom_id' => 'IUN025', 'unit_number' => 'No.25'],
-        ['custom_id' => 'IUN026', 'unit_number' => 'No.26'],
-        ['custom_id' => 'IUN027', 'unit_number' => 'No.27'],
-        ['custom_id' => 'IUN028', 'unit_number' => 'No.28'],
-        ['custom_id' => 'IUN029', 'unit_number' => 'No.29'],
-        ['custom_id' => 'IUN030', 'unit_number' => 'No.30']
+   ->sequence(
+        ['custom_id' => 'IUN001', 'no_unit' => 'No.01'],
+        ['custom_id' => 'IUN002', 'no_unit' => 'No.02'],
+        ['custom_id' => 'IUN003', 'no_unit' => 'No.03'],
+        ['custom_id' => 'IUN004', 'no_unit' => 'No.04'],
+        ['custom_id' => 'IUN005', 'no_unit' => 'No.05'],
+        ['custom_id' => 'IUN006', 'no_unit' => 'No.06'],
+        ['custom_id' => 'IUN007', 'no_unit' => 'No.07'],
+        ['custom_id' => 'IUN008', 'no_unit' => 'No.08'],
+        ['custom_id' => 'IUN009', 'no_unit' => 'No.09'],
+        ['custom_id' => 'IUN010', 'no_unit' => 'No.10'],
+        ['custom_id' => 'IUN011', 'no_unit' => 'No.11'],
+        ['custom_id' => 'IUN012', 'no_unit' => 'No.12'],
+        ['custom_id' => 'IUN013', 'no_unit' => 'No.13'],
+        ['custom_id' => 'IUN014', 'no_unit' => 'No.14'],
+        ['custom_id' => 'IUN015', 'no_unit' => 'No.15'],
+        ['custom_id' => 'IUN016', 'no_unit' => 'No.16'],
+        ['custom_id' => 'IUN017', 'no_unit' => 'No.17'],
+        ['custom_id' => 'IUN018', 'no_unit' => 'No.18'],
+        ['custom_id' => 'IUN019', 'no_unit' => 'No.19'],
+        ['custom_id' => 'IUN020', 'no_unit' => 'No.20'],
+        ['custom_id' => 'IUN021', 'no_unit' => 'No.21'],
+        ['custom_id' => 'IUN022', 'no_unit' => 'No.22'],
+        ['custom_id' => 'IUN023', 'no_unit' => 'No.23'],
+        ['custom_id' => 'IUN024', 'no_unit' => 'No.24'],
+        ['custom_id' => 'IUN025', 'no_unit' => 'No.25'],
+        ['custom_id' => 'IUN026', 'no_unit' => 'No.26'],
+        ['custom_id' => 'IUN027', 'no_unit' => 'No.27'],
+        ['custom_id' => 'IUN028', 'no_unit' => 'No.28'],
+        ['custom_id' => 'IUN029', 'no_unit' => 'No.29'],
+        ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
     )->create();
-
 
 }
 
