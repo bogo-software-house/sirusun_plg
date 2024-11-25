@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
 use App\Models\Role;
-
+use App\Http\Controllers\Api\AuthController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
@@ -26,30 +26,37 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
 
-  public function store(Request $request)
-{
-    // Define validation rules
-    $validator = Validator::make($request->all(), [
-        'nik'             => 'required|size:16|unique:users,nik', // Pastikan NIK unik
-        'username'        => 'required',
-        'tempat_lahir'    => 'required',
-        'email'           => 'required|email|unique:users,email', // Pastikan email unik
-    ]);
+//   public function store(Request $request)
+// {
+//     // Define validation rules
+//     $validator = Validator::make($request->all(), [
+//         'nik'             => 'required|size:16|unique:users,nik', // Pastikan NIK unik
+//         'username'        => 'required',
+//         'tempat_lahir'    => 'required',
+//         'email'           => 'required|email|unique:users,email', // Pastikan email unik
+//     ]);
 
-    // Check if validation fails
-    if ($validator->fails()) {
-        return response()->json($validator->errors(), 422);
+//     // Check if validation fails
+//     if ($validator->fails()) {
+//         return response()->json($validator->errors(), 422);
+//     }
+
+//     // Mengambil semua data dari request kecuali 'roles_custom_id'
+//     $userData = $request->except(['roles_custom_id']); // Ini benar, panggil except() pada $request
+
+//     // Create User dengan menggabungkan data user dan roles_custom_id
+//     $user = User::create(array_merge($userData, ['roles_custom_id' => 'IRL002']));
+
+//     // Return response
+//     return new UserResource(true, 'Data user Berhasil Ditambahkan!', $user);
+// }
+ /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
-
-    // Mengambil semua data dari request kecuali 'roles_custom_id'
-    $userData = $request->except(['roles_custom_id']); // Ini benar, panggil except() pada $request
-
-    // Create User dengan menggabungkan data user dan roles_custom_id
-    $user = User::create(array_merge($userData, ['roles_custom_id' => 'IRL002']));
-
-    // Return response
-    return new UserResource(true, 'Data user Berhasil Ditambahkan!', $user);
-}
 
     /**
      * Display the specified resource.
@@ -71,31 +78,38 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $customId)
+    public function update(Request $request, string $customId)
     {
-        //define validation rules
+        
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updatepassword(Request $request)
+    {
+            // Mendapatkan pengguna yang sedang login
+        $user = Auth::user();
+
+        // Mendefinisikan aturan validasi
         $validator = Validator::make($request->all(), [
-            'password'     => 'required',
+            'password' => 'required|string|min:8', // Menambahkan konfirmasi password
         ]);
 
-        //check if validation fails
+        // Memeriksa apakah validasi gagal
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        
-        // Temukan pengguna berdasarkan NIK
-        $user = User::where('custom_id',$customId)->first();
-
-            // Jika user tidak ditemukan, ini akan menjadi null
+        // Memperbarui password pengguna
         $user->update([
             'password' => bcrypt($request->password),
-        ]); // Ini akan menyebabkan kesalahan jika $user adalah null
-        
+        ]);
 
-        //return response
+        // Mengembalikan response
         return new UserResource(true, 'Data User Berhasil Diubah!', $user);
     }
+
     /**
      * Remove the specified resource from storage.
      */

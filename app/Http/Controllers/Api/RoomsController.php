@@ -25,19 +25,6 @@ class RoomsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'Noted' => 'required|string|max:255',
-        ]);
-
-        // Generate custom ID
-        $customId = Room::generateCustomId();
-
-        // Simpan item baru
-        $rooms = Room::create([
-            'custom_id' => $customId,
-            'Noted' => $request->Noted,
-        ]);
-        return new RoomsResource(true, 'Data Room Berhasil Ditambahkan!',$rooms);
     }
 
     /**
@@ -62,7 +49,15 @@ class RoomsController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'Noted'     => 'required',
+                'statuses_custom_id'  => 'sometimes|required|in:IST001,IST002',
+                'damage_rooms_lantai_custom_id' => 'sometimes|required|in:IDR001,IDR002,IDR003,IDR004',
+                'damage_rooms_kusen_custom_id' => 'sometimes|required|in:IDR005,IDR006,IDR007,IDR008',
+                'damage_rooms_pintu_custom_id' => 'sometimes|required|in:IDR009,IDR010,IDR011,IDR012',
+                'damage_rooms_jendela_custom_id' => 'sometimes|required|in:IDR0013,IDR014,IDR015,IDR016',
+                'damage_rooms_fn-flatfond_custom_id' => 'sometimes|required|in:IDR017,IDR018,IDR019,IDR020',
+                'damage_rooms_fn-dinding_custom_id' => 'sometimes|required|in:IDR021,IDR022,IDR023,IDR024',
+                'damage_rooms_instalasi-air_custom_id'  => 'sometimes|required|in:IDR025,IDR026,IDR027,IDR028',
+                'damage_rooms_instalasi-listrik_custom_id' => 'sometimes|required|in:IDR029,IDR030,IDR031,IDR032', 
         ]);
 
         //check if validation fails
@@ -74,7 +69,8 @@ class RoomsController extends Controller
         $rooms = Room::where('custom_id',$custom_id)->first();
 
         // Jika Room tidak ditemukan, ini akan menjadi null
-        $statuses ->update($request->all());
+        $rooms ->update($request->all());
+
         return new RoomsResource(true, 'Data Room berhasil diubah!', $rooms);
     }
 
