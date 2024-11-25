@@ -51,8 +51,8 @@ class Rusun extends Model
         'nama_rusun',
         'alamat',
         'luas',
-        'jmlh_blok',
-        'jmlh_lantai',
+        'blok',
+        'lantai',
         'tahun_pembangunan',
         'fasilitas',
     ];

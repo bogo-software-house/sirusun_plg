@@ -52,7 +52,6 @@ class DatabaseSeeder extends Seeder
         ['custom_id' =>'IRO002','leveluser' => 'user'], 
     )
     ->create();
-
     \App\Models\User::factory()->count(2)->sequence(
     [
         'custom_id' => 'IUS001',
@@ -68,14 +67,7 @@ class DatabaseSeeder extends Seeder
     ],
     )->create();
 
-    \App\Models\Blok::factory()->count(4)
-    ->sequence(
-        ['custom_id' =>'IBO001','blok' => 'A'],
-        ['custom_id' =>'IBO002','blok' => 'B'], 
-        ['custom_id' =>'IBO003','blok' => 'C'], 
-        ['custom_id' =>'IBO004','blok' => 'D'], 
-    )
-    ->create();
+    //
     
     \App\Models\Condition::factory()->count(4)
     ->sequence(
@@ -105,22 +97,33 @@ class DatabaseSeeder extends Seeder
         ['custom_id' =>'IST002','status' => 'Terisi'], 
     )
     ->create();
+
     
-    \App\Models\Price::factory()->count(13)
+    \App\Models\Blok::factory()->count(4)
+    ->sequence(
+        ['custom_id' =>'IBO001','blok' => 'A'],
+        ['custom_id' =>'IBO002','blok' => 'B'], 
+        ['custom_id' =>'IBO003','blok' => 'C'], 
+        ['custom_id' =>'IBO004','blok' => 'D'], 
+    )
+    ->create();
+    
+    \App\Models\Price::factory()->count(14)
     ->sequence(
         ['custom_id' =>'IPR001','price' => 430000],
         ['custom_id' =>'IPR002','price' => 380000], 
         ['custom_id' =>'IPR003','price' => 375000], 
         ['custom_id' =>'IPR004','price' => 350000],
         ['custom_id' =>'IPR005','price' => 340000], 
-        ['custom_id' =>'IPR006','price' => 325000], 
-        ['custom_id' =>'IPR007','price' => 310000], 
-        ['custom_id' =>'IPR008','price' => 290000], 
-        ['custom_id' =>'IPR009','price' => 285000], 
-        ['custom_id' =>'IPR010','price' => 280000],
-        ['custom_id' =>'IPR011','price' => 260000], 
-        ['custom_id' =>'IPR012','price' => 255000], 
-        ['custom_id' =>'IPR013','price' => 195000], 
+        ['custom_id' =>'IPR006','price' => 325000],
+        ['custom_id' =>'IPR007','price' => 320000], 
+        ['custom_id' =>'IPR008','price' => 310000], 
+        ['custom_id' =>'IPR009','price' => 290000], 
+        ['custom_id' =>'IPR010','price' => 285000], 
+        ['custom_id' =>'IPR011','price' => 280000],
+        ['custom_id' =>'IPR012','price' => 260000], 
+        ['custom_id' =>'IPR013','price' => 255000], 
+        ['custom_id' =>'IPR014','price' => 195000], 
     )
     ->create();
 
@@ -171,8 +174,171 @@ class DatabaseSeeder extends Seeder
     )
     ->create();
 
-   \App\Models\UnitNumber::factory()->count(30)
-   ->sequence(
+    \App\Models\DamageRoom::factory()->count(32)->sequence(
+        [   'custom_id' => 'IDR001', 
+        'properties_custom_id' => 'IPR001',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF001',
+        ],
+        [   'custom_id' => 'IDR002', 
+        'properties_custom_id' => 'IPR001',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF002',
+        ],
+        [   'custom_id' => 'IDR003', 
+        'properties_custom_id' => 'IPR001',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF003',
+        ],
+        [   'custom_id' => 'IDR004', 
+        'properties_custom_id' => 'IPR001',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF004',
+        ],
+        [   'custom_id' => 'IDR005', 
+        'properties_custom_id' => 'IPR002',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF005',
+        ],
+        [   'custom_id' => 'IDR006', 
+        'properties_custom_id' => 'IPR002',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF006',
+        ],
+        [   'custom_id' => 'IDR007', 
+            'conditions_custom_id' => 'ICD003',
+            'properties_custom_id' => 'IPR002',
+            'information_custom_id' => 'IIF007',
+        ],
+        [   'custom_id' => 'IDR008', 
+            'conditions_custom_id' => 'ICD004',
+            'properties_custom_id' => 'IPR002',
+            'information_custom_id' => 'IIF008',
+        ],
+        [   'custom_id' => 'IDR009', 
+        'properties_custom_id' => 'IPR003',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF009',
+        ],
+        [   'custom_id' => 'IDR010', 
+        'properties_custom_id' => 'IPR003',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF010',
+        ],
+        [   'custom_id' => 'IDR011', 
+        'properties_custom_id' => 'IPR003',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF011',
+        ],
+        [   'custom_id' => 'IDR012', 
+        'properties_custom_id' => 'IPR003',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF012',
+        ],
+        [   'custom_id' => 'IDR013', 
+        'properties_custom_id' => 'IPR004',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF013',
+        ],
+        [   'custom_id' => 'IDR014', 
+        'properties_custom_id' => 'IPR004',
+        'information_custom_id' => 'IIF014',
+        'conditions_custom_id' => 'ICD002',
+        ],
+        [   'custom_id' => 'IDR015', 
+        'properties_custom_id' => 'IPR004',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF015',
+        ],
+        [   'custom_id' => 'IDR016', 
+        'properties_custom_id' => 'IPR004',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF016',
+        ],
+        [   'custom_id' => 'IDR017', 
+        'properties_custom_id' => 'IPR005',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF017',
+        ],
+        [   'custom_id' => 'IDR018', 
+        'properties_custom_id' => 'IPR005',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF018',
+        ],
+        [   'custom_id' => 'IDR019', 
+        'properties_custom_id' => 'IPR005',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF019',
+        ],
+        [   'custom_id' => 'IDR020', 
+        'properties_custom_id' => 'IPR005',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF020',
+        ],
+        [   'custom_id' => 'IDR021', 
+        'properties_custom_id' => 'IPR006',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF021',
+        ],
+        [   'custom_id' => 'IDR022', 
+        'properties_custom_id' => 'IPR006',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF022',
+        ],
+        [   'custom_id' => 'IDR023', 
+        'properties_custom_id' => 'IPR006',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF023',
+        ],
+        [   'custom_id' => 'IDR024', 
+        'properties_custom_id' => 'IPR006',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF024',
+        ],
+        [   'custom_id' => 'IDR025', 
+        'properties_custom_id' => 'IPR007',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF025',
+        ],
+        [   'custom_id' => 'IDR026', 
+        'properties_custom_id' => 'IPR007',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF026',
+        ],
+        [   'custom_id' => 'IDR027', 
+        'properties_custom_id' => 'IPR007',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF027',
+        ],
+        [   'custom_id' => 'IDR028', 
+        'properties_custom_id' => 'IPR007',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF028',
+        ],
+        [   'custom_id' => 'IDR029', 
+        'properties_custom_id' => 'IPR008',
+        'conditions_custom_id' => 'ICD001',
+            'information_custom_id' => 'IIF029',
+        ],
+        [   'custom_id' => 'IDR030', 
+        'properties_custom_id' => 'IPR008',
+        'conditions_custom_id' => 'ICD002',
+            'information_custom_id' => 'IIF030',
+        ],
+        [   'custom_id' => 'IDR031', 
+        'properties_custom_id' => 'IPR008',
+        'conditions_custom_id' => 'ICD003',
+            'information_custom_id' => 'IIF031',
+        ],
+        [   'custom_id' => 'IDR032', 
+        'properties_custom_id' => 'IPR008',
+        'conditions_custom_id' => 'ICD004',
+            'information_custom_id' => 'IIF032',
+        ],
+        )->create(); 
+
+    \App\Models\UnitNumber::factory()->count(30)
+    ->sequence(
         ['custom_id' => 'IUN001', 'no_unit' => 'No.01'],
         ['custom_id' => 'IUN002', 'no_unit' => 'No.02'],
         ['custom_id' => 'IUN003', 'no_unit' => 'No.03'],
@@ -203,7 +369,8 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'IUN028', 'no_unit' => 'No.28'],
         ['custom_id' => 'IUN029', 'no_unit' => 'No.29'],
         ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
-    )->create();
+    )
+    ->create();
 
 }
 

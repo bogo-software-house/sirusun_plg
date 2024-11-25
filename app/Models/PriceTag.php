@@ -2,7 +2,9 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Rusun;
 use App\Models\Blok;
@@ -13,11 +15,10 @@ use Illuminate\Validation\ValidationException;
 class PriceTag extends Model
 {
     use HasFactory;
-
-    protected $table = 'pricetags'; // Nama tabel jika berbeda
-    protected $primaryKey = 'custom_id'; // Menggunakan kolom custom_id sebagai kunci utama
-    public $incrementing = false; // Jika custom_id bukan auto-incrementing
-    protected $keyType = 'string'; // Tipe kunci jika custom_id adalah string
+    protected $table = 'price_tags';
+    protected $primaryKey = 'custom_id'; // Menggunakan primary key custom_id sebagai primary key
+    public $incrementing = false; // Menggunakan primary key custom_id sebagai ID unik
+    protected $keyType ='string'; // Menggunakan tipe string sebagai primary key
 
 
     // Metode untuk menghasilkan ID kustom
