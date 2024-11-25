@@ -121,7 +121,7 @@ class ResidentResource extends JsonResource
                 }),
                    'transactionStatusForm' => $this->whenLoaded('transactionStatusForm', function () {
                         return $this->transactionStatusForm ? new TransactionStatusFormResource($this->transactionStatusForm) : null;
-                    }),
+                }),
             ]
         ];
     }

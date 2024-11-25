@@ -68,8 +68,8 @@ class ResidentController extends Controller
         'warga_negara'              => 'required',
         'pekerjaan'                 => 'required',
         'alamat_tempat_kerja'       => 'required',
-        'berkas_kk'                 => 'required|file|mimes:pdf,jpg,png',
-        'berkas_ktp'                => 'required|file|mimes:pdf,jpg,png',
+        'berkas_kk'                 => 'required|file|mimes:pdf',
+        'berkas_ktp'                => 'required|file|mimes:pdf',
         ]);
 
         // Check if validation fails

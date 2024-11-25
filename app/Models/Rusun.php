@@ -13,7 +13,7 @@ class Rusun extends Model
 {
     use HasFactory;
     
-    protected $table = 'rusun';
+    protected $table = 'rusuns';
     protected $primaryKey = 'custom_id';
     public $incrementing = false; // Menggunakan primary key custom_id sebagai ID unik
     protected $keyType = 'biginteger'; // Menggunakan tipe biginteger sebagai primary key
@@ -51,8 +51,8 @@ class Rusun extends Model
         'nama_rusun',
         'alamat',
         'luas',
-        'jmlh_blok',
-        'jmlh_lantai',
+        'blok',
+        'lantai',
         'tahun_pembangunan',
         'fasilitas',
     ];

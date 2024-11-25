@@ -16,8 +16,6 @@ class FloorFactory extends Factory
     public function definition()
     {
 
-        
-
         return [
             'custom_id' => $this->faker->unique()->bothify('IFL###'),  // ID unik untuk floor
             'floor' => $this->faker->numberBetween(0, 4),  // Nomor lantai (0, 1, 2, 3, 4)

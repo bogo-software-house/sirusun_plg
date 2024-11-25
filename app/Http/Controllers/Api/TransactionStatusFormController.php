@@ -14,7 +14,9 @@ use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
+use App\Jobs\DeleteTransactiomStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
+use App\Http\Resources\TransactionStatusFormShowResource;
 
 
 class TransactionStatusFormController extends Controller
@@ -24,13 +26,15 @@ class TransactionStatusFormController extends Controller
      */
     public function index()
     {
-        //
+          $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->Latest()->get();
+        return  TransactionStatusFormResource::collection($TransactionStatusForm);
     }
 
  
-    public function show(string $id)
+    public function show(string $formcustomId)
     {
-        //
+        $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->where('form_custom_id',$formcustomId)->Latest()->get();
+        return   TransactionStatusFormResource::collection($TransactionStatusForm);
     }
 
    
@@ -100,6 +104,15 @@ class TransactionStatusFormController extends Controller
                // Buat token untuk user
                 $token = $user->createToken('auth_token')->plainTextToken;
 
+                }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+                   
+                    // Jadwalkan job untuk menghapus data setelah 3 jam
+                   DeleteTransactionStatusFormData::dispatch($formcustomId)->delay(now()->addHours(1));
+
+                    // Kembalikan respons
+                    return response()->json([
+                        'message' => 'Transaction status updated to ISF003. Data will be deleted in 1 hours.'
+               ]);
                 }else {
                     // Jika user sudah ada, buat token baru
                     $token = $existingUser->createToken('auth_token')->plainTextToken;

@@ -44,6 +44,7 @@ Route::apiResource('/religions', App\Http\Controllers\Api\ReligionController::cl
 Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class);
 Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
+Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController::class);
 
 
 
@@ -64,11 +65,12 @@ Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahControll
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
                     Route::apiResource('/users-data', App\Http\Controllers\Api\UserController::class);   
-                    //Route::middleware(App\Http\Middleware\CheckRusun::class.':standar')->group(function () {
-                    Route::get('/admin/dashboard', function () {
-                        return response()->json(['message' => 'Selamat datang di dashboard admin']);
+                   
+                    //Route::middleware(App\Http\Middleware\CheckRusun::class.':kasnariansya')->group(function () {
+                    Route::get('/admin-kasnariansya/dashboard', function () {
+                        return response()->json(['message' => 'Selamat datang di dashboard admin kasnariansya']);
                     });
-              //  });
+              //  });   
 
               //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
                     Route::get('/admin-kertapati/dashboard', function () {

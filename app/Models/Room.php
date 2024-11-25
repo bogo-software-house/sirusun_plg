@@ -54,9 +54,10 @@ class Room extends Model
         'custom_id',
 
         'unit_numbers_custom_id',
+        'price_tags_custom_id',
         'statuses_custom_id',
         'damage_rooms_custom_id',
-        'price_tags_custom_id',
+        
     ];
 
     protected static function boot()
