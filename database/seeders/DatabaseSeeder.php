@@ -52,13 +52,8 @@ class DatabaseSeeder extends Seeder
         ['custom_id' =>'IRO002','leveluser' => 'user'], 
     )
     ->create();
-    
-    // //masih blm clear
-    // \App\Models\Rusun::factory()->count(2)->sequence(
-    //     ['custom_id' =>'IRS001','nama_rusun' => 'Kertapati', ],
-    //     ['custom_id' =>'IRS002','nama_rusun' => 'Kasnariansyah'], 
-    // )
-    // ->create();
+
+    //
 
     \App\Models\User::factory()->count(2)->sequence(
     [
@@ -379,29 +374,8 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
     )
     ->create();
-
-    // //masih blm clear
-    // \App\Models\Room::factory()->count()->sequence(
-    // [   'custom_id' => 'IRO001', 
-    //     'unit_numbers_custom_id' => 'IUN001', 
-    //     'price_tags_custom_id' => 'IPR001',
-    //     'statuses_custom_id' => 'IST001',
-    //     'damage_rooms_custom_id' => 'IDR001'
-    // ],
-    // //nah ini tambahannya yg lainnya nanti diisini ya wkwk
-    // )->create();
-
-    // //masih blm clear
-    // \App\Models\PriceTag::factory()->count()->sequence(
-    //     [   'custom_id' => 'IRO001', 
-    //         'rusuns_custom_id' => '', 
-    //         'bloks_custom_id' => '',
-    //         'floors_custom_id' => 'IST001',
-    //         'prices_custom_id' => 'IDR001'
-    //     ],
-    //     //nah ini tambahannya yg lainnya nanti diisini ya wkwk
-    //     )->create();
-
+    
+    //
 }
 
 }
