@@ -41,6 +41,7 @@ Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class)
 Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
 Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController::class);
+Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class);
 
 
 

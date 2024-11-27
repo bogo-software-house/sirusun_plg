@@ -106,7 +106,7 @@ class Resident extends Model
     {
         return $this->hasOne(BerkasKtp::class, 'nik', 'nik');
     }
-    public function BerkasSalary(): HasOne
+    public function berkasSalary(): HasOne
     {
         return $this->hasOne(BerkasSalary::class, 'nik', 'nik');
     }
