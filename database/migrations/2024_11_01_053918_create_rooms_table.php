@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('price_tags_custom_id');
             $table->string('unit_numbers_custom_id');
             $table->string('statuses_custom_id');
-            $table->string('damage_rooms_lantai_custom_id');
-            $table->string('damage_rooms_kusen_custom_id');
-            $table->string('damage_rooms_pintu_custom_id');
-            $table->string('damage_rooms_jendela_custom_id');
-            $table->string('damage_rooms_fn-flatfond_custom_id');
-            $table->string('damage_rooms_fn-dinding_custom_id');
-            $table->string('damage_rooms_instalasi-listrik_custom_id');
-            $table->string('damage_rooms_instalasi-air_custom_id');
+            $table->string('damage_rooms_lantai_custom_id')->nullable();
+            $table->string('damage_rooms_kusen_custom_id')->nullable();
+            $table->string('damage_rooms_pintu_custom_id')->nullable();
+            $table->string('damage_rooms_jendela_custom_id')->nullable();
+            $table->string('damage_rooms_fn-flatfond_custom_id')->nullable();
+            $table->string('damage_rooms_fn-dinding_custom_id')->nullable();
+            $table->string('damage_rooms_instalasi-listrik_custom_id')->nullable();
+            $table->string('damage_rooms_instalasi-air_custom_id')->nullable();
             $table->timestamps();
 
             //membuat relasi 
