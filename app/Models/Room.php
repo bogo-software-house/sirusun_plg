@@ -9,6 +9,7 @@ use App\Models\PriceTag;
 use App\Models\Rusun;
 use App\Models\DamageRoom;
 use App\Models\UnitNumber;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
@@ -52,11 +53,17 @@ class Room extends Model
 
     protected $fillable = [
         'custom_id',
-
         'unit_numbers_custom_id',
         'price_tags_custom_id',
         'statuses_custom_id',
-        'damage_rooms_custom_id',
+        'damage_rooms_lantai_custom_id',
+        'damage_rooms_kusen_custom_id',
+        'damage_rooms_pintu_custom_id',
+        'damage_rooms_jendela_custom_id' ,
+        'damage_rooms_fn-flatfond_custom_id',
+        'damage_rooms_fn-dinding_custom_id',
+        'damage_rooms_instalasi-air_custom_id' ,
+        'damage_rooms_instalasi-listrik_custom_id',
         
     ];
 
@@ -73,11 +80,11 @@ class Room extends Model
 
     // Relasi One-to-Many
 
-    public function DamageRoom(): BelongsTo
+    public function damageRoom(): BelongsTo
     {
         return $this->belongsTo(DamageRoom::class, 'damage_rooms_custom_id', 'custom_id');
     }
-    public function UnitNumber(): BelongsTo
+    public function unitNumber(): BelongsTo
     {
         return $this->belongsTo(UnitNumber::class, 'unit_numbers_custom_id', 'custom_id');
     }
@@ -87,11 +94,11 @@ class Room extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function Status(): HasOne
+    public function status(): BelongsTo
     {
-        return $this->hasOne(Room::class, 'custom_id', 'statuses_custom_id');
+        return $this->belongsTo(Status::class, 'statuses_custom_id', 'custom_id');
     }
-    public function PriceTag(): BelongsTo
+    public function priceTag(): BelongsTo
     {
         return $this->belongsTo(PriceTag::class, 'price_tags_custom_id', 'custom_id');
     }

@@ -75,9 +75,9 @@ class PriceTag extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function Price(): HasOne
+    public function price(): BelongsTo
     {
-        return $this->hasOne(Price::class, 'prices_custom_id', 'custom_id');
+        return $this->belongsTo(Price::class, 'prices_custom_id', 'custom_id');
     }
     
 }

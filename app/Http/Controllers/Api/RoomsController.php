@@ -16,8 +16,8 @@ class RoomsController extends Controller
     //buat fungsi index
     public function index()
     {
-        $rooms = Room::Latest()->paginate(5);
-        return new RoomsResource(true, 'List Data Rooms', $rooms);
+        $rooms = Room::with(['unitNumber','status','priceTag.price'])->Latest()->get();
+        return RoomsResource::collection($rooms);
     }
 
     /**
@@ -39,7 +39,7 @@ class RoomsController extends Controller
         if (!$rooms) {
             return response()->json(['message' => 'Room not found'], 404);
         }
-        return new RoomsResource(true, 'Detail data room!', $rooms);
+        return new RoomsResource($rooms);
     }
 
     /**
@@ -71,7 +71,7 @@ class RoomsController extends Controller
         // Jika Room tidak ditemukan, ini akan menjadi null
         $rooms ->update($request->all());
 
-        return new RoomsResource(true, 'Data Room berhasil diubah!', $rooms);
+        return new RoomsResource($rooms);
     }
 
     /**
