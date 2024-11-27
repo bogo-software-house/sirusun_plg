@@ -16,7 +16,7 @@ class RoomsController extends Controller
     //buat fungsi index
     public function index()
     {
-        $rooms = Room::with(['unitNumber','status','priceTag.price'])->Latest()->get();
+        $rooms = Room::with(['unitNumber','status','priceTag.price','damageRoomlantai'])->Latest()->get();
         return RoomsResource::collection($rooms);
     }
 

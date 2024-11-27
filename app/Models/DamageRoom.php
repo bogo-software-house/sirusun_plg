@@ -47,14 +47,25 @@ class DamageRoom extends Model
         return $this->hasOne(Condition::class, 'conditions_custom_id', 'custom_id');
     }
 
-    /**
-     * Get all of the room for the damageroom
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function rooms(): HasMany
+  // semua kerusakan
+    public function roomslantai(): HasMany
     {
-        return $this->hasMany(Room::class, 'damage_rooms_custom_id', 'custom_id');
+        return $this->hasMany(Room::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomskusen(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_kusen_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomspintu(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_pintu_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsjendela(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_jendela_custom_id', 'custom_id');
     }
 
     /**

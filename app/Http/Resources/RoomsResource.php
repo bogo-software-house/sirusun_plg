@@ -12,11 +12,10 @@ class RoomsResource extends JsonResource
         return [
             'custom_id' => $this->custom_id,
             'unit_number' => $this->UnitNumber ? $this->UnitNumber->no_unit : null,
-            'price_tags_custom_id' => $this->price_tags_custom_id,
-             'price' => $this->Price ? $this->Price->Price : null,
-             'status' => $this->status ? $this->status->status : null,
+            'price' => $this->priceTag && $this->priceTag->price ? $this->priceTag->price->price : null,
+            'status' => $this->status ? $this->status->status : null,
             'damage_rooms' => [
-                'lantai' => $this->damage_rooms_lantai_custom_id,
+                'lantai' => $this->damageRoomlantai && $this->damageRoomlantai ? $this->damageRoomlantai->properties_custom_id : null,
                 'kusen' => $this->damage_rooms_kusen_custom_id,
                 'pintu' => $this->damage_rooms_pintu_custom_id,
                 'jendela' => $this->damage_rooms_jendela_custom_id,

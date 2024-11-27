@@ -80,10 +80,38 @@ class Room extends Model
 
     // Relasi One-to-Many
 
-    public function damageRoom(): BelongsTo
+    public function damageRoomlantai(): BelongsTo
     {
-        return $this->belongsTo(DamageRoom::class, 'damage_rooms_custom_id', 'custom_id');
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
     }
+    public function damageRoomkusen(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_kusen_custom_id', 'custom_id');
+    }
+    public function damageRoompintu(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_pintu_custom_id', 'custom_id');
+    }
+    public function damageRoomjendela(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_jendela_custom_id', 'custom_id');
+    }
+    // public function damageRoomlantai(): BelongsTo
+    // {
+    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    // }
+    // public function damageRoomlantai(): BelongsTo
+    // {
+    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    // }
+    // public function damageRoomlantai(): BelongsTo
+    // {
+    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    // }
+    // public function damageRoomlantai(): BelongsTo
+    // {
+    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    // }
     public function unitNumber(): BelongsTo
     {
         return $this->belongsTo(UnitNumber::class, 'unit_numbers_custom_id', 'custom_id');

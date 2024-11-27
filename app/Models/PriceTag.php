@@ -69,12 +69,6 @@ class PriceTag extends Model
     {
         return $this->belongsTo(Floor::class, 'floors_custom_id', 'custom_id');
     }
-
-     /**
-     * Get the BerkasKk associated with the Resident
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function price(): BelongsTo
     {
         return $this->belongsTo(Price::class, 'prices_custom_id', 'custom_id');
