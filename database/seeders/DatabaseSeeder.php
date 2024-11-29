@@ -72,8 +72,6 @@ class DatabaseSeeder extends Seeder
         'roles_custom_id' => 'IRO001'  // Menggunakan role admin yang sudah ada
     ],
     )->create();
-
-    //
     
     \App\Models\Condition::factory()->count(4)
     ->sequence(
@@ -377,7 +375,5 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
     )
     ->create();
-
 }
-
 }
