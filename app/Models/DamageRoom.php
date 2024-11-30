@@ -37,14 +37,9 @@ class DamageRoom extends Model
         return $this->belongsTo(Information::class, 'information_custom_id', 'custom_id');
     }
 
-    /**
-     * Get the Condition associated with the DamageRoom
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function Condition(): HasOne
+    public function condition(): BelongsTo
     {
-        return $this->hasOne(Condition::class, 'conditions_custom_id', 'custom_id');
+        return $this->belongsTo(Condition::class, 'conditions_custom_id', 'custom_id');
     }
 
   // semua kerusakan
@@ -66,6 +61,26 @@ class DamageRoom extends Model
     public function roomsjendela(): HasMany
     {
         return $this->hasMany(Room::class, 'damage_rooms_jendela_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsflatfond(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_fn_flatfond_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsdinding(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_fn_dinding_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsinstalasiair(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_instalasi_air_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsinstalasilistrik(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_instalasi_listrik_custom_id', 'custom_id');
     }
 
     /**

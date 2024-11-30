@@ -25,10 +25,10 @@ class RoomFactory extends Factory
             'damage_rooms_kusen_custom_id' => DamageRoom::pluck('custom_id')->random(),
             'damage_rooms_pintu_custom_id' => DamageRoom::pluck('custom_id')->random(),
             'damage_rooms_jendela_custom_id' => DamageRoom::pluck('custom_id')->random(),
-            'damage_rooms_fn-flatfond_custom_id' => DamageRoom::pluck('custom_id')->random(),
-            'damage_rooms_fn-dinding_custom_id' => DamageRoom::pluck('custom_id')->random(),
-            'damage_rooms_instalasi-listrik_custom_id' => DamageRoom::pluck('custom_id')->random(),
-            'damage_rooms_instalasi-air_custom_id' => DamageRoom::pluck('custom_id')->random(),
+            'damage_rooms_fn_flatfond_custom_id' => DamageRoom::pluck('custom_id')->random(),
+            'damage_rooms_fn_dinding_custom_id' => DamageRoom::pluck('custom_id')->random(),
+            'damage_rooms_instalasi_listrik_custom_id' => DamageRoom::pluck('custom_id')->random(),
+            'damage_rooms_instalasi_air_custom_id' => DamageRoom::pluck('custom_id')->random(),
         ];
     }
 }

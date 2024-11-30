@@ -60,10 +60,10 @@ class Room extends Model
         'damage_rooms_kusen_custom_id',
         'damage_rooms_pintu_custom_id',
         'damage_rooms_jendela_custom_id' ,
-        'damage_rooms_fn-flatfond_custom_id',
-        'damage_rooms_fn-dinding_custom_id',
-        'damage_rooms_instalasi-air_custom_id' ,
-        'damage_rooms_instalasi-listrik_custom_id',
+        'damage_rooms_fn_flatfond_custom_id',
+        'damage_rooms_fn_dinding_custom_id',
+        'damage_rooms_instalasi_air_custom_id' ,
+        'damage_rooms_instalasi_listrik_custom_id',
         
     ];
 
@@ -96,22 +96,22 @@ class Room extends Model
     {
         return $this->belongsTo(DamageRoom::class, 'damage_rooms_jendela_custom_id', 'custom_id');
     }
-    // public function damageRoomlantai(): BelongsTo
-    // {
-    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
-    // }
-    // public function damageRoomlantai(): BelongsTo
-    // {
-    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
-    // }
-    // public function damageRoomlantai(): BelongsTo
-    // {
-    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
-    // }
-    // public function damageRoomlantai(): BelongsTo
-    // {
-    //     return $this->belongsTo(DamageRoom::class, 'damage_rooms_lantai_custom_id', 'custom_id');
-    // }
+    public function damageRoomflatfond(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_fn_flatfond_custom_id', 'custom_id');
+    }
+    public function damageRoomdinding(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_fn_dinding_custom_id', 'custom_id');
+    }
+    public function damageRoominstalasiair(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_instalasi_air_custom_id', 'custom_id');
+    }
+    public function damageRoominstalasilistrik(): BelongsTo
+    {
+        return $this->belongsTo(DamageRoom::class, 'damage_rooms_instalasi_listrik_custom_id', 'custom_id');
+    }
     public function unitNumber(): BelongsTo
     {
         return $this->belongsTo(UnitNumber::class, 'unit_numbers_custom_id', 'custom_id');
