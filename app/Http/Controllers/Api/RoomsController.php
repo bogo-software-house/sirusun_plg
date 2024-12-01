@@ -107,4 +107,11 @@ class RoomsController extends Controller
         $rooms-> delete();
         return new RoomsResource(true, 'Data Status berhasil dihapus!', null);
     }
+    
+    
+    public function showRoomKertapaiAltDasar(){
+    
+            
+    }
 }
+

@@ -7,17 +7,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionStatusFormShowResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return  [
-            'form_custom_id' => $this->resident_pdfs->nik,
-            'status' => $this->status_form->status,
-            'file_url' => $this->resident_pdf->file_url,
-            'username' => $this->resident_pdf->resident->username];
-    }
+            'nik' => $this->residentPdf ? $this->residentPdf->nik  : null,
+            'name' => $this->residentPdf && $this->residentPdf->resident ? $this->residentPdf->resident->username  : null,
+            'status' => $this->statusForm ? $this->statusForm->status  : null,
+            'keterangan' => $this->keterangan,
+         
+    ];
+        }
 }

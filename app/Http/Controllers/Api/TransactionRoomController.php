@@ -27,7 +27,7 @@ class TransactionRoomController extends Controller
     {
          // Define validation rules
         $validator = Validator::make($request->all(), [
-        'users_custom_id'              => 'required|exists:users,custom_id',
+        'users_custom_id'              => 'required|exists:users,custom_id|unique:table,column,except,id',
         'rooms_custom_id'              => 'required|exists:rooms,custom_id',
         ]);
 

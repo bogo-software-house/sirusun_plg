@@ -27,19 +27,19 @@ class TransactionStatusFormController extends Controller
     public function index()
     {
           $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->Latest()->get();
-        return  TransactionStatusFormResource::collection($TransactionStatusForm);
+        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
     }
 
  
     public function show(string $formcustomId)
     {
-        $TransactionStatusForm = TransactionStatusForm::with([
-           'residentPdf:file_name,file_path,file_url', // Memuat kolom tertentu dari ResidentPdf
-            'residentPdf.resident:nik,username'                     // Memuat kolom tertentu dari Resident
-            ])->where('form_custom_id',$formcustomId)->Latest()->get();
+        $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])
+        ->whereHas('residentPdf', function ($query) use ($formcustomId) {
+        $query->where('nik', $formcustomId);
+        })->Latest()->get();
 
-            dd($TransactionStatusForm);
-        return   TransactionStatusFormResource::collection($TransactionStatusForm);
+            
+        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
     }
 
    
