@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
+use App\Models\TransactionRoom;
 use Laravel\Sanctum\HasApiTokens; // Tambahkan ini
 
 
@@ -80,5 +82,10 @@ class User extends Authenticatable
     }
 
     return $newCustomId; // Kembalikan ID baru yang unik
+    }
+
+    public function transactionRoom(): HasOne
+    {
+        return $this->hasOne(TransactionRoom::class, 'users_custom_id', 'custom_id');
     }
 }

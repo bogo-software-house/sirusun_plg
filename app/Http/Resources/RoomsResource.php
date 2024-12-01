@@ -14,7 +14,7 @@ class RoomsResource extends JsonResource
             'unit_number' => $this->UnitNumber ? $this->UnitNumber->no_unit : null,
             'price' => $this->priceTag && $this->priceTag->price ? $this->priceTag->price->price : null,
             'status' => $this->status ? $this->status->status : null,
-            'damage_rooms' => [
+            'kondisi' => [
                 'lantai' => $this->damageRoomlantai && $this->damageRoomlantai->condition ? $this->damageRoomlantai->condition->condition : null,
                 'kusen' => $this->damageRoomkusen && $this->damageRoomkusen->condition ? $this->damageRoomkusen->condition->condition : null,
                 'pintu' => $this->damageRoompintu && $this->damageRoompintu->condition ? $this->damageRoompintu->condition->condition : null,

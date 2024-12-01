@@ -10,6 +10,7 @@ use App\Models\Rusun;
 use App\Models\DamageRoom;
 use App\Models\UnitNumber;
 use App\Models\Status;
+use App\Models\TransactionRoom;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
@@ -143,6 +144,13 @@ class Room extends Model
             'rusuns_custom_id',     // Primary key pada model asal (Room)
             'custom_id'             // Primary key pada model perantara (Damage_room)
         );
+    }
+
+    
+     
+    public function transactionRoom(): HasOne
+    {
+        return $this->hasOne(TransactionRoom::class, 'rooms_custom_id', 'custom_id');
     }
 
 }
