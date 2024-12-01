@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\DamageRoom;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Condition extends Model
 {
@@ -15,9 +16,9 @@ class Condition extends Model
         'condition',
     ];
 
-    public function damageRoom(): BelongsTo
+    public function damageRoom(): HasOne
     {
-        return $this->belongsTo(DamageRoom::class, 'condition_custom_id', 'custom_id');
+        return $this->hasOne(DamageRoom::class, 'conditions_custom_id', 'custom_id');
     }
 
 }

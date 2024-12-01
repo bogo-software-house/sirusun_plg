@@ -9,6 +9,7 @@ use App\models\Religion;
 use App\models\Education;
 use App\models\StatusNikah;
 use App\models\Gender;
+use App\models\Salary;
 use App\models\ResidentPdf;
 use App\models\BerkasKtp;
 use App\models\BerkasKk;
@@ -43,7 +44,7 @@ class Resident extends Model
         'education_custom_id',
         'alamat_rumah',
         'no_telp',
-        'penghasilan',
+        'salaries_custom_id',
         'warga_negara',
         'pekerjaan',
         'alamat_tempat_kerja',
@@ -88,6 +89,10 @@ class Resident extends Model
     {
         return $this->BelongsTo(StatusNikah::class, 'status_nikah_custom_id', 'custom_id');
     }
+    public function salaries(): BelongsTo
+    {
+        return $this->BelongsTo(Salary::class, 'salaries_custom_id', 'custom_id');
+    }
     /**
      * Get the BerkasKk associated with the Resident
      *
@@ -100,6 +105,10 @@ class Resident extends Model
     public function BerkasKtp(): HasOne
     {
         return $this->hasOne(BerkasKtp::class, 'nik', 'nik');
+    }
+    public function berkasSalary(): HasOne
+    {
+        return $this->hasOne(BerkasSalary::class, 'nik', 'nik');
     }
       // Tambahkan relasi dengan ResidentPdf
     public function residentPdf(): HasOne

@@ -46,6 +46,12 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'ISF002','status' => 'DITERIMA'],
         ['custom_id' => 'ISF003','status' => 'DITOLAK'],    
     )->create();
+   
+    \App\Models\Salary::factory()->count(3)->sequence(
+        ['custom_id' => 'ISY001','salary' => ' < 5.000.000'],
+        ['custom_id' => 'ISY002','salary' => '5.000.000 - 10.000.000'],
+        ['custom_id' => 'ISY003','salary' => '> 10.000.000'],    
+    )->create();
 
     \App\Models\Role::factory()->count(2)->sequence(
         ['custom_id' =>'IRO001','leveluser' => 'admin'],

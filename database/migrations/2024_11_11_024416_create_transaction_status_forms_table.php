@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('custom_id')->unique();
             $table->string('form_custom_id');
             $table->string('statusForm_custom_id');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
 
 

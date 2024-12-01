@@ -23,10 +23,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC002', 
                 'unit_numbers_custom_id' => 'IUN002', 
@@ -36,10 +36,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC003', 
                 'unit_numbers_custom_id' => 'IUN003', 
@@ -49,10 +49,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
 
             //Rusun Kertapati Blok B Lantai 1
@@ -64,10 +64,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC005', 
                 'unit_numbers_custom_id' => 'IUN002', 
@@ -77,10 +77,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC006', 
                 'unit_numbers_custom_id' => 'IUN003', 
@@ -90,10 +90,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC007', 
                 'unit_numbers_custom_id' => 'IUN004', 
@@ -103,10 +103,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC008', 
                 'unit_numbers_custom_id' => 'IUN005', 
@@ -116,10 +116,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC009', 
                 'unit_numbers_custom_id' => 'IUN006', 
@@ -129,10 +129,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC010', 
                 'unit_numbers_custom_id' => 'IUN007', 
@@ -142,10 +142,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC011', 
                 'unit_numbers_custom_id' => 'IUN008', 
@@ -155,10 +155,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC012', 
                 'unit_numbers_custom_id' => 'IUN009', 
@@ -168,10 +168,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC013', 
                 'unit_numbers_custom_id' => 'IUN010', 
@@ -181,10 +181,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC014', 
                 'unit_numbers_custom_id' => 'IUN011', 
@@ -194,10 +194,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC015', 
                 'unit_numbers_custom_id' => 'IUN012', 
@@ -207,10 +207,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC016', 
                 'unit_numbers_custom_id' => 'IUN013', 
@@ -220,10 +220,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC017', 
                 'unit_numbers_custom_id' => 'IUN014', 
@@ -233,10 +233,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC018', 
                 'unit_numbers_custom_id' => 'IUN015', 
@@ -246,10 +246,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC019', 
                 'unit_numbers_custom_id' => 'IUN016', 
@@ -259,10 +259,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC020', 
                 'unit_numbers_custom_id' => 'IUN017', 
@@ -272,10 +272,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC021', 
                 'unit_numbers_custom_id' => 'IUN018', 
@@ -285,10 +285,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC022', 
                 'unit_numbers_custom_id' => 'IUN019', 
@@ -298,10 +298,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC023', 
                 'unit_numbers_custom_id' => 'IUN020', 
@@ -311,10 +311,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC024', 
                 'unit_numbers_custom_id' => 'IUN021', 
@@ -324,10 +324,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC025', 
                 'unit_numbers_custom_id' => 'IUN022', 
@@ -337,10 +337,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC026', 
                 'unit_numbers_custom_id' => 'IUN023', 
@@ -350,10 +350,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC027', 
                 'unit_numbers_custom_id' => 'IUN024', 
@@ -363,10 +363,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
 
             //Rusun Kertapati Blok B Lantai 2
@@ -378,10 +378,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC029', 
                 'unit_numbers_custom_id' => 'IUN002', 
@@ -391,10 +391,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC030', 
                 'unit_numbers_custom_id' => 'IUN003', 
@@ -404,10 +404,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC031', 
                 'unit_numbers_custom_id' => 'IUN004', 
@@ -417,10 +417,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC032', 
                 'unit_numbers_custom_id' => 'IUN005', 
@@ -430,10 +430,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC033', 
                 'unit_numbers_custom_id' => 'IUN006', 
@@ -443,10 +443,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC034', 
                 'unit_numbers_custom_id' => 'IUN007', 
@@ -456,10 +456,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC035', 
                 'unit_numbers_custom_id' => 'IUN008', 
@@ -469,10 +469,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC036', 
                 'unit_numbers_custom_id' => 'IUN009', 
@@ -482,10 +482,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC037', 
                 'unit_numbers_custom_id' => 'IUN010', 
@@ -495,10 +495,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC038', 
                 'unit_numbers_custom_id' => 'IUN011', 
@@ -508,10 +508,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC039', 
                 'unit_numbers_custom_id' => 'IUN012', 
@@ -521,10 +521,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC040', 
                 'unit_numbers_custom_id' => 'IUN013', 
@@ -534,10 +534,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC041', 
                 'unit_numbers_custom_id' => 'IUN014', 
@@ -547,10 +547,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC042', 
                 'unit_numbers_custom_id' => 'IUN015', 
@@ -560,10 +560,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC043', 
                 'unit_numbers_custom_id' => 'IUN016', 
@@ -573,10 +573,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC044', 
                 'unit_numbers_custom_id' => 'IUN017', 
@@ -586,10 +586,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC045', 
                 'unit_numbers_custom_id' => 'IUN018', 
@@ -599,10 +599,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC046', 
                 'unit_numbers_custom_id' => 'IUN019', 
@@ -612,10 +612,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC047', 
                 'unit_numbers_custom_id' => 'IUN020', 
@@ -625,10 +625,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC048', 
                 'unit_numbers_custom_id' => 'IUN021', 
@@ -638,10 +638,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC049', 
                 'unit_numbers_custom_id' => 'IUN022', 
@@ -651,10 +651,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC050', 
                 'unit_numbers_custom_id' => 'IUN023', 
@@ -664,10 +664,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC051', 
                 'unit_numbers_custom_id' => 'IUN024', 
@@ -677,10 +677,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
 
             //Rusun Kertapati Blok B Lantai 3
@@ -692,10 +692,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC053', 
                 'unit_numbers_custom_id' => 'IUN002', 
@@ -705,10 +705,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC054', 
                 'unit_numbers_custom_id' => 'IUN003', 
@@ -718,10 +718,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC055', 
                 'unit_numbers_custom_id' => 'IUN004', 
@@ -731,10 +731,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC056', 
                 'unit_numbers_custom_id' => 'IUN005', 
@@ -744,10 +744,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC057', 
                 'unit_numbers_custom_id' => 'IUN006', 
@@ -757,10 +757,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC058', 
                 'unit_numbers_custom_id' => 'IUN007', 
@@ -770,10 +770,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC059', 
                 'unit_numbers_custom_id' => 'IUN008', 
@@ -783,10 +783,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC060', 
                 'unit_numbers_custom_id' => 'IUN009', 
@@ -796,10 +796,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC061', 
                 'unit_numbers_custom_id' => 'IUN010', 
@@ -809,10 +809,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC062', 
                 'unit_numbers_custom_id' => 'IUN011', 
@@ -822,10 +822,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC063', 
                 'unit_numbers_custom_id' => 'IUN012', 
@@ -835,10 +835,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC064', 
                 'unit_numbers_custom_id' => 'IUN013', 
@@ -848,10 +848,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC065', 
                 'unit_numbers_custom_id' => 'IUN014', 
@@ -861,10 +861,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC066', 
                 'unit_numbers_custom_id' => 'IUN015', 
@@ -874,10 +874,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC067', 
                 'unit_numbers_custom_id' => 'IUN016', 
@@ -887,10 +887,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC068', 
                 'unit_numbers_custom_id' => 'IUN017', 
@@ -900,10 +900,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC069', 
                 'unit_numbers_custom_id' => 'IUN018', 
@@ -913,10 +913,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC070', 
                 'unit_numbers_custom_id' => 'IUN019', 
@@ -926,10 +926,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC071', 
                 'unit_numbers_custom_id' => 'IUN020', 
@@ -939,10 +939,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC072', 
                 'unit_numbers_custom_id' => 'IUN021', 
@@ -952,10 +952,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC073', 
                 'unit_numbers_custom_id' => 'IUN022', 
@@ -965,10 +965,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC074', 
                 'unit_numbers_custom_id' => 'IUN023', 
@@ -978,10 +978,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC075', 
                 'unit_numbers_custom_id' => 'IUN024', 
@@ -991,10 +991,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             
             //Rusun Kertapati Blok B Lantai 4
@@ -1006,10 +1006,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC077', 
                 'unit_numbers_custom_id' => 'IUN002', 
@@ -1019,10 +1019,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC078', 
                 'unit_numbers_custom_id' => 'IUN003', 
@@ -1032,10 +1032,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC079', 
                 'unit_numbers_custom_id' => 'IUN004', 
@@ -1045,10 +1045,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC080', 
                 'unit_numbers_custom_id' => 'IUN005', 
@@ -1058,10 +1058,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC081', 
                 'unit_numbers_custom_id' => 'IUN006', 
@@ -1071,10 +1071,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC082', 
                 'unit_numbers_custom_id' => 'IUN007', 
@@ -1084,10 +1084,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC083', 
                 'unit_numbers_custom_id' => 'IUN008', 
@@ -1097,10 +1097,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC084', 
                 'unit_numbers_custom_id' => 'IUN009', 
@@ -1110,10 +1110,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC085', 
                 'unit_numbers_custom_id' => 'IUN010', 
@@ -1123,10 +1123,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC086', 
                 'unit_numbers_custom_id' => 'IUN011', 
@@ -1136,10 +1136,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC087', 
                 'unit_numbers_custom_id' => 'IUN012', 
@@ -1149,10 +1149,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC088', 
                 'unit_numbers_custom_id' => 'IUN013', 
@@ -1162,10 +1162,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC089', 
                 'unit_numbers_custom_id' => 'IUN014', 
@@ -1175,10 +1175,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC090', 
                 'unit_numbers_custom_id' => 'IUN015', 
@@ -1188,10 +1188,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC091', 
                 'unit_numbers_custom_id' => 'IUN016', 
@@ -1201,10 +1201,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC092', 
                 'unit_numbers_custom_id' => 'IUN017', 
@@ -1214,10 +1214,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC093', 
                 'unit_numbers_custom_id' => 'IUN018', 
@@ -1227,10 +1227,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC094', 
                 'unit_numbers_custom_id' => 'IUN019', 
@@ -1240,10 +1240,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC095', 
                 'unit_numbers_custom_id' => 'IUN020', 
@@ -1253,10 +1253,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC096', 
                 'unit_numbers_custom_id' => 'IUN021', 
@@ -1266,10 +1266,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC097', 
                 'unit_numbers_custom_id' => 'IUN022', 
@@ -1279,10 +1279,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC098', 
                 'unit_numbers_custom_id' => 'IUN023', 
@@ -1292,10 +1292,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             [   'custom_id' => 'IEC099', 
                 'unit_numbers_custom_id' => 'IUN024', 
@@ -1305,10 +1305,10 @@ class KertapatiBlokCSeeder extends Seeder
                 'damage_rooms_kusen_custom_id' => 'IDR005',
                 'damage_rooms_pintu_custom_id' => 'IDR009',
                 'damage_rooms_jendela_custom_id' => 'IDR013',
-                'damage_rooms_fn-flatfond_custom_id' => 'IDR017',
-                'damage_rooms_fn-dinding_custom_id' => 'IDR021',
-                'damage_rooms_instalasi-listrik_custom_id' => 'IDR025',
-                'damage_rooms_instalasi-air_custom_id' => 'IDR029'
+                'damage_rooms_fn_flatfond_custom_id' => 'IDR017',
+                'damage_rooms_fn_dinding_custom_id' => 'IDR021',
+                'damage_rooms_instalasi_listrik_custom_id' => 'IDR025',
+                'damage_rooms_instalasi_air_custom_id' => 'IDR029'
             ],
             )->create();
     }

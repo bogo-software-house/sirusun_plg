@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('education_custom_id');
             $table->string('alamat_rumah');
             $table->string('no_telp');
-            $table->string('penghasilan');
+            $table->string('salaries_custom_id');
             $table->string('warga_negara');
             $table->string('pekerjaan');
             $table->string('alamat_tempat_kerja');
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->foreign('status_nikah_custom_id')->references('custom_id')->on('status_nikahs')->onDelete('cascade');
             $table->foreign('religions_custom_id')->references('custom_id')->on('religions')->onDelete('cascade');
             $table->foreign('education_custom_id')->references('custom_id')->on('education')->onDelete('cascade');      
+            $table->foreign('salaries_custom_id')->references('custom_id')->on('salaries')->onDelete('cascade');      
         });
     }
 

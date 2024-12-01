@@ -2,34 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\StatusForm;
-use App\Models\ResidentPdf;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TransactionStatusForm extends Model
+class TransactionRoom extends Model
 {
+    use HasFactory;
     
-    protected $fillable = [
-        'custom_id',
-        'form_custom_id',
-        'statusForm_custom_id',
-        'keterangan'
-    ];
+    protected $table = 'transaction_rooms';
 
-    public function statusForm(): BelongsTo
-    {
-        return $this->belongsTo(StatusForm::class, 'statusForm_custom_id', 'custom_id');
-    }
-    public function residentPdf(): BelongsTo
-    {
-        return $this->belongsTo(ResidentPdf::class, 'form_custom_id', 'custom_id');
-    }
-
-      // Metode untuk menghasilkan ID kustom
+    // Metode untuk menghasilkan ID kustom
     public static function generateCustomId()
     {
-        $prefix = 'ITF'; // Ganti dengan prefiks yang Anda inginkan
+        $prefix = 'ITR'; // Ganti dengan prefiks yang Anda inginkan
     $lastItem = self::orderBy('custom_id', 'desc')->first();
 
     // Jika tidak ada item, mulai dari ISPER0001
@@ -54,4 +40,23 @@ class TransactionStatusForm extends Model
 
     return $newCustomId; // Kembalikan ID baru yang unik
     }
+
+
+    protected $fillable = [
+        'custom_id',
+        'users_custom_id',
+        'rooms_custom_id',
+    ];
+        
+         
+         
+        public function user(): BelongsTo
+        {
+            return $this->belongsTo(User::class, 'users_custom_id', 'custom_id');
+        }
+        public function room(): BelongsTo
+        {
+            return $this->belongsTo(Room::class, 'rooms_custom_id', 'custom_id');
+        }
+    
 }

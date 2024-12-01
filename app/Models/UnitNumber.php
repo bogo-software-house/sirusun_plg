@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 use App\Models\Room;
 use App\Models\Blok;
 use App\Models\Floor;
@@ -34,9 +35,9 @@ class UnitNumber extends Model
     }
 
     //Relasi one-to-one
-    public function room(): BelongsTo
+    public function room(): HasOne
     {
-        return $this->belongsTo(Room::class, 'custom_id', 'custom_id');
+        return $this->hasOne(Room::class, 'unit_numbers_custom_id', 'custom_id');
     }
 
     // Metode untuk menghasilkan ID kustom

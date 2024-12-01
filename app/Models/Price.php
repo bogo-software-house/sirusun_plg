@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PriceTag;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class Price extends Model
 {
@@ -15,8 +16,8 @@ class Price extends Model
         'price',
     ];
 
-    public function priceTags(): BelongsTo
+    public function priceTags(): HasMany
     {
-        return $this->belongsTo(PriceTag::class, 'prices_custom_id', 'custom_id');
+        return $this->hasMany(PriceTag::class, 'prices_custom_id', 'custom_id');
     }
 }

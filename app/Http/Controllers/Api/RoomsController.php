@@ -16,8 +16,20 @@ class RoomsController extends Controller
     //buat fungsi index
     public function index()
     {
-        $rooms = Room::Latest()->paginate(5);
-        return new RoomsResource(true, 'List Data Rooms', $rooms);
+        $rooms = Room::with([
+        'unitNumber',
+        'status',
+        'priceTag.price',
+        'damageRoomlantai.condition',
+        'damageRoomkusen.condition',
+        'damageRoompintu.condition',
+        'damageRoomjendela.condition',
+        'damageRoomflatfond.condition',
+        'damageRoomdinding.condition',
+        'damageRoominstalasiair.condition',
+        'damageRoominstalasilistrik.condition'
+        ])->Latest()->get();
+        return RoomsResource::collection($rooms);
     }
 
     /**
@@ -33,13 +45,25 @@ class RoomsController extends Controller
     public function show(string $custom_id)
     {
         // Temukan pengguna berdasarkan ID Status
-        $rooms = Room::where('custom_id',$custom_id)->first();
+        $rooms = Room::with([
+        'unitNumber',
+        'status',
+        'priceTag.price',
+        'damageRoomlantai.condition',
+        'damageRoomkusen.condition',
+        'damageRoompintu.condition',
+        'damageRoomjendela.condition',
+        'damageRoomflatfond.condition',
+        'damageRoomdinding.condition',
+        'damageRoominstalasiair.condition',
+        'damageRoominstalasilistrik.condition'
+        ])->where('custom_id',$custom_id)->first();
 
         // Periksa apakah pengguna ditemukan
         if (!$rooms) {
             return response()->json(['message' => 'Room not found'], 404);
         }
-        return new RoomsResource(true, 'Detail data room!', $rooms);
+        return new RoomsResource($rooms);
     }
 
     /**
@@ -54,10 +78,10 @@ class RoomsController extends Controller
                 'damage_rooms_kusen_custom_id' => 'sometimes|required|in:IDR005,IDR006,IDR007,IDR008',
                 'damage_rooms_pintu_custom_id' => 'sometimes|required|in:IDR009,IDR010,IDR011,IDR012',
                 'damage_rooms_jendela_custom_id' => 'sometimes|required|in:IDR0013,IDR014,IDR015,IDR016',
-                'damage_rooms_fn-flatfond_custom_id' => 'sometimes|required|in:IDR017,IDR018,IDR019,IDR020',
-                'damage_rooms_fn-dinding_custom_id' => 'sometimes|required|in:IDR021,IDR022,IDR023,IDR024',
-                'damage_rooms_instalasi-air_custom_id'  => 'sometimes|required|in:IDR025,IDR026,IDR027,IDR028',
-                'damage_rooms_instalasi-listrik_custom_id' => 'sometimes|required|in:IDR029,IDR030,IDR031,IDR032', 
+                'damage_rooms_fn_flatfond_custom_id' => 'sometimes|required|in:IDR017,IDR018,IDR019,IDR020',
+                'damage_rooms_fn_dinding_custom_id' => 'sometimes|required|in:IDR021,IDR022,IDR023,IDR024',
+                'damage_rooms_instalasi_air_custom_id'  => 'sometimes|required|in:IDR025,IDR026,IDR027,IDR028',
+                'damage_rooms_instalasi_listrik_custom_id' => 'sometimes|required|in:IDR029,IDR030,IDR031,IDR032', 
         ]);
 
         //check if validation fails
@@ -71,7 +95,7 @@ class RoomsController extends Controller
         // Jika Room tidak ditemukan, ini akan menjadi null
         $rooms ->update($request->all());
 
-        return new RoomsResource(true, 'Data Room berhasil diubah!', $rooms);
+        return new RoomsResource($rooms);
     }
 
     /**

@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('damage_rooms_kusen_custom_id')->nullable();
             $table->string('damage_rooms_pintu_custom_id')->nullable();
             $table->string('damage_rooms_jendela_custom_id')->nullable();
-            $table->string('damage_rooms_fn-flatfond_custom_id')->nullable();
-            $table->string('damage_rooms_fn-dinding_custom_id')->nullable();
-            $table->string('damage_rooms_instalasi-listrik_custom_id')->nullable();
-            $table->string('damage_rooms_instalasi-air_custom_id')->nullable();
+            $table->string('damage_rooms_fn_flatfond_custom_id')->nullable();
+            $table->string('damage_rooms_fn_dinding_custom_id')->nullable();
+            $table->string('damage_rooms_instalasi_listrik_custom_id')->nullable();
+            $table->string('damage_rooms_instalasi_air_custom_id')->nullable();
             $table->timestamps();
 
             //membuat relasi 
@@ -35,10 +35,10 @@ return new class extends Migration
             $table->foreign('damage_rooms_kusen_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
             $table->foreign('damage_rooms_pintu_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
             $table->foreign('damage_rooms_jendela_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
-            $table->foreign('damage_rooms_fn-flatfond_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
-            $table->foreign('damage_rooms_fn-dinding_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
-            $table->foreign('damage_rooms_instalasi-listrik_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
-            $table->foreign('damage_rooms_instalasi-air_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
+            $table->foreign('damage_rooms_fn_flatfond_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
+            $table->foreign('damage_rooms_fn_dinding_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
+            $table->foreign('damage_rooms_instalasi_listrik_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
+            $table->foreign('damage_rooms_instalasi_air_custom_id')->references('custom_id')->on('damage_rooms')->onDelete('cascade');
 
         });
     }
