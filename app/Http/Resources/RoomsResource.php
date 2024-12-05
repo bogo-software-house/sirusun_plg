@@ -12,6 +12,8 @@ class RoomsResource extends JsonResource
         return [
             'custom_id' => $this->custom_id,
             'unit_number' => $this->UnitNumber ? $this->UnitNumber->no_unit : null,
+            'rusun' => $this->priceTag && $this->priceTag->rusuns ? $this->priceTag->rusuns->nama_rusun : null,
+            'blok' => $this->priceTag && $this->priceTag->bloks ? $this->priceTag->bloks->blok : null,
             'price' => $this->priceTag && $this->priceTag->price ? $this->priceTag->price->price : null,
             'status' => $this->status ? $this->status->status : null,
             'kondisi' => [

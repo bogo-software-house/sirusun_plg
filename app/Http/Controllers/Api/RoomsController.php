@@ -48,6 +48,8 @@ class RoomsController extends Controller
         $rooms = Room::with([
         'unitNumber',
         'status',
+        'priceTag.rusuns',
+        'priceTag.bloks',
         'priceTag.price',
         'damageRoomlantai.condition',
         'damageRoomkusen.condition',
@@ -109,9 +111,6 @@ class RoomsController extends Controller
     }
     
     
-    public function showRoomKertapaiAltDasar(){
     
-            
-    }
 }
 
