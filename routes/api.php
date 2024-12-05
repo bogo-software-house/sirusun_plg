@@ -7,7 +7,7 @@ use App\Http\Kernel;
 use App\Http\Controllers\Api\UserController; 
 
 //posts
-Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
+Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
 //rusun
 Route::apiResource('/rusuns', App\Http\Controllers\Api\RusunController::class);
 //complaint
