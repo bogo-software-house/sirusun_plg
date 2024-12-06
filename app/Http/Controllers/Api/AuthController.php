@@ -38,25 +38,29 @@ class AuthController extends Controller
 
             if ($user->role->leveluser === 'admin') {
 
-                if($request->input('username') === 'admin-kertapati'){
+                // if($request->input('username') === 'admin-kertapati'){
 
                     return response()->json([
                         'message' => 'Login admin kertapati berhasil',
                         'token' => $token,
+                        'role' => $user->role->leveluser,
+                        'username' => $user->username, // Tambahkan username di respons
                         'redirect' => '/api/auth/admin-kertapati/dashboard' // URL untuk admin
                     ]);
-                }else{
-                      return response()->json([
-                        'message' => 'Login admin kertapati berhasil',
-                        'token' => $token,
-                        'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
-                    ]);
-                }
+                // }else{
+                //       return response()->json([
+                //         'message' => 'Login admin kertapati berhasil',
+                //         'token' => $token,
+                //         'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
+                //     ]);
+                // }
 
             } elseif ($user->role->leveluser === 'user') {
                 return response()->json([
                     'message' => 'Login berhasil',
                     'token' => $token,
+                    'role' => $user->role->leveluser,
+                    'username' => $user->username, // Tambahkan username di respons
                     'redirect' => '/api/auth/user/dashboard' // URL untuk user
                 ]);
             }
@@ -69,8 +73,6 @@ class AuthController extends Controller
         //     'role' => $user->role->leveluser
         // ]);
 
-        
-     
     }
 
     // Logout User
