@@ -1,5 +1,0 @@
-1.jangan lupa install composer dengan composer audit di terminal laravel
-2.pastikan jalankan storage:link untuk menjalankan file penyimpanan public storage ya guys
-3.silahkan jalankan perintah php artisan migrate / migrate:fresh jika sudah
-4.jalannkan perintah php artisan db:seed untuk menjalankan seeding data
-5.lalu silahkan jalankan perintah php artisan serve untuk menjalankan aplikasi laravel
