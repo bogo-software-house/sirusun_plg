@@ -375,5 +375,16 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
     )
     ->create();
+    $this->call(RusunSeeder::class);
+    $this->call(PriceTagSeeder::class);
+    $this->call(KasnariansyahBlokASeeder::class);
+    $this->call(KasnariansyahBlokBSeeder::class);
+    $this->call(KasnariansyahBlokCSeeder::class);
+    $this->call(KasnariansyahBlokDSeeder::class);
+    $this->call(KertapatiBlokASeeder::class);
+    $this->call(KertapatiBlokBSeeder::class);
+    $this->call(KertapatiBlokCSeeder::class);
 }
+
+
 }

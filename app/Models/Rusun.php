@@ -55,6 +55,10 @@ class Rusun extends Model
         'lantai',
         'tahun_pembangunan',
         'fasilitas',
+        'image1',
+        'image2',
+        'image3',
+        'image4',
     ];
 
     //relasi

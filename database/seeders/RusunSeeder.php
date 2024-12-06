@@ -21,6 +21,10 @@ class RusunSeeder extends Seeder
             'lantai' => 5,
             'tahun_pembangunan' => 2003,
             'fasilitas' => 'Tempat Parkir',
+            'image1' => '/karnariansya1.jpg',
+            'image2' => '/karnariansya2.jpg',
+            'image3' => '/karnariansya3.jpg',
+            'image4' => '/karnariansya4.jpg',
         ],
         [
             'custom_id' => 'IRN002',
@@ -31,6 +35,10 @@ class RusunSeeder extends Seeder
             'lantai' => 5,
             'tahun_pembangunan' => 2002,
             'fasilitas' => 'Tempat Parkir',
+            'image1' => '/karnariansya1.jpg',
+            'image2' => '/karnariansya2.jpg',
+            'image3' => '/karnariansya3.jpg',
+            'image4' => '/karnariansya4.jpg',
         ],
     )->create();
     }
