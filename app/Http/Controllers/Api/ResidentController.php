@@ -55,8 +55,8 @@ class ResidentController extends Controller
     {
        // Define validation rules
         $validator = Validator::make($request->all(), [
-        'nik'                       => 'required|size:16',
-        'username'                  => 'required|unique:users,username',
+        'nik'                       => 'required|size:16|unique:residents,nik',
+        'username'                  => 'required',
         'tempat_lahir'              => 'required',
         'tanggal_lahir'             => 'required|date',
         'genders_custom_id'         => 'required|exists:genders,custom_id',
@@ -72,6 +72,7 @@ class ResidentController extends Controller
         'berkas_kk'                 => 'required|file|mimes:pdf',
         'berkas_ktp'                => 'required|file|mimes:pdf',
         'berkas_salary'             => 'required|file|mimes:pdf',
+        'email'                     => 'required|email|unique:residents,email',
         ]);
 
         // Check if validation fails
@@ -98,6 +99,7 @@ class ResidentController extends Controller
                 'warga_negara' => $request->warga_negara,
                 'pekerjaan' => $request->pekerjaan,
                 'alamat_tempat_kerja' => $request->alamat_tempat_kerja,
+                'email' => $request->email,
             ]);
 
             // Simpan berkas KK

@@ -48,6 +48,7 @@ class Resident extends Model
         'warga_negara',
         'pekerjaan',
         'alamat_tempat_kerja',
+        'email',
       ];
 
 

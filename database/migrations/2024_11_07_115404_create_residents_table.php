@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('warga_negara');
             $table->string('pekerjaan');
             $table->string('alamat_tempat_kerja');
+            $table->string('email');
             $table->timestamps();
 
 
