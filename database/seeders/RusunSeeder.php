@@ -11,6 +11,12 @@ class RusunSeeder extends Seeder
      */
     public function run(): void
     {
+
+          // Buat folder 'images' jika belum ada
+        if (!Storage::disk('public')->exists('images')) {
+            Storage::disk('public')->makeDirectory('images');
+        }
+        
         \App\Models\Rusun::factory()->count(2)->sequence(
         [
             'custom_id' => 'IRN001',
