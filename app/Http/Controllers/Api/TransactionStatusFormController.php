@@ -128,6 +128,16 @@ class TransactionStatusFormController extends Controller
                     // Jika user sudah ada, buat token baru
                     $token = $existingUser->createToken('auth_token')->plainTextToken;
                  }   
+                 // Kirim email notifikasi untuk ISF002
+                if ($resident->email) {
+                    Mail::to($resident->email)->send(
+                        new TransactionStatusNotificationMail(
+                            'ISF002', 
+                            $resident, 
+                            'silahkan datang dan melihat tunggu 7 hari'
+                        )
+                    );
+                }
                 
             }else if ($request->input('statusForm_custom_id') === 'ISF003') {
                 
@@ -135,6 +145,18 @@ class TransactionStatusFormController extends Controller
                         'statusForm_custom_id' => $request->input('statusForm_custom_id'),
                         'keterangan' => $request->input('keterangan'),
                     ]);
+
+                            // Kirim email notifikasi untuk ISF003
+                if ($resident->email) {
+                    Mail::to($resident->email)->send(
+                        new TransactionStatusNotificationMail(
+                            'ISF003', 
+                            $resident, 
+                            $request->input('keterangan')
+                        )
+                    );
+                }
+
                     // Dispatch job untuk menghapus transaksi setelah 1 jam
                     DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
                 }

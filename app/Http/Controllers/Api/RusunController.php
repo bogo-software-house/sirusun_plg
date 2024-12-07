@@ -110,10 +110,10 @@ class RusunController extends Controller
 
                 $response = [
                 'rusun' => $rusun->nama_rusun,
-                'image1' => asset('storage/images' . $rusun->image1),
-                'image2' => asset('storage/images' . $rusun->image2),
-                'image3' => asset('storage/images' . $rusun->image3),
-                'image4' => asset('storage/images' . $rusun->image4),
+                'image1' => asset('storage/' . $rusun->image1),
+                'image2' => asset('storage/' . $rusun->image2),
+                'image3' => asset('storage/' . $rusun->image3),
+                'image4' => asset('storage/' . $rusun->image4),
                 'bloks' => $blokRooms->map(function($rooms, $blok)  {
                     // Kelompokkan per lantai dalam blok
                     $lantaiRooms = $rooms->groupBy(function($room) {
