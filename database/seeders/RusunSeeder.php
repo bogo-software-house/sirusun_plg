@@ -60,4 +60,5 @@ class RusunSeeder extends Seeder
          // Kembalikan path gambar yang disimpan di storage
          return $imagePath;
      }
+
 }

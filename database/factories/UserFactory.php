@@ -17,6 +17,7 @@ class UserFactory extends Factory
        
         return [
             'custom_id' => $this->faker->word,
+
             'nik' => $this->faker->unique()->numerify('##########'), // Nomor unit
             'username' => $this->faker->word, // Nomor unit
             'password' => bcrypt('password'),  // Password default, bisa diubah

@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StatusForm;
-use App\Http\Resources\StatusFormResource;
 
-class StatusFormController extends Controller
+class ResidentPdfController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $statusForm = StatusForm::Latest()->get();
-       return  StatusFormResource::collection($statusForm);
+        //
     }
 
     /**

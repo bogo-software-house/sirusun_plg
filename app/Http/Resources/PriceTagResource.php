@@ -12,6 +12,7 @@ class PriceTagResource extends JsonResource
     {
         return [
             
+
             'data'      => $this->resource
         ];
     }

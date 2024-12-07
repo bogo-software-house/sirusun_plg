@@ -41,7 +41,9 @@ Route::apiResource('/genders', App\Http\Controllers\Api\GenderController::class)
 Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::class);
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
 Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController::class);
+
 Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class);
+
 
 
 
@@ -61,14 +63,18 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
+
                     Route::apiResource('/users-data', UserController::class);   
                     //users
                     Route::put('/admin-update-password', [UserController::class,'updatepassword']);
+
                     //Route::middleware(App\Http\Middleware\CheckRusun::class.':kasnariansya')->group(function () {
                     Route::get('/admin-kasnariansya/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kasnariansya']);
                     });
+
                     //  });   
+
 
                     //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
                     Route::get('/admin-kertapati/dashboard', function () {
@@ -90,6 +96,8 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         
     });
     //update status transaction
+
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
         //transaksi rooms
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
+

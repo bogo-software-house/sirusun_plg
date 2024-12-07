@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TransactionStatusFormShowResource extends JsonResource
 {
+
     public function toArray(Request $request): array
     {
         return  [
@@ -14,7 +15,9 @@ class TransactionStatusFormShowResource extends JsonResource
             'name' => $this->residentPdf && $this->residentPdf->resident ? $this->residentPdf->resident->username  : null,
             'status' => $this->statusForm ? $this->statusForm->status  : null,
             'keterangan' => $this->keterangan,
+
          
     ];
         }
+
 }

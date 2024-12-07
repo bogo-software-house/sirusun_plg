@@ -9,11 +9,13 @@ use App\Models\Blok;
 use App\Models\Floor;
 use App\Models\Price;
 
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class PriceTagFactory extends Factory
 {
+
     protected $model = PriceTag::class;
 
     public function definition()
@@ -24,6 +26,7 @@ class PriceTagFactory extends Factory
             'bloks_custom_id' => Blok::pluck('custom_id')->random(),
             'floors_custom_id'=> Floor::pluck('custom_id')->random(),
             'prices_custom_id' => Price::pluck('custom_id')->random(),
+
         ];
     }
 }

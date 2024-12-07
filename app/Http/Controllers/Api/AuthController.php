@@ -44,6 +44,8 @@ class AuthController extends Controller
                         'message' => 'Login admin kertapati berhasil',
                         'token' => $token,
                         'role' => $user->role->leveluser,
+                        'username' => $user->username, // Tambahkan username di respons
+
                         'redirect' => '/api/auth/admin-kertapati/dashboard' // URL untuk admin
                     ]);
                 // }else{
@@ -59,6 +61,9 @@ class AuthController extends Controller
                     'message' => 'Login berhasil',
                     'token' => $token,
                     'role' => $user->role->leveluser,
+
+                    'username' => $user->username, // Tambahkan username di respons
+
                     'redirect' => '/api/auth/user/dashboard' // URL untuk user
                 ]);
             }
