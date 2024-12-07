@@ -14,7 +14,7 @@ use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
-use App\Jobs\DeleteTransactiomStatusFormData;
+use App\Jobs\DeleteTransactionStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
 use App\Http\Resources\TransactionStatusFormShowResource;
 
@@ -26,32 +26,37 @@ class TransactionStatusFormController extends Controller
      */
     public function index()
     {
-          
-          $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->Latest()->get();
-        return  TransactionStatusFormResource::collection($TransactionStatusForm);
+        //
     }
 
  
-    public function show(string $formcustomId)
+    public function show(string $id)
     {
-        $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])
-        ->whereHas('residentPdf', function ($query) use ($formcustomId) {
-        $query->where('nik', $formcustomId);
-        })->Latest()->get();
-        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
+        //
     }
 
    
     public function update(Request $request, string $formcustomId)
     {
-    $validator = Validator::make($request->all(), [
-        'statusForm_custom_id' => 'required|exists:status_forms,custom_id',
-    ]);
+        $validator = Validator::make($request->all(), [
+            'statusForm_custom_id' => 'required|exists:status_forms,custom_id',
+            'keterangan'           => 'nullable', // Keterangan bisa null
+        ]);
 
-    // Check if validation fails
-    if ($validator->fails()) {
-        return response()->json($validator->errors(), 422);
-    }
+        // Tambahkan logika kondisional untuk keterangan
+        $validator->after(function ($validator) use ($request) {
+            if ($request->input('statusForm_custom_id') === 'ISF002' && !is_null($request->input('keterangan'))) {
+                $validator->errors()->add('keterangan', 'Keterangan harus kosong jika statusForm_custom_id adalah ISF002.');
+            }
+
+            if ($request->input('statusForm_custom_id') === 'ISF003' && empty($request->input('keterangan'))) {
+                $validator->errors()->add('keterangan', 'Keterangan harus diisi jika statusForm_custom_id adalah ISF003.');
+            }
+        });
+        // Cek jika validasi gagal
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }  
 
     DB::beginTransaction();
     try {
@@ -76,13 +81,16 @@ class TransactionStatusFormController extends Controller
             throw new \Exception('Resident not found');
         }
 
-        // Update status form
-        $transaction->update([
-            'statusForm_custom_id' => $request->input('statusForm_custom_id')
-        ]);
 
-        // Cek apakah status form adalah ISF002
-        if ($request->input('statusForm_custom_id') === 'ISF002') {
+            // Cek apakah status form adalah ISF002
+            if ($request->input('statusForm_custom_id') === 'ISF002') {
+
+                
+                  // Update status form
+            $transaction->update([
+                'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
+            ]); 
 
             // Cek apakah user sudah ada
             $existingUser = User::where('nik', $resident->nik)->first();
@@ -94,30 +102,33 @@ class TransactionStatusFormController extends Controller
                 // Generate custom ID untuk user
                 $usercustomId = User::generateCustomId();
 
-                $token = null;
-                // Buat user baru
-                $user = User::create([
-                    'custom_id' => $usercustomId,
-                    'nik'       => $resident->nik,
-                    'username'  => $resident->username,
-                    'password'  => Hash::make('user123'), // Gunakan Hash untuk password
-                    'transaksi_custom_id' => $transaction->custom_id,
-                    'roles_custom_id' => $role->custom_id,
-                ]);
-                
+                    $token = null;
+                    // Buat user baru
+                    $user = User::create([
+                        'custom_id' => $usercustomId,
+                        'nik'       => $resident->nik,
+                        'username'  => $resident->username,
+                        'password'  => Hash::make('user123'), // Gunakan Hash untuk password
+                        'transaksi_custom_id' => $transaction->custom_id,
+                        'roles_custom_id' => $role->custom_id,
+                    ]); 
+                    
                 // Buat token untuk user
                 $token = $user->createToken('auth_token')->plainTextToken;
-            } else {
-                // Jika user sudah ada, buat token baru
-                $token = $existingUser->createToken('auth_token')->plainTextToken;
-            }
-        } elseif ($request->input('statusForm_custom_id') === 'ISF003') {
-            // Jadwalkan job untuk menghapus data setelah 1 jam
-            DeleteTransactionStatusFormData::dispatch($formcustomId)->delay(now()->addHours(1));
 
-            return response()->json([
-                'message' => 'Transaction status updated to ISF003. Data will be deleted in 1 hour.'
+            }else  {
+            // Jika user sudah ada, buat token baru
+            $token = $existingUser->createToken('auth_token')->plainTextToken;
+         }   
+        
+    }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+        
+        $transaction->update([
+                'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                'keterangan' => $request->input('keterangan'),
             ]);
+            // Dispatch job untuk menghapus transaksi setelah 1 jam
+            DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
         }
 
         // Commit transaksi
@@ -132,18 +143,13 @@ class TransactionStatusFormController extends Controller
             'message' => 'Transaction status updated successfully'
         ]);
 
-    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-        return response()->json([
-            'message' => 'Transaction not found'
-        ], 404);
-    } catch (\Exception $e) {
-        return response()->json([
-            'message' => 'Error updating transaction',
-            'error' => $e->getMessage()
-        ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error updating transaction',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
-}
-
 
     /**
      * Remove the specified resource from storage.

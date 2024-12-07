@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Rusun;
 use App\Models\Blok;
@@ -13,11 +14,11 @@ use Illuminate\Validation\ValidationException;
 class PriceTag extends Model
 {
     use HasFactory;
+    protected $table = 'price_tags';
+    protected $primaryKey = 'custom_id'; // Menggunakan primary key custom_id sebagai primary key
+    public $incrementing = false; // Menggunakan primary key custom_id sebagai ID unik
+    protected $keyType ='string'; // Menggunakan tipe string sebagai primary key
 
-    protected $table = 'pricetags'; // Nama tabel jika berbeda
-    protected $primaryKey = 'custom_id'; // Menggunakan kolom custom_id sebagai kunci utama
-    public $incrementing = false; // Jika custom_id bukan auto-incrementing
-    protected $keyType = 'string'; // Tipe kunci jika custom_id adalah string
 
 
     // Metode untuk menghasilkan ID kustom
@@ -69,14 +70,10 @@ class PriceTag extends Model
         return $this->belongsTo(Floor::class, 'floors_custom_id', 'custom_id');
     }
 
-     /**
-     * Get the BerkasKk associated with the Resident
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function Price(): HasOne
+    public function price(): BelongsTo
     {
-        return $this->hasOne(Price::class, 'prices_custom_id', 'custom_id');
+        return $this->belongsTo(Price::class, 'prices_custom_id', 'custom_id');
+
     }
     
 }

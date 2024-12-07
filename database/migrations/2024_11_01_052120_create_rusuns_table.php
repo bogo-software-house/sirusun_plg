@@ -21,6 +21,10 @@ return new class extends Migration
            $table->string('lantai');
            $table->string('tahun_pembangunan');
            $table->string('fasilitas');
+           $table->string('image1');
+           $table->string('image2');
+           $table->string('image3');
+           $table->string('image4');
            //gambar
            $table->timestamps();
 

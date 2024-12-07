@@ -4,14 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Kernel;
-
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+use App\Http\Controllers\Api\UserController; 
 
 //posts
-Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
+Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
 //rusun
 Route::apiResource('/rusuns', App\Http\Controllers\Api\RusunController::class);
 //complaint
@@ -46,6 +42,9 @@ Route::apiResource('/educations', App\Http\Controllers\Api\EducationController::
 Route::apiResource('/status_nikah', App\Http\Controllers\Api\StatusNikahController::class);
 Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController::class);
 
+Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class);
+
+
 
 
     //minddleware login
@@ -64,15 +63,20 @@ Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
-                    Route::apiResource('/users-data', App\Http\Controllers\Api\UserController::class);   
-                   
+
+                    Route::apiResource('/users-data', UserController::class);   
+                    //users
+                    Route::put('/admin-update-password', [UserController::class,'updatepassword']);
+
                     //Route::middleware(App\Http\Middleware\CheckRusun::class.':kasnariansya')->group(function () {
                     Route::get('/admin-kasnariansya/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kasnariansya']);
                     });
-              //  });   
 
-              //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
+                    //  });   
+
+
+                    //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
                     Route::get('/admin-kertapati/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kertapati']);
                     
@@ -85,9 +89,15 @@ Route::apiResource('/status-form', App\Http\Controllers\Api\StatusFormController
              Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
                 });
+             //users
+             Route::put('/users-update-password', [UserController::class,'updatepassword']);  
             });
         });
         
     });
     //update status transaction
+
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
+        //transaksi rooms
+        Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
+

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\hasMany;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 use App\Models\Room;
 use App\Models\Property;
 use App\Models\Condition;
@@ -36,24 +37,50 @@ class DamageRoom extends Model
         return $this->belongsTo(Information::class, 'information_custom_id', 'custom_id');
     }
 
-    /**
-     * Get the Condition associated with the DamageRoom
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function Condition(): HasOne
+    public function condition(): BelongsTo
     {
-        return $this->hasOne(Condition::class, 'conditions_custom_id', 'custom_id');
+        return $this->belongsTo(Condition::class, 'conditions_custom_id', 'custom_id');
     }
 
-    /**
-     * Get all of the room for the damageroom
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function rooms(): HasMany
+  // semua kerusakan
+    public function roomslantai(): HasMany
     {
-        return $this->hasMany(Room::class, 'damage_rooms_custom_id', 'custom_id');
+        return $this->hasMany(Room::class, 'damage_rooms_lantai_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomskusen(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_kusen_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomspintu(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_pintu_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsjendela(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_jendela_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsflatfond(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_fn_flatfond_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsdinding(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_fn_dinding_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsinstalasiair(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_instalasi_air_custom_id', 'custom_id');
+    }
+  // semua kerusakan
+    public function roomsinstalasilistrik(): HasMany
+    {
+        return $this->hasMany(Room::class, 'damage_rooms_instalasi_listrik_custom_id', 'custom_id');
     }
 
     /**

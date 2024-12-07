@@ -13,7 +13,9 @@ class TransactionStatusForm extends Model
     protected $fillable = [
         'custom_id',
         'form_custom_id',
-        'statusForm_custom_id'];
+        'statusForm_custom_id',
+        'keterangan'
+    ];
 
     public function statusForm(): BelongsTo
     {

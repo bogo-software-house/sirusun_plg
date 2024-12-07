@@ -16,9 +16,9 @@ class Status extends Model
         'status',
     ];
 
-    public function room(): BelongsTo
+    public function room(): HasMany
     {
-        return $this->belongsTo(Room::class, 'statuses_custom_id', 'custom_id');
+        return $this->hasMany(Room::class, 'statuses_custom_id', 'custom_id');
     }
 
 }

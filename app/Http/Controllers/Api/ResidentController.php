@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Resident;
 use App\Models\BerkasKk;
 use App\Models\BerkasKtp;
+use App\Models\BerkasSalary;
 use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\TransactionStatusForm;
@@ -54,8 +55,8 @@ class ResidentController extends Controller
     {
        // Define validation rules
         $validator = Validator::make($request->all(), [
-        'nik'                       => 'required|size:16',
-        'username'                  => 'required|unique:users,username',
+        'nik'                       => 'required|size:16|unique:residents,nik',
+        'username'                  => 'required',
         'tempat_lahir'              => 'required',
         'tanggal_lahir'             => 'required|date',
         'genders_custom_id'         => 'required|exists:genders,custom_id',
@@ -64,12 +65,14 @@ class ResidentController extends Controller
         'education_custom_id'       => 'required|exists:education,custom_id',
         'alamat_rumah'              => 'required',
         'no_telp'                   => 'required|numeric',
-        'penghasilan'               => 'required|numeric',
+        'salaries_custom_id'        => 'required|exists:salaries,custom_id',
         'warga_negara'              => 'required',
         'pekerjaan'                 => 'required',
         'alamat_tempat_kerja'       => 'required',
-        'berkas_kk'                 => 'required|file|mimes:pdf,jpg,png',
-        'berkas_ktp'                => 'required|file|mimes:pdf,jpg,png',
+        'berkas_kk'                 => 'required|file|mimes:pdf',
+        'berkas_ktp'                => 'required|file|mimes:pdf',
+        'berkas_salary'             => 'required|file|mimes:pdf',
+        'email'                     => 'required|email|unique:residents,email',
         ]);
 
         // Check if validation fails
@@ -92,10 +95,11 @@ class ResidentController extends Controller
                 'education_custom_id' => $request->education_custom_id,
                 'alamat_rumah' => $request->alamat_rumah,
                 'no_telp' => $request->no_telp,
-                'penghasilan' => $request->penghasilan,
+                'salaries_custom_id' => $request->salaries_custom_id,
                 'warga_negara' => $request->warga_negara,
                 'pekerjaan' => $request->pekerjaan,
                 'alamat_tempat_kerja' => $request->alamat_tempat_kerja,
+                'email' => $request->email,
             ]);
 
             // Simpan berkas KK
@@ -108,6 +112,18 @@ class ResidentController extends Controller
                     'file_name' => $kkFile->getClientOriginalName(),
                     'file_path' => $kkPath,
                     'file_url' => Storage::url($kkPath),
+                ]);
+            }
+            // Simpan berkas gaji
+            if ($request->hasFile('berkas_salary')) {
+                $salaryFile = $request->file('berkas_salary');
+                $salaryPath = $kkFile->store('berkas_salary', 'public');
+
+             $berkasKk = BerkasSalary::create([
+                    'nik' => $resident->nik,
+                    'file_name' => $salaryFile->getClientOriginalName(),
+                    'file_path' => $salaryPath,
+                    'file_url' => Storage::url($salaryPath),
                 ]);
             }
 
@@ -179,6 +195,7 @@ class ResidentController extends Controller
         $resident->load(
             'berkasKk', 
             'berkasKtp', 
+            'berkasSalary', 
             'residentPdf', 
             'transactionStatusForm.statusForm'
         );

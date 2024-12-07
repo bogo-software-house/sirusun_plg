@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('nik')->unique();
             $table->string('username');
             $table->string('password');
-            $table->string('transaksi_custom_id')->nullable(); // Menambahkan kolom nik yang unik
+            $table->string('transaksi_custom_id')->nullable(); 
             $table->string('roles_custom_id');
             $table->rememberToken(); // Kolom untuk token ingat
             $table->timestamps();

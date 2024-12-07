@@ -17,7 +17,9 @@ class PriceTagController extends Controller
     public function index()
     {
         $pricetags= PriceTag::latest()->get();
-        return new PriceTagResource(true, 'List Data Price Tag', $pricetags);
+
+        return PriceTagResource::collection($pricetags);
+
 
     }
 }
