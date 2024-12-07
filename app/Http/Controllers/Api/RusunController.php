@@ -110,6 +110,12 @@ class RusunController extends Controller
 
                 $response = [
                 'rusun' => $rusun->nama_rusun,
+                'alamat' => $rusun->alamat,
+                'luas' => $rusun->luas,
+                'fasilitas' => $rusun->fasilitas,
+                'tahun' => $rusun->tahun_pembangunan,
+                'blok' => $rusun->blok,
+                'lantai' => $rusun->lantai,
                 'image1' => asset('storage/images' . $rusun->image1),
                 'image2' => asset('storage/images' . $rusun->image2),
                 'image3' => asset('storage/images' . $rusun->image3),
