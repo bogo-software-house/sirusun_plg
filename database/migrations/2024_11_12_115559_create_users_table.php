@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Menambahkan kolom nik yang unik
             $table->string('custom_id')->unique(); // custom user
+            $table->bigInteger('nik')->unique();
             $table->string('username');
             $table->string('password');
-            $table->string('transaksi_custom_id'); // Menambahkan kolom nik yang unik
+            $table->string('transaksi_custom_id')->nullable(); 
             $table->string('roles_custom_id');
+            $table->rememberToken(); // Kolom untuk token ingat
             $table->timestamps();
 
             // Menambahkan foreign key

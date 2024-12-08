@@ -10,6 +10,7 @@ use App\models\User;
 class Role extends Model
 {
      use HasFactory;
+    protected $table = 'roles';
 
      protected $fillabe = [
         'id',

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->unique();
-            $table->string('Status');
+            $table->string('status'); //isi status (terisi/blm terisi)
             $table->timestamps();
         });
     }

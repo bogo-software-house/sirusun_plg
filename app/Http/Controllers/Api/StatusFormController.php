@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\StatusForm;
+use App\Http\Resources\StatusFormResource;
 
 class StatusFormController extends Controller
 {
@@ -11,7 +14,8 @@ class StatusFormController extends Controller
      */
     public function index()
     {
-        //
+        $statusForm = StatusForm::Latest()->get();
+       return  StatusFormResource::collection($statusForm);
     }
 
     /**

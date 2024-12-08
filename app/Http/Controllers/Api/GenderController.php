@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gender;
+use App\Http\Resources\GenderResource;
 
 class GenderController extends Controller
 {
@@ -13,8 +14,9 @@ class GenderController extends Controller
      */
     public function index()
     {
-               $Gender = Gender::Latest()->paginate(2);
-       return new ResidentResource(true, 'List Data agama',$Gender);
+                 // Ambil semua data dengan urutan terbaru
+       $Genders = Gender::latest()->get();
+       return new GenderResource(true,'data gender!',$Genders);
     
     }
 

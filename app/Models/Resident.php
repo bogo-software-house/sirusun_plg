@@ -9,14 +9,18 @@ use App\models\Religion;
 use App\models\Education;
 use App\models\StatusNikah;
 use App\models\Gender;
+use App\models\Salary;
 use App\models\ResidentPdf;
+use App\models\BerkasKtp;
+use App\models\BerkasKk;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Validation\ValidationException;
 
 class Resident extends Model
 {
+    use HasFactory;
 
- protected $table = 'Residents'; // Nama tabel jika berbeda
+    protected $table = 'Residents'; // Nama tabel jika berbeda
     protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
     public $incrementing = false; // Jika nik bukan auto-incrementing
     protected $keyType = 'biginteger'; // Tipe kunci jika nik adalah string
@@ -40,10 +44,11 @@ class Resident extends Model
         'education_custom_id',
         'alamat_rumah',
         'no_telp',
-        'penghasilan',
+        'salaries_custom_id',
         'warga_negara',
         'pekerjaan',
         'alamat_tempat_kerja',
+        'email',
       ];
 
 
@@ -85,6 +90,10 @@ class Resident extends Model
     {
         return $this->BelongsTo(StatusNikah::class, 'status_nikah_custom_id', 'custom_id');
     }
+    public function salaries(): BelongsTo
+    {
+        return $this->BelongsTo(Salary::class, 'salaries_custom_id', 'custom_id');
+    }
     /**
      * Get the BerkasKk associated with the Resident
      *
@@ -92,11 +101,15 @@ class Resident extends Model
      */
     public function BerkasKk(): HasOne
     {
-        return $this->hasOne(Resident::class, 'nik', 'nik');
+        return $this->hasOne(BerkasKk::class, 'nik', 'nik');
     }
     public function BerkasKtp(): HasOne
     {
-        return $this->hasOne(Resident::class, 'nik', 'nik');
+        return $this->hasOne(BerkasKtp::class, 'nik', 'nik');
+    }
+    public function berkasSalary(): HasOne
+    {
+        return $this->hasOne(BerkasSalary::class, 'nik', 'nik');
     }
       // Tambahkan relasi dengan ResidentPdf
     public function residentPdf(): HasOne
@@ -115,6 +128,6 @@ class Resident extends Model
             'nik',                         // Primary key pada model asal (Resident)
             'custom_id'                    // Primary key pada model perantara (ResidentPdf)
         );
-
+        
     }
 }

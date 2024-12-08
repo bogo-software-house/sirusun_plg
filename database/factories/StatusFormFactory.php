@@ -14,12 +14,9 @@ class StatusFormFactory extends Factory
 
     public function definition()
     {
-        // Hitung jumlah entri yang ada di tabel untuk menentukan nomor berikutnya
-        $count = StatusForm::count() + 1;
-        $customId = sprintf("ISF%03d", $count); // Format ID, misalnya "IRL001"
-
+   
         return [
-            'custom_id' => $customId,
+            'custom_id' => $this->faker->unique()->word,
             'status' => $this->faker->word, // Nama agama
         ];
     }

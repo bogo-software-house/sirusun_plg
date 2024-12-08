@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Education;
-
 use App\Http\Resources\EducationResource;
-use Illuminate\Support\Facades\Validator;
-
 
 class EducationController extends Controller
 {
@@ -18,9 +15,11 @@ class EducationController extends Controller
     public function index()
     {
 
-        $educations = Education::latest()->paginate(5);
-        return new EducationResource(true, 'List Data Educations', $educations);
-    } 
+                 $Education = Education::Latest()->get();
+       return new EducationResource(true, 'List Data agama',$Education);
+    
+    }
+
 
 
     /**

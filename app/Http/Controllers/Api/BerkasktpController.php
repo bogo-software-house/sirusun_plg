@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Religion;
+use App\Models\BerkasKtp;
+use App\Http\Resources\BerkasktpResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class BerkasktpController extends Controller
 {
@@ -67,30 +70,39 @@ class BerkasktpController extends Controller
     return new UserResource(true, 'Data user Berhasil Ditambahkan!', $user);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+   
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $nik)
     {
-        //
+        try {
+                $berkasktp = BerkasKtp::where('nik', $nik)
+                    ->select(['nik', 'file_name', 'file_path'])
+                    ->first();
+
+                if (!$berkasktp) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Data tidak ditemukan',
+                        'data' => null
+                    ], 404);
+                }
+
+                return new BerkasktpResource(true, 'Data ditemukan', $berkasktp);
+
+            } catch (\Exception $e) {
+                Log::error('Error in show method: ' . $e->getMessage());
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan',
+                    'error' => $e->getMessage()
+                ], 500);
+            }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      */

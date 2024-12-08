@@ -12,7 +12,7 @@ class ResidentResource extends JsonResource
 {
     // Tambahkan properti untuk status dan pesan
     protected $status = true;
-    protected $message = 'Data berhasil diambil';
+    protected $message = 'berhasil ';
 
     // Constructor untuk mengatur status dan pesan kustom
     public function __construct($resource, $status = true, $message = 'Data berhasil diambil')
@@ -51,7 +51,7 @@ class ResidentResource extends JsonResource
                     'education_custom_id' => $item->education_custom_id ?? null,
                     'alamat_rumah' => $item->alamat_rumah ?? null,
                     'no_telp' => $item->no_telp ?? null,
-                    'penghasilan' => $item->penghasilan ?? null,
+                    'salaries_custom_id' => $item->salaries_custom_id ?? null,
                     'warga_negara' => $item->warga_negara ?? null,
                     'pekerjaan' => $item->pekerjaan ?? null,
                     'alamat_tempat_kerja' => $item->alamat_tempat_kerja ?? null,
@@ -59,6 +59,9 @@ class ResidentResource extends JsonResource
                     // Gunakan metode baru untuk mengecek relasi
                     'berkas_kk' => $this->whenLoaded('berkasKk', function () use ($item) {
                         return $item->berkasKk ? new BerkaskkResource($item->berkasKk) : null;
+                    }),
+                    'berkas_salary' => $this->whenLoaded('berkasSalary', function () use ($item) {
+                        return $item->berkasSalary ? new BerkasSalaryResource($item->berkasSalary) : null;
                     }),
                     'berkas_ktp' => $this->whenLoaded('berkasKtp', function () use ($item) {
                         return $item->berkasKtp ? new BerkasktpResource($item->berkasKtp) : null;
@@ -104,24 +107,27 @@ class ResidentResource extends JsonResource
                 'education_custom_id' => $this->education_custom_id ?? null,
                 'alamat_rumah' => $this->alamat_rumah ?? null,
                 'no_telp' => $this->no_telp ?? null,
-                'penghasilan' => $this->penghasilan ?? null,
+                'salaries_custom_id' => $this->salaries_custom_id ?? null,
                 'warga_negara' => $this->warga_negara ?? null,
                 'pekerjaan' => $this->pekerjaan ?? null,
                 'alamat_tempat_kerja' => $this->alamat_tempat_kerja ?? null,
                 
                 // Gunakan whenLoaded untuk relasi
                 'berkas_kk' => $this->whenLoaded('berkasKk', function () {
-                    return $this->berkasKk ? new BerkaskkResource($this->berkasKk) : null;
+                    return $this->berkasKk ? new BerkaskkResource(true,'dapat',$this->berkasKk) : null;
+                }),
+                'berkas_salary' => $this->whenLoaded('berkasSalary', function () {
+                    return $this->berkasSalary ? new BerkasSalaryResource($this->berkasSalary) : null;
                 }),
                 'berkas_ktp' => $this->whenLoaded('berkasKtp', function () {
-                    return $this->berkasKtp ? new BerkasktpResource($this->berkasKtp) : null;
+                    return $this->berkasKtp ? new BerkasktpResource(true,'dapat',$this->berkasKtp) : null;
                 }),
                 'resident_pdf' => $this->whenLoaded('residentPdf', function () {
                     return $this->residentPdf ? new ResidentPdfResource($this->residentPdf) : null;
                 }),
                    'transactionStatusForm' => $this->whenLoaded('transactionStatusForm', function () {
                         return $this->transactionStatusForm ? new TransactionStatusFormResource($this->transactionStatusForm) : null;
-                    }),
+                }),
             ]
         ];
     }

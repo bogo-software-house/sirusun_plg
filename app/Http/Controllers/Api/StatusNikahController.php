@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\StatusNikah;
+use App\Http\Resources\StatusNikahResource;
 
 class StatusNikahController extends Controller
 {
@@ -13,8 +14,8 @@ class StatusNikahController extends Controller
      */
     public function index()
     {
-             $StatusNikah = StatusNikah::Latest()->paginate(2);
-       return new ResidentResource(true, 'List Data role',$StatusNikah);
+             $StatusNikah = StatusNikah::Latest()->get();
+       return new StatusNikahResource(true, 'List Data role',$StatusNikah);
     }
 
     /**

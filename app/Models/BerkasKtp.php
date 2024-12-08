@@ -11,11 +11,11 @@ class BerkasKtp extends Model
 {
      use HasFactory;
 
-     protected $table = 'berkas_ktps';
+    protected $table = 'berkas_ktps';
     protected $fillable = ['nik', 'file_name', 'file_path', 'file_url'];
 
     public function resident(): BelongsTo
     {
-        return $this->BelongsTo(Resident::class,'nik','nik');
+        return $this->BelongsTo(BerkasKtp::class,'nik','nik');
     }
 }

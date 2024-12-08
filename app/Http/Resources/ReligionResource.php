@@ -7,7 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReligionResource extends JsonResource
 {
-    //define properti
+
+//define properti
+
     public $status;
     public $message;
     public $resource;

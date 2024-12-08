@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 use App\Models\Resident;
 use App\Models\TransactionStatusForm;
 use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
+use App\Mail\TransactionStatusNotificationMail;
+use App\Jobs\DeleteTransactionStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
+use App\Http\Resources\TransactionStatusFormShowResource;
 
 
 class TransactionStatusFormController extends Controller
@@ -36,17 +39,28 @@ class TransactionStatusFormController extends Controller
    
     public function update(Request $request, string $formcustomId)
     {
-            $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'statusForm_custom_id' => 'required|exists:status_forms,custom_id',
+            'keterangan'           => 'nullable', // Keterangan bisa null
         ]);
 
-        // Check if validation fails
+        // Tambahkan logika kondisional untuk keterangan
+        $validator->after(function ($validator) use ($request) {
+            if ($request->input('statusForm_custom_id') === 'ISF002' && !is_null($request->input('keterangan'))) {
+                $validator->errors()->add('keterangan', 'Keterangan harus kosong jika statusForm_custom_id adalah ISF002.');
+            }
+
+            if ($request->input('statusForm_custom_id') === 'ISF003' && empty($request->input('keterangan'))) {
+                $validator->errors()->add('keterangan', 'Keterangan harus diisi jika statusForm_custom_id adalah ISF003.');
+            }
+        });
+        // Cek jika validasi gagal
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }  
 
-        DB::beginTransaction();
-        try {
+    DB::beginTransaction();
+    try {
             // Temukan transaksi berdasarkan form custom ID
             $transaction = TransactionStatusForm::with(['residentPdf', 'statusForm'])
                 ->where('form_custom_id', $formcustomId)
@@ -68,47 +82,92 @@ class TransactionStatusFormController extends Controller
                 throw new \Exception('Resident not found');
             }
 
-            // Update status form
-            $transaction->update([
-                'statusForm_custom_id' => $request->input('statusForm_custom_id')
-            ]); 
 
-            // Cek apakah status form adalah ISF002
-            if ($request->input('statusForm_custom_id') === 'ISF002') {
+                // Cek apakah status form adalah ISF002
+                if ($request->input('statusForm_custom_id') === 'ISF002') {
+
+                    
+                    // Update status form
+                $transaction->update([
+                    'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                    'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
+                ]); 
+
                 // Cek apakah user sudah ada
-                $existingUser = User::where('username', $resident->username)->first();
+                $existingUser = User::where('nik', $resident->nik)->first();
                 
                 if (!$existingUser) {
-                   //mencari di table role
-                   $role = Role::where('leveluser', 'user')->first();
-                   
+                    // mencari di table role
+                    $role = Role::where('leveluser', 'user')->first();
+                    
                     // Generate custom ID untuk user
                     $usercustomId = User::generateCustomId();
 
-                    // Buat user baru
-                    $user = User::create([
-                        'custom_id' => $usercustomId,
-                        'username' => $resident->username,
-                        'password' => Hash::make('user123'), // Gunakan Hash untuk password
-                        'transaksi_custom_id' => $transaction->custom_id,
-                        'roles_custom_id' => $role->custom_id,
-                    ]); 
-                }
-            }
+                        $token = null;
+                        // Buat user baru
+                        $user = User::create([
+                            'custom_id' => $usercustomId,
+                            'nik'       => $resident->nik,
+                            'username'  => $resident->username,
+                            'password'  => Hash::make('user123'), // Gunakan Hash untuk password
+                            'transaksi_custom_id' => $transaction->custom_id,
+                            'roles_custom_id' => $role->custom_id,
+                        ]); 
+                        
+                    // Buat token untuk user
+                    $token = $user->createToken('auth_token')->plainTextToken;
 
-            // Commit transaksi
-            DB::commit();
+                        }else  {
+                        // Jika user sudah ada, buat token baru
+                        $token = $existingUser->createToken('auth_token')->plainTextToken;
+                    }   
+                    // Kirim email notifikasi untuk ISF002
+                    if ($resident->email) {
+                        Mail::to($resident->email)->send(
+                            new TransactionStatusNotificationMail(
+                                'ISF002', 
+                                $resident, 
+                                'silahkan datang dan melihat tunggu 7 hari'
+                            )
+                        );
+                    }
+                    
+                }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+                    
+                    $transaction->update([
+                            'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                            'keterangan' => $request->input('keterangan'),
+                        ]);
 
-            // Reload transaksi untuk memastikan data terbaru
-            $transaction->refresh();
+                                // Kirim email notifikasi untuk ISF003
+                    if ($resident->email) {
+                        Mail::to($resident->email)->send(
+                            new TransactionStatusNotificationMail(
+                                'ISF003', 
+                                $resident, 
+                                $request->input('keterangan')
+                            )
+                        );
+                    }
 
-            // Kembalikan pengguna sebagai resource
-            return new TransactionStatusFormResource($transaction);
+                        // Dispatch job untuk menghapus transaksi setelah 1 jam
+                        DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
+                    }
+                
 
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Transaction not found'
-            ], 404);
+
+                // Commit transaksi
+                DB::commit();
+
+                // Reload transaksi untuk memastikan data terbaru
+                $transaction->refresh();
+
+                return response()->json([
+                    'transaction' => new TransactionStatusFormResource($transaction),
+                    'token' => $token ?? null,
+                    'message' => 'Transaction status updated successfully'
+                ]);
+
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error updating transaction',

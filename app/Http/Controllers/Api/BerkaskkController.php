@@ -40,52 +40,37 @@ class BerkaskkController extends Controller
         ], 500);
     }
 }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $nik)
-    {
-          // Temukan pengguna berdasarkan NIK (gunakan where jika NIK bukan primary key)
-    $berkaskk = BerkasKk::latest()->with('resident')->where('nik', $nik)->select(['nik','file_name','file_path'])->first();
+   public function show($nik)
+{
+  try {
+        $berkaskk = BerkasKk::where('nik', $nik)
+            ->select(['nik', 'file_name', 'file_path'])
+            ->first();
 
-       // Log data yang ditemukan atau tidak
-    Log::info('Data Berkas KK:', ['data' => $berkaskk]);
-    
-    // Periksa apakah pengguna ditemukan
-    if (!$berkaskk) {
-        return response()->json(['message' => 'berkaskk not found'], 404);
+        if (!$berkaskk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+
+        return new BerkaskkResource(true, 'Data ditemukan', $berkaskk);
+
+    } catch (\Exception $e) {
+        Log::error('Error in show method: ' . $e->getMessage());
+        
+        return response()->json([
+            'success' => false,
+            'message' => 'Terjadi kesalahan',
+            'error' => $e->getMessage()
+        ], 500);
     }
-
-    // Ambil URL file
-   $fileUrl = Storage::exists($berkaskk->file_path) ? Storage::url($berkaskk->file_path) : null;
-
-     // Gabungkan data `berkaskk` dan `fileUrl` dalam satu array
-    $data = [
-        'nik' => $berkaskk->nik,
-        'file_name' => $berkaskk->file_name,
-        'file_path' => $fileUrl,
-    
-    ];
-
-    // Kirim data gabungan ke BerkaskkResource
-    return new BerkaskkResource(true, 'Detail Data Resident!', (object) $data);
-    }
+}
 
     /**
      * Show the form for editing the specified resource.

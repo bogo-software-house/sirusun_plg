@@ -21,7 +21,7 @@ class BerkasKk extends Model
     // Relasi dengan model Resident
     public function resident(): BelongsTo
     {
-        return $this->BelongsTo(Resident::class, 'nik', 'nik');
+        return $this->BelongsTo(BerkasKk::class, 'nik', 'nik');
     }
 
   

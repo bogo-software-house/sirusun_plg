@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Unit_number;
+use App\Models\UnitNumber;
 use App\Http\Resources\UnitnumberResource;
 use Illuminate\Support\Facades\Validator;
 

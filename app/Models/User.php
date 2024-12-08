@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
+use App\Models\TransactionRoom;
+use Laravel\Sanctum\HasApiTokens; // Tambahkan ini
+
 
 class User extends Authenticatable
 {
    protected $table = 'users'; // Nama tabel jika berbeda
-    protected $primaryKey = 'nik'; // Menggunakan kolom nik sebagai kunci utama
-    public $incrementing = false; // Jika nik bukan auto-incrementing
-    protected $keyType = 'biginteger'; // Tipe kunci jika nik adalah string
+   
 
-    use HasFactory, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,15 +28,31 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'custom_id',
+        'nik',
         'username',
         'password',
         'transaksi_custom_id',
         'roles_custom_id',
     ];
 
+    protected $hidden = [
+    'password',
+    'remember_token',
+];
+
     public function role(): BelongsTo
     {
         return $this->BelongsTo(Role::class, 'roles_custom_id', 'custom_id');
+    }
+
+   // Method untuk memeriksa role
+    public function hasRole($roles)
+    {
+        // Pastikan $roles adalah array
+        $roles = is_array($roles) ? $roles : func_get_args();
+
+        // Periksa apakah role pengguna ada dan cocok dengan role yang diizinkan
+        return $this->role && in_array($this->role->leveluser, $roles);
     }
 
        // Metode untuk menghasilkan ID kustom
@@ -64,5 +82,10 @@ class User extends Authenticatable
     }
 
     return $newCustomId; // Kembalikan ID baru yang unik
+    }
+
+    public function transactionRoom(): HasOne
+    {
+        return $this->hasOne(TransactionRoom::class, 'users_custom_id', 'custom_id');
     }
 }
