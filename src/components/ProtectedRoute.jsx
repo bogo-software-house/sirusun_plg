@@ -1,13 +1,17 @@
-// ProtectedRoute.js
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
+  const { token, role, loading } = useContext(AuthContext);
 
+  // Tampilkan loading jika data belum siap
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Jika token atau role tidak valid, arahkan ke halaman login admin
   if (!token || role !== "admin") {
-    // Jika tidak ada token atau role bukan admin, redirect ke login
     return <Navigate to="/loginadmin" />;
   }
 

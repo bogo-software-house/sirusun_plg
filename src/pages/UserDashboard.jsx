@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "kamar", href: "#", icon: HomeIcon, current: true },
-  { name: "Tunggakan", href: "#", icon: UsersIcon, current: false },
+  { name: "profil", href: "#", icon: UsersIcon, current: true },
   { name: "Fasilitas", href: "#", icon: ChartPieIcon, current: false },
   { name: "Profil", href: "#", icon: ChartPieIcon, current: false },
 ];
@@ -147,6 +147,7 @@ export default function UserDashboard() {
           </div>
 
           <main className="py-10">
+
             <div className="px-4 sm:px-6 lg:px-8">
               <h1 className="text-xl font-semibold text-gray-900">Selamat Datang, {username}</h1>
               <div className="transaction-table">
@@ -193,6 +194,7 @@ export default function UserDashboard() {
               </div>
             </div>
           </main>
+          
         </div>
       </div>
     </>
