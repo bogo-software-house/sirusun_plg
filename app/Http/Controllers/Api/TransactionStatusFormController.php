@@ -131,7 +131,7 @@ class TransactionStatusFormController extends Controller
                     if ($resident->email) {
                         Mail::to($resident->email)->send(
                             new TransactionStatusNotificationMail(
-                                'ISF002', 
+                                'DITERIMA', 
                                 $resident, 
                                 'silahkan datang dan melihat tunggu 7 hari'
                             )
@@ -149,7 +149,7 @@ class TransactionStatusFormController extends Controller
                     if ($resident->email) {
                         Mail::to($resident->email)->send(
                             new TransactionStatusNotificationMail(
-                                'ISF003', 
+                                'DITOLAK', 
                                 $resident, 
                                 $request->input('keterangan')
                             )

@@ -46,7 +46,7 @@ class TransactionStatusNotificationMail extends Mailable
             view: 'emails.transaction_status_notification',
             with: [
                 'status' => $this->status,
-                'residentName' => $this->resident->name,
+                'residentName' => $this->resident->username,
                 'keterangan' => $this->keterangan
             ]
         );
