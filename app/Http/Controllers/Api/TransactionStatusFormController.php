@@ -172,6 +172,8 @@ class TransactionStatusFormController extends Controller
                     'transaction' => new TransactionStatusFormResource($transaction),
                     'token' => $token ?? null,
                     'message' => 'Transaction status updated successfully'
+                    'email' => 'terkirim! ke '. $resident->email,
+
                 ]);
 
         } catch (\Exception $e) {
