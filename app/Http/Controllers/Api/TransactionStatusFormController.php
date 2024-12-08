@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 use App\Models\Resident;
 use App\Models\TransactionStatusForm;
 use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
+use App\Mail\TransactionStatusNotificationMail;
 use App\Jobs\DeleteTransactionStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
 use App\Http\Resources\TransactionStatusFormShowResource;
@@ -60,112 +61,112 @@ class TransactionStatusFormController extends Controller
 
     DB::beginTransaction();
     try {
-        // Temukan transaksi berdasarkan form custom ID
-        $transaction = TransactionStatusForm::with(['residentPdf', 'statusForm'])
-            ->where('form_custom_id', $formcustomId)
-            ->firstOrFail();
+            // Temukan transaksi berdasarkan form custom ID
+            $transaction = TransactionStatusForm::with(['residentPdf', 'statusForm'])
+                ->where('form_custom_id', $formcustomId)
+                ->firstOrFail();
 
-        // Validasi relasi
-        if (!$transaction->residentPdf) {
-            throw new \Exception('Resident PDF not found');
-        }
+            // Validasi relasi
+            if (!$transaction->residentPdf) {
+                throw new \Exception('Resident PDF not found');
+            }
 
-        // Ambil NIK dari resident PDF
-        $nik = $transaction->residentPdf->nik;
+            // Ambil NIK dari resident PDF
+            $nik = $transaction->residentPdf->nik;
 
-        // Ambil data resident berdasarkan NIK
-        $resident = Resident::where('nik', $nik)->first();
-        
-        // Validasi resident
-        if (!$resident) {
-            throw new \Exception('Resident not found');
-        }
-
-
-            // Cek apakah status form adalah ISF002
-            if ($request->input('statusForm_custom_id') === 'ISF002') {
-
-                
-                  // Update status form
-            $transaction->update([
-                'statusForm_custom_id' => $request->input('statusForm_custom_id'),
-                'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
-            ]); 
-
-            // Cek apakah user sudah ada
-            $existingUser = User::where('nik', $resident->nik)->first();
+            // Ambil data resident berdasarkan NIK
+            $resident = Resident::where('nik', $nik)->first();
             
-            if (!$existingUser) {
-                // mencari di table role
-                $role = Role::where('leveluser', 'user')->first();
-                
-                // Generate custom ID untuk user
-                $usercustomId = User::generateCustomId();
+            // Validasi resident
+            if (!$resident) {
+                throw new \Exception('Resident not found');
+            }
 
-                    $token = null;
-                    // Buat user baru
-                    $user = User::create([
-                        'custom_id' => $usercustomId,
-                        'nik'       => $resident->nik,
-                        'username'  => $resident->username,
-                        'password'  => Hash::make('user123'), // Gunakan Hash untuk password
-                        'transaksi_custom_id' => $transaction->custom_id,
-                        'roles_custom_id' => $role->custom_id,
-                    ]); 
+
+                // Cek apakah status form adalah ISF002
+                if ($request->input('statusForm_custom_id') === 'ISF002') {
+
                     
-                // Buat token untuk user
-                $token = $user->createToken('auth_token')->plainTextToken;
-
-                    }else  {
-                    // Jika user sudah ada, buat token baru
-                    $token = $existingUser->createToken('auth_token')->plainTextToken;
-                 }   
-                 // Kirim email notifikasi untuk ISF002
-                if ($resident->email) {
-                    Mail::to($resident->email)->send(
-                        new TransactionStatusNotificationMail(
-                            'ISF002', 
-                            $resident, 
-                            'silahkan datang dan melihat tunggu 7 hari'
-                        )
-                    );
-                }
-                
-            }else if ($request->input('statusForm_custom_id') === 'ISF003') {
-                
+                    // Update status form
                 $transaction->update([
-                        'statusForm_custom_id' => $request->input('statusForm_custom_id'),
-                        'keterangan' => $request->input('keterangan'),
-                    ]);
+                    'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                    'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
+                ]); 
 
-                            // Kirim email notifikasi untuk ISF003
-                if ($resident->email) {
-                    Mail::to($resident->email)->send(
-                        new TransactionStatusNotificationMail(
-                            'ISF003', 
-                            $resident, 
-                            $request->input('keterangan')
-                        )
-                    );
-                }
+                // Cek apakah user sudah ada
+                $existingUser = User::where('nik', $resident->nik)->first();
+                
+                if (!$existingUser) {
+                    // mencari di table role
+                    $role = Role::where('leveluser', 'user')->first();
+                    
+                    // Generate custom ID untuk user
+                    $usercustomId = User::generateCustomId();
 
-                    // Dispatch job untuk menghapus transaksi setelah 1 jam
-                    DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
-                }
-            
+                        $token = null;
+                        // Buat user baru
+                        $user = User::create([
+                            'custom_id' => $usercustomId,
+                            'nik'       => $resident->nik,
+                            'username'  => $resident->username,
+                            'password'  => Hash::make('user123'), // Gunakan Hash untuk password
+                            'transaksi_custom_id' => $transaction->custom_id,
+                            'roles_custom_id' => $role->custom_id,
+                        ]); 
+                        
+                    // Buat token untuk user
+                    $token = $user->createToken('auth_token')->plainTextToken;
+
+                        }else  {
+                        // Jika user sudah ada, buat token baru
+                        $token = $existingUser->createToken('auth_token')->plainTextToken;
+                    }   
+                    // Kirim email notifikasi untuk ISF002
+                    if ($resident->email) {
+                        Mail::to($resident->email)->send(
+                            new TransactionStatusNotificationMail(
+                                'ISF002', 
+                                $resident, 
+                                'silahkan datang dan melihat tunggu 7 hari'
+                            )
+                        );
+                    }
+                    
+                }else if ($request->input('statusForm_custom_id') === 'ISF003') {
+                    
+                    $transaction->update([
+                            'statusForm_custom_id' => $request->input('statusForm_custom_id'),
+                            'keterangan' => $request->input('keterangan'),
+                        ]);
+
+                                // Kirim email notifikasi untuk ISF003
+                    if ($resident->email) {
+                        Mail::to($resident->email)->send(
+                            new TransactionStatusNotificationMail(
+                                'ISF003', 
+                                $resident, 
+                                $request->input('keterangan')
+                            )
+                        );
+                    }
+
+                        // Dispatch job untuk menghapus transaksi setelah 1 jam
+                        DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
+                    }
+                
 
 
-        // Commit transaksi
-        DB::commit();
+                // Commit transaksi
+                DB::commit();
 
-        // Reload transaksi untuk memastikan data terbaru
-        $transaction->refresh();
+                // Reload transaksi untuk memastikan data terbaru
+                $transaction->refresh();
 
-        return response()->json([
-            'transaction' => new TransactionStatusFormResource($transaction),
-            'token' => $token ?? null,
-            'message' => 'Transaction status updated successfully'
-        ]);
+                return response()->json([
+                    'transaction' => new TransactionStatusFormResource($transaction),
+                    'token' => $token ?? null,
+                    'message' => 'Transaction status updated successfully'
+                ]);
 
         } catch (\Exception $e) {
             return response()->json([

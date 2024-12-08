@@ -110,7 +110,6 @@ class RusunController extends Controller
 
                 $response = [
                 'rusun' => $rusun->nama_rusun,
-
                 'alamat' => $rusun->alamat,
                 'luas' => $rusun->luas,
                 'fasilitas' => $rusun->fasilitas,
