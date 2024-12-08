@@ -171,8 +171,8 @@ class TransactionStatusFormController extends Controller
                 return response()->json([
                     'transaction' => new TransactionStatusFormResource($transaction),
                     'token' => $token ?? null,
-                    'message' => 'Transaction status updated successfully'
-                    'email' => 'terkirim! ke '. $resident->email,
+                    'message' => 'Transaction status updated successfully',
+                    'email' => 'terkirim! ke ' . $resident->email,
 
                 ]);
 
