@@ -25,15 +25,22 @@ class TransactionStatusFormController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+       public function index()
     {
-        //
+          $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->Latest()->get();
+        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
     }
 
  
-    public function show(string $id)
+    public function show(string $formcustomId)
     {
-        //
+        $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])
+        ->whereHas('residentPdf', function ($query) use ($formcustomId) {
+        $query->where('nik', $formcustomId);
+        })->Latest()->get();
+
+            
+        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
     }
 
    
@@ -82,7 +89,6 @@ class TransactionStatusFormController extends Controller
                 throw new \Exception('Resident not found');
             }
 
-
                 // Cek apakah status form adalah ISF002
                 if ($request->input('statusForm_custom_id') === 'ISF002') {
 
@@ -120,7 +126,7 @@ class TransactionStatusFormController extends Controller
                         }else  {
                         // Jika user sudah ada, buat token baru
                         $token = $existingUser->createToken('auth_token')->plainTextToken;
-                    }   
+                       }   
                     // Kirim email notifikasi untuk ISF002
                     if ($resident->email) {
                         Mail::to($resident->email)->send(
