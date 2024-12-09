@@ -88,4 +88,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(TransactionRoom::class, 'users_custom_id', 'custom_id');
     }
+    public function transactionRoomnik(): HasOne
+    {
+        return $this->hasOne(TransactionRoom::class, 'nik', 'nik');
+    }
 }

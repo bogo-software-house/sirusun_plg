@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\TransactionRoom;
 use App\Models\Room;
+use App\Models\User;
 use App\Http\Resources\TransactionRoomResource;
 class TransactionRoomController extends Controller
 {
@@ -15,7 +16,7 @@ class TransactionRoomController extends Controller
      */
     public function index()
     {
-       $transactionRoom = TransactionRoom::with(['user','room.unitNumber','room.priceTag.price','room.priceTag.bloks'])->Latest()->get();
+       $transactionRoom = TransactionRoom::with(['user','usernik','room.unitNumber','room.priceTag.price','room.priceTag.bloks'])->Latest()->get();
 
        return TransactionRoomResource::collection($transactionRoom);
     }
@@ -27,21 +28,28 @@ class TransactionRoomController extends Controller
     {
          // Define validation rules
         $validator = Validator::make($request->all(), [
-        'users_custom_id'              => 'required|exists:users,custom_id',
+        'nik'                          => 'required|exists:users,nik',
         'rooms_custom_id'              => 'required|exists:rooms,custom_id',
         ]);
+
+
 
         // Check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        try {
+
+         $user_custom_id =  User::where('nik', $request->nik)->first();
+       
+         
+         try {
             //pembuatan custom id transaksi
             $customId = TransactionRoom::generateCustomId();
 
             $transactionRoom = TransactionRoom::create([
                 'custom_id' => $customId,
-                'users_custom_id' => $request->users_custom_id,
+                'nik' => $request->nik,
+                'users_custom_id' => $user_custom_id->custom_id,
                 'rooms_custom_id' => $request->rooms_custom_id,
             ]);
 
@@ -72,7 +80,7 @@ class TransactionRoomController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
 
@@ -90,5 +98,11 @@ class TransactionRoomController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function shownik()
+    {
+       
     }
 }

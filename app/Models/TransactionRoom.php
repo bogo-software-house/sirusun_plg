@@ -46,6 +46,7 @@ class TransactionRoom extends Model
         'custom_id',
         'users_custom_id',
         'rooms_custom_id',
+        'nik',
     ];
         
          
@@ -53,6 +54,10 @@ class TransactionRoom extends Model
         public function user(): BelongsTo
         {
             return $this->belongsTo(User::class, 'users_custom_id', 'custom_id');
+        }
+        public function usernik(): BelongsTo
+        {
+            return $this->belongsTo(User::class, 'nik', 'nik');
         }
         public function room(): BelongsTo
         {

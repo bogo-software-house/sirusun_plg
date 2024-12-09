@@ -12,6 +12,7 @@ class TransactionRoomResource extends JsonResource
     {
         return  [ 
             'custom_id' => $this->custom_id,
+            'nik' => $this->user ? $this->user->nik : null,
             'user' => $this->user ? $this->user->username : null,
             'kamar' => [
            'no' => $this->room && $this->room->UnitNumber ? $this->room->UnitNumber->no_unit : null,

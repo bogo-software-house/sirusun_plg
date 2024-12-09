@@ -28,17 +28,16 @@ class RoomsController extends Controller
         'damageRoomdinding.condition',
         'damageRoominstalasiair.condition',
         'damageRoominstalasilistrik.condition'
-        ])->Latest()->get();
+        ])->orderBy('custom_id', 'asc') // Urutkan berdasarkan custom_id secara ascending
+    ->get(); ;
+        // Periksa apakah pengguna ditemukan
+        if (!$rooms) {
+            return response()->json(['message' => 'Room not found'], 404);
+        }
         return RoomsResource::collection($rooms);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-    }
-
+    
     /**
      * Display the specified resource.
      */
