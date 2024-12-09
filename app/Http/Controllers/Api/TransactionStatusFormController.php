@@ -157,7 +157,7 @@ class TransactionStatusFormController extends Controller
                     }
 
                         // Dispatch job untuk menghapus transaksi setelah 1 jam
-                        DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addHour());
+                        DeleteTransactionStatusFormData::dispatch($transaction->id)->delay(now()->addMinute());
                     }
                 
 

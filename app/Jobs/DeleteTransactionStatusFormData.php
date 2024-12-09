@@ -20,7 +20,8 @@ class DeleteTransactionStatusFormData implements ShouldQueue
     {
         $this->formCustomId = $formCustomId;
     }
-
+    public $timeout = 120; // waktu dalam detik
+    
     public function handle()
     {
         // Temukan transaksi berdasarkan form_custom_id

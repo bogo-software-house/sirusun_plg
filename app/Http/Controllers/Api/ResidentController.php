@@ -72,7 +72,7 @@ class ResidentController extends Controller
         'berkas_kk'                 => 'required|file|mimes:pdf',
         'berkas_ktp'                => 'required|file|mimes:pdf',
         'berkas_salary'             => 'required|file|mimes:pdf',
-        'email'                     => 'required|email|unique:residents,email',
+        'email'                     => 'required|email|unique:residents,email|regex:/^[^@]+@gmail\.com$/i',
         ]);
 
         // Check if validation fails
@@ -119,7 +119,7 @@ class ResidentController extends Controller
                 $salaryFile = $request->file('berkas_salary');
                 $salaryPath = $kkFile->store('berkas_salary', 'public');
 
-             $berkasKk = BerkasSalary::create([
+             $berkasSalary = BerkasSalary::create([
                     'nik' => $resident->nik,
                     'file_name' => $salaryFile->getClientOriginalName(),
                     'file_path' => $salaryPath,
