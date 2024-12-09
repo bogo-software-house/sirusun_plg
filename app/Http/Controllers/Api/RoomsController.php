@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\Rusun;
 use App\Http\Resources\RoomsResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -109,6 +110,69 @@ class RoomsController extends Controller
         return new RoomsResource(true, 'Data Status berhasil dihapus!', null);
     }
     
+  public function showAllRoomFromRusun(string $rusun_custom_id)
+    {
+         // Temukan rusun berdasarkan custom_id
+                $rusun = Rusun::where('custom_id', $rusun_custom_id)->first();
+                
+                if (!$rusun) {
+                    return response()->json(['message' => 'Rusun not found'], 404);
+                }
+
+        // Temukan pengguna berdasarkan ID Status
+        $rooms = Room::with([
+        'unitNumber',
+        'status',
+        'priceTag.rusuns',
+        'priceTag.bloks',
+        'priceTag.price',
+        ])
+        ->whereHas('priceTag', function($query) use ($rusun) {
+                    $query->where('rusuns_custom_id', $rusun->custom_id);
+                })->get();
+
+        // Periksa apakah kamar  ditemukan
+                if ($rooms->isEmpty()) {
+                    return response()->json(['message' => 'No rooms found'], 404);
+                }
+            // Kelompokkan kamar berdasarkan blok
+                $blokRooms = $rooms->groupBy(function($room) {
+                    return $room->priceTag->bloks->blok;
+                });
+
+                $response = [
+                'rusun' => $rusun->nama_rusun,
+                'alamat' => $rusun->alamat,
+                'luas' => $rusun->luas,
+                'fasilitas' => $rusun->fasilitas,
+                'tahun' => $rusun->tahun_pembangunan,
+                'blok' => $rusun->blok,
+                'lantai' => $rusun->lantai,
+                'bloks' => $blokRooms->map(function($rooms, $blok)  {
+                    // Kelompokkan per lantai dalam blok
+                    $lantaiRooms = $rooms->groupBy(function($room) {
+                        return $room->priceTag->floors->floor; // Asumsikan ada relasi ke lantai
+                    });
+                    return [
+                        'blok' => $blok,
+                        'lantai' => $lantaiRooms->map(function($roomsPerLantai, $lantai) {
+                            return [
+                                'lantai' => $lantai,
+                               'kamar' => $roomsPerLantai->map(function ($room) {
+                                return [
+                                    'no_unit' => $room->UnitNumber->no_unit,
+                                    'harga' => $room->priceTag->price->price,
+                                    'status' => $room->status->status, 
+                                    ];
+                              })->values()
+                            ];
+                        })->values()
+                    ];
+                })->values()
+            ];
+
+        return response()->json($response);
+    }
     
     
 }
