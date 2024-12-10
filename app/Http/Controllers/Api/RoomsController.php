@@ -155,7 +155,6 @@ class RoomsController extends Controller
                                'kamar' => $roomsPerLantai->map(function ($room) {
                                 return [
                                     'no_unit' => $room->UnitNumber->no_unit,
-                                    'harga' => $room->priceTag->price->price,
                                     'status' => $room->status->status, 
                                     ];
                               })->values()
