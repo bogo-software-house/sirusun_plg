@@ -142,12 +142,6 @@ class RoomsController extends Controller
 
                 $response = [
                 'rusun' => $rusun->nama_rusun,
-                'alamat' => $rusun->alamat,
-                'luas' => $rusun->luas,
-                'fasilitas' => $rusun->fasilitas,
-                'tahun' => $rusun->tahun_pembangunan,
-                'blok' => $rusun->blok,
-                'lantai' => $rusun->lantai,
                 'bloks' => $blokRooms->map(function($rooms, $blok)  {
                     // Kelompokkan per lantai dalam blok
                     $lantaiRooms = $rooms->groupBy(function($room) {
