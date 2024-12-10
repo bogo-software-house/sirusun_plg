@@ -13,11 +13,20 @@ class TransactionRoomResource extends JsonResource
         return  [ 
             'custom_id' => $this->custom_id,
             'nik' => $this->user ? $this->user->nik : null,
-            'user' => $this->user ? $this->user->username : null,
+            'data_user' => [
+           'nama' => $this->user ? $this->user->username : null,
+           'no_telp' =>$this->user && $this->user->transactionstatusform && $this->user->transactionstatusform->residentPdf && $this->user->transactionstatusform->residentPdf->resident 
+                ? $this->user->transactionstatusform->residentPdf->resident->no_telp 
+                : null,
+           'email' => $this->user && $this->user->transactionstatusform && $this->user->transactionstatusform->residentPdf && $this->user->transactionstatusform->residentPdf->resident 
+                ? $this->user->transactionstatusform->residentPdf->resident->email 
+                : null,
+            ],
+            'rusun' => $this->room && $this->room->priceTag->rusuns ? $this->room->priceTag->rusuns->nama_rusun : null,
             'kamar' => [
-           'no' => $this->room && $this->room->UnitNumber ? $this->room->UnitNumber->no_unit : null,
-           'blog' => $this->room && $this->room->priceTag->bloks ? $this->room->priceTag->bloks->blok : null,
-           'price' => $this->room && $this->room->priceTag->price ? $this->room->priceTag->price->price : null,
+                'lantai' => $this->room && $this->room->priceTag->floors ? $this->room->priceTag->floors->floor : null,
+                'blog' => $this->room && $this->room->priceTag->bloks ? $this->room->priceTag->bloks->blok : null,
+                'no' => $this->room && $this->room->UnitNumber ? $this->room->UnitNumber->no_unit : null,
            ]
         ];
     }

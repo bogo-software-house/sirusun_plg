@@ -16,7 +16,7 @@ class TransactionRoomController extends Controller
      */
     public function index()
     {
-       $transactionRoom = TransactionRoom::with(['user','usernik','room.unitNumber','room.priceTag.price','room.priceTag.bloks'])->Latest()->get();
+       $transactionRoom = TransactionRoom::with(['user.transactionstatusform.residentPdf.resident','user','usernik','room.unitNumber','room.priceTag.price','room.priceTag.bloks'])->Latest()->get();
 
        return TransactionRoomResource::collection($transactionRoom);
     }
@@ -28,8 +28,8 @@ class TransactionRoomController extends Controller
     {
          // Define validation rules
         $validator = Validator::make($request->all(), [
-        'nik'                          => 'required|exists:users,nik',
-        'rooms_custom_id'              => 'required|exists:rooms,custom_id',
+        'nik'                          => 'required|exists:users,nik|unique:transaction_rooms,nik',
+        'rooms_custom_id'              => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
         ]);
 
 
@@ -39,9 +39,21 @@ class TransactionRoomController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-         $user_custom_id =  User::where('nik', $request->nik)->first();
-       
-         
+        $user_custom_id = User::where('nik', $request->nik)->first();
+
+    // Periksa apakah TransactionRoom dengan users_custom_id yang sama sudah ada
+    $existingTransaction = TransactionRoom::where('users_custom_id', $user_custom_id->custom_id)->first();
+
+    if ($existingTransaction) {
+        // Jika TransactionRoom dengan users_custom_id yang sama sudah ada, 
+        // tampilkan pesan error atau tangani sesuai kebutuhan
+        return response()->json([
+            'success' => false,
+            'message' => 'Transaksi untuk penghuni ini sudah ada.'
+        ], 422); 
+    } else {
+        // Jika belum ada TransactionRoom dengan users_custom_id yang sama, 
+    // lanjutkan dengan membuat TransactionRoom   
          try {
             //pembuatan custom id transaksi
             $customId = TransactionRoom::generateCustomId();
@@ -74,6 +86,7 @@ class TransactionRoomController extends Controller
 
 
     }
+}
 
     /**
      * Display the specified resource.

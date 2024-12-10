@@ -26,6 +26,11 @@ class TransactionStatusForm extends Model
         return $this->belongsTo(ResidentPdf::class, 'form_custom_id', 'custom_id');
     }
 
+    public function user(): HasOne
+    {
+        return $this->hasOne(user::class, 'transaksi_custom_id', 'custom_id');
+    }
+
       // Metode untuk menghasilkan ID kustom
     public static function generateCustomId()
     {

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Role;
 use App\Models\TransactionRoom;
+use App\Models\TransactionStatusForm;
 use Laravel\Sanctum\HasApiTokens; // Tambahkan ini
 
 
@@ -91,5 +92,9 @@ class User extends Authenticatable
     public function transactionRoomnik(): HasOne
     {
         return $this->hasOne(TransactionRoom::class, 'nik', 'nik');
+    }
+    public function transactionstatusform(): BelongsTo
+    {
+        return $this->belongsTo(TransactionStatusForm::class, 'transaksi_custom_id', 'custom_id');
     }
 }
