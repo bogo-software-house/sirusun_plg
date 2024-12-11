@@ -14,6 +14,7 @@ class RoomsResource extends JsonResource
             'unit_number' => $this->UnitNumber ? $this->UnitNumber->no_unit : null,
             'rusun' => $this->priceTag && $this->priceTag->rusuns ? $this->priceTag->rusuns->nama_rusun : null,
             'blok' => $this->priceTag && $this->priceTag->bloks ? $this->priceTag->bloks->blok : null,
+            'lantai' => $this->priceTag && $this->priceTag->floors ? $this->priceTag->floors->floor : null,
             'price' => $this->priceTag && $this->priceTag->price ? $this->priceTag->price->price : null,
             'status' => $this->status ? $this->status->status : null,
             'kondisi' => [
