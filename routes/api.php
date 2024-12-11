@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Kernel;
 use App\Http\Controllers\Api\UserController; 
 use App\Http\Controllers\Api\RoomsController; 
+use App\Http\Controllers\Api\ReportRoomController; 
 
 //posts
 Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
@@ -103,4 +104,7 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
 
         //pemanggilan kamar untuk pemilihan di admin
-           Route::get('/pengambilan-data-kamar/{id}', [RoomsController::class,'showAllRoomFromRusun']);  
+        Route::get('/pengambilan-data-kamar/{id}', [RoomsController::class,'showAllRoomFromRusun']);  
+        
+        //report kondisi kamar di admin
+        Route::get('/report-kamar', [ReportRoomController::class,'indextahun']);  
