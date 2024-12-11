@@ -97,8 +97,8 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         });
         
     });
-    //update status transaction
 
+        //update status transaction
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
         //transaksi rooms
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
