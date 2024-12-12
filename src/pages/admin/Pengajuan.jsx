@@ -5,9 +5,8 @@ const Pengajuan = () => {
   const [transactionData, setTransactionData] = useState([]);
   const [statusOptions, setStatusOptions] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [updating, setUpdating] = useState(false);
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
@@ -16,9 +15,11 @@ const Pengajuan = () => {
   }, []);
 
   const fetchTransactionData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/transactions");
-      setTransactionData(response.data?.data || []);
+      const data = response.data?.data || [];
+      setTransactionData(data);
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -45,28 +46,26 @@ const Pengajuan = () => {
       return;
     }
 
-    setUpdating(true);
     try {
-      const formcustomId = transactionData.find((transaction) => transaction.id === transactionId)?.form_custom_id;
+      const formCustomId = transactionData.find((transaction) => transaction.id === transactionId)?.form_custom_id;
 
-      if (!formcustomId) {
+      if (!formCustomId) {
         setError("Form Custom ID not found for this transaction.");
         return;
       }
 
-      await axios.patch(`http://127.0.0.1:8000/api/transactions/${formcustomId}`, {
+      await axios.patch(`http://127.0.0.1:8000/api/transactions/${formCustomId}`, {
         statusForm_custom_id: statusFormCustomId,
       });
 
-      fetchTransactionData();
       setNotification({ type: "success", message: "Status berhasil diperbarui!" });
       setTimeout(() => setNotification(null), 3000);
+
+      fetchTransactionData();
     } catch (err) {
       console.error(err);
       setNotification({ type: "error", message: "Error updating status. Please try again later." });
       setTimeout(() => setNotification(null), 3000);
-    } finally {
-      setUpdating(false);
     }
   };
 
@@ -86,13 +85,18 @@ const Pengajuan = () => {
   }
 
   return (
-    <div className="transaction-table">
+    <div className="transaction-table text-black">
       <h2>Transaction Status Table</h2>
 
       {notification && (
         <div
           className={`notification ${notification.type}`}
-          style={{ padding: "10px", marginBottom: "15px", backgroundColor: notification.type === "success" ? "green" : "red", color: "white" }}
+          style={{
+            padding: "10px",
+            marginBottom: "15px",
+            backgroundColor: notification.type === "success" ? "green" : "red",
+            color: "white",
+          }}
         >
           {notification.message}
         </div>
@@ -109,7 +113,7 @@ const Pengajuan = () => {
             <th>Update Status</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="bg-white divide-y divide-gray-200 text-black">
           {transactionData.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.resident_pdf?.resident?.nik || "N/A"}</td>
@@ -126,11 +130,7 @@ const Pengajuan = () => {
                 )}
               </td>
               <td>
-                <select
-                  onChange={(e) => handleStatusChange(transaction.id, e.target.value)}
-                  value={selectedStatuses[transaction.id] || ""}
-                  disabled={updating}
-                >
+                <select onChange={(e) => handleStatusChange(transaction.id, e.target.value)} value={selectedStatuses[transaction.id] || ""}>
                   <option value="">Select Status</option>
                   {statusOptions.map((status) => (
                     <option key={status.custom_id} value={status.custom_id}>
@@ -138,9 +138,7 @@ const Pengajuan = () => {
                     </option>
                   ))}
                 </select>
-                <button onClick={() => updateStatus(transaction.id)} disabled={updating || !selectedStatuses[transaction.id]}>
-                  {updating ? "Updating..." : "Update"}
-                </button>
+                <button onClick={() => updateStatus(transaction.id)}>Update</button>
               </td>
             </tr>
           ))}

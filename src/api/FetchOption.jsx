@@ -7,6 +7,7 @@ export const useFetchOptions = () => {
   const [statusNikah, setStatusNikah] = useState([]);
   const [religions, setReligions] = useState([]);
   const [educations, setEducations] = useState([]);
+  const [salaries, setSalaries] = useState([]);
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -22,6 +23,9 @@ export const useFetchOptions = () => {
 
         const educationResponse = await axios.get("http://127.0.0.1:8000/api/educations");
         setEducations(educationResponse.data.data);
+
+        const salariesResponse = await axios.get("http://127.0.0.1:8000/api/salaries");
+        setSalaries(salariesResponse.data.data);
       } catch (error) {
         console.error("Error fetching options:", error);
       }
@@ -30,5 +34,5 @@ export const useFetchOptions = () => {
     fetchOptions();
   }, []);
 
-  return { genders, statusNikah, religions, educations };
+  return { genders, statusNikah, religions, educations, salaries };
 };

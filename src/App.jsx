@@ -45,7 +45,7 @@ function App() {
               index
               element={
                 <ProtectedRoute>
-                  <Pengajuan />
+                  <Penghuni />
                 </ProtectedRoute>
               }
             />

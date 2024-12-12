@@ -11,18 +11,22 @@ export default function Login() {
   // Logika form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error sebelum mencoba login
+    setError(""); // Reset error before trying to login
+
     try {
       const credentials = { username, password }; // Use username instead of email
       const data = await login(credentials);
 
-      // Pastikan hanya admin yang bisa login
-      if (data.role === "admin") {
-        // Menyimpan token dan role di localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.role); // Menyimpan role
+      // Log the response to ensure correct data is returned
+      console.log("Login response:", data);
 
-        // Redirect ke halaman dashboard admin
+      // Make sure only admin role is logged in
+      if (data.role === "admin") {
+        // Store token and role in localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role); // Store role
+
+        // Redirect to the admin dashboard
         navigate("/admin/dashboard");
       } else {
         setError("Only admin can access this page.");

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
-import { Link, Outlet } from "react-router-dom"; // Mengimpor Outlet
+import { Link, Outlet, useNavigate } from "react-router-dom"; // Mengimpor Outlet
 import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // Perbaikan di sini
+import AuthContext from "../context/authContext";
 
 const navigation = [
   { name: "Pengajuan", href: "/admin/dashboard/pengajuan", icon: HomeIcon, current: true },
@@ -18,7 +19,13 @@ function classNames(...classes) {
 
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { logout } = useContext(AuthContext); // Mengambil fungsi logout dari AuthContext
+  const navigate = useNavigate(); // Menggunakan useNavigate untuk navigasi setelah logout
 
+  const handleLogout = () => {
+    logout(); // Memanggil fungsi logout dari context
+    navigate("/login"); // Arahkan ke halaman login setelah logout
+  };
   return (
     <>
       <div>
@@ -97,9 +104,9 @@ export default function AdminDashboard() {
                   </ul>
                 </li>
                 <li className="mt-auto">
-                  <a href="#" className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                  <button onClick={handleLogout} className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
                     Log out
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>
@@ -132,7 +139,6 @@ export default function AdminDashboard() {
           {/* Konten Dinamis */}
           <main className="py-10">
             <div className="px-4 sm:px-6 lg:px-8">
-              {/* Menggunakan Outlet untuk merender konten berdasarkan route */}
               <Outlet />
             </div>
           </main>

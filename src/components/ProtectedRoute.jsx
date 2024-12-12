@@ -3,19 +3,18 @@ import { Navigate } from "react-router-dom";
 import AuthContext from "../context/authContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { token, role, loading } = useContext(AuthContext);
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
-  // Tampilkan loading jika data belum siap
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // Log values to check if they are correct
+  console.log("Token:", token);
+  console.log("Role:", role);
 
-  // Jika token atau role tidak valid, arahkan ke halaman login admin
   if (!token || role !== "admin") {
-    return <Navigate to="/loginadmin" />;
+    return <Navigate to="/" />; // Redirect to login if no token or role is not admin
   }
 
-  return children;
+  return children; // Render the children if the user is authenticated and has the admin role
 };
 
 export default ProtectedRoute;
