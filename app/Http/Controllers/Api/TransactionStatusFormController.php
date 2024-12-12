@@ -28,7 +28,7 @@ class TransactionStatusFormController extends Controller
        public function index()
     {
           $TransactionStatusForm = TransactionStatusForm::with(['residentPdf.resident','statusForm'])->Latest()->get();
-        return  TransactionStatusFormShowResource::collection($TransactionStatusForm);
+        return  TransactionStatusFormResource::collection($TransactionStatusForm);
     }
 
  
