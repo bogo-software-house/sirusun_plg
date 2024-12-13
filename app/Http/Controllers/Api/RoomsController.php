@@ -32,8 +32,9 @@ class RoomsController extends Controller
         'damageRoominstalasiair.condition',
         'damageRoominstalasilistrik.condition'
         ])->orderBy('custom_id', 'asc') // Urutkan berdasarkan custom_id secara ascending
-    ->get(); ;
-        // Periksa apakah pengguna ditemukan
+        ->orderBy('custom_id', 'asc') // Urutkan berdasarkan custom_id secara ascending
+        ->paginate(10); // Membatasi jumlah data per halaman menjadi 10
+   
         if (!$rooms) {
             return response()->json(['message' => 'Room not found'], 404);
         }
