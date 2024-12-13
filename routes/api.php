@@ -92,9 +92,9 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
              Route::get('/user/dashboard', function () {
                     return response()->json(['message' => 'Selamat datang di dashboard user']);
                 });
-             //users
-             Route::put('/users-update-password', [UserController::class,'updatepassword']);  
-            });
+                //users
+                Route::put('/users-update-password', [UserController::class,'updatepassword']);  
+                });
         });
         
     });
@@ -110,10 +110,11 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         //report kondisi kamar di admin
         Route::get('/report-kamar', [ReportRoomController::class,'indextahun']);  
 
-        Route::prefix('transaction-histories')->group(function () {
+                Route::prefix('transaction-histories')->group(function () {
             Route::get('/', [TransactionHistoryController::class, 'index']);
+            Route::post('/filter', [TransactionHistoryController::class, 'filter']);
             Route::get('/summary', [TransactionHistoryController::class, 'summary']);
-            Route::get('/show/{custom_id}', [TransactionHistoryController::class, 'show']);
+            Route::get('/{id}', [TransactionHistoryController::class, 'show']);
             Route::get('/model-history', [TransactionHistoryController::class, 'getModelHistory']);
             Route::delete('/cleanup', [TransactionHistoryController::class, 'cleanup']);
         });

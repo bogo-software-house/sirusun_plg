@@ -152,5 +152,9 @@ class Room extends Model
     {
         return $this->hasOne(TransactionRoom::class, 'rooms_custom_id', 'custom_id');
     }
+    public function reportRoom(): HasMany
+    {
+        return $this->hasMany(ReportRoom::class, 'rooms_custom_id', 'custom_id');
+    }
 
 }

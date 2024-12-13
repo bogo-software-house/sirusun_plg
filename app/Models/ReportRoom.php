@@ -17,4 +17,9 @@ class ReportRoom extends Model
         'kondisi_sebelumnya',
         'kondisi_setelahnya',
     ];
+
+    public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_custom_id', 'custom_id');
+    }
 }
