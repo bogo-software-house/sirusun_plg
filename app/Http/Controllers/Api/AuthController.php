@@ -23,6 +23,7 @@ class AuthController extends Controller
         // Cari user berdasarkan username
         $user = User::with([
         'role',
+        'transactionRoom.room.unitNumber',
         'transactionRoom.room.priceTag.rusuns',
         'transactionRoom.room.priceTag.bloks',
         'transactionRoom.room.priceTag.floors',
@@ -92,6 +93,7 @@ class AuthController extends Controller
     {
        $user = $request->user()->load([
         'role',
+        'transactionRoom.room.unitNumber',
         'transactionRoom.room.priceTag.rusuns',
         'transactionRoom.room.priceTag.bloks',
         'transactionRoom.room.priceTag.floors',
@@ -104,7 +106,7 @@ class AuthController extends Controller
             'rusun' => $user->transactionRoom->room->priceTag->rusuns->nama_rusun ?? null,
             'blok' => $user->transactionRoom->room->priceTag->bloks->blok ?? null,
             'lantai' => $user->transactionRoom->room->priceTag->floors->floor ?? null,
-            'no_unit' => $user->transactionRoom->room->unit_numbers_custom_id ?? null, // Ganti dengan kolom yang sesuai
+            'no_unit' => $user->transactionRoom->room->UnitNumber->no_unit ?? null, // Ganti dengan kolom yang sesuai
         ],
         'role' => $user->role->leveluser,
     ]);
