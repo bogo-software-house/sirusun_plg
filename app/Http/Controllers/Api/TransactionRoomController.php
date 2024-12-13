@@ -25,68 +25,78 @@ class TransactionRoomController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-         // Define validation rules
-        $validator = Validator::make($request->all(), [
-        'nik'                          => 'required|exists:users,nik|unique:transaction_rooms,nik',
-        'rooms_custom_id'              => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
-        ]);
+{
+    // Define validation rules
+    $validator = Validator::make($request->all(), [
+        'nik'             => 'required|exists:users,nik|unique:transaction_rooms,nik',
+        'rooms_custom_id' => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
+    ]);
 
-
-
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        $user_custom_id = User::where('nik', $request->nik)->first();
-
-    // Periksa apakah TransactionRoom dengan users_custom_id yang sama sudah ada
-    $existingTransaction = TransactionRoom::where('users_custom_id', $user_custom_id->custom_id)->first();
-
-    if ($existingTransaction) {
-        // Jika TransactionRoom dengan users_custom_id yang sama sudah ada, 
-        // tampilkan pesan error atau tangani sesuai kebutuhan
+    // Check if validation fails
+    if ($validator->fails()) {
         return response()->json([
             'success' => false,
-            'message' => 'Transaksi untuk penghuni ini sudah ada.'
-        ], 422); 
-    } else {
-        // Jika belum ada TransactionRoom dengan users_custom_id yang sama, 
-    // lanjutkan dengan membuat TransactionRoom   
-         try {
-            //pembuatan custom id transaksi
-            $customId = TransactionRoom::generateCustomId();
+            'message' => $validator->errors(),
+        ], 422);
+    }
 
-            $transactionRoom = TransactionRoom::create([
-                'custom_id' => $customId,
-                'nik' => $request->nik,
-                'users_custom_id' => $user_custom_id->custom_id,
-                'rooms_custom_id' => $request->rooms_custom_id,
-            ]);
+    try {
+        // Cari user berdasarkan NIK
+        $user_custom_id = User::where('nik', $request->nik)->first();
 
-           // Mengubah statuses_custom_id di tabel rooms menjadi IST002
+        if (!$user_custom_id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pengguna tidak ditemukan.',
+            ], 404);
+        }
+
+        // Periksa apakah transaksi sudah ada
+        $existingTransaction = TransactionRoom::where('users_custom_id', $user_custom_id->custom_id)->first();
+
+        if ($existingTransaction) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaksi untuk penghuni ini sudah ada.',
+                'error' => 'DuplicateNIK' // Add custom error code for clarity
+            ], 422);
+        }
+
+        // Buat transaksi baru
+        $customId = TransactionRoom::generateCustomId();
+
+        $transactionRoom = TransactionRoom::create([
+            'custom_id'       => $customId,
+            'nik'             => $request->nik,
+            'users_custom_id' => $user_custom_id->custom_id,
+            'rooms_custom_id' => $request->rooms_custom_id,
+        ]);
+
+        // Mengupdate status kamar menjadi IST002
         $room = Room::where('custom_id', $request->rooms_custom_id)->first();
+
         if ($room) {
             $room->statuses_custom_id = 'IST002';
             $room->save();
         }
 
-        // Mengembalikan respons sukses
-        return new TransactionRoomResource($transactionRoom);
+        // Mengembalikan respon sukses
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil disimpan.',
+            'data'    => new TransactionRoomResource($transactionRoom),
+        ], 200);
 
-        } catch (\Throwable $e) {
-           // Tangani error yang mungkin terjadi
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menambahkan transaction',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-
-
+    } catch (\Throwable $e) {
+        // Tangani error
+        return response()->json([
+            'success' => false,
+            'message' => 'Terjadi kesalahan saat menambahkan transaksi.',
+            'error'   => $e->getMessage(),
+        ], 500);
     }
 }
+
 
     /**
      * Display the specified resource.

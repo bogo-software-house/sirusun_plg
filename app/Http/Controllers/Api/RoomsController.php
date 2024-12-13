@@ -52,6 +52,7 @@ class RoomsController extends Controller
         'status',
         'priceTag.rusuns',
         'priceTag.bloks',
+        'priceTag.floors',
         'priceTag.price',
         'damageRoomlantai.condition',
         'damageRoomkusen.condition',
@@ -208,6 +209,7 @@ class RoomsController extends Controller
                                 return [
                                     'no_unit' => $room->UnitNumber->no_unit,
                                     'status' => $room->status->status, 
+                                    'custom_id' => $room->custom_id, // Pastikan ini ada
                                     ];
                               })->values()
                             ];
