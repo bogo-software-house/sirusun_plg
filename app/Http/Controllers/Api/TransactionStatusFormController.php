@@ -74,6 +74,9 @@ class TransactionStatusFormController extends Controller
                 ->where('form_custom_id', $formcustomId)
                 ->firstOrFail();
 
+                  // Store original data for history
+            $oldTransactionData = $transaction->toArray();
+            
             // Validasi relasi
             if (!$transaction->residentPdf) {
                 throw new \Exception('Resident PDF not found');
