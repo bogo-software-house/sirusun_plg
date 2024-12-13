@@ -21,7 +21,12 @@ class AuthController extends Controller
         ]);
 
         // Cari user berdasarkan username
-        $user = User::with('role')->where('username', $request->username)->orWhere('nik', $request->username)->first();
+        $user = User::with([
+        'role',
+        'transactionRoom.room.priceTag.rusuns',
+        'transactionRoom.room.priceTag.bloks',
+        'transactionRoom.room.priceTag.floors',
+        ])->where('username', $request->username)->orWhere('nik', $request->username)->first();
 
         // Periksa kredensial
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -48,13 +53,7 @@ class AuthController extends Controller
 
                         'redirect' => '/api/auth/admin-kertapati/dashboard' // URL untuk admin
                     ]);
-                // }else{
-                //       return response()->json([
-                //         'message' => 'Login admin kertapati berhasil',
-                //         'token' => $token,
-                //         'redirect' => '/api/auth/admin/dashboard' // URL untuk admin
-                //     ]);
-                // }
+
 
             } elseif ($user->role->leveluser === 'user') {
                 return response()->json([
@@ -70,12 +69,7 @@ class AuthController extends Controller
 
              return response()->json(['message' => 'Login gagal'], 401);
 
-        // return response()->json([
-        //     'user' => $user,
-        //     'token' => $token,
-        //     'role' => $user->role->leveluser
-        // ]);
-
+       
     }
 
     // Logout User
@@ -96,10 +90,23 @@ class AuthController extends Controller
     // Cek Status Autentikasi
     public function me(Request $request)
     {
-        $user = $request->user();
-        return response()->json([
-            'user' => $user,
-            'role' => $user->role
-        ]);
+       $user = $request->user()->load([
+        'role',
+        'transactionRoom.room.priceTag.rusuns',
+        'transactionRoom.room.priceTag.bloks',
+        'transactionRoom.room.priceTag.floors',
+    ]);
+
+    return response()->json([
+        'user' => [
+            'name' => $user->username,
+            'nik' => $user->nik,
+            'rusun' => $user->transactionRoom->room->priceTag->rusuns->nama_rusun ?? null,
+            'blok' => $user->transactionRoom->room->priceTag->bloks->blok ?? null,
+            'lantai' => $user->transactionRoom->room->priceTag->floors->floor ?? null,
+            'no_unit' => $user->transactionRoom->room->unit_numbers_custom_id ?? null, // Ganti dengan kolom yang sesuai
+        ],
+        'role' => $user->role->leveluser,
+    ]);
     }
 }

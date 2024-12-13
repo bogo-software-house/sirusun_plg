@@ -45,63 +45,63 @@ class ReportRoomController extends Controller
         }
 
 
-// Inisialisasi array untuk menyimpan data yang diformat
-$formattedReports = [];
+        // Inisialisasi array untuk menyimpan data yang diformat
+        $formattedReports = [];
 
-// Iterasi melalui setiap laporan
-foreach ($reports as $data) {
-    // Mengonversi JSON string menjadi array
-    $dataArraysebelum = json_decode($data->kondisi_sebelumnya, true);
-    $dataArraysetelah = json_decode($data->kondisi_setelahnya, true);
+        // Iterasi melalui setiap laporan
+        foreach ($reports as $data) {
+            // Mengonversi JSON string menjadi array
+            $dataArraysebelum = json_decode($data->kondisi_sebelumnya, true);
+            $dataArraysetelah = json_decode($data->kondisi_setelahnya, true);
 
-    // Mengelompokkan data sebelum
-    $formattedDatasebelum = [
-        "material" => [
-            "lantai" => $dataArraysebelum['lantai'],
-            "kusen" => $dataArraysebelum["kusen"],
-            "pintu" => $dataArraysebelum["pintu"],
-            "jendela" => $dataArraysebelum["jendela"],
-            "flatfond" => $dataArraysebelum["fn_flatfond"],
-            "dinding" => $dataArraysebelum["fn_dinding"]
-        ],
-        "instalasi" => [
-            "instalasi_air" => $dataArraysebelum["instalasi_air"],
-            "instalasi_listrik" => $dataArraysebelum["instalasi_listrik"]
-        ]
-    ];
+            // Mengelompokkan data sebelum
+            $formattedDatasebelum = [
+                "material" => [
+                    "lantai" => $dataArraysebelum['lantai'],
+                    "kusen" => $dataArraysebelum["kusen"],
+                    "pintu" => $dataArraysebelum["pintu"],
+                    "jendela" => $dataArraysebelum["jendela"],
+                    "flatfond" => $dataArraysebelum["fn_flatfond"],
+                    "dinding" => $dataArraysebelum["fn_dinding"]
+                ],
+                "instalasi" => [
+                    "instalasi_air" => $dataArraysebelum["instalasi_air"],
+                    "instalasi_listrik" => $dataArraysebelum["instalasi_listrik"]
+                ]
+            ];
 
-    // Mengelompokkan data setelah
-    $formattedDatasetelah = [
-        "material" => [
-            "lantai" => $dataArraysetelah["lantai"],
-            "kusen" => $dataArraysetelah["kusen"],
-            "pintu" => $dataArraysetelah["pintu"],
-            "jendela" => $dataArraysetelah["jendela"],
-            "flatfond" => $dataArraysetelah["fn_flatfond"],
-            "dinding" => $dataArraysetelah["fn_dinding"]
-        ],
-        "instalasi" => [
-            "instalasi_air" => $dataArraysetelah["instalasi_air"],
-            "instalasi_listrik" => $dataArraysetelah["instalasi_listrik"]
-        ]
-    ];
+        // Mengelompokkan data setelah
+        $formattedDatasetelah = [
+            "material" => [
+                "lantai" => $dataArraysetelah["lantai"],
+                "kusen" => $dataArraysetelah["kusen"],
+                "pintu" => $dataArraysetelah["pintu"],
+                "jendela" => $dataArraysetelah["jendela"],
+                "flatfond" => $dataArraysetelah["fn_flatfond"],
+                "dinding" => $dataArraysetelah["fn_dinding"]
+            ],
+            "instalasi" => [
+                "instalasi_air" => $dataArraysetelah["instalasi_air"],
+                "instalasi_listrik" => $dataArraysetelah["instalasi_listrik"]
+            ]
+        ];
 
-    // Menyimpan data yang diformat ke dalam array
-    $formattedReports[] = [
-        'room_custom_id' => $data->room_custom_id,
-        'bulan' => $data->bulan,
-        'tahun' => $data->tahun,
-        'sebelum' => $formattedDatasebelum,
-        'setelah' => $formattedDatasetelah
-    ];
-}
+        // Menyimpan data yang diformat ke dalam array
+        $formattedReports[] = [
+            'room_custom_id' => $data->room_custom_id,
+            'bulan' => $data->bulan,
+            'tahun' => $data->tahun,
+            'sebelum' => $formattedDatasebelum,
+            'setelah' => $formattedDatasetelah
+            ];
+        }
 
-// Return the results as a JSON response
-return response()->json([
-    'success' => true,
-    'data' => $formattedReports,
-    'message' => 'Reports retrieved successfully.'
-]);
+        // Return the results as a JSON response
+        return response()->json([
+            'success' => true,
+            'data' => $formattedReports,
+            'message' => 'Reports retrieved successfully.'
+        ]);
     }
 
     /**
