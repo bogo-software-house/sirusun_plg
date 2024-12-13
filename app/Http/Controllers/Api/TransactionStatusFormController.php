@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Models\TransactionHistory;
 use App\Models\Resident;
 use App\Models\TransactionStatusForm;
 use App\Models\ResidentPdf;
@@ -99,6 +100,18 @@ class TransactionStatusFormController extends Controller
                     'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
                 ]); 
 
+                  // Log detailed status history
+                TransactionHistory::createHistory(
+                    TransactionStatusForm::class, 
+                    $formcustomId, 
+                    'status_accepted', 
+                    $oldTransactionData, 
+                    $transaction->toArray()
+                );
+
+
+                
+                $token = null;
                 // Cek apakah user sudah ada
                 $existingUser = User::where('nik', $resident->nik)->first();
                 
@@ -109,7 +122,6 @@ class TransactionStatusFormController extends Controller
                     // Generate custom ID untuk user
                     $usercustomId = User::generateCustomId();
 
-                        $token = null;
                         // Buat user baru
                         $user = User::create([
                             'custom_id' => $usercustomId,
@@ -123,10 +135,21 @@ class TransactionStatusFormController extends Controller
                     // Buat token untuk user
                     $token = $user->createToken('auth_token')->plainTextToken;
 
+                     // Log user creation history
+                    TransactionHistory::createHistory(
+                        User::class, 
+                        $usercustomId, 
+                        'created', 
+                        null, 
+                        $user->toArray()
+                    );
+                    
                         }else  {
                         // Jika user sudah ada, buat token baru
                         $token = $existingUser->createToken('auth_token')->plainTextToken;
                        }   
+
+
                     // Kirim email notifikasi untuk ISF002
                     if ($resident->email) {
                         Mail::to($resident->email)->send(
@@ -145,6 +168,15 @@ class TransactionStatusFormController extends Controller
                             'keterangan' => $request->input('keterangan'),
                         ]);
 
+                              // Log detailed status history for rejected status
+                TransactionHistory::createHistory(
+                    TransactionStatusForm::class, 
+                    $formcustomId, 
+                    'status_rejected', 
+                    $oldTransactionData, 
+                    $transaction->toArray()
+                );
+                
                                 // Kirim email notifikasi untuk ISF003
                     if ($resident->email) {
                         Mail::to($resident->email)->send(

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Kernel;
 use App\Http\Controllers\Api\UserController; 
 use App\Http\Controllers\Api\RoomsController; 
+use App\Http\Controllers\Api\TransactionHistoryController;
 use App\Http\Controllers\Api\ReportRoomController; 
 
 //posts
@@ -108,3 +109,11 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         
         //report kondisi kamar di admin
         Route::get('/report-kamar', [ReportRoomController::class,'indextahun']);  
+
+        Route::prefix('transaction-histories')->group(function () {
+            Route::get('/', [TransactionHistoryController::class, 'index']);
+            Route::get('/summary', [TransactionHistoryController::class, 'summary']);
+            Route::get('/show/{custom_id}', [TransactionHistoryController::class, 'show']);
+            Route::get('/model-history', [TransactionHistoryController::class, 'getModelHistory']);
+            Route::delete('/cleanup', [TransactionHistoryController::class, 'cleanup']);
+        });
