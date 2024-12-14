@@ -196,6 +196,7 @@ class RoomsController extends Controller
 
                 $response = [
                 'rusun' => $rusun->nama_rusun,
+                'rusun' => $rusun->kordinat,
                 'bloks' => $blokRooms->map(function($rooms, $blok)  {
                     // Kelompokkan per lantai dalam blok
                     $lantaiRooms = $rooms->groupBy(function($room) {
