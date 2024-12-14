@@ -150,7 +150,7 @@ class RoomsController extends Controller
             'message' => 'No changes detected in the conditions.'
         ]);
     }
-        return new RoomsResource($room);
+        return new RoomsResource($rooms);
     }
 
     /**
