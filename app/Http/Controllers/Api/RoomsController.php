@@ -53,6 +53,7 @@ class RoomsController extends Controller
         'status',
         'priceTag.rusuns',
         'priceTag.bloks',
+        'priceTag.floors',
         'priceTag.price',
         'damageRoomlantai.condition',
         'damageRoomkusen.condition',
@@ -76,10 +77,11 @@ class RoomsController extends Controller
      */
     public function update(Request $request, string $custom_id) 
     {
+        
         //define validation rules
         $validator = Validator::make($request->all(), [
      //          'statuses_custom_id'  => 'sometimes|required|in:IST001,IST002',
-                'damage_rooms_lantai_custom_id' => 'sometimes|required|in:IDR001,IDR002,IDR003,IDR004',
+                'damage_rooms_lantai_custom_id' => 'sometimes|required| in:IDR001,IDR002,IDR003,IDR004',
                 'damage_rooms_kusen_custom_id' => 'sometimes|required|in:IDR005,IDR006,IDR007,IDR008',
                 'damage_rooms_pintu_custom_id' => 'sometimes|required|in:IDR009,IDR010,IDR011,IDR012',
                 'damage_rooms_jendela_custom_id' => 'sometimes|required|in:IDR0013,IDR014,IDR015,IDR016',
@@ -91,8 +93,13 @@ class RoomsController extends Controller
 
         //check if validation fails
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
         }
+        
 
         // Temukan Room berdasarkan ID Room
     $room = Room::where('custom_id', $custom_id)->first();
@@ -117,18 +124,28 @@ class RoomsController extends Controller
 
     // Update Room 
     $room->update($request->all());
+
+    $update_custom_id = $room->custom_id;
 //ambil lagi data yang baru di update 
-    $rooms = Room::where('custom_id', $custom_id)->first();
+    $rooms = Room::where('custom_id', $update_custom_id)->first();
     
     // Simpan data kondisi kamar setelah diubah ke dalam variabel
     $afterCondition = [
+            //    'lantai' => $rooms->damageRoomlantai ? $rooms->damageRoomlantai->custom_id : null,
                 'lantai' => $rooms->damageRoomlantai && $rooms->damageRoomlantai->condition ? $rooms->damageRoomlantai->condition->condition : null,
+             //   'kusen' => $rooms->damageRoomkusen ? $rooms->damageRoomkusen->custom_id : null,
                 'kusen' => $rooms->damageRoomkusen && $rooms->damageRoomkusen->condition ? $rooms->damageRoomkusen->condition->condition : null,
+             //   'pintu' => $rooms->damageRoompintu ? $rooms->damageRoompintu->custom_id : null,
                 'pintu' => $rooms->damageRoompintu && $rooms->damageRoompintu->condition ? $rooms->damageRoompintu->condition->condition : null,
+              //  'jendela' =>$rooms->damageRoomjendela ? $rooms->damageRoomjendela->custom_id : null,
                 'jendela' =>$rooms->damageRoomjendela && $rooms->damageRoomjendela->condition ? $rooms->damageRoomjendela->condition->condition : null,
+             //   'fn_flatfond' =>$rooms->damageRoomflatfond ? $rooms->damageRoomflatfond->custom_id : null,
                 'fn_flatfond' =>$rooms->damageRoomflatfond && $rooms->damageRoomflatfond->condition ? $rooms->damageRoomflatfond->condition->condition : null,
+             //   'fn_dinding' =>$rooms->damageRoomdinding ? $rooms->damageRoomdinding->custom_id : null,
                 'fn_dinding' =>$rooms->damageRoomdinding && $rooms->damageRoomdinding->condition ? $rooms->damageRoomdinding->condition->condition : null,
+              //  'instalasi_air' => $rooms->damageRoominstalasiair ? $rooms->damageRoominstalasiair->custom_id : null,
                 'instalasi_air' => $rooms->damageRoominstalasiair && $rooms->damageRoominstalasiair->condition ? $rooms->damageRoominstalasiair->condition->condition : null,
+              //  'instalasi_listrik' =>$rooms->damageRoominstalasilistrik ? $rooms->damageRoominstalasilistrik->custom_id : null,
                 'instalasi_listrik' =>$rooms->damageRoominstalasilistrik && $rooms->damageRoominstalasilistrik->condition ? $rooms->damageRoominstalasilistrik->condition->condition : null,
     ];
 
@@ -136,7 +153,7 @@ class RoomsController extends Controller
     if ($previousCondition !== $afterCondition) {
         // Simpan perubahan kondisi ke dalam tabel report
         ReportRoom::create([
-            'room_custom_id' => $room->custom_id,
+            'room_custom_id' => $rooms->custom_id,
             'bulan' => Carbon::now()->month, // Bulan saat ini
             'tahun' => Carbon::now()->year, // Tahun saat ini
             'kondisi_sebelumnya' => json_encode($previousCondition), 
@@ -210,6 +227,7 @@ class RoomsController extends Controller
                                 return [
                                     'no_unit' => $room->UnitNumber->no_unit,
                                     'status' => $room->status->status, 
+                                    'custom_id' => $room->custom_id, // Pastikan ini ada
                                     ];
                               })->values()
                             ];

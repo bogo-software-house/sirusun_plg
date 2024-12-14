@@ -26,14 +26,12 @@ class TransactionRoomController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-         // Define validation rules
-        $validator = Validator::make($request->all(), [
-        'nik'                          => 'required|exists:users,nik|unique:transaction_rooms,nik',
-        'rooms_custom_id'              => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
-        ]);
-
-
+{
+    // Define validation rules
+    $validator = Validator::make($request->all(), [
+        'nik'             => 'required|exists:users,nik|unique:transaction_rooms,nik',
+        'rooms_custom_id' => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
+    ]);
 
         // Check if validation fails
         if ($validator->fails()) {
@@ -107,7 +105,9 @@ class TransactionRoomController extends Controller
                 ], 500);
             }
      }
+
     }
+
 
     /**
      * Display the specified resource.
