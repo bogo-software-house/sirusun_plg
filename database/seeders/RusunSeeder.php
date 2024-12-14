@@ -32,6 +32,7 @@ class RusunSeeder extends Seeder
                  'image2' => $this->uploadImage('karnariansya2.jpg'),
                  'image3' => $this->uploadImage('karnariansya3.jpg'),
                  'image4' => $this->uploadImage('karnariansya4.jpg'),
+                 'kordinat' => '-2.957860572269894, 104.73234950025018',
              ],
              [
                  'custom_id' => 'IRN002',
@@ -46,6 +47,8 @@ class RusunSeeder extends Seeder
                  'image2' => $this->uploadImage('karnariansya2.jpg'),
                  'image3' => $this->uploadImage('karnariansya3.jpg'),
                  'image4' => $this->uploadImage('karnariansya4.jpg'),
+                 'kordinat' => '-3.0857796976959277, 104.72633872204534',
+
              ],
          )->create();
      }

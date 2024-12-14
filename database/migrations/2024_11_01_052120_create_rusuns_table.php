@@ -25,6 +25,7 @@ return new class extends Migration
            $table->string('image2');
            $table->string('image3');
            $table->string('image4');
+           $table->string('kordinat');
            //gambar
            $table->timestamps();
 
