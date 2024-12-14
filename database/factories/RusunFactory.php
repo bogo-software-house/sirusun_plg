@@ -27,6 +27,7 @@ class RusunFactory extends Factory
             'image2' => $this->faker->randomElement(['Tempat Parkir']),
             'image3' => $this->faker->randomElement(['Tempat Parkir']),
             'image4' => $this->faker->randomElement(['Tempat Parkir']),
+            'image4' => $this->faker->randomElement(['Tempat Parkir']),
         ];
     }
 }

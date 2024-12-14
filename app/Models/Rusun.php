@@ -59,6 +59,7 @@ class Rusun extends Model
         'image2',
         'image3',
         'image4',
+        'kordinat',
     ];
 
     //relasi
