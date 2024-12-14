@@ -162,10 +162,6 @@ export default function Example() {
                   </li>
                 ))}
               </ul>
-              <div>
-                <ul>tersedia </ul>
-                <ul>berdasarkan peraturan pemerintah </ul>
-              </div>
             </div>
           </div>
         </div>
