@@ -61,7 +61,6 @@ class AuthController extends Controller
                     'message' => 'Login berhasil',
                     'token' => $token,
                     'role' => $user->role->leveluser,
-
                     'username' => $user->username, // Tambahkan username di respons
 
                     'redirect' => '/api/auth/user/dashboard' // URL untuk user
@@ -80,8 +79,8 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
 
         // Hapus session
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
 
         return response()->json([
             'message' => 'Berhasil logout'
