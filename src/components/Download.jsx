@@ -2,21 +2,22 @@ const posts = [
   {
     id: 1,
     title: "Panduan Pendaftaran",
-    href: "#",
+    href: "/public/PanduanPendaftaran.pdf", // Rute ke file PDF
+
     description: "downl",
     imageUrl: "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
   },
   {
     id: 2,
     title: "Formulir Pendaftaran",
-    href: "#",
+    href: "#", // Jika tidak ada file PDF, gunakan '#' atau link lain
     description: "downl",
     imageUrl: "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
   },
   {
     id: 3,
-    title: "apa aja",
-    href: "#",
+    title: "Perwali",
+    href: "#", // Jika tidak ada file PDF, gunakan '#' atau link lain
     description: "downl",
     imageUrl: "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
   },
@@ -33,7 +34,7 @@ export default function Example() {
       </div>
       <div className=" py-24 sm:py-0">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
-          <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr sm:grid-cols-2 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-10 grid max-w-2xl auto-rows-fr sm:grid-cols-2 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {posts.map((post) => (
               <article key={post.id} className="relative isolate flex flex-col justify-end items-center overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
                 <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
@@ -43,7 +44,11 @@ export default function Example() {
                   </a>
                 </h3>
                 <div className="mt-4 flex items-center gap-x-6">
-                  <a className="rounded-md bg-indigo-600 px-20 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  <a
+                    href={post.href} // Arahkan ke file PDF
+                    target="_blank" // Membuka file di tab baru
+                    className="rounded-md bg-indigo-600 px-20 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
                     Download
                   </a>
                 </div>

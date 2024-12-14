@@ -1,7 +1,9 @@
+// penghuni.js
 import React, { useState, useEffect } from "react";
 import PenghuniTable from "../../components/residents/ResidentsTable";
 import AddOccupantModal from "../../components/residents/AddResidentsModal";
 import apiService from "../../services/apiService";
+import TableHeader from "../../components/table/TableHeader";
 
 function Penghuni() {
   const [occupants, setOccupants] = useState([]);
@@ -56,12 +58,7 @@ function Penghuni() {
 
   return (
     <div>
-      <div className="flex justify-between items-end">
-        <h2 className="text-black">Daftar Penghuni</h2>
-        <button className="bg-indigo-500 p-2 rounded-md hover:bg-indigo-600" onClick={() => setIsModalOpen(true)}>
-          Tambah Data
-        </button>
-      </div>
+      <TableHeader title="Daftar Penghuni" actions={[{ label: "Tambah Data", onClick: () => setIsModalOpen(true) }]} />
 
       <PenghuniTable occupants={occupants} />
 

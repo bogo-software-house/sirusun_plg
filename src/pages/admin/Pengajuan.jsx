@@ -1,42 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Table from "../../components/table/Table";
+import KeteranganModal from "../../components/modal/KeteranganModal";
+import NotificationModal from "../../components/modal/NotificationModal";
+import { getColumns } from "../../utils/TransactionsStatusColumn";
+import { fetchTransactionData, fetchStatusOptions } from "../../api/TransactionStatus";
+import TableHeader from "../../components/table/TableHeader";
 
 const Pengajuan = () => {
   const [transactionData, setTransactionData] = useState([]);
   const [statusOptions, setStatusOptions] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [keterangan, setKeterangan] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentTransactionId, setCurrentTransactionId] = useState(null);
   const [notification, setNotification] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchTransactionData();
-    fetchStatusOptions();
+    const fetchData = async () => {
+      try {
+        const data = await fetchTransactionData();
+        setTransactionData(data);
+
+        const options = await fetchStatusOptions();
+        setStatusOptions(options);
+      } catch {
+        setNotification({ type: "error", message: "Error fetching data" });
+      }
+    };
+
+    fetchData();
   }, []);
-
-  const fetchTransactionData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/transactions");
-      const data = response.data?.data || [];
-      setTransactionData(data);
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-      setError("Error fetching transaction data");
-      setLoading(false);
-    }
-  };
-
-  const fetchStatusOptions = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/status-form");
-      setStatusOptions(response.data?.data || []);
-    } catch (err) {
-      console.error(err);
-      setError("Error fetching status options");
-    }
-  };
 
   const updateStatus = async (transactionId) => {
     const statusFormCustomId = selectedStatuses[transactionId];
@@ -47,103 +42,57 @@ const Pengajuan = () => {
     }
 
     try {
-      const formCustomId = transactionData.find((transaction) => transaction.id === transactionId)?.form_custom_id;
-
-      if (!formCustomId) {
-        setError("Form Custom ID not found for this transaction.");
+      const transaction = transactionData.find((t) => t.id === transactionId);
+      if (!transaction) {
+        setError("Transaction not found.");
         return;
       }
 
-      await axios.patch(`http://127.0.0.1:8000/api/transactions/${formCustomId}`, {
-        statusForm_custom_id: statusFormCustomId,
-      });
+      const payload = { statusForm_custom_id: statusFormCustomId };
+      if (statusFormCustomId === "ISF003") payload.keterangan = keterangan;
 
-      setNotification({ type: "success", message: "Status berhasil diperbarui!" });
-      setTimeout(() => setNotification(null), 3000);
+      const response = await axios.patch(`http://127.0.0.1:8000/api/transactions/${transaction.form_custom_id}`, payload);
 
-      fetchTransactionData();
-    } catch (err) {
-      console.error(err);
-      setNotification({ type: "error", message: "Error updating status. Please try again later." });
-      setTimeout(() => setNotification(null), 3000);
+      if (response.status === 200) {
+        setNotification({ type: "success", message: "Status berhasil diperbarui!" });
+        setTimeout(() => setNotification(null), 3000);
+        fetchTransactionData();
+        setModalVisible(false);
+        setKeterangan("");
+        window.location.reload();
+      } else {
+        setError("Failed to update the status. Please try again.");
+      }
+    } catch {
+      setError("Error updating status. Please try again later.");
     }
   };
 
   const handleStatusChange = (transactionId, statusId) => {
-    setSelectedStatuses((prevSelectedStatuses) => ({
-      ...prevSelectedStatuses,
-      [transactionId]: statusId,
-    }));
+    setSelectedStatuses((prev) => ({ ...prev, [transactionId]: statusId }));
+
+    if (statusId === "ISF003") {
+      setCurrentTransactionId(transactionId);
+      setModalVisible(true);
+    } else if (statusId === "ISF002") {
+      updateStatus(transactionId);
+      setModalVisible(false);
+    }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleModalSubmit = () => {
+    if (currentTransactionId) updateStatus(currentTransactionId);
+  };
 
-  if (error) {
-    return <div style={{ color: "red" }}>{error}</div>;
-  }
+  const columns = getColumns(statusOptions, selectedStatuses, handleStatusChange, updateStatus);
 
   return (
     <div className="transaction-table text-black">
-      <h2>Transaction Status Table</h2>
+      {notification && <NotificationModal type={notification.type} message={notification.message} onClose={() => setNotification(null)} />}
+      <TableHeader title="Daftar Pengajuan" actions={[{ label: "Tambah Data" }]} />
+      <Table columns={columns} data={transactionData} emptyMessage="Tidak ada data pengajuan." />
 
-      {notification && (
-        <div
-          className={`notification ${notification.type}`}
-          style={{
-            padding: "10px",
-            marginBottom: "15px",
-            backgroundColor: notification.type === "success" ? "green" : "red",
-            color: "white",
-          }}
-        >
-          {notification.message}
-        </div>
-      )}
-
-      <table border="1" cellPadding="10" className="text-black min-w-full border divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th>NIK</th>
-            <th>Username</th>
-            <th>Status</th>
-            <th>Custom ID</th>
-            <th>PDF Resident</th>
-            <th>Update Status</th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200 text-black">
-          {transactionData.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>{transaction.resident_pdf?.resident?.nik || "N/A"}</td>
-              <td>{transaction.resident_pdf?.resident?.username || "N/A"}</td>
-              <td>{transaction.status_form?.status || "N/A"}</td>
-              <td>{transaction.custom_id || "N/A"}</td>
-              <td>
-                {transaction.resident_pdf?.file_url ? (
-                  <a href={transaction.resident_pdf.file_url} target="_blank" rel="noopener noreferrer">
-                    Lihat PDF
-                  </a>
-                ) : (
-                  "No PDF"
-                )}
-              </td>
-              <td>
-                <select onChange={(e) => handleStatusChange(transaction.id, e.target.value)} value={selectedStatuses[transaction.id] || ""}>
-                  <option value="">Select Status</option>
-                  {statusOptions.map((status) => (
-                    <option key={status.custom_id} value={status.custom_id}>
-                      {status.status}
-                    </option>
-                  ))}
-                </select>
-                <button onClick={() => updateStatus(transaction.id)}>Update</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <KeteranganModal visible={modalVisible} keterangan={keterangan} onClose={() => setModalVisible(false)} onChange={(value) => setKeterangan(value)} onSubmit={handleModalSubmit} />
     </div>
   );
 };

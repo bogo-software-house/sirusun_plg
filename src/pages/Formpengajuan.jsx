@@ -167,12 +167,12 @@ const ResidentForm = () => {
             <input type="text" name="tanggal_lahir" value={formData.tanggal_lahir} onChange={handleInputChange} required className="border border-gray-300 rounded p-2 w-full mt-4" />
           </label>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <GenderSelect genders={genders} value={formData.genders_custom_id} onChange={handleInputChange} />
             <StatusNikahSelect statusNikah={statusNikah} value={formData.status_nikah_custom_id} onChange={handleInputChange} />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <ReligionSelect religions={religions} value={formData.religions_custom_id} onChange={handleInputChange} />
             <EducationSelect educations={educations} value={formData.education_custom_id} onChange={handleInputChange} />
             <SalariesSelect salaries={salaries} value={formData.salaries_custom_id} onChange={handleInputChange} />
@@ -187,7 +187,7 @@ const ResidentForm = () => {
 
           <label>
             No Telp:
-            <input type="text" name="no_telp" value={formData.no_telp} onChange={handleInputChange} required className="border border-gray-300 rounded p-2 w-full mt-4" />
+            <input type="text" name="no_telp" value={formData.no_telp} onChange={handleInputChange} required className="   rounded p-2 w-full mt-4" />
           </label>
 
           <label>

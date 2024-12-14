@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
+// import { CekPermohonan } from "../pages/CekPermohonan";
 
 const navigation = [
   { name: "Home", href: "Top" },
   { name: "Rusun", href: "Rusun" },
   { name: "Alur", href: "Alur" },
   { name: "Download", href: "Download" },
-  { name: "Cek Permohonan", href: "/CekPermohonan" },
+  { name: "Cek Permohonan", href: "/CekPermohonan" },  // Pastikan path ini benar
 ];
 
 export default function Navbar() {
@@ -20,7 +21,7 @@ export default function Navbar() {
 
   useEffect(() => {
     // Sync activeTab with current route or default to "Top" for the home page
-    const path = location.pathname === "/" ? "Top" : location.pathname;
+    const path = location.pathname === "/" ? "Top" : location.pathname.replace("/", "");
     setActiveTab(path);
   }, [location.pathname]);
 
@@ -68,13 +69,13 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) =>
-            item.type === "route" ? (
+            item.href.startsWith("/") ? (  // Check for absolute paths (routes)
               <Link
                 key={item.name}
                 to={item.href}
-                onClick={() => setActiveTab(item.href)} // Update active tab when a route link is clicked
+                onClick={() => setActiveTab(item.href.replace("/", ""))} // Update active tab on click
                 className={`text-sm font-semibold leading-6 relative z-10 px-4 py-2 border-2 rounded-full group ${
-                  isActive(item.href) ? "text-gray-50 bg-indigo-500 border-indigo-500" : "text-black hover:text-gray-50 hover:bg-indigo-500 hover:border-indigo-500"
+                  isActive(item.href.replace("/", "")) ? "text-gray-50 bg-indigo-500 border-indigo-500" : "text-black hover:text-gray-50 hover:bg-indigo-500 hover:border-indigo-500"
                 }`}
               >
                 {item.name}
@@ -118,8 +119,8 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    onClick={() => setActiveTab(item.href)} // Update active state in mobile menu
-                    className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 ${isActive(item.href) ? "text-indigo-600 underline" : "text-black hover:bg-gray-50"}`}
+                    onClick={() => setActiveTab(item.href.replace("/", ""))} // Update active state in mobile menu
+                    className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 ${isActive(item.href.replace("/", "")) ? "text-indigo-600 underline" : "text-black hover:bg-gray-50"}`}
                   >
                     {item.name}
                   </Link>

@@ -1,10 +1,8 @@
-
 export default function Example() {
   return (
-    <div className="bg-gray-50 py-24 sm:py-32 z-0 mt-16 z-0" >
+    <div className="bg-gray-50 py-24 sm:py-32 z-0 mt-16 z-0">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-center text-base/7 font-semibold text-indigo-600">Deploy faster</h2>
-        <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Everything you need to deploy your app</p>
+        <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Lokasi Rusunawa</p>
         <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
           <div className="relative z-0 lg:row-span-2">
             <div className="absolute z-0 inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
@@ -25,7 +23,7 @@ export default function Example() {
             <div className="absolute z-0 inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
             <div className="relative z-0 flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
               <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Lokasi</p>
+                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Rusun Kertapati</p>
               </div>
               <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                 <iframe
@@ -35,9 +33,9 @@ export default function Example() {
                   scrolling="no"
                   marginheight="0"
                   marginwidth="0"
-                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Jl.%20Gajah%20Mada%20Jl.%20Kandis%20Raya,%20Kp.%20Olo,%20Kec.%20Nanggalo,%20Kota%20Padang,%20Sumatera%20Barat%2025173+(Rusun%20Kaliurang)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Rusunawa%20Kertapati+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                 >
-                  <a href="https://www.gps.ie/">gps systems</a>
+                  <a href="https://www.gps.ie/sport-gps/">bike gps</a>
                 </iframe>
               </div>
             </div>
@@ -47,11 +45,20 @@ export default function Example() {
             <div className="absolute inset-px rounded-lg bg-white"></div>
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
               <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Security</p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi.</p>
+                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Rusun Kasnariansyah</p>
               </div>
-              <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
-                <img className="h-[min(152px,40cqw)] object-cover object-center" src="https://tailwindui.com/plus/img/component-images/bento-03-security.png" alt="" />
+              <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+                <iframe 
+                  width="100%"
+                  height="200"
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=RUSUNAWA%20KASNARIANSYAH+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                >
+                  <a href="https://www.gps.ie/sport-gps/">bike gps</a>
+                </iframe>
               </div>
             </div>
             <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5"></div>
@@ -71,7 +78,7 @@ export default function Example() {
                       <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
                     </div>
                   </div>
-                  <div className="px-6 pb-14 pt-6">{/* Your code example */}</div>
+                  <div className="px-6 pb-14 pt-6"></div>
                 </div>
               </div>
             </div>

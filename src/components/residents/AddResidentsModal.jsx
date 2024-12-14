@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NotificationModal from "../ui/NotificationModal";
-import ConfirmationModal from "../ui/ConfirmationModal"; // Import your confirmation modal component
+import NotificationModal from "../modal/NotificationModal";
+import ConfirmationModal from "../modal/ConfirmationModal"; // Import your confirmation modal component
 
 function AddOccupantModal({ onClose, onSuccess }) {
   const [formData, setFormData] = useState({ nik: "" });
