@@ -12,17 +12,16 @@ import Admin from "./pages/Admin";
 import Pengajuan from "./pages/admin/Pengajuan";
 import Penghuni from "./pages/admin/Penghuni";
 import Bangunan from "./pages/admin/Bangunan";
-import Unit from "./pages/admin/Unit";
 import Pembayaran from "./pages/admin/Pembayaran";
 import UserDashboard from "./pages/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserProtectedRoute from "./components/UserProtectedRoute";
+import Laporan from "./pages/admin/Laporan";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-     
         <Routes>
           {/* Halaman Umum */}
           <Route path="/" element={<Home />} />
@@ -31,7 +30,6 @@ function App() {
           <Route path="/Formpengajuan" element={<Formpengajuan />} />
           <Route path="/ProfilRusun/:id" element={<ProfilRusun />} />
           <Route path="/CekPermohonan" element={<CekPermohonan />} />
-          
 
           {/* Dashboard Admin */}
           <Route
@@ -76,10 +74,10 @@ function App() {
               }
             />
             <Route
-              path="/admin/dashboard/unit"
+              path="/admin/dashboard/laporan"
               element={
                 <ProtectedRoute>
-                  <Unit />
+                  <Laporan />
                 </ProtectedRoute>
               }
             />

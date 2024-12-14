@@ -1,6 +1,74 @@
 import React, { useState, useEffect } from "react";
 import Table from "../../components/table/Table";
 import TableHeader from "../../components/table/TableHeader";
+import axios from "axios";
+import Modal from "react-modal";
+import ConfirmationModal from "../../components/modal/ConfirmationModal";
+
+Modal.setAppElement("#root");
+const conditionOptions = {
+  Baik: "damage_rooms_good_custom_id",
+  "Rusak Ringan": "damage_rooms_minor_custom_id",
+  "Rusak Sedang": "damage_rooms_severe_custom_id",
+  "Rusak Berat": "damage_rooms_very_severe_custom_id",
+};
+
+const lantaiOptions = {
+  Baik: "IDR001",
+  "Rusak Ringan": "IDR002",
+  "Rusak Sedang": "IDR003",
+  "Rusak Berat": "IDR004",
+};
+
+const kusenOptions = {
+  Baik: "IDR005",
+  "Rusak Ringan": "IDR006",
+  "Rusak Sedang": "IDR007",
+  "Rusak Berat": "IDR008",
+};
+
+const pintuOptions = {
+  Baik: "IDR009",
+  "Rusak Ringan": "IDR010",
+  "Rusak Sedang": "IDR011",
+  "Rusak Berat": "IDR012",
+};
+
+const jendelaOptions = {
+  Baik: "IDR013",
+  "Rusak Ringan": "IDR014",
+  "Rusak Sedang": "IDR015",
+  "Rusak Berat": "IDR016",
+};
+
+const flatfondOptions = {
+  Baik: "IDR017",
+  "Rusak Ringan": "IDR018",
+  "Rusak Sedang": "IDR019",
+  "Rusak Berat": "IDR020",
+};
+
+const dindingOptions = {
+  Baik: "IDR021",
+  "Rusak Ringan": "IDR022",
+  "Rusak Sedang": "IDR023",
+  "Rusak Berat": "IDR024",
+};
+
+const instalasiListrikOptions = {
+  Baik: "IDR025",
+  "Rusak Ringan": "IDR026",
+  "Rusak Sedang": "IDR027",
+  "Rusak Berat": "IDR028",
+};
+
+const instalasiAirOptions = {
+  Baik: "IDR029",
+  "Rusak Ringan": "IDR030",
+  "Rusak Sedang": "IDR031",
+  "Rusak Berat": "IDR032",
+};
+Modal.setAppElement("#root");
 
 function Bangunan() {
   const [rooms, setRooms] = useState([]);
@@ -10,6 +78,7 @@ function Bangunan() {
   const [selectedRoom, setSelectedRoom] = useState(null); // Room yang dipilih untuk update
   const [formValues, setFormValues] = useState({}); // Nilai formulir
   const [conditionOptions, setConditionOptions] = useState([]); // Opsi kondisi default array kosong
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   // Fetch data from API with pagination
   useEffect(() => {
@@ -45,60 +114,70 @@ function Bangunan() {
 
   const handleEditClick = (room) => {
     setSelectedRoom(room);
-    setFormValues({
-      lantai: room.kondisi?.lantai || "",
-      kusen: room.kondisi?.kusen || "",
-      pintu: room.kondisi?.pintu || "",
-      jendela: room.kondisi?.jendela || "",
-      fn_flatfond: room.kondisi?.fn_flatfond || "",
-      fn_dinding: room.kondisi?.fn_dinding || "",
-      instalasi_air: room.kondisi?.instalasi_air || "",
-      instalasi_listrik: room.kondisi?.instalasi_listrik || "",
+    const initialValues = {};
+    Object.entries(room.kondisi).forEach(([key, value]) => {
+      if (key.includes("damage_rooms")) {
+        initialValues[key] = value;
+      }
     });
+    setFormValues(initialValues);
   };
 
   const handleUpdate = async () => {
+    setIsConfirmationModalOpen(true); // Tampilkan modal konfirmasi
+  };
+
+  const confirmUpdate = async () => {
     try {
-      const selectedRoomConditions = selectedRoom.kondisi || {};
-      const updatedValues = {};
-      let hasChanges = false;
-
-      Object.keys(formValues).forEach((key) => {
-        if (formValues[key]?.trim() !== selectedRoomConditions[key]?.trim()) {
-          updatedValues[key] = formValues[key]?.trim();
-          hasChanges = true;
-        }
-      });
-
-      console.log("Updated Values to Send:", updatedValues);
-
-      if (!hasChanges) {
-        alert("No changes detected.");
-        return;
-      }
-
-      const payload = {
-        ...updatedValues,
-        _method: "PUT",
-      };
-
-      console.log("Payload JSON: ", JSON.stringify(payload));
+      const updatedData = { ...formValues, _method: "PUT" };
 
       const response = await fetch(`http://127.0.0.1:8000/api/rooms/${selectedRoom.custom_id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(updatedData),
       });
 
-      const result = await response.json().catch(() => ({}));
-      console.log("Parsed Response Backend JSON: ", result);
-    } catch (error) {
-      console.error("Update Error:", error.message);
+      if (!response.ok) {
+        const errorDetails = await response.text();
+        throw new Error(`Update failed: ${errorDetails}`);
+      }
+
+      const updatedRoom = await response.json();
+      setRooms((prevRooms) => prevRooms.map((room) => (room.custom_id === selectedRoom.custom_id ? updatedRoom.data : room)));
+      setSelectedRoom(null);
+      setIsConfirmationModalOpen(false);
+    } catch (err) {
+      console.error("Update Error:", err.message);
+      setIsConfirmationModalOpen(false);
+    }
+  };
+  const cancelUpdate = () => {
+    setIsConfirmationModalOpen(false);
+  };
+
+  const handleUpdateClick = () => {
+    setIsConfirmationModalOpen(true);
+  };
+
+  // Mengatur fungsi pagination untuk mengubah halaman
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
     }
   };
 
-  const handleSelectChange = (key, value) => {
-    console.log(`Updating ${key} to ${value}`);
+  const renderDropdown = (key, options) => (
+    <select className="form-control" value={formValues[key] || ""} onChange={(e) => handleInputChange(key, e.target.value)}>
+      {Object.entries(options).map(([label, id]) => (
+        <option key={label} value={id}>
+          {label}
+        </option>
+      ))}
+    </select>
+  );
+
+  // Mengubah state React saat dropdown dipilih
+  const handleInputChange = (key, value) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       [key]: value,
@@ -106,12 +185,14 @@ function Bangunan() {
   };
 
   const columns = [
-    { key: "index", label: "No" }, // New column for row number
-    { key: "unit_number", label: "Unit No" },
-    { key: "rusun", label: "Nama Rusun" },
-    { key: "status", label: "Status" },
+    { key: "index", label: "No" },
+    { key: "rusun", label: "Rusun" },
     { key: "blok", label: "Blok" },
     { key: "lantai", label: "Lantai" },
+    { key: "unit_number", label: "Kamar" },
+    { key: "status", label: "Status" },
+
+    // Mengakses ID custom dari objek kondisi yang nested secara lengkap
     {
       key: "kondisi.lantai",
       label: "Kondisi Lantai",
@@ -152,6 +233,7 @@ function Bangunan() {
       label: "Kondisi Instalasi Listrik",
       render: (value, row) => getNestedValue(row, "kondisi.instalasi_listrik"),
     },
+
     {
       key: "actions",
       label: "Actions",
@@ -167,6 +249,9 @@ function Bangunan() {
 
   return (
     <div>
+      {/* Render ConfirmationModal jika modal konfirmasi dibuka */}
+      {isConfirmationModalOpen && <ConfirmationModal onConfirm={confirmUpdate} onCancel={cancelUpdate} />}
+
       <TableHeader title="Kondisi Bangunan dan Unit" actions={[{ label: "Tambah Data" }]} />
 
       <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
@@ -174,7 +259,7 @@ function Bangunan() {
           columns={columns}
           data={rooms.map((room, index) => ({
             ...room,
-            index: (currentPage - 1) * 10 + (index + 1), // Tambahkan offset index berdasarkan halaman
+            index: (currentPage - 1) * 10 + (index + 1),
           }))}
           emptyMessage="No rooms data available"
         />
@@ -193,39 +278,38 @@ function Bangunan() {
 
       {/* Update Popup */}
       {selectedRoom && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center text-black">
-          <div className="bg-white p-6 rounded shadow-lg w-96">
-            {/* Menampilkan custom_id */}
-            <p>
-              <strong>Custom ID:</strong> {selectedRoom.custom_id}
-            </p>
+        <Modal isOpen={selectedRoom !== null} onRequestClose={() => setSelectedRoom(null)} ariaHideApp={false}>
+          <h3>Update Room {selectedRoom.unit_number}</h3>
 
-            <h3 className="text-lg font-bold mb-4">Update Kondisi for {selectedRoom.unit_number}</h3>
-
-            {Object.keys(formValues).map((key) => (
-              <div key={key} className="form-group mb-3">
-                <label>{key.replace("_", " ")}</label>
-                <select value={formValues[key]} onChange={(e) => handleSelectChange(key, e.target.value)} className="w-full">
-                  <option value="">Select...</option>
-                  {conditionOptions.map((option) => (
-                    <option key={option.custom_id} value={option.condition?.trim()}>
-                      {option.condition}
-                    </option>
-                  ))}
-                </select>
+          {/* Dropdown untuk Properti Kondisi */}
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto mt-10 text-black">
+            {[
+              { label: "Kondisi Lantai", id: "damage_rooms_lantai_custom_id", options: lantaiOptions },
+              { label: "Kondisi Kusen", id: "damage_rooms_kusen_custom_id", options: kusenOptions },
+              { label: "Kondisi Pintu", id: "damage_rooms_pintu_custom_id", options: pintuOptions },
+              { label: "Kondisi Jendela", id: "damage_rooms_jendela_custom_id", options: jendelaOptions },
+              { label: "Kondisi Flatfond", id: "damage_rooms_fn_flatfond_custom_id", options: flatfondOptions },
+              { label: "Kondisi Dinding", id: "damage_rooms_fn_dinding_custom_id", options: dindingOptions },
+              { label: "Kondisi Instalasi Air", id: "damage_rooms_instalasi_air_custom_id", options: instalasiAirOptions },
+              { label: "Kondisi Instalasi Listrik", id: "damage_rooms_instalasi_listrik_custom_id", options: instalasiListrikOptions },
+            ].map(({ label, id, options }) => (
+              <div key={id} className="mt-4">
+                <label className="block text-gray-700 font-medium mb-2">{label}</label>
+                {renderDropdown(id, options)}
               </div>
             ))}
 
-            <div className="flex justify-end space-x-2 mt-4">
-              <button onClick={() => setSelectedRoom(null)} className="px-4 py-2 bg-gray-300 rounded">
-                Cancel
+            <div className="mt-6 flex justify-end gap-4">
+              <button className="bg-gray-500 text-white py-2 px-6 rounded-lg shadow" onClick={() => setSelectedRoom(null)}>
+                Close
               </button>
-              <button onClick={handleUpdate} className="px-4 py-2 bg-blue-500 text-white rounded">
-                Update
+              {/* Mengganti Save Changes untuk konfirmasi */}
+              <button className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow" onClick={handleUpdateClick}>
+                Save Changes
               </button>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

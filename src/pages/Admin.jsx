@@ -1,27 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import {
-  HomeIcon,
-  UsersIcon,
-  ChartPieIcon,
-  CalendarIcon,
-  DocumentDuplicateIcon,
-  Cog6ToothIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AuthContext from "../context/authContext";
 import logo from "../assets/images/logowhite.png";
-
 
 const navigationItems = [
   { name: "Pengajuan", href: "/admin/dashboard/pengajuan", icon: HomeIcon },
   { name: "Penghuni", href: "/admin/dashboard/penghuni", icon: UsersIcon },
   { name: "Pembayaran dan Tunggakan", href: "/admin/dashboard/pembayaran", icon: ChartPieIcon },
-
   { name: "Kondisi Bangunan", href: "/admin/dashboard/bangunan", icon: DocumentDuplicateIcon },
-  { name: "Laporan", href: "/admin/dashboard/unit", icon: CalendarIcon },
+  { name: "Laporan", href: "/admin/dashboard/laporan", icon: CalendarIcon },
 ];
 
 function classNames(...classes) {
@@ -60,7 +49,7 @@ export default function AdminDashboard() {
               </div>
               <div className="flex grow flex-col gap-y-5 overflow-y-auto">
                 <div className="flex h-16 items-center">
-                <img alt="logo" src={logo} className="h-10" />                
+                  <img alt="logo" src={logo} className="h-10" />
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul className="flex flex-1 flex-col gap-y-7">
@@ -75,12 +64,7 @@ export default function AdminDashboard() {
                                 "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                               )}
                             >
-                              <item.icon
-                                className={classNames(
-                                  item.current ? "text-white" : "text-indigo-200 group-hover:text-white",
-                                  "h-6 w-6"
-                                )}
-                              />
+                              <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
                               {item.name}
                             </Link>
                           </li>
@@ -88,10 +72,7 @@ export default function AdminDashboard() {
                       </ul>
                     </li>
                     <li className="mt-auto">
-                      <button
-                        onClick={handleLogout}
-                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                      >
+                      <button onClick={handleLogout} className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
                         <Cog6ToothIcon className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white" />
                         Log out
                       </button>
@@ -107,7 +88,7 @@ export default function AdminDashboard() {
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-indigo-600 px-6 pb-4">
             <div className="flex h-16 items-center">
-            <img alt="logo" src={logo} className="h-16 mt-4" />                
+              <img alt="logo" src={logo} className="h-16 mt-4" />
             </div>
             <nav className="flex flex-1 flex-col">
               <ul className="flex flex-1 flex-col gap-y-7">
@@ -122,12 +103,7 @@ export default function AdminDashboard() {
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                           )}
                         >
-                          <item.icon
-                            className={classNames(
-                              item.current ? "text-white" : "text-indigo-200 group-hover:text-white",
-                              "h-6 w-6"
-                            )}
-                          />
+                          <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
                           {item.name}
                         </Link>
                       </li>
@@ -135,10 +111,7 @@ export default function AdminDashboard() {
                   </ul>
                 </li>
                 <li className="mt-auto">
-                  <button
-                    onClick={handleLogout}
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                  >
+                  <button onClick={handleLogout} className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
                     Log out
                   </button>
                 </li>
