@@ -17,12 +17,17 @@ class ReportRoomController extends Controller
     }
     public function indextahun(Request $request)
     {
-        // Retrieve query parameters
+        // Mengambil parameter kueri
         $bulan = $request->query('bulan');
         $tahun = $request->query('tahun');
 
-        // Start building the query
-        $reports = ReportRoom::query();
+        // Mulai membangun kueri
+        $reports = ReportRoom::with([
+            'room.UnitNumber',
+            'room.priceTag.rusuns',
+            'room.priceTag.bloks',
+            'room.priceTag.floors',
+            ]);
 
         // Apply filters if provided
         if ($bulan) {
@@ -33,8 +38,8 @@ class ReportRoomController extends Controller
             $reports->where('tahun', $tahun);
         }
 
-        // Execute the query and get the results
-        $reports = $reports->get();
+          $reports = $reports->paginate(10); // Menggunakan pagination 10 item per halaman
+
 
         // Check if reports were found
         if ($reports->isEmpty()) {
@@ -85,25 +90,46 @@ class ReportRoomController extends Controller
                 "instalasi_listrik" => $dataArraysetelah["instalasi_listrik"]
             ]
         ];
+        
+        // Buat kunci unik untuk pengelompokan
+        $rusunName = $data->room->priceTag->rusuns->nama_rusun ?? null; // Nama rusun
+        $blokName = $data->room->priceTag->bloks->blok ?? null; // Nama blok
+        $lantaiName = $data->room->priceTag->floors->floor ?? null; // Nama lantai
 
-        // Menyimpan data yang diformat ke dalam array
-        $formattedReports[] = [
+        // Kunci unik untuk grup
+        $groupKey = "{$rusunName}_{$blokName}_{$lantaiName}";
+
+        // Inisialisasi grup jika belum ada
+        if (!isset($formattedReports[$groupKey])) {
+            $formattedReports[$groupKey] = [
+                'rusun' => $rusunName,
+                'blok' => $blokName,
+                'lantai' => $lantaiName,
+                'units' => []
+            ];
+        }
+
+        // Menyimpan data yang diformat ke dalam array units
+        $formattedReports[$groupKey]['units'][] = [
+            'unit_number' => $data->room->unitNumber->no_unit ?? null ,// Menyimpan nomor unit
             'room_custom_id' => $data->room_custom_id,
             'bulan' => $data->bulan,
             'tahun' => $data->tahun,
             'sebelum' => $formattedDatasebelum,
-            'setelah' => $formattedDatasetelah
-            ];
+            'setelah' => $formattedDatasetelah,
+        ];
         }
 
-        // Return the results as a JSON response
+        // Mengonversi array asosiatif ke array biasa untuk respons
+        $formattedReports = array_values($formattedReports);
+
+        // Mengembalikan hasil sebagai respons JSON
         return response()->json([
             'success' => true,
             'data' => $formattedReports,
             'message' => 'Reports retrieved successfully.'
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
