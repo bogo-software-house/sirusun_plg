@@ -58,20 +58,7 @@ class DatabaseSeeder extends Seeder
         ['custom_id' =>'IRO002','leveluser' => 'user'], 
     )
     ->create();
-    \App\Models\User::factory()->count(2)->sequence(
-    [
-        'custom_id' => 'IUS001',
-        'username' => 'admin', 
-        'password' => bcrypt('admin123'), 
-        'roles_custom_id' => 'IRO001'  // Menggunakan role admin yang sudah ada
-    ],
-    [
-        'custom_id' => 'IUS002',
-        'username' => 'admin-kertapati', 
-        'password' => bcrypt('admin123'), 
-        'roles_custom_id' => 'IRO001'  // Menggunakan role admin yang sudah ada
-    ],
-    )->create();
+    
     
     \App\Models\Condition::factory()->count(4)
     ->sequence(
@@ -373,9 +360,12 @@ class DatabaseSeeder extends Seeder
         ['custom_id' => 'IUN028', 'no_unit' => 'No.28'],
         ['custom_id' => 'IUN029', 'no_unit' => 'No.29'],
         ['custom_id' => 'IUN030', 'no_unit' => 'No.30']
-    )
-    ->create();
+        )
+        ->create();
     $this->call(RusunSeeder::class);
+    $this->call(ResidentSeeder::class);
+    //$this->call(ResidentPdfSeeder::class);
+    $this->call(UserSeeder::class);
     $this->call(PriceTagSeeder::class);
     $this->call(KasnariansyahBlokASeeder::class);
     $this->call(KasnariansyahBlokBSeeder::class);
