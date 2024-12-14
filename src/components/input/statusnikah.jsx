@@ -4,7 +4,7 @@ const StatusNikahSelect = ({ statusNikah, value, onChange }) => {
   return (
     <label>
       Status Nikah:
-      <select name="status_nikah_custom_id" value={value} onChange={onChange} required>
+      <select name="status_nikah_custom_id" value={value} onChange={onChange} required className="border border-gray-300 rounded-md w-full">
         <option value="">Pilih Status Nikah</option>
         {statusNikah.map((status) => (
           <option key={status.custom_id} value={status.custom_id}>
