@@ -84,11 +84,11 @@ class RoomsController extends Controller
                 'damage_rooms_lantai_custom_id' => 'sometimes|required| in:IDR001,IDR002,IDR003,IDR004',
                 'damage_rooms_kusen_custom_id' => 'sometimes|required|in:IDR005,IDR006,IDR007,IDR008',
                 'damage_rooms_pintu_custom_id' => 'sometimes|required|in:IDR009,IDR010,IDR011,IDR012',
-                'damage_rooms_jendela_custom_id' => 'sometimes|required|in:IDR0013,IDR014,IDR015,IDR016',
+                'damage_rooms_jendela_custom_id' => 'sometimes|required|in:IDR013,IDR014,IDR015,IDR016',
                 'damage_rooms_fn_flatfond_custom_id' => 'sometimes|required|in:IDR017,IDR018,IDR019,IDR020',
                 'damage_rooms_fn_dinding_custom_id' => 'sometimes|required|in:IDR021,IDR022,IDR023,IDR024',
-                'damage_rooms_instalasi_air_custom_id'  => 'sometimes|required|in:IDR025,IDR026,IDR027,IDR028',
-                'damage_rooms_instalasi_listrik_custom_id' => 'sometimes|required|in:IDR029,IDR030,IDR031,IDR032', 
+                'damage_rooms_instalasi_listrik_custom_id' => 'sometimes|required|in:IDR025,IDR026,IDR027,IDR028',
+                'damage_rooms_instalasi_air_custom_id'  => 'sometimes|required|in:IDR029,IDR030,IDR031,IDR032', 
         ]);
 
         //check if validation fails
@@ -116,8 +116,8 @@ class RoomsController extends Controller
                 'jendela' =>$room->damageRoomjendela && $room->damageRoomjendela->condition ? $room->damageRoomjendela->condition->condition : null,
                 'fn_flatfond' =>$room->damageRoomflatfond && $room->damageRoomflatfond->condition ? $room->damageRoomflatfond->condition->condition : null,
                 'fn_dinding' =>$room->damageRoomdinding && $room->damageRoomdinding->condition ? $room->damageRoomdinding->condition->condition : null,
-                'instalasi_air' => $room->damageRoominstalasiair && $room->damageRoominstalasiair->condition ? $room->damageRoominstalasiair->condition->condition : null,
                 'instalasi_listrik' =>$room->damageRoominstalasilistrik && $room->damageRoominstalasilistrik->condition ? $room->damageRoominstalasilistrik->condition->condition : null, 
+                'instalasi_air' => $room->damageRoominstalasiair && $room->damageRoominstalasiair->condition ? $room->damageRoominstalasiair->condition->condition : null,
     ];
 
     
@@ -143,10 +143,10 @@ class RoomsController extends Controller
                 'fn_flatfond' =>$rooms->damageRoomflatfond && $rooms->damageRoomflatfond->condition ? $rooms->damageRoomflatfond->condition->condition : null,
              //   'fn_dinding' =>$rooms->damageRoomdinding ? $rooms->damageRoomdinding->custom_id : null,
                 'fn_dinding' =>$rooms->damageRoomdinding && $rooms->damageRoomdinding->condition ? $rooms->damageRoomdinding->condition->condition : null,
+                //  'instalasi_listrik' =>$rooms->damageRoominstalasilistrik ? $rooms->damageRoominstalasilistrik->custom_id : null,
+                  'instalasi_listrik' =>$rooms->damageRoominstalasilistrik && $rooms->damageRoominstalasilistrik->condition ? $rooms->damageRoominstalasilistrik->condition->condition : null,
               //  'instalasi_air' => $rooms->damageRoominstalasiair ? $rooms->damageRoominstalasiair->custom_id : null,
                 'instalasi_air' => $rooms->damageRoominstalasiair && $rooms->damageRoominstalasiair->condition ? $rooms->damageRoominstalasiair->condition->condition : null,
-              //  'instalasi_listrik' =>$rooms->damageRoominstalasilistrik ? $rooms->damageRoominstalasilistrik->custom_id : null,
-                'instalasi_listrik' =>$rooms->damageRoominstalasilistrik && $rooms->damageRoominstalasilistrik->condition ? $rooms->damageRoominstalasilistrik->condition->condition : null,
     ];
 
     // Periksa apakah ada perubahan kondisi
