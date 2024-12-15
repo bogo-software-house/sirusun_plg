@@ -1,16 +1,35 @@
-import React from "react";
+export default function NotificationModal({
+  message,
+  onClose,
+  type,
+  onCloseCallback,
+}) {
+  const handleClose = () => {
+    onClose();
+    if (onCloseCallback) onCloseCallback();
+  };
 
-function NotificationModal({ message, onClose, type }) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className={`bg-${type === "success" ? "green" : "indigo"}-500 p-6 rounded-lg w-80 shadow-lg relative text-white`}>
-        <button className="absolute top-2 right-2 text-white" onClick={onClose}>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+      <div
+        className={`bg-${
+          type === "success" ? "green" : "red"
+        }-500 p-8 rounded-lg shadow-lg relative text-white max-w-lg w-full`}
+      >
+        <button
+          className="absolute top-2 right-2 text-white text-xl font-bold"
+          onClick={handleClose}
+        >
           &times;
         </button>
-        <h3 className="text-lg font-semibold">{type === "success" ? "Sukses" : "Kesalahan"}</h3>
-        <p>{message}</p>
-        <div className="mt-4 flex justify-end">
-          <button className="bg-white text-black p-2 rounded-md hover:bg-gray-200" onClick={onClose}>
+        <p className="text-lg font-semibold ">{type}!</p>
+        <p className="text-lg font-semibold mt-4">{message}</p>
+
+        <div className="mt-6 flex justify-end gap-2">
+          <button
+            className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200"
+            onClick={handleClose}
+          >
             Tutup
           </button>
         </div>
@@ -18,5 +37,3 @@ function NotificationModal({ message, onClose, type }) {
     </div>
   );
 }
-
-export default NotificationModal;
