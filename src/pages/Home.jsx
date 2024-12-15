@@ -1,20 +1,16 @@
-import { useState } from "react";
-import Heroes from "../components/Heroes";
-import Footer from "../components/Footer";
-import Card from "../components/Card";
-import Profil from "../components/Profil";
-import Static from "../components/Static";
-import Contact from "../components/Contact";
-import Download from "../components/Download";
-import AlurPendaftaran from "../components/AlurPendaftaran";
-
-
+import React from "react";
+import Heroes from "../components/landingpage/Heroes";
+import Footer from "../components/landingpage/Footer";
+import Card from "../components/landingpage/Card";
+import Profil from "../components/landingpage/Profil";
+import Static from "../components/landingpage/Static";
+import Contact from "../components/landingpage/Contact";
+import Download from "../components/landingpage/Download";
+import AlurPendaftaran from "../components/landingpage/AlurPendaftaran";
 
 import "../App.css";
 
 function Home() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Heroes />

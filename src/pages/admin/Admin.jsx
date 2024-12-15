@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import AuthContext from "../context/authContext";
-import logo from "../assets/images/logowhite.png";
+import AuthContext from "../../context/authContext";
+import logo from "../../assets/images/logowhite.png";
 
 const navigationItems = [
   { name: "Pengajuan", href: "/admin/dashboard/pengajuan", icon: HomeIcon },

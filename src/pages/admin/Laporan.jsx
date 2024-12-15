@@ -1,111 +1,48 @@
 import React, { useState, useEffect } from "react";
 import Table from "../../components/table/Table";
 import TableHeader from "../../components/table/TableHeader";
+import { fetchReportData } from "../../api/Report";
+import { getReportColumns } from "../../components/columns/ReportColumns";
+
+const ITEMS_PER_PAGE = 5;
 
 const Laporan = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Mengambil data dari API backend
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/report-kamar");
-        const result = await response.json();
-
-        if (result.success) {
-          setData(
-            result.data.flatMap((item) =>
-              item.units.map((unit) => ({
-                ...unit,
-                rusun: item.rusun,
-                blok: item.blok,
-                lantai: item.lantai,
-              }))
-            )
-          );
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const fetchedData = await fetchReportData();
+        setData(fetchedData);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load data. Please try again.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchData();
+    loadData();
   }, []);
 
-  // Pagination
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const handlePageChange = (page) => setCurrentPage(page);
+  const columns = getReportColumns();
 
-  const columns = [
-    { key: "index", label: "No" },
-    { key: "rusun", label: "Rusun" },
-    { key: "blok", label: "Blok" },
-    { key: "lantai", label: "Lantai" },
-    { key: "unit_number", label: "Kamar" },
-    { key: "bulan", label: "Bulan" },
-    { key: "tahun", label: "Tahun" },
-    {
-      key: "sebelum",
-      label: "Sebelum",
-      render: (value) => (
-        <div className="grid grid-cols-2 gap-4 mt-2 w-full text-black">
-          {[
-            { label: "Lantai", value: value?.material?.lantai },
-            { label: "Kusen", value: value?.material?.kusen },
-            { label: "Pintu", value: value?.material?.pintu },
-            { label: "Jendela", value: value?.material?.jendela },
-            { label: "Plafon", value: value?.material?.flatfond },
-            { label: "Dinding", value: value?.material?.dinding },
-            { label: "Air", value: value?.instalasi?.instalasi_air },
-            { label: "Listrik", value: value?.instalasi?.instalasi_listrik },
-          ].map((item) => (
-            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-4 flex flex-col items-center">
-              <p className="text-gray-600 font-semibold">{item.label}</p>
-              <p className="text-gray-800 mt-1">{item.value || "-"}</p>
-            </div>
-          ))}
-        </div>
-      ),
-    },
-    {
-      key: "setelah",
-      label: "Setelah",
-      render: (value) => (
-        <div className="grid grid-cols-2 gap-4 mt-2 w-full text-black">
-          {[
-            { label: "Lantai", value: value?.material?.lantai },
-            { label: "Kusen", value: value?.material?.kusen },
-            { label: "Pintu", value: value?.material?.pintu },
-            { label: "Jendela", value: value?.material?.jendela },
-            { label: "Plafon", value: value?.material?.flatfond },
-            { label: "Dinding", value: value?.material?.dinding },
-            { label: "Air", value: value?.instalasi?.instalasi_air },
-            { label: "Listrik", value: value?.instalasi?.instalasi_listrik },
-          ].map((item) => (
-            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-4 flex flex-col items-center">
-              <p className="text-gray-600 font-semibold">{item.label}</p>
-              <p className="text-gray-800 mt-1">{item.value || "-"}</p>
-            </div>
-          ))}
-        </div>
-      ),
-    },
-  ];
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="">
-      {/* Komponen Table */}
+    <div>
       <div className="overflow-hidden">
         <TableHeader title="Laporan Perubahan Kondisi" />
-
         <Table
           columns={columns}
           data={currentData.map((item, index) => ({
