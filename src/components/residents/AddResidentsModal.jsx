@@ -3,6 +3,7 @@ import axios from "axios";
 import NotificationModal from "../modal/NotificationModal";
 import ConfirmationModal from "../modal/ConfirmationModal"; // Import your confirmation modal component
 
+
 function AddOccupantModal({ onClose, onSuccess }) {
   const [formData, setFormData] = useState({ nik: "" });
   const [rusuns, setRusuns] = useState([
@@ -74,7 +75,7 @@ function AddOccupantModal({ onClose, onSuccess }) {
     if (!formData.nik || !selectedRoom) {
       setNotification({
         message: "Harap lengkapi semua data sebelum menyimpan.",
-        type: "error",
+        type: "Error",
         isVisible: true,
       });
       return;
@@ -89,25 +90,47 @@ function AddOccupantModal({ onClose, onSuccess }) {
         }
       );
 
-      if (response.data.success) {
+      console.log("Response from server:", response.data);
+
+      if (response.data && response.data.data) {
         setNotification({
-          message: response.data.message || "Data berhasil disimpan.",
-          type: "success",
+          message: "Sukses, Data berhasil disimpan.",
+          type: "Success",
           isVisible: true,
         });
-        onSuccess();
+
+        // Tunggu notifikasi ditutup sebelum menutup modal
+        const closeModalAfterNotification = () => {
+          onSuccess();
+          setNotification({
+            message: "",
+            type: "",
+            isVisible: false,
+          });
+          onClose(); // Tutup modal setelah notifikasi ditutup
+        };
+
+        setNotification({
+          message: "Data berhasil disimpan.",
+          type: "success",
+          isVisible: true,
+          onCloseCallback: closeModalAfterNotification,
+        });
       } else {
         setNotification({
-          message:
-            response.data.message || "Terjadi kesalahan saat menyimpan data.",
+          message: "Gagal menyimpan data.",
+
           type: "error",
           isVisible: true,
         });
       }
     } catch (error) {
-      console.error("Gagal menyimpan data:", error);
+
+      console.error("Error response:", error.message);
+
       setNotification({
-        message: "Data tidak Valid",
+        message: error.response?.data?.message || "Terjadi kesalahan pada server.",
+
         type: "error",
         isVisible: true,
       });

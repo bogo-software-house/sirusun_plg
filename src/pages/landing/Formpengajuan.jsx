@@ -37,8 +37,8 @@ const ResidentForm = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
-  const { genders, statusNikah, religions, educations, salaries } =
-    useFetchOptions();
+  const { genders, statusNikah, religions, educations, salaries } = useFetchOptions();
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,15 +62,11 @@ const ResidentForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        "https://api.sirusun.com/api/residents",
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("https://api.sirusun.com/api/residents", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setFormData({
         nik: "",
@@ -349,9 +345,9 @@ const ResidentForm = () => {
         </div>
       </form>
       {/* Error Modal */}
-      {showErrorModal && (
-        <ErrorModal errors={errors} onClose={handleCloseModal} />
-      )}
+
+      {showErrorModal && <ErrorModal errors={errors} onClose={handleCloseModal} />}
+
     </div>
   );
 };

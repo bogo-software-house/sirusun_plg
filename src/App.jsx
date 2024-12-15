@@ -17,7 +17,7 @@ import UserDashboard from "./pages/user/UserDashboard";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import UserProtectedRoute from "./components/protected/UserProtectedRoute";
 import Laporan from "./pages/admin/Laporan";
-
+import Suggestion from "./pages/admin/Suggestion";
 function App() {
   return (
     <AuthProvider>
@@ -89,7 +89,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+              <Route
+              path="/admin/dashboard/suggestion"
+              element={
+                <ProtectedRoute>
+                  <Suggestion />
+                </ProtectedRoute>
+              }
+            />
           </Route>
+          
 
           {/* Dashboard User */}
           <Route

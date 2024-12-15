@@ -11,6 +11,7 @@ const navigationItems = [
   { name: "Pembayaran dan Tunggakan", href: "/admin/dashboard/pembayaran", icon: ChartPieIcon },
   { name: "Kondisi Bangunan", href: "/admin/dashboard/bangunan", icon: DocumentDuplicateIcon },
   { name: "Laporan", href: "/admin/dashboard/laporan", icon: CalendarIcon },
+  { name: "Saran", href: "/admin/dashboard/suggestion", icon: CalendarIcon },
 ];
 
 function classNames(...classes) {
