@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RoomsController; 
 use App\Http\Controllers\Api\TransactionHistoryController;
 use App\Http\Controllers\Api\ReportRoomController; 
+use App\Http\Controllers\Api\SuggestionController; 
 
 //posts
 Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
@@ -103,14 +104,14 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
         //transaksi rooms
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
-
+        
         //pemanggilan kamar untuk pemilihan di admin
         Route::get('/pengambilan-data-kamar/{id}', [RoomsController::class,'showAllRoomFromRusun']);  
         
         //report kondisi kamar di admin
         Route::get('/report-kamar', [ReportRoomController::class,'indextahun']);  
-
-                Route::prefix('transaction-histories')->group(function () {
+        
+        Route::prefix('transaction-histories')->group(function () {
             Route::get('/', [TransactionHistoryController::class, 'index']);
             Route::post('/filter', [TransactionHistoryController::class, 'filter']);
             Route::get('/summary', [TransactionHistoryController::class, 'summary']);
@@ -118,3 +119,6 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
             Route::get('/model-history', [TransactionHistoryController::class, 'getModelHistory']);
             Route::delete('/cleanup', [TransactionHistoryController::class, 'cleanup']);
         });
+                    //pendapat/suggestion
+                    Route::apiResource('/suggestion', App\Http\Controllers\Api\SuggestionController::class);
+                    Route::get('/suggestion/summary', [SuggestionController::class, 'summary']);

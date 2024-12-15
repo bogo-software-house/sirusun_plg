@@ -35,7 +35,7 @@ class RoomsResource extends JsonResource
                 'instalasi_air' => $this->damageRoominstalasiair && $this->damageRoominstalasiair->condition ? $this->damageRoominstalasiair->condition->condition : null,
                 'damage_rooms_instalasi_listrik_custom_id' =>$this->damageRoominstalasilistrik ? $this->damageRoominstalasilistrik->custom_id : null, 
                 'instalasi_listrik' =>$this->damageRoominstalasilistrik && $this->damageRoominstalasilistrik->condition ? $this->damageRoominstalasilistrik->condition->condition : null, 
-            ],
+   ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
