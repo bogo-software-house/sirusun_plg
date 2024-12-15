@@ -126,7 +126,7 @@ class RoomsController extends Controller
     $room->update($request->all());
 
     $update_custom_id = $room->custom_id;
-//ambil lagi data yang baru di update 
+    //ambil lagi data yang baru di update 
     $rooms = Room::where('custom_id', $update_custom_id)->first();
     
     // Simpan data kondisi kamar setelah diubah ke dalam variabel
