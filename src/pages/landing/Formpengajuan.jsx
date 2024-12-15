@@ -59,7 +59,7 @@ const ResidentForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/residents", // Replace with your Laravel API URL
+        "https://api.sirusun.com/api/residents", // Replace with your Laravel API URL
         formDataToSend,
 
         {

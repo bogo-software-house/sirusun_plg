@@ -4,7 +4,10 @@ import Table from "../../components/table/Table";
 import KeteranganModal from "../../components/modal/KeteranganModal";
 import NotificationModal from "../../components/modal/NotificationModal";
 import { getColumns } from "../../utils/TransactionsStatusColumn";
-import { fetchTransactionData, fetchStatusOptions } from "../../api/TransactionStatus";
+import {
+  fetchTransactionData,
+  fetchStatusOptions,
+} from "../../api/TransactionStatus";
 import TableHeader from "../../components/table/TableHeader";
 
 const Pengajuan = () => {
@@ -51,10 +54,16 @@ const Pengajuan = () => {
       const payload = { statusForm_custom_id: statusFormCustomId };
       if (statusFormCustomId === "ISF003") payload.keterangan = keterangan;
 
-      const response = await axios.patch(`http://127.0.0.1:8000/api/transactions/${transaction.form_custom_id}`, payload);
+      const response = await axios.patch(
+        `https://api.sirusun.com/api/transactions/${transaction.form_custom_id}`,
+        payload
+      );
 
       if (response.status === 200) {
-        setNotification({ type: "success", message: "Status berhasil diperbarui!" });
+        setNotification({
+          type: "success",
+          message: "Status berhasil diperbarui!",
+        });
         setTimeout(() => setNotification(null), 3000);
         fetchTransactionData();
         setModalVisible(false);
@@ -84,15 +93,39 @@ const Pengajuan = () => {
     if (currentTransactionId) updateStatus(currentTransactionId);
   };
 
-  const columns = getColumns(statusOptions, selectedStatuses, handleStatusChange, updateStatus);
+  const columns = getColumns(
+    statusOptions,
+    selectedStatuses,
+    handleStatusChange,
+    updateStatus
+  );
 
   return (
     <div className="transaction-table text-black">
-      {notification && <NotificationModal type={notification.type} message={notification.message} onClose={() => setNotification(null)} />}
-      <TableHeader title="Daftar Pengajuan" actions={[{ label: "Tambah Data" }]} />
-      <Table columns={columns} data={transactionData} emptyMessage="Tidak ada data pengajuan." />
+      {notification && (
+        <NotificationModal
+          type={notification.type}
+          message={notification.message}
+          onClose={() => setNotification(null)}
+        />
+      )}
+      <TableHeader
+        title="Daftar Pengajuan"
+        actions={[{ label: "Tambah Data" }]}
+      />
+      <Table
+        columns={columns}
+        data={transactionData}
+        emptyMessage="Tidak ada data pengajuan."
+      />
 
-      <KeteranganModal visible={modalVisible} keterangan={keterangan} onClose={() => setModalVisible(false)} onChange={(value) => setKeterangan(value)} onSubmit={handleModalSubmit} />
+      <KeteranganModal
+        visible={modalVisible}
+        keterangan={keterangan}
+        onClose={() => setModalVisible(false)}
+        onChange={(value) => setKeterangan(value)}
+        onSubmit={handleModalSubmit}
+      />
     </div>
   );
 };

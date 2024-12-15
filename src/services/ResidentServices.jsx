@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://your-api-url.com"; // Ganti dengan URL API yang benar
+const API_URL = "https://api.sirusun.com/api"; // Ganti dengan URL API yang benar
 
 export const fetchResidentsWithTransactions = async () => {
   try {

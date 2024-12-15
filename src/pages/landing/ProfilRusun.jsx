@@ -12,7 +12,7 @@ export default function ProfilRusun() {
   const [loading, setLoading] = useState(true);
 
   const customId = id === "1" ? "IRN001" : "IRN002";
-  const apiUrl = `http://127.0.0.1:8000/api/rusuns/${customId}`;
+  const apiUrl = `https://api.sirusun.com/api/rusuns/${customId}`;
 
   useEffect(() => {
     const fetchData = async () => {

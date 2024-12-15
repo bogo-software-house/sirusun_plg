@@ -15,7 +15,9 @@ export default function Example() {
 
     try {
       // Panggil API untuk mencari data berdasarkan NIK
-      const response = await axios.get(`http://127.0.0.1:8000/api/transactions/${nik}`);
+      const response = await axios.get(
+        `https://api.sirusun.com/api/transactions/${nik}`
+      );
       console.log("Respons API:", response.data.data); // Debugging respons
       setSearchResults(response.data.data); // Simpan data hasil pencarian ke state
     } catch (err) {

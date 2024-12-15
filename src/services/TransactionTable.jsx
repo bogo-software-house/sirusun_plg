@@ -21,7 +21,9 @@ const TransactionTable = () => {
 
   const fetchTransactionData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/transactions");
+      const response = await axios.get(
+        "https://api.sirusun.com/api/transactions"
+      );
       setTransactionData(response.data.data); // Menyimpan data transaksi ke state
       setLoading(false);
     } catch (err) {
@@ -32,7 +34,9 @@ const TransactionTable = () => {
 
   const fetchStatusOptions = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/status-form");
+      const response = await axios.get(
+        "https://api.sirusun.com/api/status-form"
+      );
       setStatusOptions(response.data.data); // Menyimpan data status form ke state
     } catch (err) {
       setError("Error fetching status options");
@@ -59,9 +63,12 @@ const TransactionTable = () => {
       }
 
       // Kirimkan status yang dipilih untuk transaksi ini dengan formcustomId
-      const response = await axios.patch(`http://127.0.0.1:8000/api/transactions/${formcustomId}`, {
-        statusForm_custom_id: statusFormCustomId,
-      });
+      const response = await axios.patch(
+        `https://api.sirusun.com/api/transactions/${formcustomId}`,
+        {
+          statusForm_custom_id: statusFormCustomId,
+        }
+      );
 
       // Memuat ulang data transaksi setelah status diperbarui
       fetchTransactionData();

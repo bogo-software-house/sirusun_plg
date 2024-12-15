@@ -82,7 +82,7 @@ function Bangunan() {
 
   // Fetch data from API with pagination
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/rooms?page=${currentPage}`)
+    fetch(`https://api.sirusun.com/api/rooms?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setRooms(data.data); // Assign the data from the response to rooms
@@ -98,7 +98,7 @@ function Bangunan() {
   // Fetch condition options from API
   // Fetch condition options from API
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/conditions`)
+    fetch(`https://api.sirusun.com/api/conditions`)
       .then((response) => response.json())
       .then((data) => {
         console.log("Response Conditions:", data);
@@ -134,7 +134,7 @@ function Bangunan() {
       const updatedData = { ...formValues, _method: "PUT" };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/rooms/${selectedRoom.custom_id}`,
+        `https://api.sirusun.com/api/rooms/${selectedRoom.custom_id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
