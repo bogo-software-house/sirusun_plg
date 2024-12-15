@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useFetchOptions } from "../../../src/api/FetchOption"; // Import the custom hook
+import { useFetchOptions } from "../../../src/api/FetchOption";
 import GenderSelect from "../../components/input/genders";
 import StatusNikahSelect from "../../components/input/statusnikah";
 import ReligionSelect from "../../components/input/religions";
 import EducationSelect from "../../components/input/educations";
 import SalariesSelect from "../../components/input/salaries";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom";
+import ErrorModal from "../../components/modal/ErrorModal";
 
 const ResidentForm = () => {
   const [formData, setFormData] = useState({
@@ -31,10 +32,12 @@ const ResidentForm = () => {
     berkas_salary: null,
   });
 
-  const [showBanner, setShowBanner] = useState(false); // State to manage banner visibility
-  const navigate = useNavigate(); // Initialize useNavigate for redirection
+  const [showBanner, setShowBanner] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const navigate = useNavigate();
 
-  const { genders, statusNikah, religions, educations, salaries } = useFetchOptions(); // Use the custom hook
+  const { genders, statusNikah, religions, educations, salaries } = useFetchOptions();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +49,7 @@ const ResidentForm = () => {
 
   const handleFileChange = (event) => {
     const { name, files } = event.target;
-    setFormData({ ...formData, [name]: files[0] }); // Simpan file pertama (single upload)
+    setFormData({ ...formData, [name]: files[0] });
   };
 
   const handleSubmit = async (e) => {
@@ -58,18 +61,12 @@ const ResidentForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/residents", // Replace with your Laravel API URL
-        formDataToSend,
+      const response = await axios.post("http://localhost:8000/api/residents", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // Reset the form after submission
       setFormData({
         nik: "",
         username: "",
@@ -92,29 +89,32 @@ const ResidentForm = () => {
         berkas_salary: null,
       });
 
-      // Show the "Mohon tunggu" banner
       setShowBanner(true);
 
-      // Redirect to home after 3 seconds
       setTimeout(() => {
-        navigate("/"); // Redirect to home page
+        navigate("/");
       }, 3000);
 
       console.log(response.data);
     } catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
-        alert("Error: " + JSON.stringify(error.response.data, null, 2));
+        setErrors(error.response.data.errors || {});
+        setShowErrorModal(true);
       } else {
-        alert("Terjadi kesalahan: " + error.message);
-        console.error("Error:", error);
+        console.error("Error:", error.message);
+        setErrors({ message: "Terjadi kesalahan: " + error.message });
+        setShowErrorModal(true);
       }
     }
   };
 
+  const handleCloseModal = () => {
+    setShowErrorModal(false);
+  };
+
   return (
     <div>
-      {/* Banner */}
       {showBanner && (
         <div
           style={{
@@ -234,6 +234,8 @@ const ResidentForm = () => {
           </button>
         </div>
       </form>
+      {/* Error Modal */}
+      {showErrorModal && <ErrorModal errors={errors} onClose={handleCloseModal} />}
     </div>
   );
 };
