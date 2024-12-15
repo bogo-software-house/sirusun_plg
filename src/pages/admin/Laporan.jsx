@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "../../components/table/Table";
+import TableHeader from "../../components/table/TableHeader";
 
 const Laporan = () => {
   const [data, setData] = useState([]);
@@ -14,7 +15,6 @@ const Laporan = () => {
         const result = await response.json();
 
         if (result.success) {
-          console.log(data);
           setData(
             result.data.flatMap((item) =>
               item.units.map((unit) => ({
@@ -36,7 +36,7 @@ const Laporan = () => {
     fetchData();
   }, []);
 
-  // Mengatur Pagination
+  // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -62,12 +62,12 @@ const Laporan = () => {
             { label: "Kusen", value: value?.material?.kusen },
             { label: "Pintu", value: value?.material?.pintu },
             { label: "Jendela", value: value?.material?.jendela },
-            { label: "Flatfond", value: value?.material?.flatfond },
+            { label: "Plafon", value: value?.material?.flatfond },
             { label: "Dinding", value: value?.material?.dinding },
             { label: "Air", value: value?.instalasi?.instalasi_air },
             { label: "Listrik", value: value?.instalasi?.instalasi_listrik },
           ].map((item) => (
-            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-10 flex flex-col items-center" style={{ minHeight: "80px" }}>
+            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-4 flex flex-col items-center">
               <p className="text-gray-600 font-semibold">{item.label}</p>
               <p className="text-gray-800 mt-1">{item.value || "-"}</p>
             </div>
@@ -85,12 +85,12 @@ const Laporan = () => {
             { label: "Kusen", value: value?.material?.kusen },
             { label: "Pintu", value: value?.material?.pintu },
             { label: "Jendela", value: value?.material?.jendela },
-            { label: "Flatfond", value: value?.material?.flatfond },
+            { label: "Plafon", value: value?.material?.flatfond },
             { label: "Dinding", value: value?.material?.dinding },
             { label: "Air", value: value?.instalasi?.instalasi_air },
             { label: "Listrik", value: value?.instalasi?.instalasi_listrik },
           ].map((item) => (
-            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-10 flex flex-col items-center" style={{ minHeight: "80px" }}>
+            <div key={item.label} className="bg-white rounded-lg shadow border border-gray-200 w-full p-4 flex flex-col items-center">
               <p className="text-gray-600 font-semibold">{item.label}</p>
               <p className="text-gray-800 mt-1">{item.value || "-"}</p>
             </div>
@@ -101,11 +101,11 @@ const Laporan = () => {
   ];
 
   return (
-    <div className="p-8 bg-gray-50 rounded-lg shadow mt-6 text-black">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Laporan Kamar</h2>
-
+    <div className="">
       {/* Komponen Table */}
       <div className="overflow-hidden">
+        <TableHeader title="Laporan Perubahan Kondisi" />
+
         <Table
           columns={columns}
           data={currentData.map((item, index) => ({

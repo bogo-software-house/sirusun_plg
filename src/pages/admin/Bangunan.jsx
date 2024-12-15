@@ -238,7 +238,10 @@ function Bangunan() {
       key: "actions",
       label: "Actions",
       render: (value, row) => (
-        <button onClick={() => handleEditClick(row)} className="btn btn-sm btn-edit">
+        <button
+          onClick={() => handleEditClick(row)}
+          className="btn btn-sm btn-edit bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
           Edit
         </button>
       ),
@@ -267,10 +270,14 @@ function Bangunan() {
 
       {/* Pagination Controls */}
       <div className="mt-4 flex justify-end space-x-2">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300">
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 bg-indigo-600 text-white rounded disabled:bg-gray-300">
           Prev
         </button>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300">
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="btn btn-sm btn-edit bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
           Next
         </button>
         <span className="px-4 py-2 text-black">{`Page ${currentPage} of ${totalPages}`}</span>
@@ -279,32 +286,50 @@ function Bangunan() {
       {/* Update Popup */}
       {selectedRoom && (
         <Modal isOpen={selectedRoom !== null} onRequestClose={() => setSelectedRoom(null)} ariaHideApp={false}>
-          <h3>Update Room {selectedRoom.unit_number}</h3>
+          <div className="bg-transparent rounded-lg shadow-lg p-8 max-w-3xl mx-auto mt-10 text-black">
+            <h3 className="text-xl font-bold text-center mb-6">Update Room {selectedRoom.unit_number}</h3>
 
-          {/* Dropdown untuk Properti Kondisi */}
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto mt-10 text-black">
-            {[
-              { label: "Kondisi Lantai", id: "damage_rooms_lantai_custom_id", options: lantaiOptions },
-              { label: "Kondisi Kusen", id: "damage_rooms_kusen_custom_id", options: kusenOptions },
-              { label: "Kondisi Pintu", id: "damage_rooms_pintu_custom_id", options: pintuOptions },
-              { label: "Kondisi Jendela", id: "damage_rooms_jendela_custom_id", options: jendelaOptions },
-              { label: "Kondisi Flatfond", id: "damage_rooms_fn_flatfond_custom_id", options: flatfondOptions },
-              { label: "Kondisi Dinding", id: "damage_rooms_fn_dinding_custom_id", options: dindingOptions },
-              { label: "Kondisi Instalasi Air", id: "damage_rooms_instalasi_air_custom_id", options: instalasiAirOptions },
-              { label: "Kondisi Instalasi Listrik", id: "damage_rooms_instalasi_listrik_custom_id", options: instalasiListrikOptions },
-            ].map(({ label, id, options }) => (
-              <div key={id} className="mt-4">
-                <label className="block text-gray-700 font-medium mb-2">{label}</label>
-                {renderDropdown(id, options)}
-              </div>
-            ))}
+            {/* Dropdown untuk Properti Kondisi */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { label: "Kondisi Lantai", id: "damage_rooms_lantai_custom_id", options: lantaiOptions },
+                { label: "Kondisi Kusen", id: "damage_rooms_kusen_custom_id", options: kusenOptions },
+                { label: "Kondisi Pintu", id: "damage_rooms_pintu_custom_id", options: pintuOptions },
+                { label: "Kondisi Jendela", id: "damage_rooms_jendela_custom_id", options: jendelaOptions },
+                { label: "Kondisi Flatfond", id: "damage_rooms_fn_flatfond_custom_id", options: flatfondOptions },
+                { label: "Kondisi Dinding", id: "damage_rooms_fn_dinding_custom_id", options: dindingOptions },
+                { label: "Kondisi Instalasi Air", id: "damage_rooms_instalasi_air_custom_id", options: instalasiAirOptions },
+                { label: "Kondisi Instalasi Listrik", id: "damage_rooms_instalasi_listrik_custom_id", options: instalasiListrikOptions },
+              ].map(({ label, id, options }) => (
+                <div key={id} className="flex flex-col items-center">
+                  <label className="block text-center text-gray-700 font-medium mb-2">{label}</label>
+                  <select
+                    className="w-3/4 md:w-full bg-gray-100 border border-gray-300 rounded-lg p-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    value={formValues[id] || ""}
+                    onChange={(e) => handleInputChange(id, e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Pilih {label}
+                    </option>
+                    {Object.entries(options).map(([label, value]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+            </div>
 
-            <div className="mt-6 flex justify-end gap-4">
-              <button className="bg-gray-500 text-white py-2 px-6 rounded-lg shadow" onClick={() => setSelectedRoom(null)}>
+            {/* Action Buttons */}
+            <div className="mt-8 flex justify-center gap-4">
+              <button className="bg-gray-500 text-white py-2 px-6 rounded-lg shadow hover:bg-gray-600 transition" onClick={() => setSelectedRoom(null)}>
                 Close
               </button>
-              {/* Mengganti Save Changes untuk konfirmasi */}
-              <button className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow" onClick={handleUpdateClick}>
+              <button
+                className="btn btn-sm btn-edit bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleUpdateClick}
+              >
                 Save Changes
               </button>
             </div>
