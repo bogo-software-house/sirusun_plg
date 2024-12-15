@@ -38,7 +38,7 @@ class ReportRoomController extends Controller
             $reports->where('tahun', $tahun);
         }
 
-          $reports = $reports->paginate(10); // Menggunakan pagination 10 item per halaman
+          $reports = $reports->paginate(30); // Menggunakan pagination 10 item per halaman
 
 
         // Check if reports were found
