@@ -2,7 +2,7 @@ export default function Example() {
   return (
     <div className="bg-gray-50 py-24 sm:py-32 z-0 mt-16 z-0">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Lokasi Rusunawa</p>
+        <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Our Location</p>
         <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
           <div className="relative z-0 lg:row-span-2">
             <div className="absolute z-0 inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
@@ -45,10 +45,10 @@ export default function Example() {
             <div className="absolute inset-px rounded-lg bg-white"></div>
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)]">
               <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Rusun Kasnariansyah</p>
+                <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">Our Location</p>
               </div>
               <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
-                <iframe 
+                <iframe
                   width="100%"
                   height="200"
                   frameborder="0"

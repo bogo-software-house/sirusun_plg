@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import AuthContext from "../../context/authContext";
 import logo from "../../assets/images/logowhite.png";
 
@@ -12,6 +12,16 @@ const navigationItems = [
   { name: "Kondisi Bangunan", href: "/admin/dashboard/bangunan", icon: DocumentDuplicateIcon },
   { name: "Laporan", href: "/admin/dashboard/laporan", icon: CalendarIcon },
   { name: "Saran", href: "/admin/dashboard/suggestion", icon: CalendarIcon },
+  {
+    name: "Report",
+    href: "#",
+    icon: CalendarIcon,
+    children: [
+      { name: "Report 1", href: "/admin/dashboard/report/report1" },
+      { name: "Report 2", href: "/admin/dashboard/report/report2" },
+      { name: "Report 3", href: "/admin/dashboard/report/report3" },
+    ],
+  },
 ];
 
 function classNames(...classes) {
@@ -20,6 +30,7 @@ function classNames(...classes) {
 
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(null); // Track the open dropdown
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,6 +38,10 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+
+  const handleDropdownToggle = (itemName) => {
+    setDropdownOpen((prev) => (prev === itemName ? null : itemName));
   };
 
   const navigation = navigationItems.map((item) => ({
@@ -57,17 +72,30 @@ export default function AdminDashboard() {
                     <li>
                       <ul className="-mx-2 space-y-1">
                         {navigation.map((item) => (
-                          <li key={item.name}>
-                            <Link
-                              to={item.href}
-                              className={classNames(
-                                item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
-                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
-                              )}
-                            >
-                              <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
-                              {item.name}
-                            </Link>
+                          <li key={item.name} className="relative">
+                            <div>
+                              <button
+                                onClick={() => item.children && handleDropdownToggle(item.name)}
+                                className={classNames(
+                                  item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                  "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                )}
+                              >
+                                <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
+                                {item.name}
+                              </button>
+                            </div>
+                            {item.children && dropdownOpen === item.name && (
+                              <ul className="absolute left-0 mt-2 w-48 bg-indigo-600 rounded-md shadow-lg">
+                                {item.children.map((child) => (
+                                  <li key={child.name}>
+                                    <Link to={child.href} className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                                      {child.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -96,17 +124,38 @@ export default function AdminDashboard() {
                 <li>
                   <ul className="-mx-2 space-y-1">
                     {navigation.map((item) => (
-                      <li key={item.name}>
-                        <Link
-                          to={item.href}
-                          className={classNames(
-                            item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
-                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
-                          )}
-                        >
-                          <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
-                          {item.name}
-                        </Link>
+                      <li key={item.name} className="relative">
+                        <div>
+                          <button
+                            onClick={() => item.children && handleDropdownToggle(item.name)}
+                            className={classNames(
+                              item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                              "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                            )}
+                          >
+                            <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
+                            {item.name}
+                            {item.children && (
+                              <ChevronDownIcon
+                                className={classNames(
+                                  dropdownOpen === item.name ? "rotate-0 text-white absolute right-0" : "rotate-[-90deg] absolute right-0 mr-auto text-indigo-200 group-hover:text-white",
+                                  " h-5 w-5 transition-transform"
+                                )}
+                              />
+                            )}
+                          </button>
+                        </div>
+                        {item.children && dropdownOpen === item.name && (
+                          <ul className="absolute left-12 mt-2 w-48 bg-indigo-600 rounded-md">
+                            {item.children.map((child) => (
+                              <li key={child.name}>
+                                <Link to={child.href} className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                                  {child.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -128,20 +177,6 @@ export default function AdminDashboard() {
               <span className="sr-only">Open sidebar</span>
               <Bars3Icon className="h-6 w-6" />
             </button>
-            {/* <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 mt-4">
-              <form action="#" method="GET" className="relative flex flex-1">
-                <label htmlFor="search-field" className="sr-only">
-                  Search
-                </label>
-                <input
-                  id="search-field"
-                  name="search"
-                  type="search"
-                  placeholder="Search..."
-                  className="block h-12 mt-2 bg-gray-100 w-full rounded-lg border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-                />
-              </form>
-            </div> */}
           </div>
 
           {/* Dynamic Content */}
