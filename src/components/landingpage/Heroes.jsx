@@ -6,11 +6,10 @@ import logo from "../../assets/images/logowithtext.png";
 import "aos/dist/aos.css";
 import AOS from "aos";
 
-
 // Impor gambar dengan benar
-import rusun3 from "../assets/images/rusun3.jpeg";
-import rusun5 from "../assets/images/rusun5.jpeg";
-import rusun6 from "../assets/images/rusun6.jpeg";
+import rusun3 from "../../assets/images/rusun3.jpeg";
+import rusun5 from "../../assets/images/rusun5.jpeg";
+import rusun6 from "../../assets/images/rusun6.jpeg";
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -75,12 +74,10 @@ const Carousel = ({ images }) => {
           data-aos="fade-up"
         >
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-10">
- 
             <img alt="logo" src={logo} className="h-20" />
             <h1 className="mt-10 lg:text-4xl font-semibold tracking-tight text-gray-900 sm:text-lg">
               Sistem Informasi Rumah Susun
               <br />
-
               <div className="lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 SIRUSUN
               </div>
@@ -89,7 +86,6 @@ const Carousel = ({ images }) => {
               UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan
               Permukiman dan Pertanahan Kota Palembang
             </p>
-
 
             <div className="mt-10 flex items-center gap-x-6" data-aos="fade-up">
               <a className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -102,8 +98,6 @@ const Carousel = ({ images }) => {
             className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-68"
             data-aos="fade-up"
           >
-
- 
             <div className="relative mt-[40px] mr-9">
               <div className="carousel overflow-hidden">
                 <div
@@ -163,8 +157,6 @@ const Carousel = ({ images }) => {
                     strokeWidth={2}
                     d="M9 5l7 7-7 7"
                   />
-
- 
                 </svg>
               </button>
             </div>

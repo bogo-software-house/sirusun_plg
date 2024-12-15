@@ -1,7 +1,6 @@
-import download1 from "../assets/images/rusun6.jpeg";
-import download2 from "../assets/images/rusun5.jpeg";
-import download3 from "../assets/images/rusun3.jpeg";
-
+import download1 from "../../assets/images/rusun6.jpeg";
+import download2 from "../../assets/images/rusun5.jpeg";
+import download3 from "../../assets/images/rusun3.jpeg";
 
 const posts = [
   {

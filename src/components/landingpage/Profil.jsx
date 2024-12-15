@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // Perbaiki cara impor gambar, tanpa menggunakan objek
-import kertapati from "../assets/images/rusun6.jpeg";
-import kasnariansyah from "../assets/images/rusun5.jpeg"; // Pastikan ekstensi file gambar sudah benar (misalnya .jpeg atau .jpg)
+import kertapati from "../../assets/images/rusun6.jpeg";
+import kasnariansyah from "../../assets/images/rusun5.jpeg"; // Pastikan ekstensi file gambar sudah benar (misalnya .jpeg atau .jpg)
 
 const posts = [
   {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "aos/dist/aos.css";
 import AOS from "aos";
-import gambarKamar from "../assets/images/rusun5.jpeg";
+import gambarKamar from "../../assets/images/rusun5.jpeg";
 
 export default function ProfilRusun() {
   const { id } = useParams(); // Mengambil ID dari URL

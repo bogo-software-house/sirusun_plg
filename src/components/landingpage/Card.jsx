@@ -1,5 +1,5 @@
-import kepala from "../assets/images/pakagus.png";
-import walikota from "../assets/images/pjwalikota.jpg";
+import kepala from "../../assets/images/pakagus.png";
+import walikota from "../../assets/images/pjwalikota.jpg";
 
 export default function Example() {
   return (
