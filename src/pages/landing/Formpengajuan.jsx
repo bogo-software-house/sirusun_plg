@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useFetchOptions } from "../../src/api/FetchOption"; // Import the custom hook
-import GenderSelect from "../components/input/genders";
-import StatusNikahSelect from "../components/input/statusnikah";
-import ReligionSelect from "../components/input/religions";
-import EducationSelect from "../components/input/educations";
-import SalariesSelect from "../components/input/salaries";
+import { useFetchOptions } from "../../../src/api/FetchOption"; // Import the custom hook
+import GenderSelect from "../../components/input/genders";
+import StatusNikahSelect from "../../components/input/statusnikah";
+import ReligionSelect from "../../components/input/religions";
+import EducationSelect from "../../components/input/educations";
+import SalariesSelect from "../../components/input/salaries";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 const ResidentForm = () => {

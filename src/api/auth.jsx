@@ -12,10 +12,6 @@ export const login = async (credentials) => {
     const response = await axios.post(API_URL, credentials);
     const { token, role, username } = response.data;
 
-    // Menampilkan data role yang diterima dari API
-    console.log("Role yang diterima:", role);
-    console.log("username yang diterima:", username);
-
     // Menyimpan token dan role di localStorage atau sessionStorage
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);

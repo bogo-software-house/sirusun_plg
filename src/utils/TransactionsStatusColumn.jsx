@@ -3,9 +3,8 @@ import ActionDropdown from "../components/DropdownAction/ActionDropdown";
 
 export const getColumns = (statusOptions, selectedStatuses, handleStatusChange, updateStatus) => [
   { key: "nik", label: "NIK", render: (value, row) => row.resident_pdf?.nik || "N/A" },
-  { key: "username", label: "Username", render: (value, row) => row.resident_pdf?.resident?.username || "N/A" },
+  { key: "username", label: "Nama", render: (value, row) => row.resident_pdf?.resident?.username || "N/A" },
   { key: "status", label: "Status", render: (value, row) => row.status_form?.status || "N/A" },
-  { key: "custom_id", label: "Custom ID", render: (value) => value || "N/A" },
   {
     key: "actions",
     label: "Update Status",

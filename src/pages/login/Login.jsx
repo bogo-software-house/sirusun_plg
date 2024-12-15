@@ -23,7 +23,6 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role); // Menyimpan role
         localStorage.setItem("username", data.username); // Simpan username
-        console.log("Login Response:", data); // Debugging respons API login
 
         // Redirect ke halaman dashboard admin
         navigate("/user/dashboard");

@@ -1,10 +1,11 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import Navbar from "../SmallComponents/Navbar";
+import Navbar from "../../SmallComponents/Navbar";
 import { useState, useEffect } from "react";
-import logo from "../assets/images/logowithtext.png";
+import logo from "../../assets/images/logowithtext.png";
 import "aos/dist/aos.css";
 import AOS from "aos";
+
 
 // Impor gambar dengan benar
 import rusun3 from "../assets/images/rusun3.jpeg";
@@ -68,15 +69,18 @@ const Carousel = ({ images }) => {
             strokeWidth={0}
           />
         </svg>
+
         <div
           className="mt-10 mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-38"
           data-aos="fade-up"
         >
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-10">
+ 
             <img alt="logo" src={logo} className="h-20" />
             <h1 className="mt-10 lg:text-4xl font-semibold tracking-tight text-gray-900 sm:text-lg">
               Sistem Informasi Rumah Susun
               <br />
+
               <div className="lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 SIRUSUN
               </div>
@@ -85,16 +89,21 @@ const Carousel = ({ images }) => {
               UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan
               Permukiman dan Pertanahan Kota Palembang
             </p>
+
+
             <div className="mt-10 flex items-center gap-x-6" data-aos="fade-up">
               <a className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 <Link to="/Formpengajuan">Ajukan Penyewaan</Link>
               </a>
             </div>
           </div>
+
           <div
             className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-68"
             data-aos="fade-up"
           >
+
+ 
             <div className="relative mt-[40px] mr-9">
               <div className="carousel overflow-hidden">
                 <div
@@ -115,6 +124,7 @@ const Carousel = ({ images }) => {
                   ))}
                 </div>
               </div>
+
               <button
                 data-aos="fade-up"
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
@@ -153,6 +163,8 @@ const Carousel = ({ images }) => {
                     strokeWidth={2}
                     d="M9 5l7 7-7 7"
                   />
+
+ 
                 </svg>
               </button>
             </div>

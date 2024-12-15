@@ -5,24 +5,23 @@ import { AuthProvider } from "./context/authContext";
 import Home from "./pages/Home";
 import Login from "./pages/login/Login";
 import Loginadmin from "./pages/login/Loginadmin";
-import ProfilRusun from "./pages/ProfilRusun";
-import Formpengajuan from "./pages/Formpengajuan";
-import CekPermohonan from "./pages/CekPermohonan";
-import Admin from "./pages/Admin";
+import ProfilRusun from "./pages/landing/ProfilRusun";
+import Formpengajuan from "./pages/landing/Formpengajuan";
+import CekPermohonan from "./pages/landing/CekPermohonan";
+import Admin from "./pages/admin/Admin";
 import Pengajuan from "./pages/admin/Pengajuan";
 import Penghuni from "./pages/admin/Penghuni";
 import Bangunan from "./pages/admin/Bangunan";
-import Unit from "./pages/admin/Unit";
 import Pembayaran from "./pages/admin/Pembayaran";
-import UserDashboard from "./pages/UserDashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
-import UserProtectedRoute from "./components/UserProtectedRoute";
+import UserDashboard from "./pages/user/UserDashboard";
+import ProtectedRoute from "./components/protected/ProtectedRoute";
+import UserProtectedRoute from "./components/protected/UserProtectedRoute";
+import Laporan from "./pages/admin/Laporan";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-     
         <Routes>
           {/* Halaman Umum */}
           <Route path="/" element={<Home />} />
@@ -31,7 +30,6 @@ function App() {
           <Route path="/Formpengajuan" element={<Formpengajuan />} />
           <Route path="/ProfilRusun/:id" element={<ProfilRusun />} />
           <Route path="/CekPermohonan" element={<CekPermohonan />} />
-          
 
           {/* Dashboard Admin */}
           <Route
@@ -76,10 +74,10 @@ function App() {
               }
             />
             <Route
-              path="/admin/dashboard/unit"
+              path="/admin/dashboard/laporan"
               element={
                 <ProtectedRoute>
-                  <Unit />
+                  <Laporan />
                 </ProtectedRoute>
               }
             />

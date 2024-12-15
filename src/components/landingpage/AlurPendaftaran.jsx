@@ -15,7 +15,7 @@
 import { CheckIcon, HandThumbUpIcon, UserIcon } from "@heroicons/react/20/solid";
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import { content } from "flowbite-react/tailwind";
-import alur from "../assets/images/alur.png"
+import alur from "../../assets/images/alur.png";
 const timeline = [
   {
     id: 1,
@@ -104,9 +104,9 @@ export default function Example() {
           {/* colom 1 */}
           <div>
             <h2 className="text-white mt-8 text-center font-semibold text-2xl">Alur Pendafatran</h2>
-           
-             <div className="flow-root lg:ml-8 sm:ml-0 place-items-center mb-16">
-             <img alt="alur" src={alur} className=" lg:h-screen " />
+
+            <div className="flow-root lg:ml-8 sm:ml-0 place-items-center mb-16">
+              <img alt="alur" src={alur} className=" lg:h-screen " />
               {/* <ul role="list" className="-mb-8">
                 {timeline.map((event, eventIdx) => (
                   <li key={event.id}>
@@ -128,7 +128,7 @@ export default function Example() {
                   </li>
                 ))}
               </ul> */}
-            </div> 
+            </div>
           </div>
           {/* colom 2 */}
           <div>

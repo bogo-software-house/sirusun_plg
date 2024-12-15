@@ -19,8 +19,6 @@ export default function Login() {
       const credentials = { username, password }; // Use username instead of email
       const data = await login(credentials);
 
-      // Log the response to ensure correct data is returned
-      console.log("Login response:", data);
 
       // Make sure only admin role is logged in
       if (data.role === "admin") {

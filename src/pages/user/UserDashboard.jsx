@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import NotificationModal from "../components/modal/NotificationModal";
+import NotificationModal from "../../components/modal/NotificationModal";
 
 export default function UserDashboard() {
   const [userData, setUserData] = useState(null); // Data user
@@ -134,10 +134,7 @@ export default function UserDashboard() {
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-900">Update Password</dt>
                 <dd className="mt-1 sm:col-span-2">
-                  <button
-                    className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600"
-                    onClick={() => setPasswordModalOpen(true)}
-                  >
+                  <button className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600" onClick={() => setPasswordModalOpen(true)}>
                     Update
                   </button>
                 </dd>
@@ -147,10 +144,7 @@ export default function UserDashboard() {
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-900">Logout</dt>
                 <dd className="mt-1 sm:col-span-2">
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                    onClick={handleLogout}
-                  >
+                  <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onClick={handleLogout}>
                     Logout
                   </button>
                 </dd>
@@ -167,13 +161,7 @@ export default function UserDashboard() {
           <div className="fixed inset-0 flex items-center justify-center p-4">
             <Dialog.Panel className="bg-white rounded shadow-lg p-6">
               <Dialog.Title className="text-lg font-medium">Update Password</Dialog.Title>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="mt-4 border rounded w-full p-2 text-black"
-                placeholder="Password Baru"
-              />
+              <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="mt-4 border rounded w-full p-2 text-black" placeholder="Password Baru" />
               <div className="mt-4 flex justify-end">
                 <button className="mr-2 px-4 py-2 bg-gray-300 rounded" onClick={() => setPasswordModalOpen(false)}>
                   Batal
@@ -188,13 +176,7 @@ export default function UserDashboard() {
       )}
 
       {/* Notification for success or error */}
-      {notification && (
-        <NotificationModal
-          message={notification.message}
-          type={notification.type}
-          onClose={() => setNotification(null)}
-        />
-      )}
+      {notification && <NotificationModal message={notification.message} type={notification.type} onClose={() => setNotification(null)} />}
     </main>
   );
 }
