@@ -12,7 +12,7 @@ const Laporan = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/suggestion");
+        const response = await fetch("https://api.sirusun.com/api/suggestion");
         if (!response.ok) {
           throw new Error(`Failed to fetch data: ${response.statusText}`);
         }

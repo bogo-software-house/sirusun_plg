@@ -6,7 +6,7 @@ const posts = [
   {
     id: 1,
     title: "Panduan Pendaftaran",
-    href: "/public/PanduanPendaftaran.pdf", // Rute ke file PDF
+    href: "https://sirusun.com/PanduanPendaftaran.pdf", // Rute ke file PDF
 
     description: "downl",
     image: download1,
@@ -21,7 +21,7 @@ const posts = [
   {
     id: 3,
     title: "Perwali",
-    href: "/public/perwali.pdf", // Jika tidak ada file PDF, gunakan '#' atau link lain
+    href: "https://sirusun.com//perwali.pdf", // Jika tidak ada file PDF, gunakan '#' atau link lain
     description: "downl",
     image: download3,
   },

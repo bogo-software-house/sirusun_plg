@@ -37,8 +37,8 @@ const ResidentForm = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
-  const { genders, statusNikah, religions, educations, salaries } = useFetchOptions();
-
+  const { genders, statusNikah, religions, educations, salaries } =
+    useFetchOptions();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,11 +62,15 @@ const ResidentForm = () => {
     });
 
     try {
-      const response = await axios.post("https://api.sirusun.com/api/residents", formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "https://api.sirusun.com/api/residents",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       setFormData({
         nik: "",
@@ -191,6 +195,7 @@ const ResidentForm = () => {
               onChange={handleInputChange}
               required
               className="border border-gray-300 rounded p-2 w-full mt-4"
+              placeholder="ex: 10-10-2001"
             />
           </label>
 
@@ -247,7 +252,8 @@ const ResidentForm = () => {
               value={formData.no_telp}
               onChange={handleInputChange}
               required
-              className="   rounded p-2 w-full mt-4"
+              className="rounded p-2 w-full mt-4"
+              placeholder="ex: 08123456789"
             />
           </label>
 
@@ -309,6 +315,7 @@ const ResidentForm = () => {
               onChange={handleFileChange}
               required
               className="border border-gray-300 rounded p-2 w-full mt-4"
+              accept="application/pdf"
             />
           </label>
 
@@ -320,6 +327,7 @@ const ResidentForm = () => {
               onChange={handleFileChange}
               required
               className="border border-gray-300 rounded p-2 w-full mt-4"
+              accept="application/pdf"
             />
           </label>
 
@@ -331,6 +339,7 @@ const ResidentForm = () => {
               onChange={handleFileChange}
               required
               className="border border-gray-300 rounded p-2 w-full mt-4"
+              accept="application/pdf"
             />
           </label>
         </div>
@@ -346,8 +355,9 @@ const ResidentForm = () => {
       </form>
       {/* Error Modal */}
 
-      {showErrorModal && <ErrorModal errors={errors} onClose={handleCloseModal} />}
-
+      {showErrorModal && (
+        <ErrorModal errors={errors} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
