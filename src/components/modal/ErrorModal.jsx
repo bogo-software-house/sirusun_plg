@@ -23,7 +23,6 @@ const ErrorModal = ({ errors, onClose }) => {
             </div>
           </div>
         </div>
-
         <button onClick={onClose} className="mt-12 bg-red-500 text-white  rounded-lg hover:bg-red-600 ">
           Tutup
         </button>

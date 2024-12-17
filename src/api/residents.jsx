@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/residents", // Ganti sesuai URL backend Anda
+  baseURL: "https://api.sirusun.com/api/residents", // Ganti sesuai URL backend Anda
   headers: {
     "Content-Type": "application/json",
   },

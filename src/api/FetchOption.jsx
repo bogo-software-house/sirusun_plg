@@ -12,19 +12,25 @@ export const useFetchOptions = () => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const genderResponse = await axios.get("http://127.0.0.1:8000/api/genders");
+        const genderResponse = await axios.get(" https://api.sirusun.com/api/genders");
         setGenders(genderResponse.data.data);
 
-        const statusNikahResponse = await axios.get("http://127.0.0.1:8000/api/status_nikah");
+        const statusNikahResponse = await axios.get("https://api.sirusun.com/api/status_nikah");
         setStatusNikah(statusNikahResponse.data.data);
 
-        const religionResponse = await axios.get("http://127.0.0.1:8000/api/religions");
+        const religionResponse = await axios.get(
+          "https://api.sirusun.com/api/religions"
+        );
         setReligions(religionResponse.data.data);
 
-        const educationResponse = await axios.get("http://127.0.0.1:8000/api/educations");
+        const educationResponse = await axios.get(
+          "https://api.sirusun.com/api/educations"
+        );
         setEducations(educationResponse.data.data);
 
-        const salariesResponse = await axios.get("http://127.0.0.1:8000/api/salaries");
+        const salariesResponse = await axios.get(
+          "https://api.sirusun.com/api/salaries"
+        );
         setSalaries(salariesResponse.data.data);
       } catch (error) {
         console.error("Error fetching options:", error);

@@ -82,7 +82,7 @@ function Bangunan() {
 
   // Fetch data from API with pagination
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/rooms?page=${currentPage}`)
+    fetch(`https://api.sirusun.com/api/rooms?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setRooms(data.data); // Assign the data from the response to rooms
@@ -98,14 +98,16 @@ function Bangunan() {
   // Fetch condition options from API
   // Fetch condition options from API
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/conditions`)
+    fetch(`https://api.sirusun.com/api/conditions`)
       .then((response) => response.json())
       .then((data) => {
         console.log("Response Conditions:", data);
         // Mengakses array kondisi dari properti data.data
         setConditionOptions(data.data?.data || []);
       })
-      .catch((error) => console.error("Error fetching condition options:", error));
+      .catch((error) =>
+        console.error("Error fetching condition options:", error)
+      );
   }, []);
 
   const getNestedValue = (obj, key) => {
@@ -131,11 +133,14 @@ function Bangunan() {
     try {
       const updatedData = { ...formValues, _method: "PUT" };
 
-      const response = await fetch(`http://127.0.0.1:8000/api/rooms/${selectedRoom.custom_id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        `https://api.sirusun.com/api/rooms/${selectedRoom.custom_id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData),
+        }
+      );
 
       if (!response.ok) {
         const errorDetails = await response.text();
@@ -143,7 +148,11 @@ function Bangunan() {
       }
 
       const updatedRoom = await response.json();
-      setRooms((prevRooms) => prevRooms.map((room) => (room.custom_id === selectedRoom.custom_id ? updatedRoom.data : room)));
+      setRooms((prevRooms) =>
+        prevRooms.map((room) =>
+          room.custom_id === selectedRoom.custom_id ? updatedRoom.data : room
+        )
+      );
       setSelectedRoom(null);
       setIsConfirmationModalOpen(false);
     } catch (err) {
@@ -167,7 +176,11 @@ function Bangunan() {
   };
 
   const renderDropdown = (key, options) => (
-    <select className="form-control" value={formValues[key] || ""} onChange={(e) => handleInputChange(key, e.target.value)}>
+    <select
+      className="form-control"
+      value={formValues[key] || ""}
+      onChange={(e) => handleInputChange(key, e.target.value)}
+    >
       {Object.entries(options).map(([label, id]) => (
         <option key={label} value={id}>
           {label}
@@ -253,9 +266,14 @@ function Bangunan() {
   return (
     <div>
       {/* Render ConfirmationModal jika modal konfirmasi dibuka */}
-      {isConfirmationModalOpen && <ConfirmationModal onConfirm={confirmUpdate} onCancel={cancelUpdate} />}
+      {isConfirmationModalOpen && (
+        <ConfirmationModal onConfirm={confirmUpdate} onCancel={cancelUpdate} />
+      )}
 
-      <TableHeader title="Kondisi Bangunan dan Unit" actions={[{ label: "Tambah Data" }]} />
+      <TableHeader
+        title="Kondisi Bangunan dan Unit"
+        actions={[{ label: "Tambah Data" }]}
+      />
 
       <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
         <Table
@@ -270,7 +288,11 @@ function Bangunan() {
 
       {/* Pagination Controls */}
       <div className="mt-4 flex justify-end space-x-2">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 bg-indigo-600 text-white rounded disabled:bg-gray-300">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-indigo-600 text-white rounded disabled:bg-gray-300"
+        >
           Prev
         </button>
         <button
@@ -285,24 +307,64 @@ function Bangunan() {
 
       {/* Update Popup */}
       {selectedRoom && (
-        <Modal isOpen={selectedRoom !== null} onRequestClose={() => setSelectedRoom(null)} ariaHideApp={false}>
+        <Modal
+          isOpen={selectedRoom !== null}
+          onRequestClose={() => setSelectedRoom(null)}
+          ariaHideApp={false}
+        >
           <div className="bg-transparent rounded-lg shadow-lg p-8 max-w-3xl mx-auto mt-10 text-black">
-            <h3 className="text-xl font-bold text-center mb-6">Update Room {selectedRoom.unit_number}</h3>
+            <h3 className="text-xl font-bold text-center mb-6">
+              Update Room {selectedRoom.unit_number}
+            </h3>
 
             {/* Dropdown untuk Properti Kondisi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { label: "Kondisi Lantai", id: "damage_rooms_lantai_custom_id", options: lantaiOptions },
-                { label: "Kondisi Kusen", id: "damage_rooms_kusen_custom_id", options: kusenOptions },
-                { label: "Kondisi Pintu", id: "damage_rooms_pintu_custom_id", options: pintuOptions },
-                { label: "Kondisi Jendela", id: "damage_rooms_jendela_custom_id", options: jendelaOptions },
-                { label: "Kondisi Flatfond", id: "damage_rooms_fn_flatfond_custom_id", options: flatfondOptions },
-                { label: "Kondisi Dinding", id: "damage_rooms_fn_dinding_custom_id", options: dindingOptions },
-                { label: "Kondisi Instalasi Air", id: "damage_rooms_instalasi_air_custom_id", options: instalasiAirOptions },
-                { label: "Kondisi Instalasi Listrik", id: "damage_rooms_instalasi_listrik_custom_id", options: instalasiListrikOptions },
+                {
+                  label: "Kondisi Lantai",
+                  id: "damage_rooms_lantai_custom_id",
+                  options: lantaiOptions,
+                },
+                {
+                  label: "Kondisi Kusen",
+                  id: "damage_rooms_kusen_custom_id",
+                  options: kusenOptions,
+                },
+                {
+                  label: "Kondisi Pintu",
+                  id: "damage_rooms_pintu_custom_id",
+                  options: pintuOptions,
+                },
+                {
+                  label: "Kondisi Jendela",
+                  id: "damage_rooms_jendela_custom_id",
+                  options: jendelaOptions,
+                },
+                {
+                  label: "Kondisi Flatfond",
+                  id: "damage_rooms_fn_flatfond_custom_id",
+                  options: flatfondOptions,
+                },
+                {
+                  label: "Kondisi Dinding",
+                  id: "damage_rooms_fn_dinding_custom_id",
+                  options: dindingOptions,
+                },
+                {
+                  label: "Kondisi Instalasi Air",
+                  id: "damage_rooms_instalasi_air_custom_id",
+                  options: instalasiAirOptions,
+                },
+                {
+                  label: "Kondisi Instalasi Listrik",
+                  id: "damage_rooms_instalasi_listrik_custom_id",
+                  options: instalasiListrikOptions,
+                },
               ].map(({ label, id, options }) => (
                 <div key={id} className="flex flex-col items-center">
-                  <label className="block text-center text-gray-700 font-medium mb-2">{label}</label>
+                  <label className="block text-center text-gray-700 font-medium mb-2">
+                    {label}
+                  </label>
                   <select
                     className="w-3/4 md:w-full bg-gray-100 border border-gray-300 rounded-lg p-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     value={formValues[id] || ""}
@@ -323,7 +385,10 @@ function Bangunan() {
 
             {/* Action Buttons */}
             <div className="mt-8 flex justify-center gap-4">
-              <button className="bg-gray-500 text-white py-2 px-6 rounded-lg shadow hover:bg-gray-600 transition" onClick={() => setSelectedRoom(null)}>
+              <button
+                className="bg-gray-500 text-white py-2 px-6 rounded-lg shadow hover:bg-gray-600 transition"
+                onClick={() => setSelectedRoom(null)}
+              >
                 Close
               </button>
               <button

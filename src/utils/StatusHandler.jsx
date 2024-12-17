@@ -40,7 +40,10 @@ export const updateStatus = async (transactionId, selectedStatuses, transactionD
     const payload = { statusForm_custom_id: statusFormCustomId };
     if (statusFormCustomId === "ISF003") payload.keterangan = setKeterangan;
 
-    const response = await axios.patch(`http://127.0.0.1:8000/api/transactions/${transaction.form_custom_id}`, payload);
+    const response = await axios.patch(
+      `https://api.sirusun.com/api/transactions/${transaction.form_custom_id}`,
+      payload
+    );
 
     if (response.status === 200) {
       setNotification({ type: "success", message: "Status berhasil diperbarui!" });
