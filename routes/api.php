@@ -67,7 +67,6 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
-
                     Route::apiResource('/users-data', UserController::class);   
                     //users
                     Route::put('/admin-update-password', [UserController::class,'updatepassword']);
