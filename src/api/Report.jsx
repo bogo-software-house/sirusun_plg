@@ -18,6 +18,7 @@ export const fetchReportData = async () => {
     }
   } catch (error) {
     console.error("Error fetching data:", error);
-    return [];
+    // Optionally set a state to display an error message
+    setError("Data could not be loaded. Please try again later.");
   }
 };

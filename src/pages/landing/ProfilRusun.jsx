@@ -46,38 +46,44 @@ export default function ProfilRusun() {
           Rusun {rusun.rusun}
         </h1>
         {/* Menampilkan gambar rusun */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 sm:grid-cols-2 lg:gap-x-8 lg:px-8 ">
-          {rusun.image1 && (
-            <img
-              src={rusun.image1}
-              alt="Gambar 1"
-              className=" lg:w-full lg:h-full w-1/2 h-1/2 rounded-lg object-cover lg:block"
-            />
-          )}
-          <div className="lg:grid lg:grid-cols-1 sm:grid-cols-2 lg:gap-y-8">
-            {rusun.image2 && (
-              <img
-                src={rusun.image2}
-                alt="Gambar 2"
-                className=" lg:w-full lg:h-full w-1/2 h-1/2 rounded-lg object-cover"
-              />
-            )}
-            {rusun.image3 && (
-              <img
-                src={rusun.image3}
-                alt="Gambar 3"
-                className="lg:w-full lg:h-full w-1/2 h-1/2 rounded-lg object-cover"
-              />
-            )}
-          </div>
-          {rusun.image4 && (
-            <img
-              src={rusun.image4}
-              alt="Gambar 4"
-              className="lg:w-full lg:h-full w-1/2 h-1/2  size-full rounded-lg object-cover lg:block"
-            />
-          )}
-        </div>
+        <div className="mx-auto mt-6 max-w-6xl sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6 lg:px-6">
+  {rusun.image1 && (
+    <div className="flex justify-center">
+      <img
+        src={rusun.image1}
+        alt="Gambar 1"
+        className="w-full h-72 rounded-lg object-cover lg:h-64"
+      />
+    </div>
+  )}
+  {rusun.image2 && (
+    <div className="flex justify-center">
+      <img
+        src={rusun.image2}
+        alt="Gambar 2"
+        className="w-full h-72 rounded-lg object-cover lg:h-64"
+      />
+    </div>
+  )}
+  {rusun.image3 && (
+    <div className="flex justify-center">
+      <img
+        src={rusun.image3}
+        alt="Gambar 3"
+        className="w-full h-72 rounded-lg object-cover lg:h-64"
+      />
+    </div>
+  )}
+  {rusun.image4 && (
+    <div className="flex justify-center">
+      <img
+        src={rusun.image4}
+        alt="Gambar 4"
+        className="w-full h-72 rounded-lg object-cover lg:h-64"
+      />
+    </div>
+  )}
+</div>
 
         {/* Informasi rusun */}
         <div data-aos="fade-up">
