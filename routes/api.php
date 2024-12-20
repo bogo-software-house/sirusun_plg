@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\TransactionHistoryController;
 use App\Http\Controllers\Api\ReportRoomController; 
 use App\Http\Controllers\Api\SuggestionController; 
 
+
 //posts
 Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
 //rusun
@@ -101,6 +102,9 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
 
         //update status transaction
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
+        //mengambil data total semua
+         Route::get('/statistic-room-form', [App\Http\Controllers\Api\TransactionStatusFormController::class, 'getStatistics']);
+         
         //transaksi rooms
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
         
@@ -121,3 +125,4 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
                     //pendapat/suggestion
                     Route::apiResource('/suggestion', App\Http\Controllers\Api\SuggestionController::class);
                     Route::get('/suggestion/summary', [SuggestionController::class, 'summary']);
+                   
