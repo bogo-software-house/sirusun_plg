@@ -292,7 +292,7 @@ class RoomsController extends Controller
             }
 
             // Get the results with pagination
-            $rooms = $query->paginate(10);
+            $rooms = $query->latest()->paginate(10);
 
             // Check if any rooms were found
             if ($rooms->isEmpty()) {
@@ -306,6 +306,22 @@ class RoomsController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => RoomsResource::collection($rooms),
+                'links' => [
+                'first' => $rooms->url(1),
+                'last' => $rooms->url($rooms->lastPage()),
+                'prev' => $rooms->previousPageUrl(),
+                'next' => $rooms->nextPageUrl()
+            ],
+            'meta' => [
+                'current_page' => $rooms->currentPage(),
+                'from' => $rooms->firstItem(),
+                'last_page' => $rooms->lastPage(),
+                'links' => $rooms->linkCollection()->toArray(),
+                'path' => $rooms->path(),
+                'per_page' => $rooms->perPage(),
+                'to' => $rooms->lastItem(),
+                'total' => $rooms->total()
+            ],
                 'message' => 'Rooms retrieved successfully'
             ]);
 

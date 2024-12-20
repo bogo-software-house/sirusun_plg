@@ -245,6 +245,7 @@ class TransactionStatusFormController extends Controller
 
             //total kamar yang masih tersedia
             $totalKamarTersedia = Room::where('statuses_custom_id','IST001')->count();
+            
             return response()->json([
                 'success' => true,
                 'data' => [
