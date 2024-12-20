@@ -30,8 +30,12 @@ Route::apiResource('/damagerooms', App\Http\Controllers\Api\DamageroomsControlle
 Route::apiResource('/informations', App\Http\Controllers\Api\InformationController::class);
 //unit_numbers
 Route::apiResource('/unit_numbers', App\Http\Controllers\Api\UnitnumberController::class);
+
 //rooms
 Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
+//filter kamar
+Route::get('/kamar/filter', [App\Http\Controllers\Api\RoomsController::class, 'filterRooms']);
+
 //resident
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document
