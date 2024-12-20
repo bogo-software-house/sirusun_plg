@@ -66,7 +66,7 @@
             <strong>Nomor Telepon:</strong> {{ $resident->no_telp }}
         </div>
         <div class="detail">
-            <strong>Penghasilan:</strong> Rp. {{ number_format($resident->penghasilan, 0, ',', '.') }}
+            <strong>Penghasilan:</strong> {{ $resident->salaries->salary ?? 'tidak diketahui' }}
         </div>
         <div class="detail">
             <strong>Kewarganegaraan:</strong> {{ $resident->warga_negara }}
