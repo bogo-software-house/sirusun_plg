@@ -79,21 +79,36 @@ function Bangunan() {
   const [formValues, setFormValues] = useState({}); // Nilai formulir
   const [conditionOptions, setConditionOptions] = useState([]); // Opsi kondisi default array kosong
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [filter, setFilter] = useState({
+    rusun: "",
+    blok: "",
+    lantai: "",
+    unit_number: "",
+  });
 
   // Fetch data from API with pagination
   useEffect(() => {
-    fetch(`https://api.sirusun.com/api/rooms?page=${currentPage}`)
+    const query = new URLSearchParams();
+    Object.keys(filter).forEach((key) => {
+      if (filter[key]) {
+        query.append(key, filter[key]);
+      }
+    });
+
+    fetch(`http://127.0.0.1:8000/api/kamar/filter?${query.toString()}`)
       .then((response) => response.json())
       .then((data) => {
-        setRooms(data.data); // Assign the data from the response to rooms
-        setTotalPages(data.meta.last_page); // Set the total pages from the response
+        console.log("Fetched rooms:", data); // Add logging here
+        setRooms(data?.data || []); // Make sure the data is available and set it
+        setTotalPages(data?.meta?.last_page || 1);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
         setLoading(false);
       });
-  }, [currentPage]); // Trigger fetch when the page changes
+  }, [currentPage, filter]);
 
   // Fetch condition options from API
   // Fetch condition options from API
@@ -109,6 +124,14 @@ function Bangunan() {
         console.error("Error fetching condition options:", error)
       );
   }, []);
+
+  // Handle input filter change
+  const handleFilterChange = (key, value) => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [key]: value,
+    }));
+  };
 
   const getNestedValue = (obj, key) => {
     return key.split(".").reduce((acc, part) => (acc ? acc[part] : ""), obj);
@@ -272,13 +295,89 @@ function Bangunan() {
 
       <TableHeader
         title="Kondisi Bangunan dan Unit"
-        actions={[{ label: "Tambah Data" }]}
+        actions={[
+          { label: "Tambah Data" },
+          { label: "Filter", onClick: () => setIsFilterModalOpen(true) },
+        ]}
       />
+      <Modal
+        isOpen={isFilterModalOpen}
+        onRequestClose={() => setIsFilterModalOpen(false)}
+        contentLabel="Filter Rooms"
+        className="modal-container"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      >
+        <div className="modal-content bg-white rounded-lg p-6 shadow-lg max-w-md w-full relative z-10">
+          <h3 className="text-xl font-semibold mb-4">Filter Rooms</h3>
+          <form>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Rusun
+              </label>
+              <input
+                type="text"
+                value={filter.rusun}
+                onChange={(e) => handleFilterChange("rusun", e.target.value)}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Blok
+              </label>
+              <input
+                type="text"
+                value={filter.blok}
+                onChange={(e) => handleFilterChange("blok", e.target.value)}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Lantai
+              </label>
+              <input
+                type="text"
+                value={filter.lantai}
+                onChange={(e) => handleFilterChange("lantai", e.target.value)}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Kamar (Unit Number)
+              </label>
+              <input
+                type="text"
+                value={filter.unit_number}
+                onChange={(e) =>
+                  handleFilterChange("unit_number", e.target.value)
+                }
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
+              />
+            </div>
+          </form>
+          <div className="flex justify-end space-x-2 mt-4">
+            <button
+              onClick={() => setIsFilterModalOpen(false)}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
+            >
+              Apply Filters
+            </button>
+            <button
+              onClick={() => setIsFilterModalOpen(false)}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
 
       <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200">
         <Table
           columns={columns}
-          data={rooms.map((room, index) => ({
+          data={rooms?.map((room, index) => ({
             ...room,
             index: (currentPage - 1) * 10 + (index + 1),
           }))}
