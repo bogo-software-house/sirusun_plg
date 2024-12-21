@@ -18,8 +18,8 @@ class RoleFactory extends Factory
         // $customId = sprintf("IRL%03d", $count); // Format ID, misalnya "IPR001"
 
         return   [   
-            'custom_id' => $this->faker->unique()->randomElement(['IRL001', 'IRL002']), // Menggunakan elemen acak
-            'leveluser' => $this->faker->randomElement(['admin', 'user']), // Menggunakan elemen acak
+            'custom_id' => $this->faker->unique()->word(), // Menggunakan elemen acak
+            'leveluser' => $this->faker->word(), // Menggunakan elemen acak
         ];
     }
 }

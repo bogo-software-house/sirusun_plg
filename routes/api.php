@@ -3,12 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Kernel;
 use App\Http\Controllers\Api\UserController; 
 use App\Http\Controllers\Api\RoomsController; 
 use App\Http\Controllers\Api\TransactionHistoryController;
 use App\Http\Controllers\Api\ReportRoomController; 
 use App\Http\Controllers\Api\SuggestionController; 
+
 
 //posts
 Route::apiResource('/pricetag', App\Http\Controllers\Api\PriceTagController::class);
@@ -30,8 +30,12 @@ Route::apiResource('/damagerooms', App\Http\Controllers\Api\DamageroomsControlle
 Route::apiResource('/informations', App\Http\Controllers\Api\InformationController::class);
 //unit_numbers
 Route::apiResource('/unit_numbers', App\Http\Controllers\Api\UnitnumberController::class);
+
 //rooms
 Route::apiResource('/rooms', App\Http\Controllers\Api\RoomsController::class);
+//filter kamar
+Route::get('/kamar/filter', [App\Http\Controllers\Api\RoomsController::class, 'filterRooms']);
+
 //resident
 Route::apiResource('/residents', App\Http\Controllers\Api\ResidentController::class);
 //resident/document
@@ -67,25 +71,32 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
             // Route khusus admin
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
-
                     Route::apiResource('/users-data', UserController::class);   
-                    //users
+                    //update password
                     Route::put('/admin-update-password', [UserController::class,'updatepassword']);
 
                     //Route::middleware(App\Http\Middleware\CheckRusun::class.':kasnariansya')->group(function () {
                     Route::get('/admin-kasnariansya/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kasnariansya']);
                     });
-
                     //  });   
-
-
                     //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
                     Route::get('/admin-kertapati/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kertapati']);
-                    
                     });
               //  });
+            });
+            // Route khusus admin
+            Route::middleware(App\Http\Middleware\CheckRole::class.':staff')->group(function () {
+                    //users
+                    Route::apiResource('/users-data', UserController::class);   
+                    //update password
+                    Route::put('/admin-update-password', [UserController::class,'updatepassword']);
+
+                    Route::get('/staff/dashboard', function () {
+                        return response()->json(['message' => 'Selamat datang di dashboard staff']);
+                    });
+                    
             });
 
             // Route khusus user
@@ -102,6 +113,9 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
 
         //update status transaction
         Route::apiResource('/transactions', App\Http\Controllers\Api\TransactionStatusFormController::class);
+        //mengambil data total semua
+         Route::get('/statistic-room-form', [App\Http\Controllers\Api\TransactionStatusFormController::class, 'getStatistics']);
+         
         //transaksi rooms
         Route::apiResource('/transactions-rooms', App\Http\Controllers\Api\TransactionRoomController::class);
         
@@ -122,3 +136,4 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
                     //pendapat/suggestion
                     Route::apiResource('/suggestion', App\Http\Controllers\Api\SuggestionController::class);
                     Route::get('/suggestion/summary', [SuggestionController::class, 'summary']);
+                   

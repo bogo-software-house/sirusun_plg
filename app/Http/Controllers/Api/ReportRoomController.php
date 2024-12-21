@@ -59,6 +59,25 @@ class ReportRoomController extends Controller
             $dataArraysebelum = json_decode($data->kondisi_sebelumnya, true);
             $dataArraysetelah = json_decode($data->kondisi_setelahnya, true);
 
+             // Format tanggal dan waktu dari created_at
+        $created = $data->created_at;
+        $hari = $created->format('l'); // Mendapatkan nama hari dalam bahasa Inggris
+        $jam = $created->format('H:i:s'); // Format 24 jam
+
+        // Konversi nama hari ke Bahasa Indonesia
+        $hariIndonesia = [
+            'Sunday' => 'Minggu',
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu'
+        ];
+        
+        $hariID = $hariIndonesia[$hari];
+
+
             // Mengelompokkan data sebelum
             $formattedDatasebelum = [
                 "material" => [
@@ -115,6 +134,8 @@ class ReportRoomController extends Controller
             'room_custom_id' => $data->room_custom_id,
             'bulan' => $data->bulan,
             'tahun' => $data->tahun,
+            'hari' => $hariID,
+            'jam' => $jam,
             'sebelum' => $formattedDatasebelum,
             'setelah' => $formattedDatasetelah,
         ];

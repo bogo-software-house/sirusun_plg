@@ -19,6 +19,8 @@ class RoomsController extends Controller
     //buat fungsi index
     public function index()
     {
+
+
         $rooms = Room::with([
         'unitNumber',
         'status',
@@ -241,6 +243,98 @@ class RoomsController extends Controller
         return response()->json($response);
     }
     
+        /**
+     * Filter rooms based on rusun, lantai, and blok.
+     */
+    public function filterRooms(Request $request)
+    {
+        try {
+            // Build query with relationships
+            $query = Room::with([
+                'priceTag.rusuns',
+                'priceTag.bloks',
+                'priceTag.floors',
+                'unitNumber',
+                'damageRoomlantai.condition',
+                'damageRoomkusen.condition',
+                'damageRoompintu.condition',
+                'damageRoomjendela.condition',
+                'damageRoomflatfond.condition',
+                'damageRoomdinding.condition',
+                'damageRoominstalasilistrik.condition',
+                'damageRoominstalasiair.condition'
+            ]);
+
+            // Filter by rusun
+            if ($request->has('rusun')) {
+                $query->whereHas('priceTag.rusuns', function($q) use ($request) {
+                    $q->where('nama_rusun', 'like', '%' . $request->rusun . '%');
+                });
+            }
+
+            // Filter by lantai
+            if ($request->has('lantai')) {
+                $query->whereHas('priceTag.floors', function($q) use ($request) {
+                    $q->where('floor', $request->lantai);
+                });
+            }
+
+            // Filter by blok
+            if ($request->has('blok')) {
+                $query->whereHas('priceTag.bloks', function($q) use ($request) {
+                    $q->where('blok', 'like', '%' . $request->blok . '%');
+                });
+            }
+
+            // Filter by unit number
+            if ($request->has('unit')) {
+                $query->whereHas('UnitNumber', function($q) use ($request) {
+                    $q->where('no_unit', 'like', '%' . $request->unit . '%');
+                });
+            }
+
+            // Get the results with pagination
+            $rooms = $query->latest()->paginate(10);
+
+            // Check if any rooms were found
+            if ($rooms->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No rooms found matching the specified criteria.'
+                ], 404);
+            }
+
+            // Return the filtered results
+            return response()->json([
+                'success' => true,
+                'data' => RoomsResource::collection($rooms),
+                'links' => [
+                'first' => $rooms->url(1),
+                'last' => $rooms->url($rooms->lastPage()),
+                'prev' => $rooms->previousPageUrl(),
+                'next' => $rooms->nextPageUrl()
+            ],
+            'meta' => [
+                'current_page' => $rooms->currentPage(),
+                'from' => $rooms->firstItem(),
+                'last_page' => $rooms->lastPage(),
+                'links' => $rooms->linkCollection()->toArray(),
+                'path' => $rooms->path(),
+                'per_page' => $rooms->perPage(),
+                'to' => $rooms->lastItem(),
+                'total' => $rooms->total()
+            ],
+                'message' => 'Rooms retrieved successfully'
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error retrieving rooms',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     
     
 }

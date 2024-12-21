@@ -15,6 +15,7 @@ use App\Models\ResidentPdf;
 use App\Models\StatusForm;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Room;
 use App\Mail\TransactionStatusNotificationMail;
 use App\Jobs\DeleteTransactionStatusFormData;
 use App\Http\Resources\TransactionStatusFormResource;
@@ -225,5 +226,43 @@ class TransactionStatusFormController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+        public function getStatistics()
+    {
+        try {
+            // Total pendaftar (semua status)
+            $totalPendaftar = TransactionStatusForm::count();
+
+            // Total yang disetujui (ISF002)
+            $totalDisetujui = TransactionStatusForm::where('statusForm_custom_id', 'ISF002')->count();
+
+            // Total yang ditolak (ISF003)
+            $totalDitolak = TransactionStatusForm::where('statusForm_custom_id', 'ISF003')->count();
+
+            // Total yang masih dalam proses (ISF001)
+            $totalProses = TransactionStatusForm::where('statusForm_custom_id', 'ISF001')->count();
+
+            //total kamar yang masih tersedia
+            $totalKamarTersedia = Room::where('statuses_custom_id','IST001')->count();
+            
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'total_pendaftar' => $totalPendaftar,
+                    'total_disetujui' => $totalDisetujui,
+                    'total_ditolak' => $totalDitolak,
+                    'total_proses' => $totalProses,
+                    'total_kamar' => $totalKamarTersedia
+                ],
+                'message' => 'Statistics retrieved successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error retrieving statistics',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
