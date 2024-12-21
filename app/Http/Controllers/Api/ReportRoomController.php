@@ -61,21 +61,9 @@ class ReportRoomController extends Controller
 
              // Format tanggal dan waktu dari created_at
         $created = $data->created_at;
-        $hari = $created->format('l'); // Mendapatkan nama hari dalam bahasa Inggris
+        $hari = $created->format('d'); // Mendapatkan nama hari dalam bahasa Inggris
         $jam = $created->format('H:i:s'); // Format 24 jam
 
-        // Konversi nama hari ke Bahasa Indonesia
-        $hariIndonesia = [
-            'Sunday' => 'Minggu',
-            'Monday' => 'Senin',
-            'Tuesday' => 'Selasa',
-            'Wednesday' => 'Rabu',
-            'Thursday' => 'Kamis',
-            'Friday' => 'Jumat',
-            'Saturday' => 'Sabtu'
-        ];
-        
-        $hariID = $hariIndonesia[$hari];
 
 
             // Mengelompokkan data sebelum
@@ -134,7 +122,7 @@ class ReportRoomController extends Controller
             'room_custom_id' => $data->room_custom_id,
             'bulan' => $data->bulan,
             'tahun' => $data->tahun,
-            'hari' => $hariID,
+            'tanggal' => $hari,
             'jam' => $jam,
             'sebelum' => $formattedDatasebelum,
             'setelah' => $formattedDatasetelah,

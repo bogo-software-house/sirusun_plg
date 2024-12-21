@@ -294,7 +294,7 @@ class RoomsController extends Controller
             }
 
             // Get the results with pagination
-            $rooms = $query->latest()->paginate(20);
+            $rooms = $query->orderBy('id', 'asc')->paginate(20);
 
             // Check if any rooms were found
             if ($rooms->isEmpty()) {
