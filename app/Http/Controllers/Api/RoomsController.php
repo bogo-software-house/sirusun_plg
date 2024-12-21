@@ -263,6 +263,8 @@ class RoomsController extends Controller
                 'damageRoominstalasiair.condition'
             ]);
 
+
+        
             // Filter by rusun
             if ($request->has('rusun')) {
                 $query->whereHas('priceTag.rusuns', function($q) use ($request) {
@@ -285,14 +287,14 @@ class RoomsController extends Controller
             }
 
             // Filter by unit number
-            if ($request->has('unit')) {
+            if ($request->has('unit_number')) {
                 $query->whereHas('UnitNumber', function($q) use ($request) {
-                    $q->where('no_unit', 'like', '%' . $request->unit . '%');
+                    $q->where('no_unit', 'like', '%' . $request->unit_number . '%');
                 });
             }
 
             // Get the results with pagination
-            $rooms = $query->latest()->paginate(10);
+            $rooms = $query->latest()->paginate(20);
 
             // Check if any rooms were found
             if ($rooms->isEmpty()) {
