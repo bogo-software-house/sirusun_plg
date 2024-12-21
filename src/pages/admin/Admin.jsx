@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
@@ -37,11 +37,19 @@ export default function AdminDashboard() {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [role, setRole] = useState(""); // Store role of the user
+
+  // Get role from localStorage
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
+  }, []);
 
   // Handle logout
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    localStorage.removeItem("role"); // Remove role from localStorage
+    navigate("/loginadmin");
   };
 
   // Handle dropdown toggle
@@ -54,6 +62,11 @@ export default function AdminDashboard() {
     ...item,
     current: location.pathname === item.href,
   }));
+
+  // Handle item click to close sidebar (for mobile)
+  const handleItemClick = () => {
+    setSidebarOpen(false); // Close sidebar on item click (mobile)
+  };
 
   return (
     <>
@@ -96,7 +109,10 @@ export default function AdminDashboard() {
                                   <li key={child.name}>
                                     <Link
                                       to={child.href}
-                                      onClick={() => setDropdownOpen(null)} // Close dropdown on navigation
+                                      onClick={() => {
+                                        setDropdownOpen(null);
+                                        handleItemClick(); // Close sidebar
+                                      }} // Close dropdown on navigation
                                       className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
                                     >
                                       {child.name}
@@ -156,8 +172,8 @@ export default function AdminDashboard() {
                                 {item.children.map((child) => (
                                   <li key={child.name}>
                                     <Link
-                                      to={child.href} // Use Link for proper navigation
-                                      onClick={() => setDropdownOpen(null)} // Close dropdown on navigation
+                                      to={child.href}
+                                      onClick={handleItemClick} // Close sidebar on click
                                       className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
                                     >
                                       {child.name}
@@ -170,6 +186,7 @@ export default function AdminDashboard() {
                         ) : (
                           <Link
                             to={item.href} // For non-dropdown items, use Link directly
+                            onClick={handleItemClick} // Close sidebar on click
                             className={classNames(
                               item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                               "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
@@ -194,19 +211,23 @@ export default function AdminDashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="lg:pl-72">
+        <div className="lg:pl-72 ml-10 mr-10">
           <div className="sticky top-0 z-40 flex h-16 items-center gap-x-4 px-4 sm:gap-x-6 sm:px-6 lg:px-8">
             <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
               <Bars3Icon className="h-6 w-6" />
             </button>
           </div>
 
-          {/* Dynamic Content */}
-          <main className="">
-            <div className="px-4 sm:px-6 lg:px-8">
-              <Outlet />
+          {/* Selamat Datang */}
+          {role && (
+            <div className=" ">
+              <h1 className="text-2xl  font-semibold text-indigo-600">
+                Selamat Datang, {role === "admin" ? "Admin" : "Staff"}!
+              </h1>
             </div>
-          </main>
+          )}
+
+          <Outlet /> {/* Render child routes here */}
         </div>
       </div>
     </>

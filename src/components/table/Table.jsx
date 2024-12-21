@@ -1,6 +1,6 @@
 const Table = ({ columns, data, emptyMessage = "No data available" }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto ">
       <table className="min-w-full divide-y divide-gray-200 border border-gray-300 bg-white shadow-sm rounded-lg table-fixed">
         <thead className="bg-gray-50">
           <tr>

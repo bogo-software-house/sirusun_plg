@@ -27,6 +27,7 @@
     "react-scroll": "^1.9.0",
     "react-select": "^5.9.0",
     "react-toastify": "^10.0.6",
+    "reactstrap": "^9.2.3",
     "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {

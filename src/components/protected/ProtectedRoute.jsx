@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");  
 
-  if (!token || role !== "admin") {
+  if (role !== "admin" && role !== "staff") {
     return <Navigate to="/" />; // Redirect to login if no token or role is not admin
   }
 
