@@ -20,10 +20,8 @@ const Laporan = () => {
     const loadData = async () => {
       try {
         const fetchedData = await fetchReportData();
-        console.log(fetchedData); // Check the structure of the fetched data
         setData(fetchedData);
       } catch (err) {
-        console.error(err);
         setError("Failed to load data. Please try again.");
       } finally {
         setIsLoading(false);

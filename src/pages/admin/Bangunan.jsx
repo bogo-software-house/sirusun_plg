@@ -47,13 +47,11 @@ function Bangunan() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data kamar yang diambil:", data);
         setRooms(data?.data || []); // Menyimpan data kamar
         setTotalPages(data?.meta?.last_page || 1); // Menyimpan total halaman untuk paginasi
         setLoading(false); // Menandakan bahwa data sudah selesai diambil
       })
       .catch((error) => {
-        console.error("Error saat mengambil data:", error);
         setLoading(false); // Menghentikan loading saat terjadi error
       });
   }, [currentPage, filter]); // Hook ini akan dipanggil setiap kali `currentPage` atau `filter` berubah
@@ -64,7 +62,6 @@ function Bangunan() {
     fetch(`https://api.sirusun.com/api/conditions`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Response Conditions:", data);
         // Mengakses array kondisi dari properti data.data
         setConditionOptions(data.data?.data || []);
       })
