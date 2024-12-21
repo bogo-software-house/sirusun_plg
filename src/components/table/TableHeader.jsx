@@ -2,8 +2,8 @@ import React from "react";
 
 function TableHeader({ title, actions = [] }) {
   return (
-    <div className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between mb-10">
-      <h3 className="text-base font-semibold leading-6 text-gray-900">{title}</h3>
+    <div className="border-b border-indigo-600 pb-5 sm:flex sm:items-center sm:justify-between mb-10">
+      <h3 className="text-lg font-semibold leading-6 text-gray-900">{title}</h3>
       <div className="mt-3 flex sm:ml-4 sm:mt-0">
         {actions.map((action, index) => (
           <button

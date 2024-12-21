@@ -16,7 +16,8 @@ const navigation = {
     },
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/palembang.dinasperkimtan/profilecard/?igsh=cDg1MGJyYXAwd3Zl",
+
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -71,7 +72,7 @@ export default function Example() {
               className="text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">{item.name}</span>
-              <item.icon aria-hidden="true" className="h-6 w-6" />
+              <item.icon aria-hidden="true" target="_blank" className="h-6 w-6" />
             </a>
           ))}
         </div>

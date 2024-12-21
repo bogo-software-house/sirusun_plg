@@ -10,7 +10,9 @@ const navigation = [
   { name: "Alur", href: "Alur" },
   { name: "Download", href: "Download" },
   { name: "Cek Permohonan", href: "/CekPermohonan" },
+
   // { name: "Login", href: "/Login" },
+
 ];
 
 export default function Navbar() {
@@ -22,35 +24,22 @@ export default function Navbar() {
   useEffect(() => {
     const path =
       location.pathname === "/" ? "Top" : location.pathname.replace("/", "");
+
     setActiveTab(path);
   }, [location.pathname]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollToTop(true);
-      } else {
-        setShowScrollToTop(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
+
       setMobileMenuOpen(false); // Tutup menu mobile sebelum scroll
       setTimeout(() => {
         section.scrollIntoView({ behavior: "smooth" });
         setActiveTab(id); // Update active tab state
       }, 300); // Timeout agar scroll terjadi setelah animasi menu
+
     }
+    setMobileMenuOpen(false); // Tutup menu mobile setelah navigasi dilakukan
   };
 
   const isActive = (href) => activeTab === href;
@@ -139,6 +128,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   to={item.href}
+
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
                 >
@@ -178,5 +168,7 @@ export default function Navbar() {
       )}
     </header>
   );
+  
+  
 }
   

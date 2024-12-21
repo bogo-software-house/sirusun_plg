@@ -1,9 +1,9 @@
 import kepala from "../../assets/images/pakagus.png";
-import walikota from "../../assets/images/pjwalikota.jpg";
+import walikota from "../../assets/images/walikota.png";
 
 export default function Example() {
   return (
-    <div className="bg-gray-50 py-24 sm:py-32 z-0 mt-16 z-0">
+    <div className="bg-gray-50 lg:py-10 sm:py-32 z-0 mt-10 z-0">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
           <div className="relative z-0 lg:row-span-2">
@@ -14,12 +14,12 @@ export default function Example() {
                   PJ Walikota Palembang
                 </p>
                 <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center font-semibold">
-                  Dr.Ucok Abdul Rauf Damenta, Sos.,Mag.rer.
+                Dr. Cheka Virgowansyah, S.STP, M.E.
                 </p>
               </div>
               <div className="relative z-0 min-h-[30rem] w-full grow [container-type:inline-size] max-lg:mx-auto max-lg:max-w-sm">
                 <div>
-                  <img src={walikota} alt="pjwalikota" />
+                  <img src={walikota} alt="pjwalikota" className="h-fit" />
                 </div>
               </div>
             </div>
@@ -56,6 +56,7 @@ export default function Example() {
                 <p className="mt-2 text-lg/7 font-medium tracking-tight text-gray-950 max-lg:text-center">
                   Rusun Kasnariansyah
                 </p>
+
               </div>
               <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
                 <iframe
@@ -84,7 +85,7 @@ export default function Example() {
                   H.Agus Rizal, A.P.,M.Si.
                 </p>
               </div>
-              <img src={kepala} alt="kepala" />
+              <img src={kepala} alt="kepala" className="h-fit"/>
 
               {/* <div className="relative min-h-[30rem] w-full grow">
                 <div className="absolute bottom-0 left-10 right-0 top-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">
