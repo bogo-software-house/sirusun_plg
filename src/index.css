@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Gaya untuk tombol yang dinonaktifkan */
+button[disabled], .btn-disabled {
+  background-color: #d3d3d3; /* Warna abu-abu untuk tombol nonaktif */
+  cursor: not-allowed;
+  pointer-events: none;
+  color: #666; /* Warna teks lebih gelap */
+  border: 1px solid #ccc; /* Batas tombol */
+}
+
+/* Gaya untuk menampilkan tooltip */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: none; /* Sembunyikan tooltip secara default */
+  z-index: 1000;
+}
+
+.tooltip-visible {
+  display: block; /* Tampilkan tooltip ketika ada peringatan */
+}
+
+/* Gaya untuk alert error */
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  color: #856404;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
 
 
 :root {

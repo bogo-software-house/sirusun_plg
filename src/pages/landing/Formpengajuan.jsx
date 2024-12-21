@@ -64,7 +64,7 @@ const ResidentForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://api.sirusun.com/api/residents", formDataToSend, {
+      const response = await axios.post("http://127.0.0.1:8000/api/residents", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -123,7 +123,7 @@ const ResidentForm = () => {
       {showBanner && <ProcessingBanner />}
       <FormHeader />
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 text-black mx-6 lg:mx-24 py-10 px-20">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 text-black mx-6 lg:mx-24 py-10">
         <ResidentFormFields
           formData={formData}
           handleInputChange={handleInputChange}

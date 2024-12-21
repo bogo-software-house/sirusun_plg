@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../api/auth"; // Sesuaikan dengan struktur folder
 import logo from "../../assets/images/logowithtext.png";
 
-
 export default function Login() {
-  const [username, setUsername] = useState(""); // Changed from email to username
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -13,35 +12,44 @@ export default function Login() {
   // Logika form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error before trying to login
+    setError(""); // Reset error sebelum mencoba login
 
     try {
-      const credentials = { username, password }; // Use username instead of email
+      // Kirim username dan password ke API
+      const credentials = { username, password };
+      console.log("Sending credentials:", credentials);
+
       const data = await login(credentials);
 
+      // Simpan token, role, dan username di localStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("username", data.username);
 
-      // Make sure only admin role is logged in
+      // Redirect berdasarkan role
       if (data.role === "admin") {
-        // Store token and role in localStorage
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.role); // Store role
-
-        // Redirect to the admin dashboard
-        navigate("/admin/dashboard");
+        navigate("/admin/dashboard"); // Redirect ke halaman admin
+      } else if (data.role === "staff") {
+        // Pastikan path yang digunakan sesuai dengan rute backend untuk staff
+        navigate("/admin/dashboard"); // Redirect ke path dashboard staff yang disediakan backend
       } else {
-        setError("Only admin can access this page.");
+        setError("Access denied. Only admin or staff can access this page.");
       }
     } catch (err) {
-      console.error("Login failed:", err.response || err.message);
-      setError("Invalid credentials or server error.");
+      console.error("Login failed:", err.response?.data || err.message);
+      
+      // Tampilkan pesan error yang diterima dari API, jika ada
+      setError(err.response?.data?.message || "Invalid credentials or server error.");
     }
   };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-      <img alt="logo" src={logo} className="h-20 " />     
-        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Admin Login</h2>
+        <img alt="logo" src={logo} className="h-20 " />
+        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Admin Login
+        </h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -49,18 +57,21 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Input Username */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Username
               </label>
               <div className="mt-2">
                 <input
                   id="username"
                   name="username"
-                  type="text" // Changed from email type to text for username
+                  type="text"
                   required
-                  autoComplete="new-username" // Menggunakan nilai unik untuk menghindari autofill
-                  value={username} // Bind to the username state
-                  onChange={(e) => setUsername(e.target.value)} // Update username
+                  autoComplete="off"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -68,7 +79,10 @@ export default function Login() {
 
             {/* Input Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Password
               </label>
               <div className="mt-2">
@@ -77,7 +91,7 @@ export default function Login() {
                   name="password"
                   type="password"
                   required
-                  autoComplete="new-password"
+                  autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -86,7 +100,11 @@ export default function Login() {
             </div>
 
             {/* Error Message */}
-            {error && <div className="text-red-600 text-sm text-center mt-2">{error}</div>}
+            {error && (
+              <div className="text-red-600 text-sm text-center mt-2">
+                {error}
+              </div>
+            )}
 
             {/* Submit Button */}
             <div>
@@ -102,7 +120,10 @@ export default function Login() {
           {/* Footer */}
           <div className="mt-10 text-center text-sm text-gray-500">
             Not an admin?{" "}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a
+              href="#"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Contact Admin
             </a>
           </div>

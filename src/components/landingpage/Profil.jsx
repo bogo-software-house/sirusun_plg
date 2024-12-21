@@ -25,7 +25,7 @@ export default function Example() {
             Profil Rusun
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
-            Dinas PU Kota Palembang Memiliki 2 Rusun
+            Dinas Perkimtan Kota Palembang Memiliki 2 Rusun
           </p>
         </div>
 
