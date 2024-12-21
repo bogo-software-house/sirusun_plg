@@ -72,23 +72,31 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
             Route::middleware(App\Http\Middleware\CheckRole::class.':admin')->group(function () {
                     //users
                     Route::apiResource('/users-data', UserController::class);   
-                    //users
+                    //update password
                     Route::put('/admin-update-password', [UserController::class,'updatepassword']);
 
                     //Route::middleware(App\Http\Middleware\CheckRusun::class.':kasnariansya')->group(function () {
                     Route::get('/admin-kasnariansya/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kasnariansya']);
                     });
-
                     //  });   
-
-
                     //  Route::middleware(App\Http\Middleware\CheckRusun::class.':kertapati')->group(function () {
                     Route::get('/admin-kertapati/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard admin kertapati']);
-                    
                     });
               //  });
+            });
+            // Route khusus admin
+            Route::middleware(App\Http\Middleware\CheckRole::class.':staff')->group(function () {
+                    //users
+                    Route::apiResource('/users-data', UserController::class);   
+                    //update password
+                    Route::put('/admin-update-password', [UserController::class,'updatepassword']);
+
+                    Route::get('/staff/dashboard', function () {
+                        return response()->json(['message' => 'Selamat datang di dashboard staff']);
+                    });
+                    
             });
 
             // Route khusus user
