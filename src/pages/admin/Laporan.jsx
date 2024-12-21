@@ -5,7 +5,7 @@ import { fetchReportData } from "../../api/Report";
 import { getReportColumns } from "../../components/columns/ReportColumns";
 import Modal from "../../components/columns/ModalShowReport";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Laporan = () => {
   const [data, setData] = useState([]);
@@ -59,7 +59,7 @@ const Laporan = () => {
           columns={columns}
           data={currentData.map((item, index) => ({
             ...item,
-            index: indexOfFirstItem + index + 1,
+            index: indexOfFirstItem + index + 1 + ".",
           }))}
           emptyMessage="No laporan tersedia"
         />
@@ -68,7 +68,13 @@ const Laporan = () => {
       {/* Pagination */}
       <div className="mt-4 flex justify-center space-x-2">
         {Array.from({ length: totalPages }, (_, i) => (
-          <button key={i + 1} onClick={() => handlePageChange(i + 1)} className={`px-4 py-2 rounded-lg font-semibold ${currentPage === i + 1 ? "bg-indigo-600 text-white" : "bg-gray-200"}`}>
+          <button
+            key={i + 1}
+            onClick={() => handlePageChange(i + 1)}
+            className={`px-4 py-2 rounded-lg font-semibold ${
+              currentPage === i + 1 ? "bg-indigo-600 text-white" : "bg-gray-200"
+            }`}
+          >
             {i + 1}
           </button>
         ))}
