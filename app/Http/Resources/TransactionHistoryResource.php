@@ -21,13 +21,7 @@ class TransactionHistoryResource extends JsonResource
             'action' => $this->action,
             'old_data' => $this->old_data,
             'new_data' => $this->new_data,
-            'user_id' => $this->user_id,
-            'performed_by' => $this->whenLoaded('user', function () {
-                return [
-                    'id' => $this->user->id,
-                    'name' => $this->user->name ?? 'System'
-                ];
-            }),
+
             'created_at' => $this->created_at->toIso8601String(),
             'created_at_human' => $this->created_at->diffForHumans()
         ];
