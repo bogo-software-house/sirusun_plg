@@ -128,7 +128,7 @@ class TransactionStatusFormController extends Controller
                 TransactionHistory::createHistory(
                     TransactionStatusForm::class,
                     $formcustomId,
-                    'status_accepted',
+                    'Status Accepted',
                     $oldTransactionData,
                     $newTransactionData
                 );
@@ -208,7 +208,7 @@ class TransactionStatusFormController extends Controller
                     TransactionHistory::createHistory(
                         TransactionStatusForm::class,
                         $formcustomId,
-                        'status_accepted',
+                        'Status Rejected',
                         $oldTransactionData,
                         $newTransactionData
                     );
