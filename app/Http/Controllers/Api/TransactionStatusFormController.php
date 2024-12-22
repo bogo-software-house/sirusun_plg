@@ -80,6 +80,10 @@ class TransactionStatusFormController extends Controller
                     'form_custom_id' => $transaction->form_custom_id,
                     'statusForm_custom_id' => $transaction->statusForm_custom_id,
                     'keterangan' => $transaction->keterangan,
+                    'user' => [
+                        'nik' => $transaction->residentPdf->nik,
+                        'nama' => $transaction->residentPdf->resident->username,
+                    ],
                     'status' => $transaction->statusForm->status // Ambil status lama
                 ];
             
