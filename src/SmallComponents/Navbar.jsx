@@ -95,10 +95,10 @@ export default function Navbar() {
         </div>
 
         {/* Login button (always right-aligned on large screens) */}
-        <div className="hidden lg:flex lg:justify-end">
+        <div className="hidden lg:flex lg:justify-end bg-indigo-500 rounded-md py-2 px-4 ">
           <Link
             to="/login"
-            className="text-sm font-semibold leading-6 text-black"
+            className="text-sm  font-semibold leading-6 text-white hover:text-white"
           >
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
@@ -107,54 +107,73 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <Dialog
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-        className="lg:hidden z-[60]"
-      >
-        <div className="fixed inset-0 z-[60] bg-black bg-opacity-25" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-[70] w-full bg-white px-6 py-6 sm:max-w-sm">
-          <div className="flex place-content-end">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700 sm:place-items-end"
-            >
-              <XMarkIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
-          </div>
-          <div className="mt-6">
-            {navigation.map((item) =>
-              item.href.startsWith("/") ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
+  open={mobileMenuOpen}
+  onClose={setMobileMenuOpen}
+  className="lg:hidden z-[60]"
+>
+  {/* Background Overlay */}
+  <div
+    className={`fixed inset-0 z-[60] bg-black transition-opacity duration-300 ${
+      mobileMenuOpen ? "opacity-50" : "opacity-0"
+    }`}
+  />
 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <button
-                  key={item.name}
-                  onClick={() => handleScroll(item.href)}
-                  className="block w-full text-left py-2 text-base font-semibold leading-7 text-black hover:bg-gray-50"
-                >
-                  {item.name}
-                </button>
-              )
+  {/* Animated Dialog Panel */}
+  <DialogPanel
+    className={`fixed inset-y-0 right-0 z-[70] w-full bg-white px-6 py-6 sm:max-w-sm
+      ${
+        mobileMenuOpen
+          ? "animate-slideIn"
+          : "animate-slideOut"
+      }`}
+  >
+    <div className="flex justify-between items-center">
+      <h2 className="text-lg font-semibold leading-6 text-gray-900">Menu</h2>
+      <button
+        type="button"
+        onClick={() => setMobileMenuOpen(false)}
+        className="-m-2.5 rounded-md p-2.5 text-gray-700"
+      >
+        <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+      </button>
+    </div>
+    <div className="mt-6">
+      <ul className="space-y-4">
+        {navigation.map((item) => (
+          <li key={item.name}>
+            {item.href.startsWith("/") ? (
+              <Link
+                to={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-left py-2 text-base font-semibold leading-7 ml-4 text-gray-900 hover:bg-gray-100"
+              >
+                {item.name}
+              </Link>
+            ) : (
+              <button
+                onClick={() => handleScroll(item.href)}
+                className="block w-full text-left py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+              >
+                {item.name}
+              </button>
             )}
-          </div>
-          <div className="py-6">
-            <Link
-              to="/login"
-              className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-black hover:bg-gray-50 ml-2"
-            >
-              Log in
-            </Link>
-          </div>
-        </DialogPanel>
-      </Dialog>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className=" bg-indigo-500 rounded-md mt-4 mr-52 ml-4 ">
+      <Link
+        to="/login"
+        className="block  text-left  px-3 py-2.5 text-base font-semibold  text-white "
+      >
+        Log in <span aria-hidden="true">&rarr;</span>
+      </Link>
+    </div>
+  </DialogPanel>
+</Dialog>
+
+
+
 
       {/* Scroll to Top Button */}
       {showScrollToTop && (

@@ -73,7 +73,7 @@ const Carousel = ({ images }) => {
           className="mt-10 mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-38"
           data-aos="fade-up"
         >
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-10">
+          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-32">
             <img alt="logo" src={logo} className="h-20" />
             <h1 className="mt-10 lg:text-4xl font-semibold tracking-tight text-gray-900 sm:text-lg">
               Sistem Informasi Rumah Susun

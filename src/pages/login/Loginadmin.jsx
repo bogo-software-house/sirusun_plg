@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/auth"; // Sesuaikan dengan struktur folder
 import logo from "../../assets/images/logowithtext.png";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -45,15 +46,19 @@ export default function Login() {
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img alt="logo" src={logo} className="h-20 " />
-        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Admin Login
-        </h2>
-      </div>
+     <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md lg:mx-auto lg:w-full lg:max-w-lg">
+  <img alt="logo" src={logo} className="h-20" />     
+  <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login</h2>
+</div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+          <div className="bg-white px-6 pt-4 pb-24 shadow sm:rounded-lg sm:px-12">
+                    <div className=" font-bold text-xl mb-8 ">
+                      <Link to="/" className="text-black ">
+                        ←
+                      </Link>
+                    </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Input Username */}
             <div>
@@ -129,6 +134,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
