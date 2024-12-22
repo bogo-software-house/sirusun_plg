@@ -68,15 +68,15 @@ class TransactionStatusFormController extends Controller
             return response()->json($validator->errors(), 422);
         }  
 
-    DB::beginTransaction();
-    try {
-            // Temukan transaksi berdasarkan form custom ID
-            $transaction = TransactionStatusForm::with(['residentPdf', 'statusForm'])
-                ->where('form_custom_id', $formcustomId)
-                ->firstOrFail();
+        DB::beginTransaction();
+        try {
+                // Temukan transaksi berdasarkan form custom ID
+                $transaction = TransactionStatusForm::with(['residentPdf', 'statusForm'])
+                    ->where('form_custom_id', $formcustomId)
+                    ->firstOrFail();
 
-                  // Store original data for history
-            $oldTransactionData = $transaction->toArray();
+                    // Store original data for history
+            $oldTransactionData = $transaction->getOriginal();
             
             // Validasi relasi
             if (!$transaction->residentPdf) {
