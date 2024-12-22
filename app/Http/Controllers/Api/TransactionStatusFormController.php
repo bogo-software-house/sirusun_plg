@@ -75,8 +75,13 @@ class TransactionStatusFormController extends Controller
                     ->where('form_custom_id', $formcustomId)
                     ->firstOrFail();
 
-                    // Store original data for history
-            $oldTransactionData = $transaction->getOriginal();
+                 // Simpan data lama sebelum update
+                $oldTransactionData = [
+                    'form_custom_id' => $transaction->form_custom_id,
+                    'statusForm_custom_id' => $transaction->statusForm_custom_id,
+                    'keterangan' => $transaction->keterangan,
+                    'status' => $transaction->statusForm->status // Ambil status lama
+                ];
             
             // Validasi relasi
             if (!$transaction->residentPdf) {
@@ -104,14 +109,26 @@ class TransactionStatusFormController extends Controller
                     'keterangan'           => 'silahkan datang dan melihat tunggu 7 hari'
                 ]); 
 
-                  // Log detailed status history
+                // Refresh data setelah update
+                $transaction->refresh();
+                
+                // Data baru setelah update
+                $newTransactionData = [
+                    'form_custom_id' => $transaction->form_custom_id,
+                    'statusForm_custom_id' => $transaction->statusForm_custom_id,
+                    'keterangan' => $transaction->keterangan,
+                    'status' => $transaction->statusForm->status // Ambil status baru
+                ];
+
+                // Log history dengan data yang benar
                 TransactionHistory::createHistory(
-                    TransactionStatusForm::class, 
-                    $formcustomId, 
-                    'status_accepted', 
-                    $oldTransactionData, 
-                    $transaction->toArray()
+                    TransactionStatusForm::class,
+                    $formcustomId,
+                    'status_accepted',
+                    $oldTransactionData,
+                    $newTransactionData
                 );
+
 
 
                 
@@ -172,15 +189,27 @@ class TransactionStatusFormController extends Controller
                             'keterangan' => $request->input('keterangan'),
                         ]);
 
-                              // Log detailed status history for rejected status
-                TransactionHistory::createHistory(
-                    TransactionStatusForm::class, 
-                    $formcustomId, 
-                    'status_rejected', 
-                    $oldTransactionData, 
-                    $transaction->toArray()
-                );
-                
+                            // Refresh data setelah update
+                    $transaction->refresh();
+                    
+                    // Data baru setelah update
+                    $newTransactionData = [
+                        'form_custom_id' => $transaction->form_custom_id,
+                        'statusForm_custom_id' => $transaction->statusForm_custom_id,
+                        'keterangan' => $transaction->keterangan,
+                        'status' => $transaction->statusForm->status // Ambil status baru
+                    ];
+
+                    // Log history dengan data yang benar
+                    TransactionHistory::createHistory(
+                        TransactionStatusForm::class,
+                        $formcustomId,
+                        'status_accepted',
+                        $oldTransactionData,
+                        $newTransactionData
+                    );
+
+                        
                                 // Kirim email notifikasi untuk ISF003
                     if ($resident->email) {
                         Mail::to($resident->email)->send(
