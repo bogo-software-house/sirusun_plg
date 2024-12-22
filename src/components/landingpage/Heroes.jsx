@@ -6,7 +6,7 @@ import logo from "../../assets/images/logowithtext.png";
 import "aos/dist/aos.css";
 import AOS from "aos";
 
-// Impor gambar dengan benar
+// Import gambar dengan benar
 import rusun3 from "../../assets/images/rusun3.jpeg";
 import rusun5 from "../../assets/images/rusun5.jpeg";
 import rusun6 from "../../assets/images/rusun6.jpeg";
@@ -41,10 +41,7 @@ const Carousel = ({ images }) => {
   return (
     <>
       <Navbar />
-      <div
-        className="relative isolate overflow-hidden bg-white h-screen "
-        id="Top"
-      >
+      <div className="relative isolate overflow-hidden bg-white" id="Top">
         <svg
           aria-hidden="true"
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
@@ -75,14 +72,14 @@ const Carousel = ({ images }) => {
         >
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-32">
             <img alt="logo" src={logo} className="h-20" />
-            <h1 className="mt-10 lg:text-4xl font-semibold tracking-tight text-gray-900 sm:text-lg">
+            <h1 className="mt-6 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl">
               Sistem Informasi Rumah Susun
               <br />
               <div className="lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 SIRUSUN
               </div>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-4 text-base sm:text-lg md:text-xl leading-7 text-gray-600">
               UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan
               Permukiman dan Pertanahan Kota Palembang
             </p>
@@ -95,10 +92,10 @@ const Carousel = ({ images }) => {
           </div>
 
           <div
-            className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-68"
+            className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-[400px] sm:h-[300px]"
             data-aos="fade-up"
           >
-            <div className="relative mt-[40px] mr-9">
+            <div className="relative min-[400px]:mt-[30px] sm:mt-[30px] xl:translate-y-[-80px]">
               <div className="carousel overflow-hidden">
                 <div
                   className="lg:w-[40rem] carousel-inner flex transition-transform duration-500"
@@ -112,7 +109,7 @@ const Carousel = ({ images }) => {
                       <img
                         src={image.src}
                         alt={image.alt}
-                        className="w-full lg:h-[400px] sm:h-[300px] rounded-lg"
+                        className="w-full h-full object-cover rounded-lg"
                       />
                     </div>
                   ))}
@@ -168,7 +165,6 @@ const Carousel = ({ images }) => {
 };
 
 const App = () => {
-  // Pastikan gambar diinisialisasi dengan benar
   const images = [
     { src: rusun3, alt: "Rusun 3" },
     { src: rusun5, alt: "Rusun 5" },

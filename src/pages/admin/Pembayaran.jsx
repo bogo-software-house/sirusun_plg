@@ -3,7 +3,7 @@ import React from "react";
 function Pembayaran() {
   return (
     <div>
-      <h2 className="text-black">pembayaran dan Tunggakan</h2>
+      <h2 className="text-black">Coming Soon</h2>
     </div>
   );
 }
