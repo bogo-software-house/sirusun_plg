@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.aspect-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Aspect ratio 16:9 */
+}
+
+.aspect-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.dialog-enter {
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+}
+.dialog-enter-active {
+  transform: translateX(0);
+}
+.dialog-leave {
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+}
+.dialog-leave-active {
+  transform: translateX(100%);
+}
+
+
 /* Gaya untuk tombol yang dinonaktifkan */
 button[disabled], .btn-disabled {
   background-color: #d3d3d3; /* Warna abu-abu untuk tombol nonaktif */

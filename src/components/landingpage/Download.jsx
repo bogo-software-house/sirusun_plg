@@ -7,7 +7,6 @@ const posts = [
     id: 1,
     title: "Panduan Pendaftaran",
     href: "https://sirusun.com/PanduanPendaftaran.pdf", // Rute ke file PDF
-
     description: "downl",
     image: download1,
   },
@@ -21,27 +20,26 @@ const posts = [
   {
     id: 3,
     title: "Perwali",
-    href: "https://sirusun.com//perwali.pdf", // Jika tidak ada file PDF, gunakan '#' atau link lain
+    href: "https://sirusun.com/perwali.pdf", // Jika tidak ada file PDF, gunakan '#' atau link lain
     description: "downl",
     image: download3,
   },
-
   // More posts...
 ];
 
 export default function Example() {
   return (
-    <div className="lg:h-screen  mb-12 py-24 sm:py-32" id="Download">
+    <div className="lg:h-screen mb-12 sm:py-12" id="Download">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Download
         </h2>
         <p className="mt-2 text-lg leading-8 text-gray-600">
           Silahkan Download Untuk Melihat Informasi Lebih Lanjut
         </p>
       </div>
-      <div className=" py-24 sm:py-0">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
+      <div className="py-24 sm:py-0">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto mt-10 grid max-w-2xl auto-rows-fr sm:grid-cols-2 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {posts.map((post) => (
               <article
@@ -57,10 +55,10 @@ export default function Example() {
                 <div className="mt-4 flex items-center gap-x-6">
                   <a
                     href={post.href} // Arahkan ke file PDF
-                    target="_blank" // Membuka file di tab baru
+                    target={post.title === "Formulir Pendaftaran" ? "_self" : "_blank"} // "Daftar" tetap di tab yang sama
                     className="rounded-md bg-indigo-600 px-20 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Download
+                    {post.title === "Formulir Pendaftaran" ? "Daftar" : "Download"}
                   </a>
                 </div>
                 <img
