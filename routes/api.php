@@ -91,7 +91,7 @@ Route::apiResource('/salaries', App\Http\Controllers\Api\SalaryController::class
                     //users
                     Route::apiResource('/users-data', UserController::class);   
                     //update password
-                    Route::put('/admin-update-password', [UserController::class,'updatepassword']);
+                    Route::put('/staff-update-password', [UserController::class,'updatepassword']);
 
                     Route::get('/staff/dashboard', function () {
                         return response()->json(['message' => 'Selamat datang di dashboard staff']);
