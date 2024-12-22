@@ -50,7 +50,7 @@ export const Roomcolumns = [
 
   {
     key: "actions",
-    label: "Actions",
+    label: "",
     render: (
       value,
       row,
@@ -58,7 +58,7 @@ export const Roomcolumns = [
     ) => (
       <button
         onClick={() => handleEditClick(row)} // Panggil fungsi handleEditClick yang diteruskan
-        className="btn btn-sm btn-edit bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="btn font-semibold text-lg btn-edit text-indigo-600  hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Edit
       </button>

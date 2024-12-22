@@ -29,7 +29,7 @@ export const getReportColumns = (openModal) => [
   { key: "unit_number", label: "Kamar" },
   {
     key: "periode",
-    label: "Update At",
+    label: "Updated",
     render: (value, item) => {
       const { tanggal, bulan, tahun, jam } = item;
       return getFormattedPeriode(tanggal, bulan, tahun, jam);
@@ -37,13 +37,13 @@ export const getReportColumns = (openModal) => [
   },
   {
     key: "action",
-    label: "Aksi",
+    label: "",
     render: (value, item) => (
       <button
         onClick={() => openModal(item, "sebelum", "setelah")}
-        className="bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="text-indigo-600 hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        See...
+        Lihat
       </button>
     ),
   },

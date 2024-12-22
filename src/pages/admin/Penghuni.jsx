@@ -3,6 +3,7 @@ import PenghuniTable from "../../components/residents/ResidentsTable";
 import AddOccupantModal from "../../components/residents/AddResidentsModal";
 import apiService from "../../services/apiService";
 import TableHeader from "../../components/table/TableHeader";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 function Penghuni() {
   const [occupants, setOccupants] = useState([]);
@@ -71,7 +72,13 @@ function Penghuni() {
       {role === "admin" && (
         <TableHeader
           title="Daftar Penghuni"
-          actions={[{ label: "Tambah Data", onClick: () => setIsModalOpen(true) }]}
+          actions={[
+            {
+              label: "Tambah",
+              icon: <PlusIcon class="h-6 w-6 text-white" />,
+              onClick: () => setIsModalOpen(true),
+            },
+          ]}
         />
       )}
 

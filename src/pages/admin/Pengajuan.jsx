@@ -31,23 +31,23 @@ const Pengajuan = () => {
 
   // Ambil data transaksi
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/transactions/"
-        );
-        setTransactionData(response.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setNotification({
-          type: "error",
-          message: "Gagal mengambil data transaksi.",
-        });
-      }
-    };
+    fetchData(); // Panggil fetchData saat pertama kali komponen dimuat
+  }, []); // Empty dependency array untuk hanya memanggil sekali
 
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/transactions/"
+      );
+      setTransactionData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setNotification({
+        type: "error",
+        message: "Gagal mengambil data transaksi.",
+      });
+    }
+  };
 
   const updateStatus = async (transactionId) => {
     if (!isAdmin) {
@@ -80,8 +80,9 @@ const Pengajuan = () => {
       );
 
       if (response.status === 200) {
+        setKeterangan(false);
         setNotification({
-          type: "success",
+          type: "Success",
           message: "Status berhasil diperbarui!",
         });
         setTimeout(() => setNotification(null), 3000);
@@ -89,7 +90,10 @@ const Pengajuan = () => {
         setModalVisible(false);
         setKeterangan("");
       } else {
-        setError("Gagal memperbarui status. Silakan coba lagi.");
+        setNotification({
+          type: "error",
+          message: "Status gagal diperbarui!",
+        });
       }
     } catch (error) {
       console.error("Error updating status:", error);
@@ -114,6 +118,11 @@ const Pengajuan = () => {
     } else if (statusId === "ISF002" && isAdmin) {
       updateStatus(transactionId);
       setModalVisible(false);
+    } else if (statusId === "ISF001" && isAdmin) {
+      setNotification({
+        type: "Warning",
+        message: "Silahkan pilih status DI TOLAK dan DI TERIMA",
+      });
     }
   };
 
@@ -141,7 +150,7 @@ const Pengajuan = () => {
   );
 
   return (
-    <div className="transaction-table text-black max-w-full sm:max-w-4xl md:max-w-6xl lg:max-w-7xl xl:max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div>
       {notification && (
         <NotificationModal
           type={notification.type}
@@ -149,8 +158,9 @@ const Pengajuan = () => {
           onClose={() => setNotification(null)}
         />
       )}
-      <TableHeader title="Daftar Pengajuan" actions={[{ label: "Tambah Data" }]} />
+      <TableHeader title="Daftar Pengajuan" />
       <Table
+        showCheckbox={false}
         columns={columns}
         data={transactionData}
         emptyMessage="Tidak ada data pengajuan."

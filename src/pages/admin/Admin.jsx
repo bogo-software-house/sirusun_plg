@@ -1,27 +1,52 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Cog6ToothIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  UsersIcon,
+  ChartPieIcon,
+  CalendarIcon,
+  DocumentDuplicateIcon,
+  Cog6ToothIcon,
+  Bars3Icon,
+  XMarkIcon,
+  ChevronDownIcon,
+  Cog8ToothIcon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import AuthContext from "../../context/authContext";
 import logo from "../../assets/images/logowhite.png";
+import Settings from "./setting/Settings";
+
+
 
 // Navigation Items
-const navigationItems = [
+const mainNavigation = [
   { name: "Pengajuan", href: "/admin/dashboard/pengajuan", icon: HomeIcon },
   { name: "Penghuni", href: "/admin/dashboard/penghuni", icon: UsersIcon },
-  { name: "Pembayaran dan Tunggakan", href: "/admin/dashboard/pembayaran", icon: ChartPieIcon },
-  { name: "Kondisi Bangunan", href: "/admin/dashboard/bangunan", icon: DocumentDuplicateIcon },
-  { name: "Laporan", href: "/admin/dashboard/laporan", icon: CalendarIcon },
-  { name: "Saran", href: "/admin/dashboard/suggestion", icon: CalendarIcon },
   {
-    name: "Report",
-    href: "#",
+    name: "Pembayaran dan Tunggakan",
+    href: "/admin/dashboard/pembayaran",
+    icon: ChartPieIcon,
+  },
+  {
+    name: "Kondisi Bangunan",
+    href: "/admin/dashboard/bangunan",
+    icon: DocumentDuplicateIcon,
+  },
+  { name: "Saran", href: "/admin/dashboard/suggestion", icon: CalendarIcon },
+];
+
+const reportNavigation = [
+  {
+    name: "Kondisi Kamar",
+    href: "/admin/dashboard/laporan",
     icon: CalendarIcon,
-    children: [
-      { name: "Report 1", href: "/admin/dashboard/report/report1" },
-      { name: "Report 2", href: "/admin/dashboard/report/report2" },
-      { name: "Report 3", href: "/admin/dashboard/report/report3" },
-    ],
+  },
+  {
+    name: "Status Transaksi",
+    href: "/admin/dashboard/status-transaksi-history",
+    icon: CalendarIcon,
   },
 ];
 
@@ -58,7 +83,12 @@ export default function AdminDashboard() {
   };
 
   // Update navigation items with active state
-  const navigation = navigationItems.map((item) => ({
+  const mainNav = mainNavigation.map((item) => ({
+    ...item,
+    current: location.pathname === item.href,
+  }));
+
+  const reportNav = reportNavigation.map((item) => ({
     ...item,
     current: location.pathname === item.href,
   }));
@@ -72,12 +102,20 @@ export default function AdminDashboard() {
     <>
       <div>
         {/* Mobile Sidebar */}
-        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
+        <Dialog
+          open={sidebarOpen}
+          onClose={setSidebarOpen}
+          className="relative z-50 lg:hidden"
+        >
           <DialogBackdrop className="fixed inset-0 bg-gray-900/80" />
           <div className="fixed inset-0 flex">
             <DialogPanel className="relative flex w-full max-w-xs flex-1 bg-indigo-600 px-6 pb-4">
               <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                <button type="button" onClick={() => setSidebarOpen(false)} className="-m-2.5 p-2.5">
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen(false)}
+                  className="-m-2.5 p-2.5"
+                >
                   <XMarkIcon className="h-6 w-6 text-white" />
                 </button>
               </div>
@@ -87,46 +125,173 @@ export default function AdminDashboard() {
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul className="flex flex-1 flex-col gap-y-7">
+                    {/* Main Navigation */}
                     <li>
                       <ul className="-mx-2 space-y-1">
-                        {navigation.map((item) => (
+                        {mainNav.map((item) => (
                           <li key={item.name} className="relative">
-                            <div>
-                              <button
-                                onClick={() => item.children && handleDropdownToggle(item.name)}
+                            {item.children ? (
+                              <div>
+                                <button
+                                  onClick={() =>
+                                    handleDropdownToggle(item.name)
+                                  }
+                                  className={classNames(
+                                    item.current
+                                      ? "bg-indigo-700 text-white"
+                                      : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                    "group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                  )}
+                                >
+                                  <item.icon
+                                    className={classNames(
+                                      item.current
+                                        ? "text-white"
+                                        : "text-indigo-200 group-hover:text-white",
+                                      "h-6 w-6"
+                                    )}
+                                  />
+                                  {item.name}
+                                  {item.children && (
+                                    <ChevronDownIcon
+                                      className={classNames(
+                                        dropdownOpen === item.name
+                                          ? "rotate-0 text-white"
+                                          : "rotate-[-90deg] text-indigo-200 group-hover:text-white",
+                                        "h-5 w-5 transition-transform"
+                                      )}
+                                    />
+                                  )}
+                                </button>
+                                {dropdownOpen === item.name && (
+                                  <ul className="absolute left-0 mt-2 w-48 bg-indigo-600 rounded-md shadow-lg">
+                                    {item.children.map((child) => (
+                                      <li key={child.name}>
+                                        <Link
+                                          to={child.href}
+                                          onClick={handleItemClick}
+                                          className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                                        >
+                                          {child.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            ) : (
+                              <Link
+                                to={item.href}
+                                onClick={handleItemClick}
                                 className={classNames(
-                                  item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                  item.current
+                                    ? "bg-indigo-700 text-white"
+                                    : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                                   "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                 )}
                               >
-                                <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
+                                <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-white"
+                                      : "text-indigo-200 group-hover:text-white",
+                                    "h-6 w-6"
+                                  )}
+                                />
                                 {item.name}
-                              </button>
-                            </div>
-                            {item.children && dropdownOpen === item.name && (
-                              <ul className="absolute left-0 mt-2 w-48 bg-indigo-600 rounded-md shadow-lg">
-                                {item.children.map((child) => (
-                                  <li key={child.name}>
-                                    <Link
-                                      to={child.href}
-                                      onClick={() => {
-                                        setDropdownOpen(null);
-                                        handleItemClick(); // Close sidebar
-                                      }} // Close dropdown on navigation
-                                      className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                                    >
-                                      {child.name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
+                              </Link>
                             )}
                           </li>
                         ))}
                       </ul>
                     </li>
+                    {/* Report Navigation */}
+                    {reportNav.length > 0 && (
+                      <li>
+                        <ul className="-mx-2 space-y-1">
+                          {mainNav.map((item) => (
+                            <li key={item.name} className="relative">
+                              {item.children ? (
+                                <div>
+                                  <button
+                                    onClick={() =>
+                                      handleDropdownToggle(item.name)
+                                    }
+                                    className={classNames(
+                                      item.current
+                                        ? "bg-indigo-700 text-white"
+                                        : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                      "group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                    )}
+                                  >
+                                    <item.icon
+                                      className={classNames(
+                                        item.current
+                                          ? "text-white"
+                                          : "text-indigo-200 group-hover:text-white",
+                                        "h-6 w-6"
+                                      )}
+                                    />
+                                    {item.name}
+                                    {item.children && (
+                                      <ChevronDownIcon
+                                        className={classNames(
+                                          dropdownOpen === item.name
+                                            ? "rotate-0 text-white"
+                                            : "rotate-[-90deg] text-indigo-200 group-hover:text-white",
+                                          "h-5 w-5 transition-transform"
+                                        )}
+                                      />
+                                    )}
+                                  </button>
+                                  {dropdownOpen === item.name && (
+                                    <ul className="absolute left-0 mt-2 w-48 bg-indigo-600 rounded-md shadow-lg">
+                                      {item.children.map((child) => (
+                                        <li key={child.name}>
+                                          <Link
+                                            to={child.href}
+                                            onClick={handleItemClick}
+                                            className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                                          >
+                                            {child.name}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              ) : (
+                                <Link
+                                  to={item.href}
+                                  onClick={handleItemClick}
+                                  className={classNames(
+                                    item.current
+                                      ? "bg-indigo-700 text-white"
+                                      : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                  )}
+                                >
+                                  <item.icon
+                                    className={classNames(
+                                      item.current
+                                        ? "text-white"
+                                        : "text-indigo-200 group-hover:text-white",
+                                      "h-6 w-6"
+                                    )}
+                                  />
+                                  {item.name}
+                                </Link>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    )}
                     <li className="mt-auto">
-                      <button onClick={handleLogout} className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
+                      <button
+                        onClick={handleLogout}
+                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                      >
                         <Cog6ToothIcon className="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white" />
                         Log out
                       </button>
@@ -145,25 +310,43 @@ export default function AdminDashboard() {
               <img alt="logo" src={logo} className="h-16 mt-4" />
             </div>
             <nav className="flex flex-1 flex-col">
-              <ul className="flex flex-1 flex-col gap-y-7">
+              <ul className="flex flex-1 flex-col gap-y-5 mt-5">
+                {/* Main Navigation */}
                 <li>
+                  <p className="ms-2 text-indigo-200 text-sm font-semibold my-3">
+                    Main Navigation
+                  </p>
                   <ul className="-mx-2 space-y-1">
-                    {navigation.map((item) => (
+                    {mainNav.map((item) => (
                       <li key={item.name} className="relative">
                         {item.children ? (
                           <div>
                             <button
                               onClick={() => handleDropdownToggle(item.name)}
                               className={classNames(
-                                item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                item.current
+                                  ? "bg-indigo-700 text-white"
+                                  : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                                 "group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                               )}
                             >
-                              <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-white"
+                                    : "text-indigo-200 group-hover:text-white",
+                                  "h-6 w-6"
+                                )}
+                              />
                               {item.name}
                               {item.children && (
                                 <ChevronDownIcon
-                                  className={classNames(dropdownOpen === item.name ? "rotate-0 text-white" : "rotate-[-90deg] text-indigo-200 group-hover:text-white", "h-5 w-5 transition-transform")}
+                                  className={classNames(
+                                    dropdownOpen === item.name
+                                      ? "rotate-0 text-white"
+                                      : "rotate-[-90deg] text-indigo-200 group-hover:text-white",
+                                    "h-5 w-5 transition-transform"
+                                  )}
                                 />
                               )}
                             </button>
@@ -173,7 +356,7 @@ export default function AdminDashboard() {
                                   <li key={child.name}>
                                     <Link
                                       to={child.href}
-                                      onClick={handleItemClick} // Close sidebar on click
+                                      onClick={handleItemClick}
                                       className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
                                     >
                                       {child.name}
@@ -185,14 +368,23 @@ export default function AdminDashboard() {
                           </div>
                         ) : (
                           <Link
-                            to={item.href} // For non-dropdown items, use Link directly
-                            onClick={handleItemClick} // Close sidebar on click
+                            to={item.href}
+                            onClick={handleItemClick}
                             className={classNames(
-                              item.current ? "bg-indigo-700 text-white" : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                              item.current
+                                ? "bg-indigo-700 text-white"
+                                : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                               "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                             )}
                           >
-                            <item.icon className={classNames(item.current ? "text-white" : "text-indigo-200 group-hover:text-white", "h-6 w-6")} />
+                            <item.icon
+                              className={classNames(
+                                item.current
+                                  ? "text-white"
+                                  : "text-indigo-200 group-hover:text-white",
+                                "h-6 w-6"
+                              )}
+                            />
                             {item.name}
                           </Link>
                         )}
@@ -200,11 +392,90 @@ export default function AdminDashboard() {
                     ))}
                   </ul>
                 </li>
-                <li className="mt-auto">
-                  <button onClick={handleLogout} className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
-                    Log out
-                  </button>
-                </li>
+                {/* Report Navigation */}
+                {reportNav.length > 0 && (
+                  <li>
+                    <p className="ms-2 text-indigo-200 text-sm font-semibold my-2">
+                      Report
+                    </p>
+                    <ul className="-mx-2 space-y-1">
+                      {reportNav.map((item) => (
+                        <li key={item.name} className="relative">
+                          {item.children ? (
+                            <div>
+                              <button
+                                onClick={() => handleDropdownToggle(item.name)}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-indigo-700 text-white"
+                                    : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                  "group flex w-full gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                )}
+                              >
+                                <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-white"
+                                      : "text-indigo-200 group-hover:text-white",
+                                    "h-6 w-6"
+                                  )}
+                                />
+                                {item.name}
+                                {item.children && (
+                                  <ChevronDownIcon
+                                    className={classNames(
+                                      dropdownOpen === item.name
+                                        ? "rotate-0 text-white"
+                                        : "rotate-[-90deg] text-indigo-200 group-hover:text-white",
+                                      "h-5 w-5 transition-transform"
+                                    )}
+                                  />
+                                )}
+                              </button>
+                              {dropdownOpen === item.name && (
+                                <ul className="absolute left-0 mt-2 w-48 bg-indigo-600 rounded-md shadow-lg">
+                                  {item.children.map((child) => (
+                                    <li key={child.name}>
+                                      <Link
+                                        to={child.href}
+                                        onClick={handleItemClick}
+                                        className="block px-4 py-2 text-sm text-indigo-200 hover:bg-indigo-700 hover:text-white"
+                                      >
+                                        {child.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ) : (
+                            <Link
+                              to={item.href}
+                              onClick={handleItemClick}
+                              className={classNames(
+                                item.current
+                                  ? "bg-indigo-700 text-white"
+                                  : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
+                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                              )}
+                            >
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-white"
+                                    : "text-indigo-200 group-hover:text-white",
+                                  "h-6 w-6"
+                                )}
+                              />
+                              {item.name}
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
+                <Settings /> {/* Render the Settings component */}
               </ul>
             </nav>
           </div>
@@ -213,20 +484,22 @@ export default function AdminDashboard() {
         {/* Main Content */}
         <div className="lg:pl-72 ml-10 mr-10">
           <div className="sticky top-0 z-40 flex h-16 items-center gap-x-4 px-4 sm:gap-x-6 sm:px-6 lg:px-8">
-            <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
+            <button
+              type="button"
+              onClick={() => setSidebarOpen(true)}
+              className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+            >
               <Bars3Icon className="h-6 w-6" />
             </button>
           </div>
-
           {/* Selamat Datang */}
           {role && (
             <div className=" ">
-              <h1 className="text-2xl  font-semibold text-indigo-600">
+              <h1 className="text-2xl font-semibold text-indigo-600">
                 Selamat Datang, {role === "admin" ? "Admin" : "Staff"}!
               </h1>
             </div>
           )}
-
           <Outlet /> {/* Render child routes here */}
         </div>
       </div>

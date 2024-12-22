@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
-
 import Home from "./pages/Home";
 import Login from "./pages/login/Login";
 import Loginadmin from "./pages/login/Loginadmin";
@@ -16,8 +15,10 @@ import Pembayaran from "./pages/admin/Pembayaran";
 import UserDashboard from "./pages/user/UserDashboard";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import UserProtectedRoute from "./components/protected/UserProtectedRoute";
-import Laporan from "./pages/admin/Laporan";
+import TransaksiReport from "./pages/admin/TransaksiReport";
+import RoomReport from "./pages/admin/RoomsReport";
 import Suggestion from "./pages/admin/Suggestion";
+
 function App() {
   return (
     <AuthProvider>
@@ -77,7 +78,15 @@ function App() {
               path="/admin/dashboard/laporan"
               element={
                 <ProtectedRoute>
-                  <Laporan />
+                  <RoomReport />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/dashboard/status-transaksi-history"
+              element={
+                <ProtectedRoute>
+                  <TransaksiReport />
                 </ProtectedRoute>
               }
             />
@@ -89,7 +98,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-              <Route
+            <Route
               path="/admin/dashboard/suggestion"
               element={
                 <ProtectedRoute>
@@ -98,7 +107,6 @@ function App() {
               }
             />
           </Route>
-          
 
           {/* Dashboard User */}
           <Route
