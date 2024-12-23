@@ -8,7 +8,7 @@ import TableHeader from "../../components/table/TableHeader";
 
 const Pengajuan = () => {
   const [transactionData, setTransactionData] = useState([]);
-  const [statusOptions, setStatusOptions] = useState([
+  const [statusOptions] = useState([
     { custom_id: "ISF001", status: "PROSES" },
     { custom_id: "ISF002", status: "DITERIMA" },
     { custom_id: "ISF003", status: "DITOLAK" },
@@ -18,7 +18,7 @@ const Pengajuan = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentTransactionId, setCurrentTransactionId] = useState(null);
   const [notification, setNotification] = useState(null);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
@@ -144,13 +144,13 @@ const Pengajuan = () => {
     if (currentTransactionId) updateStatus(currentTransactionId);
   };
 
-  const renderStatusOptions = (transactionId) => {
-    return statusOptions.map((option) => (
-      <option key={option.custom_id} value={option.custom_id} disabled={!isAdmin}>
-        {option.status}
-      </option>
-    ));
-  };
+  // const renderStatusOptions = (transactionId) => {
+  //   return statusOptions.map((option) => (
+  //     <option key={option.custom_id} value={option.custom_id} disabled={!isAdmin}>
+  //       {option.status}
+  //     </option>
+  //   ));
+  // };
 
   const columns = getColumns(statusOptions, selectedStatuses, handleStatusChange, updateStatus);
 

@@ -1,3 +1,4 @@
+import React from "react";
 // src/utils/columns.js
 export const Roomcolumns = [
   { key: "index", label: "No" },

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -15,10 +16,7 @@ export default function Example() {
 
     try {
       // Panggil API untuk mencari data berdasarkan NIK
-      const response = await axios.get(
-        `https://api.sirusun.com/api/transactions/${nik}`
-      );
-      console.log("Respons API:", response.data.data); // Debugging respons
+      const response = await axios.get(`https://api.sirusun.com/api/transactions/${nik}`);
       setSearchResults(response.data.data); // Simpan data hasil pencarian ke state
     } catch (err) {
       console.error("Kesalahan:", err); // Debug error jika terjadi

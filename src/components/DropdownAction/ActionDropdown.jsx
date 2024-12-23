@@ -1,5 +1,5 @@
 import React from "react";
-import { PlusIcon } from "@heroicons/react/20/solid";
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 const ActionDropdown = ({ statusOptions, selectedStatus, onStatusChange, onUpdate }) => {
   return (
@@ -17,7 +17,7 @@ const ActionDropdown = ({ statusOptions, selectedStatus, onStatusChange, onUpdat
         ))}
       </select>
       <button className="text-white bg-indigo-600 rounded-2xl text-sm hover:bg-indigo-700 flex items-center space-x-2 font-bold" onClick={onUpdate}>
-        <PlusIcon className="h-5 w-5  font-extrabold" />
+        <ArrowPathIcon className="h-5 w-5 font-extrabold" />
         <span>Update</span>
       </button>
     </div>

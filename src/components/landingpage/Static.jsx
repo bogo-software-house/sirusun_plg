@@ -9,9 +9,6 @@ export default function Example() {
       try {
         const response = await fetch("https://api.sirusun.com/api/statistic-room-form");
         const data = await response.json();
-
-        console.log("Data statistics:", data); // Log data statistics
-
         if (data.success) {
           const apiStats = [
             { id: 3, name: "Total Pendaftar", value: data.data.total_pendaftar },
@@ -23,7 +20,6 @@ export default function Example() {
 
           setStats(apiStats); // Update stats state with API data
         } else {
-          console.log("Error: Invalid data", data);
           setStats([]); // Clear stats if data is not valid
         }
       } catch (error) {

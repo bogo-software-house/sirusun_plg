@@ -19,12 +19,10 @@ export default {
       },
     },
   },
-
   plugins: [
     require("@tailwindcss/forms"),
-    require("@tailwindcss/forms"),
     // require('tailwind-scrollbar'),
-    //   require('@tailwindcss/typography'),
-    //   require('@tailwindcss/aspect-ratio'),
+    // require('@tailwindcss/typography'),
+    // require('@tailwindcss/aspect-ratio'),
   ],
 };

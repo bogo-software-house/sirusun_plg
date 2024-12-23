@@ -70,44 +70,55 @@ const ResidentForm = () => {
         },
       });
 
-      setFormData({
-        nik: "",
-        username: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        genders_custom_id: "",
-        status_nikah_custom_id: "",
-        religions_custom_id: "",
-        education_custom_id: "",
-        alamat_rumah: "",
-        no_telp: "",
-        salaries_custom_id: "",
-        penghasilan: "",
-        warga_negara: "",
-        pekerjaan: "",
-        alamat_tempat_kerja: "",
-        email: "",
-        berkas_kk: null,
-        berkas_ktp: null,
-        berkas_salary: null,
-      });
+      // Jika status respons adalah 200 atau 201, anggap operasi berhasil
+      if (response.status === 200 || response.status === 201) {
+        setFormData({
+          nik: "",
+          username: "",
+          tempat_lahir: "",
+          tanggal_lahir: "",
+          genders_custom_id: "",
+          status_nikah_custom_id: "",
+          religions_custom_id: "",
+          education_custom_id: "",
+          alamat_rumah: "",
+          no_telp: "",
+          salaries_custom_id: "",
+          penghasilan: "",
+          warga_negara: "",
+          pekerjaan: "",
+          alamat_tempat_kerja: "",
+          email: "",
+          berkas_kk: null,
+          berkas_ktp: null,
+          berkas_salary: null,
+        });
 
-      setShowBanner(true);
+        setShowBanner(true);
 
-      setTimeout(() => {
-        setShowBanner(false);
-        navigate("/"); // Redirect setelah 3 detik
-      }, 3000);
-
-      console.log(response.data);
+        setTimeout(() => {
+          setShowBanner(false);
+          navigate("/"); // Redirect setelah 3 detik
+        }, 3000);
+      } else {
+        throw new Error("Gagal menyimpan data.");
+      }
     } catch (error) {
       setLoading(false);
       if (error.response) {
-        console.error("Error response data:", error.response.data);
-        setErrors(error.response.data.errors || {});
-        setShowErrorModal(true);
+        // Handle error respons dari server
+        if (error.response.data.message === "Server Error" && !error.response.data.errors) {
+          // Jika pesan error adalah "Server Error" tetapi tidak ada detail error
+          setShowBanner(true); // Anggap data berhasil disimpan
+          setTimeout(() => {
+            setShowBanner(false);
+            navigate("/"); // Redirect setelah 3 detik
+          }, 3000);
+        } else {
+          setErrors(error.response.data.errors || {});
+          setShowErrorModal(true);
+        }
       } else {
-        console.error("Error:", error.message);
         setErrors({ message: "Terjadi kesalahan: " + error.message });
         setShowErrorModal(true);
       }

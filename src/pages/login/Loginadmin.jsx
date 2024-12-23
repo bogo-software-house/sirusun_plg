@@ -18,7 +18,6 @@ export default function Login() {
     try {
       // Kirim username dan password ke API
       const credentials = { username, password };
-      console.log("Sending credentials:", credentials);
 
       const data = await login(credentials);
 

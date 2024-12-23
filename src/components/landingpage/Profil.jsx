@@ -1,3 +1,5 @@
+import React from 'react'; // Pastikan React diimpor
+
 import { Link } from "react-router-dom";
 // Perbaiki cara impor gambar, tanpa menggunakan objek
 import kertapati from "../../assets/images/rusun6.jpeg";

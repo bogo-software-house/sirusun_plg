@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Cog8ToothIcon,
-  ArrowLeftStartOnRectangleIcon,
-} from "@heroicons/react/24/solid";
+import { Cog8ToothIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/solid";
 import PasswordUpdateModal from "./UpdatePassword";
 import AuthContext from "../../../context/authContext";
 import { useNavigate } from "react-router-dom"; // Import useNavigate here
@@ -43,19 +40,13 @@ function Settings() {
         </button>
 
         {/* Log out Button */}
-        <button
-          onClick={handleLogout}
-          className="inline-flex items-center gap-2 rounded-md text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white"
-        >
+        <button onClick={handleLogout} className="inline-flex items-center gap-2 rounded-md text-sm font-semibold text-indigo-200 hover:bg-indigo-700 hover:text-white">
           <ArrowLeftStartOnRectangleIcon className="w-5 h-5" /> Log out
         </button>
       </li>
 
       {/* Password Update Modal */}
-      <PasswordUpdateModal
-        isModalOpen={isModalOpen}
-        toggleModal={toggleModal}
-      />
+      <PasswordUpdateModal isModalOpen={isModalOpen} toggleModal={toggleModal} />
     </>
   );
 }

@@ -1,20 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
-import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import {
-  HomeIcon,
-  UsersIcon,
-  ChartPieIcon,
-  CalendarIcon,
-  DocumentDuplicateIcon,
-  Cog6ToothIcon,
-  Bars3Icon,
-  XMarkIcon,
-  ChevronDownIcon,
-  Cog8ToothIcon,
-  ArrowLeftStartOnRectangleIcon,
-} from "@heroicons/react/24/outline";
-import AuthContext from "../../context/authContext";
+import React, { useState, useEffect } from "react";
+import { Dialog } from "@headlessui/react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { HomeIcon, UsersIcon, ChartPieIcon, CalendarIcon, DocumentDuplicateIcon, Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+// import AuthContext from "../../context/authContext";
 import logo from "../../assets/images/logowhite.png";
 import Settings from "./setting/Settings";
 
@@ -57,8 +45,8 @@ function classNames(...classes) {
 export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null); // Dropdown tracking
-  const { logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const { logout } = useContext(AuthContext);
+  // const navigate = useNavigate();
   const location = useLocation();
   const [role, setRole] = useState(""); // Store role of the user
 
@@ -67,13 +55,6 @@ export default function AdminDashboard() {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
   }, []);
-
-  // Handle logout
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem("role"); // Remove role from localStorage
-    navigate("/loginadmin");
-  };
 
   // Handle dropdown toggle
   const handleDropdownToggle = (itemName) => {

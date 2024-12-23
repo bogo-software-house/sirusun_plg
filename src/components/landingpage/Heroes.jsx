@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import Navbar from "../../SmallComponents/Navbar";
 import { useState, useEffect } from "react";
@@ -42,118 +41,55 @@ const Carousel = ({ images }) => {
     <>
       <Navbar />
       <div className="relative isolate overflow-hidden bg-white" id="Top">
-        <svg
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-        >
+        <svg aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]">
           <defs>
-            <pattern
-              x="50%"
-              y={-1}
-              id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-              width={200}
-              height={200}
-              patternUnits="userSpaceOnUse"
-            >
+            <pattern x="50%" y={-1} id="0787a7c5-978c-4f66-83c7-11c213f99cb7" width={200} height={200} patternUnits="userSpaceOnUse">
               <path d="M.5 200V.5H200" fill="none" />
             </pattern>
           </defs>
-          <rect
-            fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-            width="100%"
-            height="100%"
-            strokeWidth={0}
-          />
+          <rect fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" width="100%" height="100%" strokeWidth={0} />
         </svg>
 
-        <div
-          className="mt-10 mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-38"
-          data-aos="fade-up"
-        >
+        <div className="mt-10 mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-38" data-aos="fade-up">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-32">
             <img alt="logo" src={logo} className="h-20" />
             <h1 className="mt-6 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl">
               Sistem Informasi Rumah Susun
               <br />
-              <div className="lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                SIRUSUN
-              </div>
+              <div className="lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl">SIRUSUN</div>
             </h1>
-            <p className="mt-4 text-base sm:text-lg md:text-xl leading-7 text-gray-600">
-              UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan
-              Permukiman dan Pertanahan Kota Palembang
-            </p>
+            <p className="mt-4 text-base sm:text-lg md:text-xl leading-7 text-gray-600">UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan Permukiman dan Pertanahan Kota Palembang</p>
 
             <div className="mt-10 flex items-center gap-x-6" data-aos="fade-up">
-              <a className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <Link to="/Formpengajuan">Ajukan Penyewaan</Link>
-              </a>
+              <Link
+                to="/Formpengajuan"
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Ajukan Penyewaan
+              </Link>
             </div>
           </div>
 
-          <div
-            className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-[400px] sm:h-[300px]"
-            data-aos="fade-up"
-          >
+          <div className="lg:mt-28 flex max-w-2xl sm:mt-8 lg:ml-10 lg:mr-0 lg:mt-10 lg:max-w-none lg:flex-none xl:ml-[50px] h-[400px] sm:h-[300px]" data-aos="fade-up">
             <div className="relative min-[400px]:mt-[30px] sm:mt-[30px] xl:translate-y-[-80px]">
               <div className="carousel overflow-hidden">
-                <div
-                  className="lg:w-[40rem] carousel-inner flex transition-transform duration-500"
-                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                >
+                <div className="lg:w-[40rem] carousel-inner flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                   {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className="carousel-item flex-shrink-0 w-full"
-                    >
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                    <div key={index} className="carousel-item flex-shrink-0 w-full">
+                      <img src={image.src} alt={image.alt} className="w-full h-full object-cover rounded-lg" />
                     </div>
                   ))}
                 </div>
               </div>
 
-              <button
-                data-aos="fade-up"
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
-                onClick={handlePrevClick}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
+              <button data-aos="fade-up" className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300" onClick={handlePrevClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <button
-                data-aos="fade-up"
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300"
-                onClick={handleNextClick}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
+              <button data-aos="fade-up" className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full p-2 hover:bg-gray-400 transition-colors duration-300" onClick={handleNextClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
             </div>

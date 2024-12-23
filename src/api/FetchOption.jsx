@@ -33,7 +33,6 @@ export const useFetchOptions = () => {
         );
         setSalaries(salariesResponse.data.data);
       } catch (error) {
-        console.error("Error fetching options:", error);
       }
     };
 

@@ -1,5 +1,6 @@
+import React from "react"; // Pastikan React diimpor
+
 const navigation = {
- 
   social: [
     {
       name: "Facebook",
@@ -57,20 +58,12 @@ export default function Example() {
   return (
     <footer className="bg-gray-900">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-10 sm:py-24 lg:px-8 text-white">
-        <nav
-          aria-label="Footer"
-          className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12 text-2xl text-center font-semibold"
-        >
-          UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan
-          Permukiman dan Pertanahan Kota Palembang
+        <nav aria-label="Footer" className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12 text-2xl text-center font-semibold">
+          UPTD Pengelolaan Rumah Susun Dinas Perumahan Rakyat, Kawasan Permukiman dan Pertanahan Kota Palembang
         </nav>
         <div className="mt-10 flex justify-center space-x-10">
           {navigation.social.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-gray-400 hover:text-gray-500"
-            >
+            <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">{item.name}</span>
               <item.icon aria-hidden="true" target="_blank" className="h-6 w-6" />
             </a>

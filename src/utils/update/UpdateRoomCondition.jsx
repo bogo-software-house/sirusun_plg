@@ -17,7 +17,7 @@ Modal.setAppElement("#root");
 function UpdateRoomModal({
   selectedRoom,
   formValues,
-  setFormValues,
+ 
   setSelectedRoom,
   handleInputChange,
   handleUpdateClick,

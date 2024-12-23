@@ -1,3 +1,5 @@
+import React from 'react'; // Pastikan React diimpor
+
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 
 export default function NotificationModal({

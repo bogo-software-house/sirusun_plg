@@ -15,7 +15,7 @@ const Laporan = () => {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedCondition, setSelectedCondition] = useState("sebelum"); // Track which condition is selected (sebelum/setelah)
+  const [selectedCondition] = useState("sebelum"); // Track which condition is selected (sebelum/setelah)
 
   useEffect(() => {
     const loadData = async () => {
@@ -33,6 +33,14 @@ const Laporan = () => {
   }, []);
 
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+
+  // Reset current page if it exceeds totalPages
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
+
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -64,11 +72,7 @@ const Laporan = () => {
         />
       </div>
 
-      <PaginationControls
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-      />
+      {totalPages > 0 && <PaginationControls currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange} />}
 
       {/* Modal */}
       <Modal

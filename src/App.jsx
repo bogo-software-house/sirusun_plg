@@ -1,123 +1,81 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
-import Home from "./pages/Home";
-import Login from "./pages/login/Login";
-import Loginadmin from "./pages/login/Loginadmin";
-import ProfilRusun from "./pages/landing/ProfilRusun";
-import Formpengajuan from "./pages/landing/Formpengajuan";
-import CekPermohonan from "./pages/landing/CekPermohonan";
-import Admin from "./pages/admin/Admin";
-import Pengajuan from "./pages/admin/Pengajuan";
-import Penghuni from "./pages/admin/Penghuni";
-import Bangunan from "./pages/admin/Bangunan";
-import Pembayaran from "./pages/admin/Pembayaran";
-import UserDashboard from "./pages/user/UserDashboard";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import UserProtectedRoute from "./components/protected/UserProtectedRoute";
-import TransaksiReport from "./pages/admin/TransaksiReport";
-import RoomReport from "./pages/admin/RoomsReport";
-import Suggestion from "./pages/admin/Suggestion";
+import Spinner from "./components/ui/spinner/Spinner";
+
+// Landing Pages
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/login/Login"));
+const Loginadmin = lazy(() => import("./pages/login/Loginadmin"));
+const ProfilRusun = lazy(() => import("./pages/landing/ProfilRusun"));
+const Formpengajuan = lazy(() => import("./pages/landing/Formpengajuan"));
+const CekPermohonan = lazy(() => import("./pages/landing/CekPermohonan"));
+
+// Admin Pages
+const Admin = lazy(() => import("./pages/admin/Admin"));
+const Pengajuan = lazy(() => import("./pages/admin/Pengajuan"));
+const Penghuni = lazy(() => import("./pages/admin/Penghuni"));
+const Bangunan = lazy(() => import("./pages/admin/Bangunan"));
+const Pembayaran = lazy(() => import("./pages/admin/Pembayaran"));
+const TransaksiReport = lazy(() => import("./pages/admin/TransaksiReport"));
+const RoomReport = lazy(() => import("./pages/admin/RoomsReport"));
+const Suggestion = lazy(() => import("./pages/admin/Suggestion"));
+
+// User Pages
+const UserDashboard = lazy(() => import("./pages/user/UserDashboard"));
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Routes>
-          {/* Halaman Umum */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/loginadmin" element={<Loginadmin />} />
-          <Route path="/Formpengajuan" element={<Formpengajuan />} />
-          <Route path="/ProfilRusun/:id" element={<ProfilRusun />} />
-          <Route path="/CekPermohonan" element={<CekPermohonan />} />
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-screen">
+              <Spinner text="Loading..." /> {/* Spinner animasi */}
+            </div>
+          }
+        >
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/loginadmin" element={<Loginadmin />} />
+            <Route path="/Formpengajuan" element={<Formpengajuan />} />
+            <Route path="/ProfilRusun/:id" element={<ProfilRusun />} />
+            <Route path="/CekPermohonan" element={<CekPermohonan />} />
 
-          {/* Dashboard Admin */}
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <Admin /> {/* Layout untuk Dashboard Admin */}
-              </ProtectedRoute>
-            }
-          >
-            {/* Halaman Default Setelah Login Admin */}
+            {/* Admin Dashboard Routes */}
             <Route
-              index
+              path="/admin/dashboard/*"
               element={
                 <ProtectedRoute>
-                  <Penghuni />
+                  <Admin />
                 </ProtectedRoute>
               }
-            />
-            <Route
-              path="/admin/dashboard/pengajuan"
-              element={
-                <ProtectedRoute>
-                  <Pengajuan />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/penghuni"
-              element={
-                <ProtectedRoute>
-                  <Penghuni />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/pembayaran"
-              element={
-                <ProtectedRoute>
-                  <Pembayaran />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/laporan"
-              element={
-                <ProtectedRoute>
-                  <RoomReport />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/status-transaksi-history"
-              element={
-                <ProtectedRoute>
-                  <TransaksiReport />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/bangunan"
-              element={
-                <ProtectedRoute>
-                  <Bangunan />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/dashboard/suggestion"
-              element={
-                <ProtectedRoute>
-                  <Suggestion />
-                </ProtectedRoute>
-              }
-            />
-          </Route>
+            >
+              <Route index element={<Penghuni />} /> {/* Default Page */}
+              <Route path="pengajuan" element={<Pengajuan />} />
+              <Route path="penghuni" element={<Penghuni />} />
+              <Route path="pembayaran" element={<Pembayaran />} />
+              <Route path="laporan" element={<RoomReport />} />
+              <Route path="status-transaksi-history" element={<TransaksiReport />} />
+              <Route path="bangunan" element={<Bangunan />} />
+              <Route path="suggestion" element={<Suggestion />} />
+            </Route>
 
-          {/* Dashboard User */}
-          <Route
-            path="/user/dashboard"
-            element={
-              <UserProtectedRoute>
-                <UserDashboard />
-              </UserProtectedRoute>
-            }
-          />
-        </Routes>
+            {/* User Dashboard Routes */}
+            <Route
+              path="/user/dashboard"
+              element={
+                <UserProtectedRoute>
+                  <UserDashboard />
+                </UserProtectedRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </Router>
     </AuthProvider>
   );

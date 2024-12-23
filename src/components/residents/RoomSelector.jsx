@@ -1,6 +1,6 @@
 import React from "react";
 
-function RoomSelector({ rooms, selectedRoom, onSelect }) {
+function RoomSelector({ rooms, onSelect }) {
   return (
     <div>
       <h3 className="text-sm font-medium text-gray-700">Pilih Kamar</h3>

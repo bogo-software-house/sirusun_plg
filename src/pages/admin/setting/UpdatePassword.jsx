@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ConfirmationModal from "../../../components/modal/ConfirmationModal";
 
-function PasswordUpdateModal({ isModalOpen, toggleModal, onClick }) {
+function PasswordUpdateModal({ isModalOpen, toggleModal }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [notification, setNotification] = useState({

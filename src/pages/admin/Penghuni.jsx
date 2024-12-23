@@ -37,7 +37,6 @@ function Penghuni() {
         }))
       );
     } catch (error) {
-      console.error("Error fetching occupants:", error);
       setHasError(true);
     } finally {
       setIsLoading(false);
@@ -56,10 +55,7 @@ function Penghuni() {
     return (
       <div className="bg-red-100 text-red-700 p-4 rounded-md">
         <p>Terjadi kesalahan saat memuat data. Silakan coba lagi.</p>
-        <button
-          className="bg-indigo-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-indigo-600"
-          onClick={fetchOccupants}
-        >
+        <button className="bg-indigo-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-indigo-600" onClick={fetchOccupants}>
           Coba Lagi
         </button>
       </div>
@@ -91,8 +87,8 @@ function Penghuni() {
         <AddOccupantModal
           onClose={() => setIsModalOpen(false)}
           onSuccess={() => {
-            setIsModalOpen(false);
-            fetchOccupants();
+            fetchOccupants(); // Fetch data terbaru
+            setIsModalOpen(false); // Tutup modal
           }}
         />
       )}
