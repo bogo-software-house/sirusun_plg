@@ -199,6 +199,10 @@ private function updateAndLogRoomStatus($room)
         'custom_id' => $room->custom_id,
         'statuses_custom_id' => $room->statuses_custom_id,
         'status' => $room->status->status,
+        'rusun' => $room->priceTag?->rusuns?->nama_rusun,
+        'blok' => $room->priceTag?->bloks?->blok,
+        'lantai' => $room->priceTag?->floors?->floor,
+        'unit_number' => $room->unitNumber?->no_unit,
        
     ];
 
@@ -210,6 +214,10 @@ private function updateAndLogRoomStatus($room)
         'custom_id' => $room->custom_id,
         'statuses_custom_id' => $room->statuses_custom_id,
         'status' => $room->status->status,
+        'rusun' => $room->priceTag?->rusuns?->nama_rusun,
+        'blok' => $room->priceTag?->bloks?->blok,
+        'lantai' => $room->priceTag?->floors?->floor,
+        'unit_number' => $room->unitNumber?->no_unit,
         
     ];
 
