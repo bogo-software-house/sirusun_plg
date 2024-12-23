@@ -26,7 +26,7 @@ class TransactionRoomResource extends JsonResource
             'kamar' => [
                 'lantai' => $this->room && $this->room->priceTag->floors ? $this->room->priceTag->floors->floor : null,
                 'blog' => $this->room && $this->room->priceTag->bloks ? $this->room->priceTag->bloks->blok : null,
-                'no' => $this->room && $this->room->UnitNumber ? $this->room->UnitNumber->no_unit : null,
+                'no' => $this->room && $this->room->unitNumber ? $this->room->unitNumber->no_unit : null,
            ]
         ];
     }

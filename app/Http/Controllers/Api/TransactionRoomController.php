@@ -25,88 +25,70 @@ class TransactionRoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+ public function store(Request $request)
 {
-    // Define validation rules
+    // Validasi request
     $validator = Validator::make($request->all(), [
         'nik'             => 'required|exists:users,nik|unique:transaction_rooms,nik',
         'rooms_custom_id' => 'required|exists:rooms,custom_id|unique:transaction_rooms,rooms_custom_id',
     ]);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        $user_custom_id = User::where('nik', $request->nik)->first();
-
-        // Periksa apakah TransactionRoom dengan users_custom_id yang sama sudah ada
-        $existingTransaction = TransactionRoom::where('users_custom_id', $user_custom_id->custom_id)->first();
-
-
-
-        if ($existingTransaction) {
-            // Jika TransactionRoom dengan users_custom_id yang sama sudah ada, 
-            // tampilkan pesan error atau tangani sesuai kebutuhan
-            return response()->json([
-                'success' => false,
-                'message' => 'Transaksi untuk penghuni ini sudah ada.'
-            ], 422); 
-        } else {
-            // Jika belum ada TransactionRoom dengan users_custom_id yang sama, 
-        // lanjutkan dengan membuat TransactionRoom   
-            try {
-                //pembuatan custom id transaksi
-                $customId = TransactionRoom::generateCustomId();
-
-                $transactionRoom = TransactionRoom::create([
-                    'custom_id' => $customId,
-                    'nik' => $request->nik,
-                    'users_custom_id' => $user_custom_id->custom_id,
-                    'rooms_custom_id' => $request->rooms_custom_id,
-                ]);
-
-                // Log history for transaction creation
-                TransactionHistory::createHistory(
-                    TransactionRoom::class, 
-                    $customId, 
-                    'created', 
-                    null, 
-                    $transactionRoom->toArray()
-                );
-
-
-            // Mengubah statuses_custom_id di tabel rooms menjadi IST002
-            $room = Room::where('custom_id', $request->rooms_custom_id)->first();
-            if ($room) {
-                $room->statuses_custom_id = 'IST002';
-                $room->save();
-            }
-
-
-              // Log history for room status update
-                    TransactionHistory::createHistory(
-                        Room::class, 
-                        $room->custom_id, 
-                        'status_updated', 
-                        ['statuses_custom_id' => $room->getOriginal('statuses_custom_id')], 
-                        ['statuses_custom_id' => 'IST002']
-                    );
-
-            // Mengembalikan respons sukses
-            return new TransactionRoomResource($transactionRoom);
-
-            } catch (\Throwable $e) {
-            // Tangani error yang mungkin terjadi
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal menambahkan transaction',
-                    'error' => $e->getMessage()
-                ], 500);
-            }
-     }
-
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
     }
+
+    // Cek user dan transaksi yang sudah ada
+    $user = User::where('nik', $request->nik)->first();
+    $existingTransaction = TransactionRoom::where('users_custom_id', $user->custom_id)->first();
+
+    if ($existingTransaction) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Transaksi untuk penghuni ini sudah ada.'
+        ], 422);
+    }
+
+    try {
+        // Ambil data room dengan relasinya
+        $room = Room::with([
+            'priceTag.rusuns',
+            'priceTag.bloks',
+            'priceTag.floors',
+            'UnitNumber',
+            'status'
+        ])->where('custom_id', $request->rooms_custom_id)->first();
+
+        
+        // Buat transaksi baru
+        $customId = TransactionRoom::generateCustomId();
+        $transactionRoom = TransactionRoom::create([
+            'custom_id' => $customId,
+            'nik' => $request->nik,
+            'users_custom_id' => $user->custom_id,
+            'rooms_custom_id' => $request->rooms_custom_id,
+        ]);
+
+        // Refresh dan load relasi
+        $transactionRoom->refresh();
+        $transactionRoom->load(['user','room.status','room.priceTag.bloks', 'room.priceTag.rusuns', 'room.priceTag.floors', 'room.UnitNumber']);
+
+        // Log history transaksi room
+        $this->logTransactionHistory($transactionRoom, $user, $room);
+
+        // Update dan log history status room
+        $this->updateAndLogRoomStatus($room);
+
+        return new TransactionRoomResource($transactionRoom);
+
+    } catch (\Throwable $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal menambahkan transaction',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
 
 
     /**
@@ -153,7 +135,7 @@ class TransactionRoomController extends Controller
         TransactionHistory::createHistory(
             TransactionRoom::class, 
             $custom_id, 
-            'deleted', 
+            'Deleted Add Resident', 
             $transactionDestroy->toArray(), 
             null
         );
@@ -180,4 +162,64 @@ class TransactionRoomController extends Controller
 
 
  
+    private function logTransactionHistory($transactionRoom, $user, $room)
+{
+    $newData = [
+        'transaction' => [
+            'custom_id' => $transactionRoom->custom_id,
+            'nik' => $transactionRoom->nik,
+        ],
+        'user' => [
+            'nik' => $user->nik,
+            'username' => $user->username,
+        ],
+        'room' => [
+            'custom_id' => $room->custom_id,
+            'rusun' => $room->priceTag?->rusuns?->nama_rusun,
+            'blok' => $room->priceTag?->bloks?->blok,
+            'lantai' => $room->priceTag?->floors?->floor,
+            'unit_number' => $room->unitNumber?->no_unit,
+        ]
+    ];
+
+    TransactionHistory::createHistory(
+        TransactionRoom::class,
+        $transactionRoom->custom_id,
+        'Add Resident',
+        null,
+        $newData
+    );
+}
+
+private function updateAndLogRoomStatus($room)
+{
+   // dd($room->unitNumber);
+
+ 
+    $oldData = [
+        'custom_id' => $room->custom_id,
+        'statuses_custom_id' => $room->statuses_custom_id,
+        'status' => $room->status->status,
+        'unit_number' => $room->unitNumber ? $room->unitNumber->no_unit : null
+    ];
+
+    $room->statuses_custom_id = 'IST002';
+    $room->save();
+    $room->refresh();
+
+    $newData = [
+        'custom_id' => $room->custom_id,
+        'statuses_custom_id' => $room->statuses_custom_id,
+        'status' => $room->status->status,
+        'unit_number' => $room->unitNumber ? $room->unitNumber->no_unit : null
+    ];
+
+    TransactionHistory::createHistory(
+        Room::class,
+        $room->custom_id,
+        'Status Room Updated',
+        $oldData,
+        $newData
+    );
+}
 }
