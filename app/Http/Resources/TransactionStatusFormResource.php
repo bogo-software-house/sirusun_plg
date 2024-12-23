@@ -19,6 +19,7 @@ class TransactionStatusFormResource extends JsonResource
             'resident' => $this->residentPdf->resident->BerkasKk,
             'resident' => $this->residentPdf->resident->BerkasKtp,
             'resident' => $this->residentPdf->resident->berkasSalary,
+            'status' => $this->statusForm->status,
         ];
     }
 }
