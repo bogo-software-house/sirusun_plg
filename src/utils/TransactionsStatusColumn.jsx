@@ -10,18 +10,18 @@ export const getColumns = (
   {
     key: "nik",
     label: "NIK",
-    render: (value, row) => row.resident_pdf?.nik || "N/A",
+    render: (value, row) => row.data?.resident?.nik || "N/A",
   },
   {
     key: "username",
     label: "Nama",
-    render: (value, row) => row.resident_pdf?.resident?.username || "N/A",
+    render: (value, row) => row.data?.resident?.username || "N/A",
   },
   {
     key: "status",
     label: "Status",
     render: (value, row) => {
-      const status = row.status_form?.status || "N/A";
+      const status = row.data?.resident?.status || "N/A"; // Accessing the correct status
       let statusColor;
 
       // Define colors based on the status value
@@ -30,10 +30,10 @@ export const getColumns = (
           statusColor = "bg-yellow-200 text-yellow-800"; // Yellow for 'DI PROSES'
           break;
         case "DITERIMA":
-          statusColor = "bg-green-200 text-green-800"; // Green for 'DI TERIMA'
+          statusColor = "bg-green-200 text-green-800"; // Green for 'DITERIMA'
           break;
         case "DITOLAK":
-          statusColor = "bg-red-200 text-red-800"; // Red for 'DI TOLAK'
+          statusColor = "bg-red-200 text-red-800"; // Red for 'DITOLAK'
           break;
         default:
           statusColor = "bg-gray-200 text-gray-800"; // Default color if no status found
@@ -57,9 +57,9 @@ export const getColumns = (
     key: "resident_pdf",
     label: "Resident PDF",
     render: (value, row) =>
-      row.resident_pdf?.file_url ? (
+      row.data?.resident_pdf?.file_url ? (
         <a
-          href={row.resident_pdf.file_url}
+          href={row.data.resident_pdf.file_url} // Correctly accessing the file URL
           target="_blank"
           rel="noopener noreferrer"
           className="p-2 font-semibold text-indigo-600 rounded-lg text-base hover:bg-indigo-700 hover:text-white box-border"
