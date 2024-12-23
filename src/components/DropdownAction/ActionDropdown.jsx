@@ -1,12 +1,7 @@
 import React from "react";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
-const ActionDropdown = ({
-  statusOptions,
-  selectedStatus,
-  onStatusChange,
-  onUpdate,
-}) => {
+const ActionDropdown = ({ statusOptions, selectedStatus, onStatusChange, onUpdate }) => {
   return (
     <div className="text-center flex justify-center">
       <select
@@ -21,10 +16,7 @@ const ActionDropdown = ({
           </option>
         ))}
       </select>
-      <button
-        className="text-white bg-indigo-600 rounded-2xl text-sm hover:bg-indigo-700 flex items-center space-x-2 font-bold"
-        onClick={onUpdate}
-      >
+      <button className="text-white bg-indigo-600 rounded-2xl text-sm hover:bg-indigo-700 flex items-center space-x-2 font-bold" onClick={onUpdate}>
         <PlusIcon className="h-5 w-5  font-extrabold" />
         <span>Update</span>
       </button>

@@ -64,7 +64,7 @@ const ResidentForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/residents", formDataToSend, {
+      const response = await axios.post("https://api.sirusun.com/api/residents", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

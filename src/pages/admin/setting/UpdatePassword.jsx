@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ConfirmationModal from "../../../components/modal/ConfirmationModal";
 
-function PasswordUpdateModal({ isModalOpen, toggleModal }) {
+function PasswordUpdateModal({ isModalOpen, toggleModal, onClick }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [notification, setNotification] = useState({
@@ -29,7 +29,7 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://127.0.0.1:8000/api/auth/admin-update-password", // URL API
+        "https://api.sirusun.com/api/auth/admin-update-password", // URL API
         {
           method: "PUT",
           headers: {
@@ -72,15 +72,11 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
   return (
     <div>
       <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">
-        <div className="bg-white p-8 rounded-lg w-96 shadow-lg transform transition-all duration-300 ease-in-out">
-          <h2 className="text-2xl font-semibold mb-6 text-center">
-            Update Password
-          </h2>
+        <div className="bg-white p-8 rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-lg shadow-lg transform transition-all duration-300 ease-in-out">
+          <h2 className="text-2xl font-semibold mb-6 text-center">Update Password</h2>
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                New Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
               <input
                 type="password"
                 name="newPassword"
@@ -92,9 +88,7 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm New Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
               <input
                 type="password"
                 name="confirmNewPassword"
@@ -105,24 +99,10 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
               />
             </div>
 
-            {notification.message && (
-              <p
-                className={`text-sm mt-2 ${
-                  notification.type === "error"
-                    ? "text-red-500"
-                    : "text-green-500"
-                }`}
-              >
-                {notification.message}
-              </p>
-            )}
+            {notification.message && <p className={`text-sm mt-2 ${notification.type === "error" ? "text-red-500" : "text-green-500"}`}>{notification.message}</p>}
 
             <div className="flex justify-between items-center mt-6">
-              <button
-                type="button"
-                onClick={toggleModal}
-                className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
-              >
+              <button type="button" onClick={toggleModal} className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
                 Cancel
               </button>
               <button
@@ -130,7 +110,7 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
                 onClick={handleUpdatePassword}
                 className="ml-2 px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                Update Password
+                Update
               </button>
             </div>
           </form>
@@ -138,12 +118,7 @@ function PasswordUpdateModal({ isModalOpen, toggleModal }) {
       </div>
 
       {/* Modal Konfirmasi */}
-      {showConfirmationModal && (
-        <ConfirmationModal
-          onConfirm={handleConfirmPasswordUpdate}
-          onCancel={handleCancelPasswordUpdate}
-        />
-      )}
+      {showConfirmationModal && <ConfirmationModal onConfirm={handleConfirmPasswordUpdate} onCancel={handleCancelPasswordUpdate} />}
     </div>
   );
 }

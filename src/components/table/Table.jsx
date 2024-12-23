@@ -126,7 +126,7 @@ const Table = ({
                 {columns.map((col) => (
                   <td
                     key={col.key}
-                    className="px-6 py-4 whitespace-normal break-words text-center"
+                    className="px-6 py-4 whitespace-normal break-words text-center text-base"
                   >
                     {col.render
                       ? col.render(row[col.key], row, handleEditClick)

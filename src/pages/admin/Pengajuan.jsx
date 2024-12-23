@@ -19,26 +19,22 @@ const Pengajuan = () => {
   const [currentTransactionId, setCurrentTransactionId] = useState(null);
   const [notification, setNotification] = useState(null);
   const [error, setError] = useState("");
-  const [userRole, setUserRole] = useState(""); // Menyimpan role user
+  const [userRole, setUserRole] = useState("");
 
-  // Ambil role dari localStorage untuk mengetahui apakah user admin atau staff
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
-    setUserRole(storedRole || ""); // Jika role tidak ada, set empty string
+    setUserRole(storedRole || "");
   }, []);
 
-  const isAdmin = userRole.toLowerCase() === "admin"; // Cek apakah user adalah admin
+  const isAdmin = userRole.toLowerCase() === "admin";
 
-  // Ambil data transaksi
   useEffect(() => {
-    fetchData(); // Panggil fetchData saat pertama kali komponen dimuat
-  }, []); // Empty dependency array untuk hanya memanggil sekali
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/transactions/"
-      );
+      const response = await axios.get("https://api.sirusun.com/api/transactions");
       setTransactionData(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -65,39 +61,57 @@ const Pengajuan = () => {
     }
 
     try {
-      const transaction = transactionData.find((t) => t.id === transactionId);
+      const transaction = transactionData.find((t) => t.data.id === transactionId);
       if (!transaction) {
         setError("Transaksi tidak ditemukan.");
         return;
       }
 
-      const payload = { statusForm_custom_id: statusFormCustomId };
-      if (statusFormCustomId === "ISF003") payload.keterangan = keterangan;
+      const payload = {
+        statusForm_custom_id: statusFormCustomId,
+      };
 
-      const response = await axios.patch(
-        `http://127.0.0.1:8000/api/transactions/${transaction.form_custom_id}`,
-        payload
-      );
+      // Jika status ditolak (ISF003), pastikan keterangan ada
+      if (statusFormCustomId === "ISF003" && keterangan) {
+        payload.keterangan = keterangan;
+      } else if (statusFormCustomId === "ISF002" && keterangan) {
+        // Jika status diterima (ISF002), pastikan keterangan kosong
+        setError("Keterangan harus kosong jika status adalah Diterima.");
+        return;
+      }
 
+      const response = await axios.patch(`https://api.sirusun.com/api/transactions/${transaction.data.custom_id}`, payload);
+
+      // Jika berhasil (status 200)
       if (response.status === 200) {
-        setKeterangan(false);
+        setModalVisible(false);
+        setKeterangan();
         setNotification({
-          type: "Success",
+          type: "Success", // Pastikan type adalah 'success'
           message: "Status berhasil diperbarui!",
         });
-        setTimeout(() => setNotification(null), 3000);
-        fetchData(); // Perbarui data setelah berhasil
-        setModalVisible(false);
-        setKeterangan("");
+
+        // Tutup modal setelah 3 detik dan reset notifikasi
+        setTimeout(() => {
+          setNotification(null);
+          setModalVisible(false);
+        }, 3000);
+
+        // Refresh data transaksi setelah update
+        fetchData();
       } else {
+        // Tangani jika status bukan 200
         setNotification({
-          type: "error",
+          type: "Rrror",
           message: "Status gagal diperbarui!",
         });
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      setError("Terjadi kesalahan saat memperbarui status.");
+      setNotification({
+        type: "Error", // Set error message jika ada error
+        message: "Terjadi kesalahan saat memperbarui status.",
+      });
     }
   };
 
@@ -120,7 +134,7 @@ const Pengajuan = () => {
       setModalVisible(false);
     } else if (statusId === "ISF001" && isAdmin) {
       setNotification({
-        type: "Warning",
+        type: "warning",
         message: "Silahkan pilih status DI TOLAK dan DI TERIMA",
       });
     }
@@ -132,48 +146,21 @@ const Pengajuan = () => {
 
   const renderStatusOptions = (transactionId) => {
     return statusOptions.map((option) => (
-      <option
-        key={option.custom_id}
-        value={option.custom_id}
-        disabled={!isAdmin} // Nonaktifkan dropdown jika user bukan admin
-      >
+      <option key={option.custom_id} value={option.custom_id} disabled={!isAdmin}>
         {option.status}
       </option>
     ));
   };
 
-  const columns = getColumns(
-    statusOptions,
-    selectedStatuses,
-    handleStatusChange,
-    updateStatus
-  );
+  const columns = getColumns(statusOptions, selectedStatuses, handleStatusChange, updateStatus);
 
   return (
     <div>
-      {notification && (
-        <NotificationModal
-          type={notification.type}
-          message={notification.message}
-          onClose={() => setNotification(null)}
-        />
-      )}
+      {notification && <NotificationModal type={notification.type} message={notification.message} onClose={() => setNotification(null)} />}
       <TableHeader title="Daftar Pengajuan" />
-      <Table
-        showCheckbox={false}
-        columns={columns}
-        data={transactionData}
-        emptyMessage="Tidak ada data pengajuan."
-      />
+      <Table showCheckbox={false} columns={columns} data={transactionData} emptyMessage="Tidak ada data pengajuan." />
 
-      {/* Modal untuk keterangan */}
-      <KeteranganModal
-        visible={modalVisible}
-        keterangan={keterangan}
-        onClose={() => setModalVisible(false)}
-        onChange={(value) => setKeterangan(value)}
-        onSubmit={handleModalSubmit}
-      />
+      <KeteranganModal visible={modalVisible} keterangan={keterangan} onClose={() => setModalVisible(false)} onChange={(value) => setKeterangan(value)} onSubmit={handleModalSubmit} />
     </div>
   );
 };
