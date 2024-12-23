@@ -14,6 +14,11 @@ class TransactionStatusFormResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'data' => $this->residentPdf,
+            'resident' => $this->residentPdf->resident->BerkasKk,
+            'resident' => $this->residentPdf->resident->BerkasKtp,
+            'resident' => $this->residentPdf->resident->berkasSalary,
+        ];
     }
 }
