@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from "../../components/table/Table";
 import TableHeader from "../../components/table/TableHeader";
-import axios from "axios";
-
+import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline"; // Untuk Outline icon
 import ConfirmationModal from "../../components/modal/ConfirmationModal";
 import UpdateRoomModal from "../../utils/update/UpdateRoomCondition";
 import PaginationControls from "../../utils/paginations/Paginations";
@@ -173,7 +172,11 @@ function Bangunan() {
         <TableHeader
           title="Kondisi Bangunan dan Unit"
           actions={[
-            { label: "Filter", onClick: () => setIsFilterModalOpen(true) },
+            {
+              label: "Filter",
+              icon: <AdjustmentsVerticalIcon class="h-6 w-6 text-white" />,
+              onClick: () => setIsFilterModalOpen(true),
+            },
           ]}
         />
         <RoomFilterModal
@@ -183,15 +186,16 @@ function Bangunan() {
           handleFilterChange={handleFilterChange}
         />
         // Inside Bangunan.js
-        <Table
-          columns={Roomcolumns}
-          data={rooms?.map((room, index) => ({
-            ...room,
-            index: (currentPage - 1) * 10 + (index + 1) + ".", // Correct index calculation
-          }))}
-          emptyMessage="No rooms data available"
-          handleEditClick={handleEditClick} // Ensure this is passed correctly
-        />
+          <Table
+            showCheckbox={false}
+            columns={Roomcolumns}
+            data={rooms?.map((room, index) => ({
+              ...room,
+              index: (currentPage - 1) * 10 + (index + 1) + ".", // Correct index calculation
+            }))}
+            emptyMessage="No rooms data available"
+            handleEditClick={handleEditClick} // Ensure this is passed correctly
+          />
       </div>
       {/* Pagination */}
       // Pada komponen PaginationControls

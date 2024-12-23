@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TableHeader from "../../components/table/TableHeader";
+import Table from "../../components/table/Table";
+import PaginationControls from "../../utils/paginations/Paginations";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -18,19 +19,17 @@ const Laporan = () => {
         }
 
         const result = await response.json();
-        console.log("API Response:", result); // Debugging API response
 
         // Pemrosesan data untuk tabel
         const fetchedData = result.data.map((item, index) => ({
           key: item.custom_id || `row-${index}`,
           index: index + 1, // Nomor urut
-          nama: item.contact?.nama || "-", // Nama dari contact
-          email: item.contact?.email || "-", // Email dari contact
-          description: item.description || "-", // Deskripsi
+          nama: item.contact?.nama || "-",
+          email: item.contact?.email || "-",
+          description: item.description || "-",
         }));
         setData(fetchedData);
       } catch (err) {
-        console.error("Error fetching data:", err);
         setError("Failed to load data. Please try again.");
       } finally {
         setIsLoading(false);
@@ -45,13 +44,17 @@ const Laporan = () => {
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   const columns = [
-    { name: "index", label: "No" },
-    { name: "nama", label: "Nama" },
-    { name: "email", label: "Email" },
-    { name: "description", label: "Deskripsi" },
+    { key: "index", label: "No" },
+    { key: "nama", label: "Nama" },
+    { key: "email", label: "Email" },
+    { key: "description", label: "Deskripsi" },
   ];
 
   if (isLoading) return <p>Loading...</p>;
@@ -59,63 +62,17 @@ const Laporan = () => {
 
   return (
     <div>
-      <div className="overflow-hidden text-black">
-        <TableHeader title="Laporan Saran dan Keluhan" />
-        <table className="min-w-full table-auto border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              {columns.map((column) => (
-                <th
-                  key={column.name}
-                  className="px-4 py-2 border border-gray-300 text-left"
-                >
-                  {column.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {currentData.length > 0 ? (
-              currentData.map((row) => (
-                <tr key={row.key}>
-                  {columns.map((column) => (
-                    <td
-                      key={column.name}
-                      className="px-4 py-2 border border-gray-300"
-                    >
-                      {row[column.name]}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="text-center py-4 border border-gray-300"
-                >
-                  Tidak ada laporan tersedia.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Pagination */}
-      <div className="mt-4 flex justify-center space-x-2">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={`page-${i + 1}`}
-            onClick={() => handlePageChange(i + 1)}
-            className={`px-4 py-2 rounded-lg font-semibold ${
-              currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      <h1 className="text-2xl font-bold mb-4">Laporan Saran dan Keluhan</h1>
+      <Table
+        columns={columns}
+        data={currentData}
+        emptyMessage="Tidak ada data tersedia."
+      />
+      <PaginationControls
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import axios from "axios";
 
 // Correct API_URL without the extra '/login' part
-const API_URL = "http://127.0.0.1:8000/api/auth/login";
+const API_URL = "https://api.sirusun.com/api/auth/login";
 
 // Fungsi untuk login
 export const login = async (credentials) => {

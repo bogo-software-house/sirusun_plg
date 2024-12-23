@@ -13,7 +13,14 @@ const PenghuniTable = ({ occupants }) => {
     { key: "phone", label: "No. HP" },
   ];
 
-  return <Table columns={columns} data={occupants} emptyMessage="Tidak ada data penghuni." />;
+  return (
+    <Table
+      showCheckbox={false}
+      columns={columns}
+      data={occupants}
+      emptyMessage="Tidak ada data penghuni."
+    />
+  );
 };
 
 export default PenghuniTable;
