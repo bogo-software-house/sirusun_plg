@@ -190,6 +190,53 @@ class ReportRoomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            // Cari report berdasarkan id
+            $report = ReportRoom::findOrFail($id);
+            
+            // Simpan data yang akan dihapus untuk history
+            $oldData = [
+                'room_custom_id' => $report->room_custom_id,
+                'bulan' => $report->bulan,
+                'tahun' => $report->tahun,
+                'kondisi_sebelumnya' => $report->kondisi_sebelumnya,
+                'kondisi_setelahnya' => $report->kondisi_setelahnya
+            ];
+    
+            // Hapus report
+            $report->delete();
+    
+            // Catat ke history
+            TransactionHistory::createHistory(
+                ReportRoom::class,
+                $id,
+                'deleted',
+                $oldData,
+                null
+            );
+    
+            DB::commit();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Report berhasil dihapus'
+            ], 200);
+    
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Report tidak ditemukan'
+            ], 404);
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus report',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
