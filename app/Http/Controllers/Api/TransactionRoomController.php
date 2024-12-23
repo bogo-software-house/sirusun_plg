@@ -170,7 +170,6 @@ class TransactionRoomController extends Controller
             'nik' => $transactionRoom->nik,
         ],
         'user' => [
-            'nik' => $user->nik,
             'username' => $user->username,
         ],
         'room' => [
@@ -200,7 +199,7 @@ private function updateAndLogRoomStatus($room)
         'custom_id' => $room->custom_id,
         'statuses_custom_id' => $room->statuses_custom_id,
         'status' => $room->status->status,
-        'unit_number' => $room->unitNumber ? $room->unitNumber->no_unit : null
+       
     ];
 
     $room->statuses_custom_id = 'IST002';
@@ -211,7 +210,7 @@ private function updateAndLogRoomStatus($room)
         'custom_id' => $room->custom_id,
         'statuses_custom_id' => $room->statuses_custom_id,
         'status' => $room->status->status,
-        'unit_number' => $room->unitNumber ? $room->unitNumber->no_unit : null
+        
     ];
 
     TransactionHistory::createHistory(

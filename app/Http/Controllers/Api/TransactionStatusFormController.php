@@ -157,16 +157,19 @@ class TransactionStatusFormController extends Controller
                             'roles_custom_id' => $role->custom_id,
                         ]); 
                         
-                    // Buat token untuk user
-                    $token = $user->createToken('auth_token')->plainTextToken;
-
-                     // Log user creation history
+                        // Buat token untuk user
+                        $token = $user->createToken('auth_token')->plainTextToken;
+                        $newuserdata = [
+                            'username' => $user->username,
+                            'nik' => $user->nik,
+                    ];
+                        // Log user creation history
                     TransactionHistory::createHistory(
                         User::class, 
                         $usercustomId, 
                         'created', 
                         null, 
-                        $user->toArray()
+                        $newuserdata
                     );
                     
                         }else  {
