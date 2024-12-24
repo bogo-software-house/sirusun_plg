@@ -94,27 +94,6 @@ export default function Example() {
             <h2 className="text-white mt-8 text-center font-semibold text-2xl">Alur Pendafatran</h2>
             <div className="flow-root lg:ml-8 sm:ml-0 place-items-center mb-16">
               <img alt="alur" src={alur} className=" lg:h-screen " />
-              <ul role="list" className="-mb-8">
-                {timeline.map((event, eventIdx) => (
-                  <li key={event.id}>
-                    <div className="relative pb-8">
-                      {eventIdx !== timeline.length - 1 ? <span aria-hidden="true" className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" /> : null}
-                      <div className="relative flex space-x-5">
-                        <div>
-                          <span className="flex h-8 w-8 items-center bg-white justify-center rounded-full ring-4 ring-gray-200">
-                            <event.icon aria-hidden="true" className="h-5 w-5 text-indigo-500" />
-                          </span>
-                        </div>
-                        <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-                          <div>
-                            <p className="text-lg font-semibold text-white">{event.content}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
           {/* colom 2 */}

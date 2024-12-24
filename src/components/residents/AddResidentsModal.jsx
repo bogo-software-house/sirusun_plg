@@ -161,7 +161,13 @@ function AddOccupantModal({ onClose, onSuccess }) {
 
   const SelectButton = ({ label, isSelected, onClick, isDisabled }) => (
     <button
-      className={`p-2 border rounded-md ${isSelected ? "bg-indigo-500 text-white" : "bg-gray-200 text-black"} ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+      className={`p-2 border rounded-md  ${
+        isDisabled
+          ? "bg-red-500 text-white cursor-not-allowed"
+          : isSelected
+          ? "bg-indigo-500 text-white"
+          : "bg-gray-200 text-black"
+      }`}
       onClick={onClick}
       disabled={isDisabled}
     >
@@ -221,16 +227,42 @@ function AddOccupantModal({ onClose, onSuccess }) {
           </div>
         )}
 
-        {rooms.length > 0 && (
-          <div className="mt-4">
-            <h3 className="text-sm font-medium text-gray-700">Pilih Kamar</h3>
-            <div className="flex flex-wrap gap-4 mt-2 p-4 border rounded-md bg-gray-50" style={{ maxHeight: "300px", overflowY: "auto" }}>
-              {rooms.map((room) => (
-                <SelectButton key={room.number} label={room.number} isSelected={selectedRoom?.number === room.number} onClick={() => setSelectedRoom(room)} isDisabled={!room.available} />
-              ))}
-            </div>
-          </div>
-        )}
+{rooms.length > 0 && (
+  <div className="mt-4">
+    <h3 className="text-sm font-medium text-gray-700">Pilih Kamar</h3>
+    <div
+      className="flex flex-wrap gap-4 mt-2 p-4 border rounded-md bg-gray-50"
+      style={{ maxHeight: "300px", overflowY: "auto" }}
+    >
+      {rooms.map((room) => {
+        console.log(`Room ${room.number}: Available: ${room.available}`);  // Debugging
+
+        const isRoomAvailable = room.available;  // true jika tersedia, false jika terisi
+        const isSelected = selectedRoom?.number === room.number; // untuk highlight kamar yang dipilih
+
+        return (
+          <button
+            key={room.number}
+            onClick={() => isRoomAvailable && setSelectedRoom(room)} // hanya bisa pilih jika tersedia
+            disabled={!isRoomAvailable} // nonaktifkan tombol jika kamar tidak tersedia
+            className={`p-2 border rounded-md 
+              ${isRoomAvailable 
+                ? "bg-gray-200 text-black" // kamar tersedia
+                : "bg-red-500 text-white"} // kamar terisi, beri warna merah
+              ${isSelected ? "bg-indigo-500 text-white" : ""} // kamar yang dipilih, beri warna ungu
+            `}
+          >
+            {room.number}
+          </button>
+        );
+      })}
+    </div>
+  </div>
+)}
+
+
+
+
 
         {selectedRoom && (
           <div className="mt-4 p-4 bg-indigo-500 text-white rounded-md">
@@ -242,18 +274,36 @@ function AddOccupantModal({ onClose, onSuccess }) {
           </div>
         )}
 
-        <div className="mt-6 flex justify-end gap-4">
-          <button className="bg-gray-300 text-black p-2 rounded-md hover:bg-gray-400" onClick={handleClose}>
+<div className="mt-6 flex justify-end gap-4">
+          <button
+            className="bg-gray-300 text-black p-2 rounded-md hover:bg-gray-400"
+            onClick={handleClose}
+          >
             Batal
           </button>
-          <button className="bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600" onClick={() => setShowConfirmation(true)}>
+          <button
+            className="bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600"
+            onClick={() => setShowConfirmation(true)}
+          >
             Simpan
           </button>
         </div>
       </div>
+
       {/* Show NotificationModal if visible */}
-      {notification.isVisible && <NotificationModal message={notification.message} type={notification.type} onClose={closeNotification} />}
-      {showConfirmation && <ConfirmationModal onConfirm={() => handleConfirmationClose(true)} onCancel={() => handleConfirmationClose(false)} />}
+      {notification.isVisible && (
+        <NotificationModal
+          message={notification.message}
+          type={notification.type}
+          onClose={closeNotification}
+        />
+      )}
+      {showConfirmation && (
+        <ConfirmationModal
+          onConfirm={() => handleConfirmationClose(true)}
+          onCancel={() => handleConfirmationClose(false)}
+        />
+      )}
     </div>
   );
 }

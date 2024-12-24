@@ -16,11 +16,16 @@ export default function Login() {
     try {
       const credentials = { username, password };
       const data = await login(credentials);
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("username", data.username);
       if (data.role === "user") {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.role);
-        localStorage.setItem("username", data.username);
+      
+
+        // Navigate to the dashboard immediately after login
         navigate("/user/dashboard");
+        window.location.reload();
       } else {
         setError("You Can't Access This Page.");
       }
@@ -41,7 +46,7 @@ export default function Login() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 pt-4 pb-24 shadow sm:rounded-lg sm:px-12">
-          <div className=" font-bold text-xl mb-8 ">
+          <div className="font-bold text-xl mb-8">
             <Link to="/" className="text-black ">
               ←
             </Link>

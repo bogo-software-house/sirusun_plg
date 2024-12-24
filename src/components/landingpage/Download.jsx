@@ -34,7 +34,7 @@ export default function Example() {
     <div className="lg:h-screen mb-12 sm:py-12" id="Download">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Download</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">Silahkan Download Untuk Melihat Informasi Lebih Lanjutt</p>
+        <p className="mt-2 text-lg leading-8 text-gray-600">Silahkan Download Untuk Melihat Informasi Lebih Lanjut</p>
       </div>
       <div className="py-24 sm:py-0">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

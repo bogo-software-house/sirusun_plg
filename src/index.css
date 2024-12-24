@@ -36,13 +36,7 @@
 
 
 /* Gaya untuk tombol yang dinonaktifkan */
-button[disabled], .btn-disabled {
-  background-color: #d3d3d3; /* Warna abu-abu untuk tombol nonaktif */
-  cursor: not-allowed;
-  pointer-events: none;
-  color: #666; /* Warna teks lebih gelap */
-  border: 1px solid #ccc; /* Batas tombol */
-}
+
 
 /* Gaya untuk menampilkan tooltip */
 .tooltip {

@@ -10,18 +10,15 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Logika form submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error sebelum mencoba login
+    setError(""); 
 
     try {
-      // Kirim username dan password ke API
       const credentials = { username, password };
 
       const data = await login(credentials);
-
-      // Simpan token, role, dan username di localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
       localStorage.setItem("username", data.username);

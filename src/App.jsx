@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/authContext"; // Pastikan ini benar
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import UserProtectedRoute from "./components/protected/UserProtectedRoute";
 import Spinner from "./components/ui/spinner/Spinner";
@@ -33,7 +33,7 @@ function App() {
         <Suspense
           fallback={
             <div className="flex items-center justify-center h-screen">
-              <Spinner text="Loading..." /> {/* Spinner animasi */}
+              <Spinner text="Loading..." />
             </div>
           }
         >
